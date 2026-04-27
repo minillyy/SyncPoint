@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Data\DatabaseHelper.cs" />
     <Compile Include="Data\Session.cs" />
+    <Compile Include="Forms\InstructorDashboardForm.cs" />
     <Compile Include="Forms\LeaderDashboardForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,6 +67,7 @@
     <Compile Include="Forms\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\MemberDashboardForm.cs" />
     <Compile Include="Forms\RegisterForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,6 +80,7 @@
     <Compile Include="Forms\SidebarControl.Designer.cs">
       <DependentUpon>SidebarControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\TaskManagementForm.cs" />
     <Compile Include="Helpers\ColorTheme.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
