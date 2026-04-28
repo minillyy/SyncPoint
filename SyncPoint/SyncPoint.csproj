@@ -53,7 +53,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\DatabaseHelper.cs" />
+    <Compile Include="Forms\MyScoresForm.cs" />
+    <Compile Include="Forms\MyTaskForm.cs" />
+    <Compile Include="Forms\ReportsForm.cs" />
     <Compile Include="Data\Session.cs" />
+    <Compile Include="Forms\CreateTaskForm.cs" />
+    <Compile Include="Forms\GroupManagementForm.cs" />
     <Compile Include="Forms\InstructorDashboardForm.cs" />
     <Compile Include="Forms\LeaderDashboardForm.cs">
       <SubType>Form</SubType>
