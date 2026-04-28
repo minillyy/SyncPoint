@@ -131,40 +131,54 @@ namespace SyncPoint.Data
         //  SEED DEFAULT DATA
         private static void SeedData(SQLiteConnection conn)
         {
-            using (var cmd = new SQLiteCommand("SELECT COUNT(*) FROM Roles;", conn))
+            // Seed Roles
+            using (var cmd = new SQLiteCommand(
+                "SELECT COUNT(*) FROM Roles;", conn))
             {
                 long count = (long)cmd.ExecuteScalar();
                 if (count == 0)
                 {
-                    Execute(conn, "INSERT INTO Roles (RoleName) VALUES ('Instructor');");
-                    Execute(conn, "INSERT INTO Roles (RoleName) VALUES ('Leader');");
-                    Execute(conn, "INSERT INTO Roles (RoleName) VALUES ('Member');");
+                    Execute(conn,
+                        "INSERT INTO Roles (RoleName) VALUES ('Instructor');");
+                    Execute(conn,
+                        "INSERT INTO Roles (RoleName) VALUES ('Leader');");
+                    Execute(conn,
+                        "INSERT INTO Roles (RoleName) VALUES ('Member');");
                 }
             }
 
-            using (var cmd = new SQLiteCommand("SELECT COUNT(*) FROM TaskStatus;", conn))
+            // Seed TaskStatus
+            using (var cmd = new SQLiteCommand(
+                "SELECT COUNT(*) FROM TaskStatus;", conn))
             {
                 long count = (long)cmd.ExecuteScalar();
                 if (count == 0)
                 {
-                    Execute(conn, "INSERT INTO TaskStatus (StatusName) VALUES ('Pending');");
-                    Execute(conn, "INSERT INTO TaskStatus (StatusName) VALUES ('Accepted');");
-                    Execute(conn, "INSERT INTO TaskStatus (StatusName) VALUES ('In Progress');");
-                    Execute(conn, "INSERT INTO TaskStatus (StatusName) VALUES ('Completed');");
-                    Execute(conn, "INSERT INTO TaskStatus (StatusName) VALUES ('Declined');");
+                    Execute(conn,
+                        "INSERT INTO TaskStatus (StatusName) VALUES ('Pending');");
+                    Execute(conn,
+                        "INSERT INTO TaskStatus (StatusName) VALUES ('Accepted');");
+                    Execute(conn,
+                        "INSERT INTO TaskStatus (StatusName) VALUES ('In Progress');");
+                    Execute(conn,
+                        "INSERT INTO TaskStatus (StatusName) VALUES ('Completed');");
+                    Execute(conn,
+                        "INSERT INTO TaskStatus (StatusName) VALUES ('Declined');");
                 }
             }
 
-            // Seed a default admin/leader account if no users exist
-            using (var cmd = new SQLiteCommand("SELECT COUNT(*) FROM Users;", conn))
+            // Seed Instructor account (RoleID = 1)
+            using (var cmd = new SQLiteCommand(
+                "SELECT COUNT(*) FROM Users;", conn))
             {
                 long count = (long)cmd.ExecuteScalar();
                 if (count == 0)
                 {
                     string hashed = HashPassword("instructor123");
                     Execute(conn,
-                        "INSERT INTO Users (FullName, Username, Password, RoleID) " +
-                        "VALUES ('Default Instructor', 'instructor', '" + hashed + "', 1);");
+                        "INSERT INTO Users " +
+                        "(FullName, Username, Password, RoleID) VALUES " +
+                        "('Professor', 'instructor', '" + hashed + "', 1);");
                 }
             }
         }
@@ -191,15 +205,40 @@ namespace SyncPoint.Data
 
         //  USER QUERIES
 
-        // Returns a DataTable of all users with their role names.
-        public static DataTable GetAllUsers()
+        // Get all registered Members (RoleID = 3)
+        public static DataTable GetAllMembers()
         {
             using (var conn = GetConnection())
             {
                 string sql = @"
-                    SELECT u.UserID, u.FullName, u.Username, r.RoleName
+                    SELECT u.UserID, u.FullName, u.Username
                     FROM   Users u
-                    JOIN   Roles r ON u.RoleID = r.RoleID;";
+                    WHERE  u.RoleID = 3
+                    ORDER BY u.FullName ASC;";
+                var da = new SQLiteDataAdapter(sql, conn);
+                var dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+            }
+        }
+
+        // Get all groups created by Instructor
+        public static DataTable GetAllGroups()
+        {
+            using (var conn = GetConnection())
+            {
+                string sql = @"
+                    SELECT g.GroupID,
+                           g.GroupName,
+                           COALESCE(u.FullName, 'Not appointed') AS LeaderName,
+                           COUNT(gm.ID) AS MemberCount
+                    FROM   Groups g
+                    LEFT JOIN Users u
+                           ON g.LeaderID = u.UserID
+                    LEFT JOIN GroupMembers gm
+                           ON g.GroupID  = gm.GroupID
+                    GROUP  BY g.GroupID
+                    ORDER  BY g.GroupName ASC;";
                 var da = new SQLiteDataAdapter(sql, conn);
                 var dt = new DataTable();
                 da.Fill(dt);
@@ -338,42 +377,48 @@ namespace SyncPoint.Data
         {
             using (var conn = GetConnection())
             {
-                string sql = @"
-            UPDATE Groups SET LeaderID = @uid WHERE GroupID = @gid;";
-                var cmd = new SQLiteCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@uid", userID);
-                cmd.Parameters.AddWithValue("@gid", groupID);
-                cmd.ExecuteNonQuery();
+                // Update group's LeaderID
+                var cmd1 = new SQLiteCommand(@"
+                    UPDATE Groups SET LeaderID = @uid
+                    WHERE  GroupID = @gid;", conn);
+                cmd1.Parameters.AddWithValue("@uid", userID);
+                cmd1.Parameters.AddWithValue("@gid", groupID);
+                cmd1.ExecuteNonQuery();
 
-                string updateRole = @"
-            UPDATE Users SET RoleID = 2 WHERE UserID = @uid;";
-                var cmd2 = new SQLiteCommand(updateRole, conn);
+                // Promote the user's role to Leader (RoleID = 2)
+                var cmd2 = new SQLiteCommand(@"
+                    UPDATE Users SET RoleID = 2
+                    WHERE  UserID = @uid;", conn);
                 cmd2.Parameters.AddWithValue("@uid", userID);
                 cmd2.ExecuteNonQuery();
 
-                string updateGM = @"
-            UPDATE GroupMembers SET GroupRole = 'Leader'
-            WHERE GroupID = @gid AND UserID = @uid;";
-                var cmd3 = new SQLiteCommand(updateGM, conn);
+                // Add them to GroupMembers if not already there
+                var cmd3 = new SQLiteCommand(@"
+                    INSERT OR IGNORE INTO GroupMembers
+                        (GroupID, UserID, GroupRole, JoinedAt)
+                    VALUES
+                        (@gid, @uid, 'Leader', DATE('now'));", conn);
                 cmd3.Parameters.AddWithValue("@gid", groupID);
                 cmd3.Parameters.AddWithValue("@uid", userID);
                 cmd3.ExecuteNonQuery();
             }
         }
 
-        // Get all Members (RoleID = 3) not yet in a group
-        public static DataTable GetAvailableMembers()
+        // Get members of a specific group
+        public static DataTable GetMembersOfGroup(int groupID)
         {
             using (var conn = GetConnection())
             {
                 string sql = @"
-            SELECT u.UserID, u.FullName, u.Username
-            FROM   Users u
-            WHERE  u.RoleID = 3
-            AND    u.UserID NOT IN (
-                SELECT UserID FROM GroupMembers
-            );";
-                var da = new SQLiteDataAdapter(sql, conn);
+                    SELECT u.UserID, u.FullName, u.Username,
+                           gm.GroupRole, gm.JoinedAt
+                    FROM   GroupMembers gm
+                    JOIN   Users u ON gm.UserID = u.UserID
+                    WHERE  gm.GroupID = @gid
+                    ORDER  BY gm.GroupRole ASC;";
+                var cmd = new SQLiteCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@gid", groupID);
+                var da = new SQLiteDataAdapter(cmd);
                 var dt = new DataTable();
                 da.Fill(dt);
                 return dt;
@@ -386,12 +431,12 @@ namespace SyncPoint.Data
             using (var conn = GetConnection())
             {
                 string sql = @"
-            SELECT u.UserID, u.FullName, u.Username
-            FROM   Users u
-            WHERE  u.RoleID = 3
-            AND    u.UserID NOT IN (
-                SELECT UserID FROM GroupMembers WHERE GroupID = @gid
-            );";
+                    SELECT u.UserID, u.FullName, u.Username
+                    FROM   Users u
+                    WHERE  u.RoleID = 3
+                    AND    u.UserID NOT IN (
+                        SELECT UserID FROM GroupMembers WHERE GroupID = @gid
+                    );";
                 var cmd = new SQLiteCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@gid", groupID);
                 var da = new SQLiteDataAdapter(cmd);
@@ -407,14 +452,14 @@ namespace SyncPoint.Data
             using (var conn = GetConnection())
             {
                 string sql = @"
-            SELECT g.GroupID, g.GroupName,
-                   u.FullName AS LeaderName,
-                   COUNT(gm.ID) AS MemberCount
-            FROM   Groups g
-            LEFT JOIN Users u  ON g.LeaderID     = u.UserID
-            LEFT JOIN GroupMembers gm ON g.GroupID = gm.GroupID
-            WHERE  g.InstructorID = @id
-            GROUP BY g.GroupID;";
+                    SELECT g.GroupID, g.GroupName,
+                           u.FullName AS LeaderName,
+                           COUNT(gm.ID) AS MemberCount
+                    FROM   Groups g
+                    LEFT JOIN Users u  ON g.LeaderID     = u.UserID
+                    LEFT JOIN GroupMembers gm ON g.GroupID = gm.GroupID
+                    WHERE  g.InstructorID = @id
+                    GROUP BY g.GroupID;";
                 var cmd = new SQLiteCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@id", instructorID);
                 var da = new SQLiteDataAdapter(cmd);
@@ -424,16 +469,30 @@ namespace SyncPoint.Data
             }
         }
 
+        public static bool GroupHasLeader(int groupID)
+        {
+            using (var conn = GetConnection())
+            {
+                string sql = @"
+                    SELECT LeaderID FROM Groups
+                    WHERE  GroupID = @gid;";
+                var cmd = new SQLiteCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@gid", groupID);
+                var result = cmd.ExecuteScalar();
+                return result != null && result != DBNull.Value;
+            }
+        }
+
         // Search user by username
         public static DataRow GetUserByUsername(string username)
         {
             using (var conn = GetConnection())
             {
                 string sql = @"
-            SELECT u.UserID, u.FullName, u.Username, r.RoleName
-            FROM   Users u
-            JOIN   Roles r ON u.RoleID = r.RoleID
-            WHERE  u.Username = @user;";
+                    SELECT u.UserID, u.FullName, u.Username, r.RoleName
+                    FROM   Users u
+                    JOIN   Roles r ON u.RoleID = r.RoleID
+                    WHERE  u.Username = @user;";
                 var cmd = new SQLiteCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@user", username);
                 var da = new SQLiteDataAdapter(cmd);
