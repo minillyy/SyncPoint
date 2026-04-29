@@ -41,8 +41,7 @@ namespace SyncPoint.Forms
                 return;
             }
 
-            int groupID = DatabaseHelper.CreateGroup(
-                groupName, Session.UserID);
+            int groupID = DatabaseHelper.CreateGroup(groupName, Session.UserID);
 
             MessageBox.Show(
                 $"Group \"{groupName}\" created successfully!\n\n" +
