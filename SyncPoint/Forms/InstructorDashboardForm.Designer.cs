@@ -72,6 +72,7 @@
             this.lblUser.Size = new System.Drawing.Size(93, 23);
             this.lblUser.TabIndex = 1;
             this.lblUser.Text = "Instructor";
+            this.lblUser.Click += new System.EventHandler(this.lblUser_Click);
             // 
             // lblTitle
             // 
@@ -217,7 +218,7 @@
             this.btnCreateGroup.TabIndex = 0;
             this.btnCreateGroup.Text = "+ Create Group";
             this.btnCreateGroup.UseVisualStyleBackColor = false;
-            this.btnCreateGroup.Click += new System.EventHandler(this.btnCreateGroup_Click_1);
+            this.btnCreateGroup.Click += new System.EventHandler(this.btnCreateGroup_Click);
             // 
             // lblPageTitle
             // 
