@@ -175,6 +175,7 @@
             this.linkRegister.TabIndex = 10;
             this.linkRegister.TabStop = true;
             this.linkRegister.Text = "Register here";
+            this.linkRegister.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkRegister_LinkClicked);
             // 
             // lblNoAccount
             // 
@@ -200,6 +201,7 @@
             this.btnInstructor.TabIndex = 12;
             this.btnInstructor.Text = "Instructor";
             this.btnInstructor.UseVisualStyleBackColor = false;
+            this.btnInstructor.Click += new System.EventHandler(this.btnInstructor_Click);
             // 
             // LoginForm
             // 

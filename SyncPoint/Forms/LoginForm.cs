@@ -59,10 +59,10 @@ namespace SyncPoint
         // ════════════════════════════════════════════════════
         private void Login(string expectedRole)
         {
-            // ── Step 1: Basic input validation ───────────────
             string username = txtUsername.Text.Trim();
             string password = txtPassword.Text;
 
+            // ── Validate inputs ───────────────────────────────
             if (string.IsNullOrEmpty(username))
             {
                 MessageBox.Show(
@@ -85,73 +85,14 @@ namespace SyncPoint
                 return;
             }
 
-            // ── Step 2: Special check for Instructor ─────────
-            // The Instructor credentials are pre-determined
-            // and validated separately before hitting the DB
-            if (expectedRole == "Instructor")
-            {
-                if (username != INSTRUCTOR_USERNAME ||
-                    password != INSTRUCTOR_PASSWORD)
-                {
-                    // Also try the database in case
-                    // the instructor changed their password
-                    DataRow user =
-                        DatabaseHelper.ValidateLogin(
-                            username, password);
-
-                    if (user == null ||
-                        user["RoleName"].ToString()
-                            != "Instructor")
-                    {
-                        MessageBox.Show(
-                            "Incorrect instructor credentials.\n\n" +
-                            "Please check your username " +
-                            "and password.",
-                            "SyncPoint — Access Denied",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Error);
-                        txtPassword.Clear();
-                        txtPassword.Focus();
-                        return;
-                    }
-
-                    // DB validation passed — load session
-                    LoadSession(user);
-                    OpenDashboard("Instructor");
-                    return;
-                }
-
-                // Pre-determined credentials matched —
-                // now confirm against database
-                DataRow instructor =
-                    DatabaseHelper.ValidateLogin(
-                        username, password);
-
-                if (instructor == null)
-                {
-                    MessageBox.Show(
-                        "Instructor account not found.\n\n" +
-                        "Please contact your system administrator.",
-                        "SyncPoint",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                    return;
-                }
-
-                LoadSession(instructor);
-                OpenDashboard("Instructor");
-                return;
-            }
-
-            // ── Step 3: Leader and Member validation ──────────
-            DataRow loginResult =
+            // ── Validate against database ─────────────────────
+            DataRow user =
                 DatabaseHelper.ValidateLogin(username, password);
 
-            // Wrong username or password
-            if (loginResult == null)
+            if (user == null)
             {
                 MessageBox.Show(
-                    "Incorrect username or password.\n\n" +
+                    "Incorrect username or password.\n" +
                     "Please try again.",
                     "SyncPoint — Login Failed",
                     MessageBoxButtons.OK,
@@ -161,50 +102,53 @@ namespace SyncPoint
                 return;
             }
 
-            string actualRole =
-                loginResult["RoleName"].ToString();
+            string actualRole = user["RoleName"].ToString();
 
-            // ── Step 4: Role mismatch check ───────────────────
+            // ── Check role matches button clicked ─────────────
             if (actualRole != expectedRole)
             {
-                string message = "";
-
-                if (actualRole == "Instructor")
-                    message =
-                        "This is an Instructor account.\n" +
-                        "Please use the Instructor button.";
-
-                else if (actualRole == "Leader" &&
-                         expectedRole == "Member")
-                    message =
-                        "You have been appointed as Leader.\n" +
-                        "Please use the Leader button instead.";
-
-                else if (actualRole == "Member" &&
-                         expectedRole == "Leader")
-                    message =
-                        "You are not a Leader yet.\n\n" +
-                        "Ask your Instructor to appoint you " +
-                        "as Leader first.";
-
-                else
-                    message =
-                        $"This account is registered as " +
-                        $"{actualRole}.\n" +
-                        $"Please use the {actualRole} " +
-                        $"login button.";
-
                 MessageBox.Show(
-                    message,
+                    GetRoleMismatchMessage(
+                        actualRole, expectedRole),
                     "SyncPoint — Wrong Login Button",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
                 return;
             }
 
-            // ── Step 5: All good — load session and open form ─
-            LoadSession(loginResult);
+            // ── All good — open dashboard ─────────────────────
+            LoadSession(user);
             OpenDashboard(actualRole);
+        }
+
+        // ════════════════════════════════════════════════════
+        //  ROLE MISMATCH MESSAGE
+        // ════════════════════════════════════════════════════
+        private string GetRoleMismatchMessage(
+            string actualRole, string expectedRole)
+        {
+            if (actualRole == "Instructor")
+                return
+                    "This is an Instructor account.\n" +
+                    "Please click the Instructor button.";
+
+            if (actualRole == "Leader" &&
+                expectedRole == "Member")
+                return
+                    "You have been appointed as Leader.\n" +
+                    "Please use the Leader button instead.";
+
+            if (actualRole == "Member" &&
+                expectedRole == "Leader")
+                return
+                    "You are not a Leader yet.\n\n" +
+                    "Ask your Instructor to appoint " +
+                    "you as Leader first.";
+
+            return
+                $"This account is registered as " +
+                $"{actualRole}.\n" +
+                $"Please use the {actualRole} button.";
         }
 
         // ════════════════════════════════════════════════════
@@ -218,8 +162,7 @@ namespace SyncPoint
             Session.Username = user["Username"].ToString();
             Session.RoleID = Convert.ToInt32(user["RoleID"]);
             Session.RoleName = user["RoleName"].ToString();
-            Session.GroupID =
-                DatabaseHelper.GetUserGroupID(Session.UserID);
+            Session.GroupID = DatabaseHelper.GetUserGroupID(Session.UserID);
         }
 
         // ════════════════════════════════════════════════════
@@ -264,29 +207,25 @@ namespace SyncPoint
         // ════════════════════════════════════════════════════
 
         // Instructor button
-        private void btnInstructor_Click(
-            object sender, EventArgs e)
+        private void btnInstructor_Click(object sender, EventArgs e)
         {
             Login("Instructor");
         }
 
         // Leader button
-        private void btnLeader_Click(
-            object sender, EventArgs e)
+        private void btnLeader_Click(object sender, EventArgs e)
         {
             Login("Leader");
         }
 
         // Member button
-        private void btnMember_Click(
-            object sender, EventArgs e)
+        private void btnMember_Click(object sender, EventArgs e)
         {
             Login("Member");
         }
 
         // Register link
-        private void lnkRegister_LinkClicked(
-            object sender, LinkLabelLinkClickedEventArgs e)
+        private void lnkRegister_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             new RegisterForm().ShowDialog();
         }
@@ -298,26 +237,22 @@ namespace SyncPoint
         // ════════════════════════════════════════════════════
         private Button _lastClickedButton = null;
 
-        private void btnInstructor_MouseDown(
-            object sender, MouseEventArgs e)
+        private void btnInstructor_MouseDown(object sender, MouseEventArgs e)
         {
             _lastClickedButton = btnInstructor;
         }
 
-        private void btnLeader_MouseDown(
-            object sender, MouseEventArgs e)
+        private void btnLeader_MouseDown(object sender, MouseEventArgs e)
         {
             _lastClickedButton = btnLeader;
         }
 
-        private void btnMember_MouseDown(
-            object sender, MouseEventArgs e)
+        private void btnMember_MouseDown(object sender, MouseEventArgs e)
         {
             _lastClickedButton = btnMember;
         }
 
-        private void txtPassword_KeyDown(
-            object sender, KeyEventArgs e)
+        private void txtPassword_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
@@ -326,6 +261,11 @@ namespace SyncPoint
                 else
                     btnMember.PerformClick(); // default
             }
+        }
+
+        private void linkRegister_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            new RegisterForm().ShowDialog();
         }
     }
 }
