@@ -41,7 +41,7 @@ namespace SyncPoint.Forms
         private void SetActiveNav(Label active)
         {
             Label[] navItems = {
-                lblNavGroups, lblNavCreate, lblNavReports };
+                lblNavGroups, lblNavReports };
 
             foreach (var lbl in navItems)
             {
@@ -217,14 +217,6 @@ namespace SyncPoint.Forms
             LoadGroups();
         }
 
-        private void lblNavCreate_Click(
-            object sender, EventArgs e)
-        {
-            var form = new CreateGroupForm();
-            form.ShowDialog();
-            LoadGroups();
-        }
-
         private void lblNavReports_Click(
             object sender, EventArgs e)
         {
@@ -234,10 +226,9 @@ namespace SyncPoint.Forms
         }
 
         // Logout
-        private void lblLogout_Click(
-            object sender, EventArgs e)
+        private void lblLogout_Click(object sender, EventArgs e)
         {
-            var result = MessageBox.Show(
+            DialogResult result = MessageBox.Show(
                 "Are you sure you want to logout?",
                 "SyncPoint",
                 MessageBoxButtons.YesNo,
@@ -248,6 +239,11 @@ namespace SyncPoint.Forms
                 Session.Clear();
                 this.Close();
             }
+        }
+
+        private void btnCreateGroup_Click_1(object sender, EventArgs e)
+        {
+            new CreateGroupForm().ShowDialog();
         }
     }
 }

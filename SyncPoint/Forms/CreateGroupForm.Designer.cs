@@ -43,7 +43,7 @@
             this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(39)))), ((int)(((byte)(68)))));
             this.lblTitle.Location = new System.Drawing.Point(20, 20);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(230, 27);
+            this.lblTitle.Size = new System.Drawing.Size(221, 27);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Create New Group";
             // 
@@ -52,7 +52,7 @@
             this.lblGroupName.AutoSize = true;
             this.lblGroupName.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblGroupName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(111)))), ((int)(((byte)(90)))));
-            this.lblGroupName.Location = new System.Drawing.Point(20, 65);
+            this.lblGroupName.Location = new System.Drawing.Point(20, 61);
             this.lblGroupName.Name = "lblGroupName";
             this.lblGroupName.Size = new System.Drawing.Size(91, 17);
             this.lblGroupName.TabIndex = 1;
@@ -62,10 +62,10 @@
             // 
             this.txtGroupName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtGroupName.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtGroupName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(249)))), ((int)(((byte)(243)))));
+            this.txtGroupName.ForeColor = System.Drawing.Color.Black;
             this.txtGroupName.Location = new System.Drawing.Point(20, 83);
             this.txtGroupName.Name = "txtGroupName";
-            this.txtGroupName.Size = new System.Drawing.Size(320, 27);
+            this.txtGroupName.Size = new System.Drawing.Size(329, 27);
             this.txtGroupName.TabIndex = 2;
             // 
             // lblNote
@@ -86,27 +86,29 @@
             this.btnCreate.ForeColor = System.Drawing.Color.White;
             this.btnCreate.Location = new System.Drawing.Point(20, 160);
             this.btnCreate.Name = "btnCreate";
-            this.btnCreate.Size = new System.Drawing.Size(150, 38);
+            this.btnCreate.Size = new System.Drawing.Size(165, 38);
             this.btnCreate.TabIndex = 4;
             this.btnCreate.Text = "Create Group";
             this.btnCreate.UseVisualStyleBackColor = false;
+            this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
             // 
             // btnCancel
             // 
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.Location = new System.Drawing.Point(180, 160);
+            this.btnCancel.Location = new System.Drawing.Point(191, 160);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(100, 38);
+            this.btnCancel.Size = new System.Drawing.Size(149, 38);
             this.btnCancel.TabIndex = 5;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click_1);
             // 
             // CreateGroupForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(247)))), ((int)(((byte)(242)))));
-            this.ClientSize = new System.Drawing.Size(362, 213);
+            this.ClientSize = new System.Drawing.Size(381, 213);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnCreate);
             this.Controls.Add(this.lblNote);

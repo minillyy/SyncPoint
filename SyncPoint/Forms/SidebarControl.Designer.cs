@@ -140,11 +140,12 @@
             // lblLogout
             // 
             this.lblLogout.AutoSize = true;
+            this.lblLogout.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblLogout.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLogout.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(123)))), ((int)(((byte)(106)))));
             this.lblLogout.Location = new System.Drawing.Point(17, 13);
             this.lblLogout.Name = "lblLogout";
-            this.lblLogout.Size = new System.Drawing.Size(65, 19);
+            this.lblLogout.Size = new System.Drawing.Size(74, 19);
             this.lblLogout.TabIndex = 0;
             this.lblLogout.Text = "↩ Logout";
             this.lblLogout.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

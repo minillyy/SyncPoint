@@ -160,5 +160,10 @@ namespace SyncPoint.Forms
         {
             this.Close();
         }
+
+        private void btnAppoint_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

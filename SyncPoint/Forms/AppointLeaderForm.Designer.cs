@@ -45,7 +45,7 @@
             this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(39)))), ((int)(((byte)(68)))));
             this.lblTitle.Location = new System.Drawing.Point(20, 20);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(216, 27);
+            this.lblTitle.Size = new System.Drawing.Size(207, 27);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Appoint a Leader";
             // 
@@ -103,19 +103,20 @@
             this.btnAppoint.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(39)))), ((int)(((byte)(68)))));
             this.btnAppoint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAppoint.ForeColor = System.Drawing.Color.White;
-            this.btnAppoint.Location = new System.Drawing.Point(20, 295);
+            this.btnAppoint.Location = new System.Drawing.Point(20, 326);
             this.btnAppoint.Name = "btnAppoint";
             this.btnAppoint.Size = new System.Drawing.Size(160, 38);
             this.btnAppoint.TabIndex = 5;
             this.btnAppoint.Text = "Appoint as Leader";
             this.btnAppoint.UseVisualStyleBackColor = false;
+            this.btnAppoint.Click += new System.EventHandler(this.btnAppoint_Click_1);
             // 
             // btnCancel
             // 
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.Location = new System.Drawing.Point(190, 295);
+            this.btnCancel.Location = new System.Drawing.Point(202, 326);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(90, 38);
+            this.btnCancel.Size = new System.Drawing.Size(140, 38);
             this.btnCancel.TabIndex = 6;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -125,7 +126,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(247)))), ((int)(((byte)(242)))));
-            this.ClientSize = new System.Drawing.Size(402, 333);
+            this.ClientSize = new System.Drawing.Size(402, 396);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnAppoint);
             this.Controls.Add(this.lblNone);

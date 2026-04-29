@@ -29,26 +29,25 @@
         private void InitializeComponent()
         {
             this.pnlTopbar = new System.Windows.Forms.Panel();
-            this.lblTitle = new System.Windows.Forms.Label();
             this.lblUser = new System.Windows.Forms.Label();
+            this.lblTitle = new System.Windows.Forms.Label();
             this.pnlSidebar = new System.Windows.Forms.Panel();
-            this.lblNavGroups = new System.Windows.Forms.Label();
-            this.lblNavCreate = new System.Windows.Forms.Label();
-            this.lblNavReports = new System.Windows.Forms.Label();
             this.pnlSidebarFooter = new System.Windows.Forms.Panel();
             this.lblLogout = new System.Windows.Forms.Label();
+            this.lblNavReports = new System.Windows.Forms.Label();
+            this.lblNavGroups = new System.Windows.Forms.Label();
             this.pnlContent = new System.Windows.Forms.Panel();
-            this.lblPageTitle = new System.Windows.Forms.Label();
-            this.pnlActions = new System.Windows.Forms.Panel();
-            this.btnCreateGroup = new System.Windows.Forms.Button();
-            this.lblGroupCount = new System.Windows.Forms.Label();
             this.dgvGroups = new System.Windows.Forms.DataGridView();
+            this.pnlActions = new System.Windows.Forms.Panel();
+            this.lblGroupCount = new System.Windows.Forms.Label();
+            this.btnCreateGroup = new System.Windows.Forms.Button();
+            this.lblPageTitle = new System.Windows.Forms.Label();
             this.pnlTopbar.SuspendLayout();
             this.pnlSidebar.SuspendLayout();
             this.pnlSidebarFooter.SuspendLayout();
             this.pnlContent.SuspendLayout();
-            this.pnlActions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGroups)).BeginInit();
+            this.pnlActions.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlTopbar
@@ -62,17 +61,6 @@
             this.pnlTopbar.Size = new System.Drawing.Size(932, 55);
             this.pnlTopbar.TabIndex = 0;
             // 
-            // lblTitle
-            // 
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(240)))), ((int)(((byte)(232)))));
-            this.lblTitle.Location = new System.Drawing.Point(14, 16);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(370, 24);
-            this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "SyncPoint — Instructor Dashboard";
-            // 
             // lblUser
             // 
             this.lblUser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -85,60 +73,28 @@
             this.lblUser.TabIndex = 1;
             this.lblUser.Text = "Instructor";
             // 
+            // lblTitle
+            // 
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(240)))), ((int)(((byte)(232)))));
+            this.lblTitle.Location = new System.Drawing.Point(14, 16);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(370, 24);
+            this.lblTitle.TabIndex = 0;
+            this.lblTitle.Text = "SyncPoint — Instructor Dashboard";
+            // 
             // pnlSidebar
             // 
             this.pnlSidebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(45)))), ((int)(((byte)(74)))));
             this.pnlSidebar.Controls.Add(this.pnlSidebarFooter);
             this.pnlSidebar.Controls.Add(this.lblNavReports);
-            this.pnlSidebar.Controls.Add(this.lblNavCreate);
             this.pnlSidebar.Controls.Add(this.lblNavGroups);
             this.pnlSidebar.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlSidebar.Location = new System.Drawing.Point(0, 55);
             this.pnlSidebar.Name = "pnlSidebar";
             this.pnlSidebar.Size = new System.Drawing.Size(130, 518);
             this.pnlSidebar.TabIndex = 1;
-            // 
-            // lblNavGroups
-            // 
-            this.lblNavGroups.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblNavGroups.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblNavGroups.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNavGroups.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(143)))), ((int)(((byte)(163)))), ((int)(((byte)(196)))));
-            this.lblNavGroups.Location = new System.Drawing.Point(0, 0);
-            this.lblNavGroups.Name = "lblNavGroups";
-            this.lblNavGroups.Padding = new System.Windows.Forms.Padding(14, 0, 0, 0);
-            this.lblNavGroups.Size = new System.Drawing.Size(130, 40);
-            this.lblNavGroups.TabIndex = 0;
-            this.lblNavGroups.Text = "My Groups";
-            this.lblNavGroups.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblNavCreate
-            // 
-            this.lblNavCreate.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblNavCreate.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblNavCreate.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNavCreate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(143)))), ((int)(((byte)(163)))), ((int)(((byte)(196)))));
-            this.lblNavCreate.Location = new System.Drawing.Point(0, 40);
-            this.lblNavCreate.Name = "lblNavCreate";
-            this.lblNavCreate.Padding = new System.Windows.Forms.Padding(14, 0, 0, 0);
-            this.lblNavCreate.Size = new System.Drawing.Size(130, 40);
-            this.lblNavCreate.TabIndex = 1;
-            this.lblNavCreate.Text = "Create Group";
-            this.lblNavCreate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblNavReports
-            // 
-            this.lblNavReports.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblNavReports.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblNavReports.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNavReports.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(143)))), ((int)(((byte)(163)))), ((int)(((byte)(196)))));
-            this.lblNavReports.Location = new System.Drawing.Point(0, 80);
-            this.lblNavReports.Name = "lblNavReports";
-            this.lblNavReports.Padding = new System.Windows.Forms.Padding(14, 0, 0, 0);
-            this.lblNavReports.Size = new System.Drawing.Size(130, 40);
-            this.lblNavReports.TabIndex = 2;
-            this.lblNavReports.Text = "Reports";
-            this.lblNavReports.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // pnlSidebarFooter
             // 
@@ -163,6 +119,37 @@
             this.lblLogout.TabIndex = 0;
             this.lblLogout.Text = "↩  Logout";
             this.lblLogout.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblLogout.Click += new System.EventHandler(this.lblLogout_Click);
+            // 
+            // lblNavReports
+            // 
+            this.lblNavReports.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblNavReports.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblNavReports.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNavReports.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(143)))), ((int)(((byte)(163)))), ((int)(((byte)(196)))));
+            this.lblNavReports.Location = new System.Drawing.Point(0, 40);
+            this.lblNavReports.Name = "lblNavReports";
+            this.lblNavReports.Padding = new System.Windows.Forms.Padding(14, 0, 0, 0);
+            this.lblNavReports.Size = new System.Drawing.Size(130, 40);
+            this.lblNavReports.TabIndex = 2;
+            this.lblNavReports.Text = "Reports";
+            this.lblNavReports.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblNavReports.Click += new System.EventHandler(this.lblNavReports_Click);
+            // 
+            // lblNavGroups
+            // 
+            this.lblNavGroups.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblNavGroups.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblNavGroups.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNavGroups.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(143)))), ((int)(((byte)(163)))), ((int)(((byte)(196)))));
+            this.lblNavGroups.Location = new System.Drawing.Point(0, 0);
+            this.lblNavGroups.Name = "lblNavGroups";
+            this.lblNavGroups.Padding = new System.Windows.Forms.Padding(14, 0, 0, 0);
+            this.lblNavGroups.Size = new System.Drawing.Size(130, 40);
+            this.lblNavGroups.TabIndex = 0;
+            this.lblNavGroups.Text = "My Groups";
+            this.lblNavGroups.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblNavGroups.Click += new System.EventHandler(this.lblNavGroups_Click);
             // 
             // pnlContent
             // 
@@ -175,51 +162,6 @@
             this.pnlContent.Padding = new System.Windows.Forms.Padding(16);
             this.pnlContent.Size = new System.Drawing.Size(802, 518);
             this.pnlContent.TabIndex = 2;
-            // 
-            // lblPageTitle
-            // 
-            this.lblPageTitle.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblPageTitle.Font = new System.Drawing.Font("Georgia", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPageTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(39)))), ((int)(((byte)(68)))));
-            this.lblPageTitle.Location = new System.Drawing.Point(16, 16);
-            this.lblPageTitle.Name = "lblPageTitle";
-            this.lblPageTitle.Size = new System.Drawing.Size(770, 35);
-            this.lblPageTitle.TabIndex = 0;
-            this.lblPageTitle.Text = "My Groups";
-            // 
-            // pnlActions
-            // 
-            this.pnlActions.BackColor = System.Drawing.Color.Transparent;
-            this.pnlActions.Controls.Add(this.lblGroupCount);
-            this.pnlActions.Controls.Add(this.btnCreateGroup);
-            this.pnlActions.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlActions.Location = new System.Drawing.Point(16, 51);
-            this.pnlActions.Name = "pnlActions";
-            this.pnlActions.Size = new System.Drawing.Size(770, 45);
-            this.pnlActions.TabIndex = 1;
-            // 
-            // btnCreateGroup
-            // 
-            this.btnCreateGroup.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(39)))), ((int)(((byte)(68)))));
-            this.btnCreateGroup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCreateGroup.ForeColor = System.Drawing.Color.White;
-            this.btnCreateGroup.Location = new System.Drawing.Point(0, 6);
-            this.btnCreateGroup.Name = "btnCreateGroup";
-            this.btnCreateGroup.Size = new System.Drawing.Size(130, 32);
-            this.btnCreateGroup.TabIndex = 0;
-            this.btnCreateGroup.Text = "+ Create Group";
-            this.btnCreateGroup.UseVisualStyleBackColor = false;
-            // 
-            // lblGroupCount
-            // 
-            this.lblGroupCount.AutoSize = true;
-            this.lblGroupCount.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblGroupCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(111)))), ((int)(((byte)(90)))));
-            this.lblGroupCount.Location = new System.Drawing.Point(145, 12);
-            this.lblGroupCount.Name = "lblGroupCount";
-            this.lblGroupCount.Size = new System.Drawing.Size(65, 17);
-            this.lblGroupCount.TabIndex = 1;
-            this.lblGroupCount.Text = "0 groups";
             // 
             // dgvGroups
             // 
@@ -242,6 +184,52 @@
             this.dgvGroups.Size = new System.Drawing.Size(770, 406);
             this.dgvGroups.TabIndex = 2;
             // 
+            // pnlActions
+            // 
+            this.pnlActions.BackColor = System.Drawing.Color.Transparent;
+            this.pnlActions.Controls.Add(this.lblGroupCount);
+            this.pnlActions.Controls.Add(this.btnCreateGroup);
+            this.pnlActions.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlActions.Location = new System.Drawing.Point(16, 51);
+            this.pnlActions.Name = "pnlActions";
+            this.pnlActions.Size = new System.Drawing.Size(770, 45);
+            this.pnlActions.TabIndex = 1;
+            // 
+            // lblGroupCount
+            // 
+            this.lblGroupCount.AutoSize = true;
+            this.lblGroupCount.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGroupCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(111)))), ((int)(((byte)(90)))));
+            this.lblGroupCount.Location = new System.Drawing.Point(145, 12);
+            this.lblGroupCount.Name = "lblGroupCount";
+            this.lblGroupCount.Size = new System.Drawing.Size(65, 17);
+            this.lblGroupCount.TabIndex = 1;
+            this.lblGroupCount.Text = "0 groups";
+            // 
+            // btnCreateGroup
+            // 
+            this.btnCreateGroup.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(39)))), ((int)(((byte)(68)))));
+            this.btnCreateGroup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCreateGroup.ForeColor = System.Drawing.Color.White;
+            this.btnCreateGroup.Location = new System.Drawing.Point(0, 6);
+            this.btnCreateGroup.Name = "btnCreateGroup";
+            this.btnCreateGroup.Size = new System.Drawing.Size(130, 32);
+            this.btnCreateGroup.TabIndex = 0;
+            this.btnCreateGroup.Text = "+ Create Group";
+            this.btnCreateGroup.UseVisualStyleBackColor = false;
+            this.btnCreateGroup.Click += new System.EventHandler(this.btnCreateGroup_Click_1);
+            // 
+            // lblPageTitle
+            // 
+            this.lblPageTitle.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblPageTitle.Font = new System.Drawing.Font("Georgia", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPageTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(39)))), ((int)(((byte)(68)))));
+            this.lblPageTitle.Location = new System.Drawing.Point(16, 16);
+            this.lblPageTitle.Name = "lblPageTitle";
+            this.lblPageTitle.Size = new System.Drawing.Size(770, 35);
+            this.lblPageTitle.TabIndex = 0;
+            this.lblPageTitle.Text = "My Groups";
+            // 
             // InstructorDashboardForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -261,9 +249,9 @@
             this.pnlSidebar.ResumeLayout(false);
             this.pnlSidebarFooter.ResumeLayout(false);
             this.pnlContent.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvGroups)).EndInit();
             this.pnlActions.ResumeLayout(false);
             this.pnlActions.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvGroups)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -276,7 +264,6 @@
         private System.Windows.Forms.Panel pnlSidebar;
         private System.Windows.Forms.Label lblNavGroups;
         private System.Windows.Forms.Label lblNavReports;
-        private System.Windows.Forms.Label lblNavCreate;
         private System.Windows.Forms.Panel pnlSidebarFooter;
         private System.Windows.Forms.Label lblLogout;
         private System.Windows.Forms.Panel pnlContent;
