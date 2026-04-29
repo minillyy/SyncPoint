@@ -71,6 +71,7 @@ namespace SyncPoint.Data
                     ID        INTEGER PRIMARY KEY AUTOINCREMENT,
                     GroupID   INTEGER NOT NULL,
                     UserID    INTEGER NOT NULL,
+                    GroupRole VARCHAR(50) DEFAULT 'Member',
                     JoinedAt  DATE,
                     FOREIGN KEY (GroupID) REFERENCES Groups(GroupID),
                     FOREIGN KEY (UserID)  REFERENCES Users(UserID)
@@ -377,27 +378,26 @@ namespace SyncPoint.Data
         {
             using (var conn = GetConnection())
             {
-                // Update group's LeaderID
+                // 1. Update group's LeaderID in the Groups table
                 var cmd1 = new SQLiteCommand(@"
-                    UPDATE Groups SET LeaderID = @uid
-                    WHERE  GroupID = @gid;", conn);
+            UPDATE Groups SET LeaderID = @uid
+            WHERE  GroupID = @gid;", conn);
                 cmd1.Parameters.AddWithValue("@uid", userID);
                 cmd1.Parameters.AddWithValue("@gid", groupID);
                 cmd1.ExecuteNonQuery();
 
-                // Promote the user's role to Leader (RoleID = 2)
+                // 2. Promote the global user's role to Leader (RoleID = 2)
                 var cmd2 = new SQLiteCommand(@"
-                    UPDATE Users SET RoleID = 2
-                    WHERE  UserID = @uid;", conn);
+            UPDATE Users SET RoleID = 2
+            WHERE  UserID = @uid;", conn);
                 cmd2.Parameters.AddWithValue("@uid", userID);
                 cmd2.ExecuteNonQuery();
 
-                // Add them to GroupMembers if not already there
+                // 3. Update the specific role WITHIN this group
                 var cmd3 = new SQLiteCommand(@"
-                    INSERT OR IGNORE INTO GroupMembers
-                        (GroupID, UserID, GroupRole, JoinedAt)
-                    VALUES
-                        (@gid, @uid, 'Leader', DATE('now'));", conn);
+            UPDATE GroupMembers 
+            SET GroupRole = 'Leader'
+            WHERE GroupID = @gid AND UserID = @uid;", conn);
                 cmd3.Parameters.AddWithValue("@gid", groupID);
                 cmd3.Parameters.AddWithValue("@uid", userID);
                 cmd3.ExecuteNonQuery();
