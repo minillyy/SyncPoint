@@ -138,7 +138,7 @@ namespace SyncPoint.Forms
             // Prevent adding columns twice
             if (dgvGroups.Columns.Count > 0) return;
 
-            // Hidden GroupID — used to identify rows
+            // Hidden GroupID
             dgvGroups.Columns.Add(
                 new DataGridViewTextBoxColumn
                 {
@@ -173,7 +173,19 @@ namespace SyncPoint.Forms
                     Name = "MemberCount",
                     HeaderText = "Members",
                     ReadOnly = true,
-                    FillWeight = 15
+                    FillWeight = 15,
+                    DefaultCellStyle = new DataGridViewCellStyle
+                    {
+                        Alignment =
+                            DataGridViewContentAlignment.MiddleCenter
+                    },
+                    HeaderCell = {
+            Style = new DataGridViewCellStyle {
+                Alignment =
+                    DataGridViewContentAlignment
+                        .MiddleCenter
+            }
+                    }
                 });
 
             // Appoint Leader Button
@@ -187,20 +199,85 @@ namespace SyncPoint.Forms
                     FillWeight = 20
                 });
 
-            // Style header
-            dgvGroups.EnableHeadersVisualStyles = false;
-            dgvGroups.ColumnHeadersDefaultCellStyle
-                .BackColor =
-                ColorTranslator.FromHtml("#1a2744");
-            dgvGroups.ColumnHeadersDefaultCellStyle
-                .ForeColor = Color.White;
-            dgvGroups.ColumnHeadersDefaultCellStyle
-                .Font =
-                new Font("Arial", 9f, FontStyle.Bold);
-            dgvGroups.ColumnHeadersHeight = 36;
+            // Remove sort arrows from all columns
+            foreach (DataGridViewColumn col in dgvGroups.Columns)
+            {
+                col.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
 
-            // Style rows
+            // ── TABLE BACKGROUND ─────────────────────────────────
+            // White background
             dgvGroups.BackgroundColor = Color.White;
+
+            // ── HEADER ROW ───────────────────────────────────────
+            // Dark navy
+            dgvGroups.EnableHeadersVisualStyles = false;
+            dgvGroups.ColumnHeadersDefaultCellStyle.BackColor =
+                ColorTranslator.FromHtml("#1a2744");
+            dgvGroups.ColumnHeadersDefaultCellStyle.ForeColor =
+                Color.White;
+            dgvGroups.ColumnHeadersDefaultCellStyle.Font =
+                new Font("Georgia", 9f, FontStyle.Bold);
+            dgvGroups.ColumnHeadersDefaultCellStyle.Padding =
+                new Padding(8, 0, 0, 0);
+            dgvGroups.ColumnHeadersHeight = 38;
+
+            // ── DATA ROWS ────────────────────────────────────────
+            // White rows with navy text
+            dgvGroups.DefaultCellStyle.BackColor =
+                Color.White;
+            dgvGroups.DefaultCellStyle.ForeColor =
+                ColorTranslator.FromHtml("#1a2744");
+            dgvGroups.DefaultCellStyle.Font =
+                new Font("Arial", 9.5f);
+            dgvGroups.DefaultCellStyle.Padding =
+                new Padding(8, 0, 0, 0);
+            dgvGroups.DefaultCellStyle.SelectionBackColor =
+                ColorTranslator.FromHtml("#e8e4f0");
+            dgvGroups.DefaultCellStyle.SelectionForeColor =
+                ColorTranslator.FromHtml("#1a2744");
+
+            // Alternating row — very light cream
+            dgvGroups.AlternatingRowsDefaultCellStyle.BackColor =
+                ColorTranslator.FromHtml("#faf7f2");
+            dgvGroups.AlternatingRowsDefaultCellStyle.ForeColor =
+                ColorTranslator.FromHtml("#1a2744");
+            dgvGroups.AlternatingRowsDefaultCellStyle
+                .SelectionBackColor =
+                ColorTranslator.FromHtml("#e8e4f0");
+            dgvGroups.AlternatingRowsDefaultCellStyle
+                .SelectionForeColor =
+                ColorTranslator.FromHtml("#1a2744");
+
+            // ── GRID LINES ───────────────────────────────────────
+            // Subtle horizontal lines only — cleaner look
+            dgvGroups.CellBorderStyle =
+                DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvGroups.GridColor =
+                ColorTranslator.FromHtml("#e8e0d0");
+
+            // ── BUTTON COLUMN STYLE ──────────────────────────────
+            // Dark navy button matching your UI buttons
+            dgvGroups.Columns["BtnAppoint"]
+                .DefaultCellStyle.BackColor =
+                ColorTranslator.FromHtml("#1a2744");
+            dgvGroups.Columns["BtnAppoint"]
+                .DefaultCellStyle.ForeColor =
+                Color.White;
+            dgvGroups.Columns["BtnAppoint"]
+                .DefaultCellStyle.Font =
+                new Font("Arial", 8.5f, FontStyle.Bold);
+            dgvGroups.Columns["BtnAppoint"]
+                .DefaultCellStyle.Alignment =
+                DataGridViewContentAlignment.MiddleCenter;
+            dgvGroups.Columns["BtnAppoint"]
+                .DefaultCellStyle.SelectionBackColor =
+                ColorTranslator.FromHtml("#2e3f5c");
+            dgvGroups.Columns["BtnAppoint"]
+                .DefaultCellStyle.SelectionForeColor =
+                Color.White;
+
+            // ── OTHER GRID PROPERTIES ────────────────────────────
             dgvGroups.BorderStyle = BorderStyle.None;
             dgvGroups.RowHeadersVisible = false;
             dgvGroups.AllowUserToAddRows = false;
@@ -209,18 +286,27 @@ namespace SyncPoint.Forms
                 DataGridViewSelectionMode.FullRowSelect;
             dgvGroups.AutoSizeColumnsMode =
                 DataGridViewAutoSizeColumnsMode.Fill;
-            dgvGroups.DefaultCellStyle.Font =
-                new Font("Arial", 9.5f);
-            dgvGroups.DefaultCellStyle.ForeColor =
-                ColorTranslator.FromHtml("#1a2744");
-            dgvGroups.RowTemplate.Height = 40;
-            dgvGroups.AlternatingRowsDefaultCellStyle
-                .BackColor =
-                ColorTranslator.FromHtml("#faf7f2");
+            dgvGroups.RowTemplate.Height = 42;
             dgvGroups.MultiSelect = false;
 
-            // Wire CellClick ONCE here
+            // Remove blue selection highlight
+            dgvGroups.DefaultCellStyle.SelectionBackColor =
+                Color.White;
+            dgvGroups.DefaultCellStyle.SelectionForeColor =
+                ColorTranslator.FromHtml("#1a2744");
+
+            dgvGroups.AlternatingRowsDefaultCellStyle
+                .SelectionBackColor =
+                ColorTranslator.FromHtml("#faf7f2");
+            dgvGroups.AlternatingRowsDefaultCellStyle
+                .SelectionForeColor =
+                ColorTranslator.FromHtml("#1a2744");
+
+            // Wire CellClick once
             dgvGroups.CellClick += new DataGridViewCellEventHandler(dgvGroups_CellClick);
+
+            // Wire custom button painter
+            dgvGroups.CellPainting += new DataGridViewCellPaintingEventHandler(dgvGroups_CellPainting);
         }
 
         // ════════════════════════════════════════════════════
@@ -249,6 +335,83 @@ namespace SyncPoint.Forms
             }
 
             lblGroupCount.Text = groups.Rows.Count + " group(s)";
+            StyleButtonCells();
+        }
+
+        private void dgvGroups_CellPainting(
+    object sender,
+    DataGridViewCellPaintingEventArgs e)
+        {
+            // Only paint the BtnAppoint column
+            if (e.ColumnIndex !=
+                dgvGroups.Columns["BtnAppoint"].Index ||
+                e.RowIndex < 0)
+                return;
+
+            e.Paint(e.ClipBounds,
+                DataGridViewPaintParts.Background);
+
+            // Draw the navy button background
+            Color btnColor =
+                ColorTranslator.FromHtml("#1a2744");
+            Color btnHover =
+                ColorTranslator.FromHtml("#2e3f5c");
+
+            using (var brush = new SolidBrush(btnColor))
+            {
+                // Button rectangle with padding inside the cell
+                Rectangle btnRect = new Rectangle(
+                    e.CellBounds.X + 6,
+                    e.CellBounds.Y + 5,
+                    e.CellBounds.Width - 12,
+                    e.CellBounds.Height - 10);
+
+                // Draw filled rounded-looking button
+                e.Graphics.FillRectangle(brush, btnRect);
+
+                // Draw button text in white
+                using (var textBrush = new SolidBrush(Color.White))
+                using (var font = new Font(
+                    "Arial", 8.5f, FontStyle.Bold))
+                {
+                    var format = new StringFormat
+                    {
+                        Alignment =
+                            StringAlignment.Center,
+                        LineAlignment =
+                            StringAlignment.Center
+                    };
+
+                    e.Graphics.DrawString(
+                        "Appoint Leader",
+                        font,
+                        textBrush,
+                        btnRect,
+                        format);
+                }
+            }
+
+            e.Handled = true; // prevent default drawing
+        }
+
+        private void StyleButtonCells()
+        {
+            foreach (DataGridViewRow row in dgvGroups.Rows)
+            {
+                if (row.IsNewRow) continue;
+
+                // Style the Appoint Leader button cell
+                var cell = row.Cells["BtnAppoint"]
+                    as DataGridViewButtonCell;
+                if (cell != null)
+                {
+                    cell.Style.BackColor =
+                        ColorTranslator.FromHtml("#1a2744");
+                    cell.Style.ForeColor = Color.White;
+                    cell.Style.Font =
+                        new Font("Arial", 8.5f, FontStyle.Bold);
+                }
+            }
         }
 
         // ════════════════════════════════════════════════════
