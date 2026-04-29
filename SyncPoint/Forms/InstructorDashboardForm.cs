@@ -20,71 +20,51 @@ namespace SyncPoint.Forms
 
         // ════════════════════════════════════════════════════
         //  WIRE UP ALL EVENTS IN CODE
-        //  This replaces all designer event connections
-        //  so nothing is missed or duplicated
         // ════════════════════════════════════════════════════
         private void WireUpEvents()
         {
             // Form load
-            this.Load +=
-                new EventHandler(
-                    InstructorDashboardForm_Load);
+            this.Load += new EventHandler(InstructorDashboardForm_Load);
 
             // Nav label clicks
-            lblNavGroups.Click +=
-                new EventHandler(lblNavGroups_Click);
-            lblNavReports.Click +=
-                new EventHandler(lblNavReports_Click);
+            lblNavGroups.Click += new EventHandler(lblNavGroups_Click);
+            lblNavReports.Click += new EventHandler(lblNavReports_Click);
 
             // Make nav labels look clickable
             lblNavGroups.Cursor = Cursors.Hand;
             lblNavReports.Cursor = Cursors.Hand;
 
             // Logout label
-            lblLogout.Click +=
-                new EventHandler(lblLogout_Click);
+            lblLogout.Click += new EventHandler(lblLogout_Click);
             lblLogout.Cursor = Cursors.Hand;
 
             // Create group button
-            // Wire ONLY here — remove from designer
-            btnCreateGroup.Click +=
-                new EventHandler(btnCreateGroup_Click);
+            btnCreateGroup.Click += new EventHandler(btnCreateGroup_Click);
 
             // Topbar gold border paint
             pnlTopbar.Paint += (s, pe) =>
             {
-                var pen = new Pen(
-                    ColorTranslator.FromHtml("#c9a84c"), 3);
-                pe.Graphics.DrawLine(pen,
-                    0, pnlTopbar.Height - 2,
+                var pen = new Pen(ColorTranslator.FromHtml("#c9a84c"), 3);
+                pe.Graphics.DrawLine(pen, 0, pnlTopbar.Height - 2,
                     pnlTopbar.Width, pnlTopbar.Height - 2);
             };
 
             // Sidebar footer divider paint
             pnlSidebarFooter.Paint += (s, pe) =>
             {
-                var pen = new Pen(
-                    ColorTranslator.FromHtml("#2e3f5c"), 1);
-                pe.Graphics.DrawLine(pen,
-                    0, 0,
-                    pnlSidebarFooter.Width, 0);
+                var pen = new Pen(ColorTranslator.FromHtml("#2e3f5c"), 1);
+                pe.Graphics.DrawLine(pen, 0, 0, pnlSidebarFooter.Width, 0);
             };
         }
 
         // ════════════════════════════════════════════════════
         //  FORM LOAD
         // ════════════════════════════════════════════════════
-        private void InstructorDashboardForm_Load(
-            object sender, EventArgs e)
+        private void InstructorDashboardForm_Load(object sender, EventArgs e)
         {
-            lblUser.Text =
-                "Instructor: " + Session.FullName;
+            lblUser.Text = "Instructor";
 
-            // Setup grid columns FIRST
-            // then load data
             SetupGroupsGrid();
-
-            // Default to Groups tab on load
             ShowGroupsTab();
         }
 
@@ -101,23 +81,17 @@ namespace SyncPoint.Forms
             // Reset all labels to inactive style
             foreach (Label lbl in navLabels)
             {
-                lbl.ForeColor =
-                    ColorTranslator.FromHtml("#8fa3c4");
+                lbl.ForeColor = ColorTranslator.FromHtml("#8fa3c4");
                 lbl.BackColor = Color.Transparent;
-                lbl.Font =
-                    new Font("Arial", 10f,
-                        FontStyle.Regular);
+                lbl.Font = new Font("Arial", 10f, FontStyle.Regular);
                 lbl.Tag = "";
                 lbl.Invalidate(); // force visual refresh
             }
 
             // Apply active style to clicked label
-            activeLabel.ForeColor =
-                ColorTranslator.FromHtml("#f5f0e8");
-            activeLabel.BackColor =
-                Color.FromArgb(30, 201, 168, 76);
-            activeLabel.Font =
-                new Font("Arial", 10f, FontStyle.Bold);
+            activeLabel.ForeColor = ColorTranslator.FromHtml("#f5f0e8");
+            activeLabel.BackColor = Color.FromArgb(30, 201, 168, 76);
+            activeLabel.Font = new Font("Arial", 10f, FontStyle.Bold);
             activeLabel.Tag = "active";
             activeLabel.Invalidate(); // force visual refresh
         }
@@ -125,14 +99,12 @@ namespace SyncPoint.Forms
         // ════════════════════════════════════════════════════
         //  NAV LABEL CLICKS
         // ════════════════════════════════════════════════════
-        private void lblNavGroups_Click(
-            object sender, EventArgs e)
+        private void lblNavGroups_Click(object sender, EventArgs e)
         {
             ShowGroupsTab();
         }
 
-        private void lblNavReports_Click(
-            object sender, EventArgs e)
+        private void lblNavReports_Click(object sender, EventArgs e)
         {
             ShowReportsTab();
         }
@@ -248,9 +220,7 @@ namespace SyncPoint.Forms
             dgvGroups.MultiSelect = false;
 
             // Wire CellClick ONCE here
-            dgvGroups.CellClick +=
-                new DataGridViewCellEventHandler(
-                    dgvGroups_CellClick);
+            dgvGroups.CellClick += new DataGridViewCellEventHandler(dgvGroups_CellClick);
         }
 
         // ════════════════════════════════════════════════════
@@ -278,37 +248,28 @@ namespace SyncPoint.Forms
                 );
             }
 
-            lblGroupCount.Text =
-                groups.Rows.Count + " group(s)";
+            lblGroupCount.Text = groups.Rows.Count + " group(s)";
         }
 
         // ════════════════════════════════════════════════════
         //  GRID CELL CLICK
         //  Handles both row selection and button clicks
         // ════════════════════════════════════════════════════
-        private void dgvGroups_CellClick(
-            object sender,
-            DataGridViewCellEventArgs e)
+        private void dgvGroups_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             // Ignore header row clicks
             if (e.RowIndex < 0) return;
 
-            int groupID = Convert.ToInt32(
-                dgvGroups.Rows[e.RowIndex]
-                         .Cells["GroupID"].Value);
+            int groupID = Convert.ToInt32(dgvGroups.Rows[e.RowIndex].Cells["GroupID"].Value);
 
-            string groupName =
-                dgvGroups.Rows[e.RowIndex]
-                         .Cells["GroupName"]
-                         .Value.ToString();
+            string groupName = dgvGroups.Rows[e.RowIndex].Cells["GroupName"].Value.ToString();
 
             // Store selected group
             _selectedGroupID = groupID;
             _selectedGroupName = groupName;
 
             // Appoint Leader button clicked
-            if (e.ColumnIndex ==
-                dgvGroups.Columns["BtnAppoint"].Index)
+            if (e.ColumnIndex == dgvGroups.Columns["BtnAppoint"].Index)
             {
                 var form = new AppointLeaderForm(groupID, groupName);
                 form.ShowDialog();
@@ -318,10 +279,8 @@ namespace SyncPoint.Forms
 
         // ════════════════════════════════════════════════════
         //  CREATE GROUP BUTTON
-        //  Only one method — duplicate removed
         // ════════════════════════════════════════════════════
-        private void btnCreateGroup_Click(
-            object sender, EventArgs e)
+        private void btnCreateGroup_Click(object sender, EventArgs e)
         {
             var form = new CreateGroupForm();
             form.ShowDialog();

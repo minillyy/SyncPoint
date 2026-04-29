@@ -139,7 +139,7 @@
             this.MinimizeBox = false;
             this.Name = "AppointLeaderForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "SyncPoint — Appoint Leader";
+            this.Text = "Appoint Leader";
             this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.dgvMembers)).EndInit();
             this.ResumeLayout(false);

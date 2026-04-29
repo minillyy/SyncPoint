@@ -120,7 +120,7 @@
             this.MinimizeBox = false;
             this.Name = "CreateGroupForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "SyncPoint — Create Group";
+            this.Text = "Create Group";
             this.ResumeLayout(false);
             this.PerformLayout();
 

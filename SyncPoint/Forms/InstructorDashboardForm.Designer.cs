@@ -72,7 +72,6 @@
             this.lblUser.Size = new System.Drawing.Size(93, 23);
             this.lblUser.TabIndex = 1;
             this.lblUser.Text = "Instructor";
-            this.lblUser.Click += new System.EventHandler(this.lblUser_Click);
             // 
             // lblTitle
             // 
@@ -120,7 +119,6 @@
             this.lblLogout.TabIndex = 0;
             this.lblLogout.Text = "↩  Logout";
             this.lblLogout.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblLogout.Click += new System.EventHandler(this.lblLogout_Click);
             // 
             // lblNavReports
             // 
@@ -135,7 +133,6 @@
             this.lblNavReports.TabIndex = 2;
             this.lblNavReports.Text = "Reports";
             this.lblNavReports.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblNavReports.Click += new System.EventHandler(this.lblNavReports_Click);
             // 
             // lblNavGroups
             // 
@@ -150,7 +147,6 @@
             this.lblNavGroups.TabIndex = 0;
             this.lblNavGroups.Text = "My Groups";
             this.lblNavGroups.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblNavGroups.Click += new System.EventHandler(this.lblNavGroups_Click);
             // 
             // pnlContent
             // 
@@ -199,11 +195,11 @@
             // lblGroupCount
             // 
             this.lblGroupCount.AutoSize = true;
-            this.lblGroupCount.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblGroupCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(111)))), ((int)(((byte)(90)))));
-            this.lblGroupCount.Location = new System.Drawing.Point(145, 12);
+            this.lblGroupCount.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGroupCount.ForeColor = System.Drawing.Color.SaddleBrown;
+            this.lblGroupCount.Location = new System.Drawing.Point(150, 8);
             this.lblGroupCount.Name = "lblGroupCount";
-            this.lblGroupCount.Size = new System.Drawing.Size(65, 17);
+            this.lblGroupCount.Size = new System.Drawing.Size(88, 24);
             this.lblGroupCount.TabIndex = 1;
             this.lblGroupCount.Text = "0 groups";
             // 
@@ -212,13 +208,12 @@
             this.btnCreateGroup.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(39)))), ((int)(((byte)(68)))));
             this.btnCreateGroup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCreateGroup.ForeColor = System.Drawing.Color.White;
-            this.btnCreateGroup.Location = new System.Drawing.Point(0, 6);
+            this.btnCreateGroup.Location = new System.Drawing.Point(0, 0);
             this.btnCreateGroup.Name = "btnCreateGroup";
-            this.btnCreateGroup.Size = new System.Drawing.Size(130, 32);
+            this.btnCreateGroup.Size = new System.Drawing.Size(130, 45);
             this.btnCreateGroup.TabIndex = 0;
             this.btnCreateGroup.Text = "+ Create Group";
             this.btnCreateGroup.UseVisualStyleBackColor = false;
-            this.btnCreateGroup.Click += new System.EventHandler(this.btnCreateGroup_Click);
             // 
             // lblPageTitle
             // 
@@ -244,7 +239,7 @@
             this.MaximizeBox = false;
             this.Name = "InstructorDashboardForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "SyncPoint — Instructor Dashboard";
+            this.Text = "SyncPoint";
             this.pnlTopbar.ResumeLayout(false);
             this.pnlTopbar.PerformLayout();
             this.pnlSidebar.ResumeLayout(false);

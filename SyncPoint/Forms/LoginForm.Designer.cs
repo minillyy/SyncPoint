@@ -225,7 +225,7 @@
             this.MinimizeBox = false;
             this.Name = "LoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "SyncPoint — Login";
+            this.Text = "Login Page";
             this.Load += new System.EventHandler(this.LoginForm_Load);
             this.panelHeader.ResumeLayout(false);
             this.panelHeader.PerformLayout();

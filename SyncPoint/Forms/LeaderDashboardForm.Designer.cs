@@ -348,7 +348,7 @@
             this.MaximizeBox = false;
             this.Name = "LeaderDashboardForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "SyncPoint — Dashboard";
+            this.Text = "SyncPoint";
             this.Load += new System.EventHandler(this.LeaderDashboardForm_Load);
             this.pnlTopbar.ResumeLayout(false);
             this.pnlTopbar.PerformLayout();
