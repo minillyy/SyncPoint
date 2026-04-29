@@ -107,8 +107,7 @@ namespace SyncPoint.Forms
             string username = txtUsername.Text.Trim();
             string password = txtPassword.Text;
 
-            bool success = DatabaseHelper.RegisterUser(
-                fullName, username, password, "Member");
+            bool success = DatabaseHelper.RegisterUser(fullName, username, password, "Member");
 
             if (success)
             {

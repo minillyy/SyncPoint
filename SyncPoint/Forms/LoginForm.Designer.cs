@@ -49,7 +49,6 @@
             this.panelHeader.Name = "panelHeader";
             this.panelHeader.Size = new System.Drawing.Size(376, 90);
             this.panelHeader.TabIndex = 0;
-            this.panelHeader.Paint += new System.Windows.Forms.PaintEventHandler(this.panelHeader_Paint);
             // 
             // panel1
             // 
@@ -59,7 +58,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(376, 3);
             this.panel1.TabIndex = 2;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // lblSubTitle
             // 
@@ -82,7 +80,6 @@
             this.lblTitle.Size = new System.Drawing.Size(166, 38);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "SyncPoint";
-            this.lblTitle.Click += new System.EventHandler(this.label1_Click);
             // 
             // lblUsername
             // 
@@ -94,7 +91,6 @@
             this.lblUsername.Size = new System.Drawing.Size(76, 17);
             this.lblUsername.TabIndex = 3;
             this.lblUsername.Text = "Username";
-            this.lblUsername.Click += new System.EventHandler(this.Username_Click);
             // 
             // txtUsername
             // 
@@ -105,7 +101,6 @@
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(290, 27);
             this.txtUsername.TabIndex = 4;
-            this.txtUsername.TextChanged += new System.EventHandler(this.txtUsername_TextChanged);
             // 
             // lblPassword
             // 
@@ -117,7 +112,6 @@
             this.lblPassword.Size = new System.Drawing.Size(74, 17);
             this.lblPassword.TabIndex = 5;
             this.lblPassword.Text = "Password";
-            this.lblPassword.Click += new System.EventHandler(this.Password_Click);
             // 
             // txtPassword
             // 
@@ -129,7 +123,6 @@
             this.txtPassword.Size = new System.Drawing.Size(290, 27);
             this.txtPassword.TabIndex = 6;
             this.txtPassword.UseSystemPasswordChar = true;
-            this.txtPassword.TextChanged += new System.EventHandler(this.txtPassword_TextChanged);
             // 
             // lblSignInAs
             // 
@@ -142,7 +135,6 @@
             this.lblSignInAs.TabIndex = 7;
             this.lblSignInAs.Text = "—————————— Sign in as ——————————";
             this.lblSignInAs.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.lblSignInAs.Click += new System.EventHandler(this.label3_Click);
             // 
             // btnLeader
             // 
@@ -195,7 +187,6 @@
             this.lblNoAccount.Size = new System.Drawing.Size(90, 17);
             this.lblNoAccount.TabIndex = 11;
             this.lblNoAccount.Text = "No account?";
-            this.lblNoAccount.Click += new System.EventHandler(this.NoAccount_Click);
             // 
             // btnInstructor
             // 
@@ -210,6 +201,7 @@
             this.btnInstructor.TabIndex = 12;
             this.btnInstructor.Text = "Instructor";
             this.btnInstructor.UseVisualStyleBackColor = false;
+            this.btnInstructor.Click += new System.EventHandler(this.btnInstructor_Click);
             // 
             // LoginForm
             // 
@@ -233,7 +225,7 @@
             this.MinimizeBox = false;
             this.Name = "LoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "SyncPoint — Login";
+            this.Text = "Login Page";
             this.Load += new System.EventHandler(this.LoginForm_Load);
             this.panelHeader.ResumeLayout(false);
             this.panelHeader.PerformLayout();

@@ -22,18 +22,18 @@
         private void InitializeComponent()
         {
             this.pnlHeader = new System.Windows.Forms.Panel();
-            this.lblTitle = new System.Windows.Forms.Label();
             this.lblSub = new System.Windows.Forms.Label();
+            this.lblTitle = new System.Windows.Forms.Label();
             this.pnlBody = new System.Windows.Forms.Panel();
-            this.lblFullName = new System.Windows.Forms.Label();
-            this.txtFullName = new System.Windows.Forms.TextBox();
-            this.lblUsername = new System.Windows.Forms.Label();
-            this.txtUsername = new System.Windows.Forms.TextBox();
-            this.lblPassword = new System.Windows.Forms.Label();
-            this.txtPassword = new System.Windows.Forms.TextBox();
-            this.lblConfirm = new System.Windows.Forms.Label();
-            this.txtConfirm = new System.Windows.Forms.TextBox();
             this.btnRegister = new System.Windows.Forms.Button();
+            this.txtConfirm = new System.Windows.Forms.TextBox();
+            this.lblConfirm = new System.Windows.Forms.Label();
+            this.txtPassword = new System.Windows.Forms.TextBox();
+            this.lblPassword = new System.Windows.Forms.Label();
+            this.txtUsername = new System.Windows.Forms.TextBox();
+            this.lblUsername = new System.Windows.Forms.Label();
+            this.txtFullName = new System.Windows.Forms.TextBox();
+            this.lblFullName = new System.Windows.Forms.Label();
             this.pnlHeader.SuspendLayout();
             this.pnlBody.SuspendLayout();
             this.SuspendLayout();
@@ -49,17 +49,6 @@
             this.pnlHeader.Size = new System.Drawing.Size(382, 80);
             this.pnlHeader.TabIndex = 0;
             // 
-            // lblTitle
-            // 
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Georgia", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(240)))), ((int)(((byte)(232)))));
-            this.lblTitle.Location = new System.Drawing.Point(108, 9);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(160, 32);
-            this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "SyncPoint";
-            // 
             // lblSub
             // 
             this.lblSub.AutoSize = true;
@@ -71,6 +60,17 @@
             this.lblSub.TabIndex = 1;
             this.lblSub.Text = "Create your account";
             this.lblSub.Click += new System.EventHandler(this.lblSub_Click);
+            // 
+            // lblTitle
+            // 
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.Font = new System.Drawing.Font("Georgia", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(240)))), ((int)(((byte)(232)))));
+            this.lblTitle.Location = new System.Drawing.Point(108, 9);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(160, 32);
+            this.lblTitle.TabIndex = 0;
+            this.lblTitle.Text = "SyncPoint";
             // 
             // pnlBody
             // 
@@ -91,88 +91,6 @@
             this.pnlBody.Size = new System.Drawing.Size(382, 390);
             this.pnlBody.TabIndex = 1;
             // 
-            // lblFullName
-            // 
-            this.lblFullName.AutoSize = true;
-            this.lblFullName.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFullName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(111)))), ((int)(((byte)(90)))));
-            this.lblFullName.Location = new System.Drawing.Point(89, 29);
-            this.lblFullName.Name = "lblFullName";
-            this.lblFullName.Size = new System.Drawing.Size(74, 17);
-            this.lblFullName.TabIndex = 0;
-            this.lblFullName.Text = "Full Name";
-            // 
-            // txtFullName
-            // 
-            this.txtFullName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(249)))), ((int)(((byte)(243)))));
-            this.txtFullName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtFullName.Location = new System.Drawing.Point(92, 53);
-            this.txtFullName.Name = "txtFullName";
-            this.txtFullName.Size = new System.Drawing.Size(207, 22);
-            this.txtFullName.TabIndex = 1;
-            // 
-            // lblUsername
-            // 
-            this.lblUsername.AutoSize = true;
-            this.lblUsername.Font = new System.Drawing.Font("Arial", 9F);
-            this.lblUsername.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(111)))), ((int)(((byte)(90)))));
-            this.lblUsername.Location = new System.Drawing.Point(89, 100);
-            this.lblUsername.Name = "lblUsername";
-            this.lblUsername.Size = new System.Drawing.Size(76, 17);
-            this.lblUsername.TabIndex = 2;
-            this.lblUsername.Text = "Username";
-            // 
-            // txtUsername
-            // 
-            this.txtUsername.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(249)))), ((int)(((byte)(243)))));
-            this.txtUsername.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtUsername.Location = new System.Drawing.Point(92, 124);
-            this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(207, 22);
-            this.txtUsername.TabIndex = 3;
-            // 
-            // lblPassword
-            // 
-            this.lblPassword.AutoSize = true;
-            this.lblPassword.Font = new System.Drawing.Font("Arial", 9F);
-            this.lblPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(111)))), ((int)(((byte)(90)))));
-            this.lblPassword.Location = new System.Drawing.Point(89, 170);
-            this.lblPassword.Name = "lblPassword";
-            this.lblPassword.Size = new System.Drawing.Size(74, 17);
-            this.lblPassword.TabIndex = 4;
-            this.lblPassword.Text = "Password";
-            // 
-            // txtPassword
-            // 
-            this.txtPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(249)))), ((int)(((byte)(243)))));
-            this.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtPassword.Location = new System.Drawing.Point(92, 195);
-            this.txtPassword.Name = "txtPassword";
-            this.txtPassword.PasswordChar = '●';
-            this.txtPassword.Size = new System.Drawing.Size(207, 22);
-            this.txtPassword.TabIndex = 5;
-            // 
-            // lblConfirm
-            // 
-            this.lblConfirm.AutoSize = true;
-            this.lblConfirm.Font = new System.Drawing.Font("Arial", 9F);
-            this.lblConfirm.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(111)))), ((int)(((byte)(90)))));
-            this.lblConfirm.Location = new System.Drawing.Point(89, 243);
-            this.lblConfirm.Name = "lblConfirm";
-            this.lblConfirm.Size = new System.Drawing.Size(128, 17);
-            this.lblConfirm.TabIndex = 6;
-            this.lblConfirm.Text = "Confirm password";
-            // 
-            // txtConfirm
-            // 
-            this.txtConfirm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(249)))), ((int)(((byte)(243)))));
-            this.txtConfirm.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtConfirm.Location = new System.Drawing.Point(92, 269);
-            this.txtConfirm.Name = "txtConfirm";
-            this.txtConfirm.PasswordChar = '●';
-            this.txtConfirm.Size = new System.Drawing.Size(207, 22);
-            this.txtConfirm.TabIndex = 7;
-            // 
             // btnRegister
             // 
             this.btnRegister.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(39)))), ((int)(((byte)(68)))));
@@ -187,7 +105,89 @@
             this.btnRegister.UseVisualStyleBackColor = false;
             this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
             // 
-            // RegistrationForm
+            // txtConfirm
+            // 
+            this.txtConfirm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(249)))), ((int)(((byte)(243)))));
+            this.txtConfirm.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtConfirm.Location = new System.Drawing.Point(92, 269);
+            this.txtConfirm.Name = "txtConfirm";
+            this.txtConfirm.PasswordChar = '●';
+            this.txtConfirm.Size = new System.Drawing.Size(207, 22);
+            this.txtConfirm.TabIndex = 7;
+            // 
+            // lblConfirm
+            // 
+            this.lblConfirm.AutoSize = true;
+            this.lblConfirm.Font = new System.Drawing.Font("Arial", 9F);
+            this.lblConfirm.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(111)))), ((int)(((byte)(90)))));
+            this.lblConfirm.Location = new System.Drawing.Point(89, 243);
+            this.lblConfirm.Name = "lblConfirm";
+            this.lblConfirm.Size = new System.Drawing.Size(128, 17);
+            this.lblConfirm.TabIndex = 6;
+            this.lblConfirm.Text = "Confirm password";
+            // 
+            // txtPassword
+            // 
+            this.txtPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(249)))), ((int)(((byte)(243)))));
+            this.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtPassword.Location = new System.Drawing.Point(92, 195);
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.PasswordChar = '●';
+            this.txtPassword.Size = new System.Drawing.Size(207, 22);
+            this.txtPassword.TabIndex = 5;
+            // 
+            // lblPassword
+            // 
+            this.lblPassword.AutoSize = true;
+            this.lblPassword.Font = new System.Drawing.Font("Arial", 9F);
+            this.lblPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(111)))), ((int)(((byte)(90)))));
+            this.lblPassword.Location = new System.Drawing.Point(89, 170);
+            this.lblPassword.Name = "lblPassword";
+            this.lblPassword.Size = new System.Drawing.Size(74, 17);
+            this.lblPassword.TabIndex = 4;
+            this.lblPassword.Text = "Password";
+            // 
+            // txtUsername
+            // 
+            this.txtUsername.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(249)))), ((int)(((byte)(243)))));
+            this.txtUsername.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtUsername.Location = new System.Drawing.Point(92, 124);
+            this.txtUsername.Name = "txtUsername";
+            this.txtUsername.Size = new System.Drawing.Size(207, 22);
+            this.txtUsername.TabIndex = 3;
+            // 
+            // lblUsername
+            // 
+            this.lblUsername.AutoSize = true;
+            this.lblUsername.Font = new System.Drawing.Font("Arial", 9F);
+            this.lblUsername.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(111)))), ((int)(((byte)(90)))));
+            this.lblUsername.Location = new System.Drawing.Point(89, 100);
+            this.lblUsername.Name = "lblUsername";
+            this.lblUsername.Size = new System.Drawing.Size(76, 17);
+            this.lblUsername.TabIndex = 2;
+            this.lblUsername.Text = "Username";
+            // 
+            // txtFullName
+            // 
+            this.txtFullName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(249)))), ((int)(((byte)(243)))));
+            this.txtFullName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtFullName.Location = new System.Drawing.Point(92, 53);
+            this.txtFullName.Name = "txtFullName";
+            this.txtFullName.Size = new System.Drawing.Size(207, 22);
+            this.txtFullName.TabIndex = 1;
+            // 
+            // lblFullName
+            // 
+            this.lblFullName.AutoSize = true;
+            this.lblFullName.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFullName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(111)))), ((int)(((byte)(90)))));
+            this.lblFullName.Location = new System.Drawing.Point(89, 29);
+            this.lblFullName.Name = "lblFullName";
+            this.lblFullName.Size = new System.Drawing.Size(74, 17);
+            this.lblFullName.TabIndex = 0;
+            this.lblFullName.Text = "Full Name";
+            // 
+            // RegisterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -197,9 +197,9 @@
             this.Controls.Add(this.pnlHeader);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.Name = "RegistrationForm";
+            this.Name = "RegisterForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "SyncPoint — Register";
+            this.Text = "Registration Form";
             this.Load += new System.EventHandler(this.RegistrationForm_Load);
             this.pnlHeader.ResumeLayout(false);
             this.pnlHeader.PerformLayout();

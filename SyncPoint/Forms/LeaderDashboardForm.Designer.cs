@@ -70,7 +70,7 @@
             this.lblUserName.AutoSize = true;
             this.lblUserName.Font = new System.Drawing.Font("Georgia", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUserName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(201)))), ((int)(((byte)(168)))), ((int)(((byte)(76)))));
-            this.lblUserName.Location = new System.Drawing.Point(617, 16);
+            this.lblUserName.Location = new System.Drawing.Point(599, 16);
             this.lblUserName.Name = "lblUserName";
             this.lblUserName.Size = new System.Drawing.Size(130, 20);
             this.lblUserName.TabIndex = 2;
@@ -348,7 +348,7 @@
             this.MaximizeBox = false;
             this.Name = "LeaderDashboardForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "SyncPoint — Dashboard";
+            this.Text = "SyncPoint";
             this.Load += new System.EventHandler(this.LeaderDashboardForm_Load);
             this.pnlTopbar.ResumeLayout(false);
             this.pnlTopbar.PerformLayout();

@@ -9,6 +9,7 @@
         public static string RoleName { get; set; }
         public static int GroupID { get; set; }
 
+        public static bool IsInstructor => RoleName == "Instructor";
         public static bool IsLeader => RoleName == "Leader";
         public static bool IsMember => RoleName == "Member";
 
