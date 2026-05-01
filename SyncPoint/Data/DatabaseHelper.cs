@@ -378,29 +378,86 @@ namespace SyncPoint.Data
         {
             using (var conn = GetConnection())
             {
+                // Find current leader for this group (if any)
+                int previousLeaderId = -1;
+                using (var sel = new SQLiteCommand(
+                    "SELECT LeaderID FROM Groups WHERE GroupID = @gid;", conn))
+                {
+                    sel.Parameters.AddWithValue("@gid", groupID);
+                    var res = sel.ExecuteScalar();
+                    if (res != null && res != DBNull.Value)
+                        previousLeaderId = Convert.ToInt32(res);
+                }
+
                 // 1. Update group's LeaderID in the Groups table
-                var cmd1 = new SQLiteCommand(@"
+                using (var cmd1 = new SQLiteCommand(@"
             UPDATE Groups SET LeaderID = @uid
-            WHERE  GroupID = @gid;", conn);
-                cmd1.Parameters.AddWithValue("@uid", userID);
-                cmd1.Parameters.AddWithValue("@gid", groupID);
-                cmd1.ExecuteNonQuery();
+            WHERE  GroupID = @gid;", conn))
+                {
+                    cmd1.Parameters.AddWithValue("@uid", userID);
+                    cmd1.Parameters.AddWithValue("@gid", groupID);
+                    cmd1.ExecuteNonQuery();
+                }
 
                 // 2. Promote the global user's role to Leader (RoleID = 2)
-                var cmd2 = new SQLiteCommand(@"
+                using (var cmd2 = new SQLiteCommand(@"
             UPDATE Users SET RoleID = 2
-            WHERE  UserID = @uid;", conn);
-                cmd2.Parameters.AddWithValue("@uid", userID);
-                cmd2.ExecuteNonQuery();
+            WHERE  UserID = @uid;", conn))
+                {
+                    cmd2.Parameters.AddWithValue("@uid", userID);
+                    cmd2.ExecuteNonQuery();
+                }
 
-                // 3. Update the specific role WITHIN this group
-                var cmd3 = new SQLiteCommand(@"
-            UPDATE GroupMembers 
-            SET GroupRole = 'Leader'
-            WHERE GroupID = @gid AND UserID = @uid;", conn);
-                cmd3.Parameters.AddWithValue("@gid", groupID);
-                cmd3.Parameters.AddWithValue("@uid", userID);
-                cmd3.ExecuteNonQuery();
+                // 3. Ensure the user is a member of the group and set their GroupRole to 'Leader'
+                using (var check = new SQLiteCommand(
+                    "SELECT COUNT(*) FROM GroupMembers WHERE GroupID = @gid AND UserID = @uid;", conn))
+                {
+                    check.Parameters.AddWithValue("@gid", groupID);
+                    check.Parameters.AddWithValue("@uid", userID);
+                    long count = (long)check.ExecuteScalar();
+                    if (count == 0)
+                    {
+                        using (var ins = new SQLiteCommand(@"
+                    INSERT INTO GroupMembers (GroupID, UserID, GroupRole, JoinedAt)
+                    VALUES (@gid, @uid, 'Leader', @date);", conn))
+                        {
+                            ins.Parameters.AddWithValue("@gid", groupID);
+                            ins.Parameters.AddWithValue("@uid", userID);
+                            ins.Parameters.AddWithValue("@date", DateTime.Now.ToString("yyyy-MM-dd"));
+                            ins.ExecuteNonQuery();
+                        }
+                    }
+                    else
+                    {
+                        using (var upd = new SQLiteCommand(@"
+                    UPDATE GroupMembers SET GroupRole = 'Leader'
+                    WHERE GroupID = @gid AND UserID = @uid;", conn))
+                        {
+                            upd.Parameters.AddWithValue("@gid", groupID);
+                            upd.Parameters.AddWithValue("@uid", userID);
+                            upd.ExecuteNonQuery();
+                        }
+                    }
+                }
+
+                // 4. If there was a previous leader (different from the new one), revert them to Member
+                if (previousLeaderId > 0 && previousLeaderId != userID)
+                {
+                    using (var demoteUser = new SQLiteCommand(
+                        "UPDATE Users SET RoleID = 3 WHERE UserID = @pid;", conn))
+                    {
+                        demoteUser.Parameters.AddWithValue("@pid", previousLeaderId);
+                        demoteUser.ExecuteNonQuery();
+                    }
+
+                    using (var demoteMember = new SQLiteCommand(
+                        "UPDATE GroupMembers SET GroupRole = 'Member' WHERE GroupID = @gid AND UserID = @pid;", conn))
+                    {
+                        demoteMember.Parameters.AddWithValue("@gid", groupID);
+                        demoteMember.Parameters.AddWithValue("@pid", previousLeaderId);
+                        demoteMember.ExecuteNonQuery();
+                    }
+                }
             }
         }
 

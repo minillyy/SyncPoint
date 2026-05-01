@@ -164,6 +164,17 @@ namespace SyncPoint.Forms
                     FillWeight = 50
                 });
 
+            // Prevent table resize
+            dgvStudents.AllowUserToResizeColumns = false;
+            dgvStudents.AllowUserToResizeRows = false;
+            dgvStudents.ColumnHeadersHeightSizeMode =
+                DataGridViewColumnHeadersHeightSizeMode
+                    .DisableResizing;
+            dgvStudents.RowHeadersWidthSizeMode =
+                DataGridViewRowHeadersWidthSizeMode
+                    .DisableResizing;
+            dgvStudents.AllowUserToOrderColumns = false;
+
             // ── Header ────────────────────────────────────
             dgvStudents.EnableHeadersVisualStyles = false;
             dgvStudents.ColumnHeadersDefaultCellStyle
