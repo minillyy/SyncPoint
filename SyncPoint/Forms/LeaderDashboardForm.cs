@@ -74,6 +74,16 @@ namespace SyncPoint.Forms
 
             dgvMembers.AlternatingRowsDefaultCellStyle.BackColor =
                 ColorTranslator.FromHtml("#faf7f2");
+
+            dgvMembers.AllowUserToResizeColumns = false;
+            dgvMembers.AllowUserToResizeRows = false;
+            dgvMembers.ColumnHeadersHeightSizeMode =
+                DataGridViewColumnHeadersHeightSizeMode
+                    .DisableResizing;
+            dgvMembers.RowHeadersWidthSizeMode =
+                DataGridViewRowHeadersWidthSizeMode
+                    .DisableResizing;
+            dgvMembers.AllowUserToOrderColumns = false;
         }
         private void sidebarControl1_Load(object sender, EventArgs e)
         {
