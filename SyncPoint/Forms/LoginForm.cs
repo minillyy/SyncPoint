@@ -10,7 +10,6 @@ namespace SyncPoint
     public partial class LoginForm : Form
     {
         // ── Pre-determined Instructor credentials ────────────
-        // These are fixed and cannot be changed from the UI
         // The instructor account is seeded in the database
         private const string INSTRUCTOR_USERNAME = "instructor";
         private const string INSTRUCTOR_PASSWORD = "instructor123";
