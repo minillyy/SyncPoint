@@ -84,7 +84,7 @@ namespace SyncPoint
                 return;
             }
 
-            // ── Validate against database ─────────────────────
+            // ── Validate against database
             DataRow user =
                 DatabaseHelper.ValidateLogin(username, password);
 
