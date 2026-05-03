@@ -194,14 +194,7 @@
             this.pnlStatTotal.Name = "pnlStatTotal";
             this.pnlStatTotal.Size = new System.Drawing.Size(270, 120);
             this.pnlStatTotal.TabIndex = 0;
-            this.pnlStatTotal.Paint += (s, e) => {
-                using (var pen = new System.Drawing.Pen(System.Drawing.Color.FromArgb(220, 220, 220), 1))
-                using (var fillBrush = new System.Drawing.SolidBrush(System.Drawing.Color.White))
-                {
-                    e.Graphics.FillRectangle(fillBrush, 0, 0, 269, 119);
-                    e.Graphics.DrawRectangle(pen, 0, 0, 269, 119);
-                }
-            };
+            this.pnlStatTotal.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlStatTotal_Paint);
 
             this.lblTotalNum.AutoSize = true;
             this.lblTotalNum.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Bold);
@@ -228,14 +221,7 @@
             this.pnlStatCompleted.Name = "pnlStatCompleted";
             this.pnlStatCompleted.Size = new System.Drawing.Size(270, 120);
             this.pnlStatCompleted.TabIndex = 1;
-            this.pnlStatCompleted.Paint += (s, e) => {
-                using (var pen = new System.Drawing.Pen(System.Drawing.Color.FromArgb(220, 220, 220), 1))
-                using (var fillBrush = new System.Drawing.SolidBrush(System.Drawing.Color.White))
-                {
-                    e.Graphics.FillRectangle(fillBrush, 0, 0, 269, 119);
-                    e.Graphics.DrawRectangle(pen, 0, 0, 269, 119);
-                }
-            };
+            this.pnlStatCompleted.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlStatCompleted_Paint);
 
             this.lblCompletedNum.AutoSize = true;
             this.lblCompletedNum.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Bold);
@@ -262,14 +248,7 @@
             this.pnlStatProgress.Name = "pnlStatProgress";
             this.pnlStatProgress.Size = new System.Drawing.Size(270, 120);
             this.pnlStatProgress.TabIndex = 2;
-            this.pnlStatProgress.Paint += (s, e) => {
-                using (var pen = new System.Drawing.Pen(System.Drawing.Color.FromArgb(220, 220, 220), 1))
-                using (var fillBrush = new System.Drawing.SolidBrush(System.Drawing.Color.White))
-                {
-                    e.Graphics.FillRectangle(fillBrush, 0, 0, 269, 119);
-                    e.Graphics.DrawRectangle(pen, 0, 0, 269, 119);
-                }
-            };
+            this.pnlStatProgress.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlStatProgress_Paint);
 
             this.lblInProgressNum.AutoSize = true;
             this.lblInProgressNum.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Bold);
@@ -466,6 +445,37 @@
             this.pnlUpdateStatus.ResumeLayout(false);
             this.pnlUpdateStatus.PerformLayout();
             this.ResumeLayout(false);
+        }
+
+        // Designer-friendly paint handlers
+        private void pnlStatTotal_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
+        {
+            using (var pen = new System.Drawing.Pen(System.Drawing.Color.FromArgb(220, 220, 220), 1))
+            using (var fillBrush = new System.Drawing.SolidBrush(System.Drawing.Color.White))
+            {
+                e.Graphics.FillRectangle(fillBrush, 0, 0, 269, 119);
+                e.Graphics.DrawRectangle(pen, 0, 0, 269, 119);
+            }
+        }
+
+        private void pnlStatCompleted_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
+        {
+            using (var pen = new System.Drawing.Pen(System.Drawing.Color.FromArgb(220, 220, 220), 1))
+            using (var fillBrush = new System.Drawing.SolidBrush(System.Drawing.Color.White))
+            {
+                e.Graphics.FillRectangle(fillBrush, 0, 0, 269, 119);
+                e.Graphics.DrawRectangle(pen, 0, 0, 269, 119);
+            }
+        }
+
+        private void pnlStatProgress_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
+        {
+            using (var pen = new System.Drawing.Pen(System.Drawing.Color.FromArgb(220, 220, 220), 1))
+            using (var fillBrush = new System.Drawing.SolidBrush(System.Drawing.Color.White))
+            {
+                e.Graphics.FillRectangle(fillBrush, 0, 0, 269, 119);
+                e.Graphics.DrawRectangle(pen, 0, 0, 269, 119);
+            }
         }
 
         // ========== Control Declarations ==========
