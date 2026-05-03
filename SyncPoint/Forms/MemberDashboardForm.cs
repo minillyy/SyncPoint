@@ -11,9 +11,15 @@ namespace SyncPoint.Forms
         public MemberDashboardForm()
         {
             InitializeComponent();
-            PopulateStatusDropdown();
-            SetupDataGridViewColumns();
-            AttachEvents();
+
+            // Avoid running runtime-only initialization while the form is opened in the WinForms designer.
+            // LicenseManager.UsageMode is a reliable way to detect design-time vs run-time here.
+            if (System.ComponentModel.LicenseManager.UsageMode != System.ComponentModel.LicenseUsageMode.Designtime)
+            {
+                PopulateStatusDropdown();
+                SetupDataGridViewColumns();
+                AttachEvents();
+            }
         }
 
         private void AttachEvents()
