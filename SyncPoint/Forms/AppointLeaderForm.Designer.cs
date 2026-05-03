@@ -33,21 +33,21 @@
             this.lblInstruction = new System.Windows.Forms.Label();
             this.pnlHeader = new System.Windows.Forms.Panel();
             this.pnlBody = new System.Windows.Forms.Panel();
-            this.pnlSearch = new System.Windows.Forms.Panel();
-            this.txtSearch = new System.Windows.Forms.TextBox();
-            this.lblCount = new System.Windows.Forms.Label();
-            this.dgvStudents = new System.Windows.Forms.DataGridView();
+            this.pnlButtons = new System.Windows.Forms.Panel();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnAppoint = new System.Windows.Forms.Button();
             this.pnlSelected = new System.Windows.Forms.Panel();
             this.lblSelected = new System.Windows.Forms.Label();
-            this.pnlButtons = new System.Windows.Forms.Panel();
-            this.btnAppoint = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
+            this.dgvStudents = new System.Windows.Forms.DataGridView();
+            this.lblCount = new System.Windows.Forms.Label();
+            this.pnlSearch = new System.Windows.Forms.Panel();
+            this.txtSearch = new System.Windows.Forms.TextBox();
             this.pnlHeader.SuspendLayout();
             this.pnlBody.SuspendLayout();
-            this.pnlSearch.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvStudents)).BeginInit();
-            this.pnlSelected.SuspendLayout();
             this.pnlButtons.SuspendLayout();
+            this.pnlSelected.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvStudents)).BeginInit();
+            this.pnlSearch.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblTitle
@@ -110,52 +110,41 @@
             this.pnlBody.Size = new System.Drawing.Size(413, 366);
             this.pnlBody.TabIndex = 8;
             // 
-            // pnlSearch
+            // pnlButtons
             // 
-            this.pnlSearch.BackColor = System.Drawing.Color.Transparent;
-            this.pnlSearch.Controls.Add(this.txtSearch);
-            this.pnlSearch.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlSearch.Location = new System.Drawing.Point(16, 34);
-            this.pnlSearch.Name = "pnlSearch";
-            this.pnlSearch.Padding = new System.Windows.Forms.Padding(0, 6, 0, 6);
-            this.pnlSearch.Size = new System.Drawing.Size(381, 40);
-            this.pnlSearch.TabIndex = 3;
+            this.pnlButtons.Controls.Add(this.btnCancel);
+            this.pnlButtons.Controls.Add(this.btnAppoint);
+            this.pnlButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlButtons.Location = new System.Drawing.Point(16, 303);
+            this.pnlButtons.Name = "pnlButtons";
+            this.pnlButtons.Size = new System.Drawing.Size(381, 51);
+            this.pnlButtons.TabIndex = 7;
             // 
-            // txtSearch
+            // btnCancel
             // 
-            this.txtSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(249)))), ((int)(((byte)(243)))));
-            this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtSearch.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtSearch.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(168)))), ((int)(((byte)(152)))));
-            this.txtSearch.Location = new System.Drawing.Point(0, 6);
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(381, 27);
-            this.txtSearch.TabIndex = 0;
+            this.btnCancel.BackColor = System.Drawing.Color.White;
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(39)))), ((int)(((byte)(68)))));
+            this.btnCancel.Location = new System.Drawing.Point(213, 9);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(168, 36);
+            this.btnCancel.TabIndex = 1;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = false;
             // 
-            // lblCount
+            // btnAppoint
             // 
-            this.lblCount.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblCount.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(111)))), ((int)(((byte)(90)))));
-            this.lblCount.Location = new System.Drawing.Point(16, 74);
-            this.lblCount.Name = "lblCount";
-            this.lblCount.Size = new System.Drawing.Size(381, 20);
-            this.lblCount.TabIndex = 4;
-            this.lblCount.Text = "0 Students available";
-            // 
-            // dgvStudents
-            // 
-            this.dgvStudents.BackgroundColor = System.Drawing.Color.White;
-            this.dgvStudents.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgvStudents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvStudents.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvStudents.Location = new System.Drawing.Point(16, 94);
-            this.dgvStudents.Name = "dgvStudents";
-            this.dgvStudents.RowHeadersWidth = 51;
-            this.dgvStudents.RowTemplate.Height = 24;
-            this.dgvStudents.Size = new System.Drawing.Size(381, 260);
-            this.dgvStudents.TabIndex = 5;
+            this.btnAppoint.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(39)))), ((int)(((byte)(68)))));
+            this.btnAppoint.Enabled = false;
+            this.btnAppoint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAppoint.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAppoint.ForeColor = System.Drawing.Color.White;
+            this.btnAppoint.Location = new System.Drawing.Point(0, 9);
+            this.btnAppoint.Name = "btnAppoint";
+            this.btnAppoint.Size = new System.Drawing.Size(193, 36);
+            this.btnAppoint.TabIndex = 0;
+            this.btnAppoint.Text = "Appoint as Leader";
+            this.btnAppoint.UseVisualStyleBackColor = false;
             // 
             // pnlSelected
             // 
@@ -179,41 +168,52 @@
             this.lblSelected.Text = "No student selected";
             this.lblSelected.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // pnlButtons
+            // dgvStudents
             // 
-            this.pnlButtons.Controls.Add(this.btnCancel);
-            this.pnlButtons.Controls.Add(this.btnAppoint);
-            this.pnlButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlButtons.Location = new System.Drawing.Point(16, 303);
-            this.pnlButtons.Name = "pnlButtons";
-            this.pnlButtons.Size = new System.Drawing.Size(381, 51);
-            this.pnlButtons.TabIndex = 7;
+            this.dgvStudents.BackgroundColor = System.Drawing.Color.White;
+            this.dgvStudents.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvStudents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvStudents.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvStudents.Location = new System.Drawing.Point(16, 94);
+            this.dgvStudents.Name = "dgvStudents";
+            this.dgvStudents.RowHeadersWidth = 51;
+            this.dgvStudents.RowTemplate.Height = 24;
+            this.dgvStudents.Size = new System.Drawing.Size(381, 260);
+            this.dgvStudents.TabIndex = 5;
             // 
-            // btnAppoint
+            // lblCount
             // 
-            this.btnAppoint.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(39)))), ((int)(((byte)(68)))));
-            this.btnAppoint.Enabled = false;
-            this.btnAppoint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAppoint.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAppoint.ForeColor = System.Drawing.Color.White;
-            this.btnAppoint.Location = new System.Drawing.Point(0, 9);
-            this.btnAppoint.Name = "btnAppoint";
-            this.btnAppoint.Size = new System.Drawing.Size(193, 36);
-            this.btnAppoint.TabIndex = 0;
-            this.btnAppoint.Text = "Appoint as Leader";
-            this.btnAppoint.UseVisualStyleBackColor = false;
+            this.lblCount.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblCount.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(111)))), ((int)(((byte)(90)))));
+            this.lblCount.Location = new System.Drawing.Point(16, 74);
+            this.lblCount.Name = "lblCount";
+            this.lblCount.Size = new System.Drawing.Size(381, 20);
+            this.lblCount.TabIndex = 4;
+            this.lblCount.Text = "0 Students available";
             // 
-            // btnCancel
+            // pnlSearch
             // 
-            this.btnCancel.BackColor = System.Drawing.Color.White;
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(39)))), ((int)(((byte)(68)))));
-            this.btnCancel.Location = new System.Drawing.Point(213, 9);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(168, 36);
-            this.btnCancel.TabIndex = 1;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = false;
+            this.pnlSearch.BackColor = System.Drawing.Color.Transparent;
+            this.pnlSearch.Controls.Add(this.txtSearch);
+            this.pnlSearch.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlSearch.Location = new System.Drawing.Point(16, 34);
+            this.pnlSearch.Name = "pnlSearch";
+            this.pnlSearch.Padding = new System.Windows.Forms.Padding(0, 6, 0, 6);
+            this.pnlSearch.Size = new System.Drawing.Size(381, 40);
+            this.pnlSearch.TabIndex = 3;
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(249)))), ((int)(((byte)(243)))));
+            this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtSearch.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtSearch.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSearch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(168)))), ((int)(((byte)(152)))));
+            this.txtSearch.Location = new System.Drawing.Point(0, 6);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(381, 27);
+            this.txtSearch.TabIndex = 0;
             // 
             // AppointLeaderForm
             // 
@@ -233,12 +233,12 @@
             this.pnlHeader.ResumeLayout(false);
             this.pnlHeader.PerformLayout();
             this.pnlBody.ResumeLayout(false);
-            this.pnlSearch.ResumeLayout(false);
-            this.pnlSearch.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvStudents)).EndInit();
+            this.pnlButtons.ResumeLayout(false);
             this.pnlSelected.ResumeLayout(false);
             this.pnlSelected.PerformLayout();
-            this.pnlButtons.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvStudents)).EndInit();
+            this.pnlSearch.ResumeLayout(false);
+            this.pnlSearch.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

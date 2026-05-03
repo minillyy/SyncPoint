@@ -14,7 +14,7 @@ namespace SyncPoint
         // The instructor account is seeded in the database
         private const string INSTRUCTOR_USERNAME = "instructor";
         private const string INSTRUCTOR_PASSWORD = "instructor123";
-
+        
         public LoginForm()
         {
             InitializeComponent();
@@ -184,14 +184,9 @@ namespace SyncPoint
                     break;
 
                 case "Member":
-                    // TO ADD ONCE MEMBER DASHBOARD IS READY
-                     MessageBox.Show(
-                        "Member dashboard is under construction.\n\n" +
-                        "Please check back later.",
-                        "SyncPoint",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information);
+                    new MemberDashboardForm().ShowDialog();
                     break;
+
             }
 
             // When the dashboard closes, show login again
