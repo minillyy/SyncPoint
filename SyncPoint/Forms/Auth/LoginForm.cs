@@ -9,60 +9,59 @@ namespace SyncPoint
 {
     public partial class LoginForm : Form
     {
-        // ── Pre-determined Instructor credentials ────────────
-        // These are fixed and cannot be changed from the UI
-        // The instructor account is seeded in the database
-        private const string INSTRUCTOR_USERNAME = "instructor";
-        private const string INSTRUCTOR_PASSWORD = "instructor123";
-        
         public LoginForm()
         {
             InitializeComponent();
         }
 
-        // ── Form Load ────────────────────────────────────────
-        private void LoginForm_Load(object sender, EventArgs e)
+        // ════════════════════════════════════════════════════
+        //  FORM LOAD
+        // ════════════════════════════════════════════════════
+        private void LoginForm_Load(
+            object sender, EventArgs e)
         {
+            // Style the login button border
+            btnLogin.FlatAppearance.BorderColor =
+                ColorTranslator.FromHtml("#c9a84c");
+            btnLogin.FlatAppearance.BorderSize = 1;
+
             // Paint gold border on header
-            panelHeader.Paint += (s, pe) =>
+            pnlHeader.Paint += (s, pe) =>
             {
                 var pen = new Pen(
                     ColorTranslator.FromHtml("#c9a84c"), 3);
                 pe.Graphics.DrawLine(pen,
-                    0, panelHeader.Height - 2,
-                    panelHeader.Width, panelHeader.Height - 2);
+                    0, pnlHeader.Height - 2,
+                    pnlHeader.Width,
+                    pnlHeader.Height - 2);
             };
 
-            // Style the flat buttons border
-            btnInstructor.FlatAppearance.BorderColor =
-                ColorTranslator.FromHtml("#c9a84c");
-            btnInstructor.FlatAppearance.BorderSize = 1;
+            // Allow pressing Enter to login
+            this.AcceptButton = btnLogin;
 
-            btnLeader.FlatAppearance.BorderColor =
-                ColorTranslator.FromHtml("#c4b89a");
-            btnLeader.FlatAppearance.BorderSize = 1;
-
-            btnMember.FlatAppearance.BorderColor =
-                ColorTranslator.FromHtml("#c4b89a");
-            btnMember.FlatAppearance.BorderSize = 1;
-
-            // Allow pressing Enter to submit
-            this.AcceptButton = btnMember;
-
-            // Focus on username field
+            // Focus on username when form opens
             txtUsername.Select();
         }
 
         // ════════════════════════════════════════════════════
-        //  CORE LOGIN METHOD
-        //  expectedRole = "Instructor" / "Leader" / "Member"
+        //  LOGIN BUTTON CLICK
         // ════════════════════════════════════════════════════
-        private void Login(string expectedRole)
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            Login();
+        }
+
+        // ════════════════════════════════════════════════════
+        //  CORE LOGIN METHOD
+        //  Validates credentials and detects role
+        //  automatically from the database
+        // ════════════════════════════════════════════════════
+        private void Login()
         {
             string username = txtUsername.Text.Trim();
             string password = txtPassword.Text;
 
-            // ── Validate inputs ───────────────────────────────
+            // ── Step 1: Check inputs are not empty ────────
             if (string.IsNullOrEmpty(username))
             {
                 MessageBox.Show(
@@ -85,10 +84,14 @@ namespace SyncPoint
                 return;
             }
 
-            // ── Validate against database ─────────────────────
+            // ── Step 2: Validate against database ─────────
+            // ValidateLogin hashes the password and
+            // compares it with what's stored in the DB
             DataRow user =
-                DatabaseHelper.ValidateLogin(username, password);
+                DatabaseHelper.ValidateLogin(
+                    username, password);
 
+            // No matching user found
             if (user == null)
             {
                 MessageBox.Show(
@@ -97,77 +100,61 @@ namespace SyncPoint
                     "SyncPoint — Login Failed",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
+
+                // Clear password and refocus
                 txtPassword.Clear();
                 txtPassword.Focus();
                 return;
             }
 
-            string actualRole = user["RoleName"].ToString();
+            // ── Step 3: Read role from database ───────────
+            // No need for the user to tell us their role
+            // — we read it directly from the DB
+            string role = user["RoleName"].ToString();
 
-            // ── Check role matches button clicked ─────────────
-            if (actualRole != expectedRole)
+            // ── Step 4: Save session data ─────────────────
+            Session.UserID =
+                Convert.ToInt32(user["UserID"]);
+            Session.FullName =
+                user["FullName"].ToString();
+            Session.Username =
+                user["Username"].ToString();
+            Session.RoleID =
+                Convert.ToInt32(user["RoleID"]);
+            Session.RoleName = role;
+            // Prefer GroupID from the validated user row if present;
+            // fall back to the helper lookup only when necessary.
+            if (user.Table.Columns.Contains("GroupID") &&
+                user["GroupID"] != DBNull.Value)
+            {
+                Session.GroupID = Convert.ToInt32(user["GroupID"]);
+            }
+            else
+            {
+                Session.GroupID =
+                    DatabaseHelper.GetUserGroupID(
+                        Session.UserID);
+            }
+
+            // ── Step 5: Open the correct dashboard ────────
+            // Prevent members without a group from opening the Member Dashboard
+            if (role == "Member" && Session.GroupID == -1)
             {
                 MessageBox.Show(
-                    GetRoleMismatchMessage(
-                        actualRole, expectedRole),
-                    "SyncPoint — Wrong Login Button",
+                    "You must be a member of a group to access the Member Dashboard.",
+                    "SyncPoint",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
                 return;
             }
 
-            // ── All good — open dashboard ─────────────────────
-            LoadSession(user);
-            OpenDashboard(actualRole);
-        }
-
-        // ════════════════════════════════════════════════════
-        //  ROLE MISMATCH MESSAGE
-        // ════════════════════════════════════════════════════
-        private string GetRoleMismatchMessage(
-            string actualRole, string expectedRole)
-        {
-            if (actualRole == "Instructor")
-                return
-                    "This is an Instructor account.\n" +
-                    "Please click the Instructor button.";
-
-            if (actualRole == "Leader" &&
-                expectedRole == "Member")
-                return
-                    "You have been appointed as Leader.\n" +
-                    "Please use the Leader button instead.";
-
-            if (actualRole == "Member" &&
-                expectedRole == "Leader")
-                return
-                    "You are not a Leader yet.\n\n" +
-                    "Ask your Instructor to appoint " +
-                    "you as Leader first.";
-
-            return
-                $"This account is registered as " +
-                $"{actualRole}.\n" +
-                $"Please use the {actualRole} button.";
-        }
-
-        // ════════════════════════════════════════════════════
-        //  LOAD SESSION
-        //  Saves the logged-in user's data into Session
-        // ════════════════════════════════════════════════════
-        private void LoadSession(DataRow user)
-        {
-            Session.UserID = Convert.ToInt32(user["UserID"]);
-            Session.FullName = user["FullName"].ToString();
-            Session.Username = user["Username"].ToString();
-            Session.RoleID = Convert.ToInt32(user["RoleID"]);
-            Session.RoleName = user["RoleName"].ToString();
-            Session.GroupID = DatabaseHelper.GetUserGroupID(Session.UserID);
+            OpenDashboard(role);
         }
 
         // ════════════════════════════════════════════════════
         //  OPEN DASHBOARD
-        //  Opens the correct form based on role
+        //  Automatically routes to the right form
+        //  based on the role read from the database
         // ════════════════════════════════════════════════════
         private void OpenDashboard(string role)
         {
@@ -176,87 +163,58 @@ namespace SyncPoint
             switch (role)
             {
                 case "Instructor":
-                    new InstructorDashboardForm().ShowDialog();
+                    new InstructorDashboardForm()
+                        .ShowDialog();
                     break;
 
                 case "Leader":
-                    new LeaderDashboardForm().ShowDialog();
+                    new LeaderDashboardForm()
+                        .ShowDialog();
                     break;
 
                 case "Member":
-                    new MemberDashboardForm().ShowDialog();
+                    new MemberDashboardForm()
+                        .ShowDialog();
                     break;
 
+                default:
+                    // Unknown role — should never happen
+                    // but handle it gracefully
+                    MessageBox.Show(
+                        $"Unknown role: {role}\n\n" +
+                        "Please contact your administrator.",
+                        "SyncPoint — Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    break;
             }
 
-            // When the dashboard closes, show login again
-            // so another user can log in
+            // When dashboard closes, clear fields
+            // and show login again for the next user
+            // Guard against the case where the login
+            // form was disposed while the dashboard
+            // was open (prevents ObjectDisposedException).
+            if (this.IsDisposed || this.Disposing)
+                return;
+
             txtUsername.Clear();
             txtPassword.Clear();
             txtUsername.Focus();
-            this.Show();
-        }
-
-        // ════════════════════════════════════════════════════
-        //  BUTTON CLICK EVENTS
-        // ════════════════════════════════════════════════════
-
-        // Instructor button
-        private void btnInstructor_Click(object sender, EventArgs e)
-        {
-            Login("Instructor");
-        }
-
-        // Leader button
-        private void btnLeader_Click(object sender, EventArgs e)
-        {
-            Login("Leader");
-        }
-
-        // Member button
-        private void btnMember_Click(object sender, EventArgs e)
-        {
-            Login("Member");
-        }
-
-        // Register link
-        private void lnkRegister_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            new RegisterForm().ShowDialog();
-        }
-
-        // ════════════════════════════════════════════════════
-        //  KEYBOARD SHORTCUT
-        //  Allow pressing Enter on the password field
-        //  to trigger the last clicked button
-        // ════════════════════════════════════════════════════
-        private Button _lastClickedButton = null;
-
-        private void btnInstructor_MouseDown(object sender, MouseEventArgs e)
-        {
-            _lastClickedButton = btnInstructor;
-        }
-
-        private void btnLeader_MouseDown(object sender, MouseEventArgs e)
-        {
-            _lastClickedButton = btnLeader;
-        }
-
-        private void btnMember_MouseDown(object sender, MouseEventArgs e)
-        {
-            _lastClickedButton = btnMember;
-        }
-
-        private void txtPassword_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
+            try
             {
-                if (_lastClickedButton != null)
-                    _lastClickedButton.PerformClick();
-                else
-                    btnMember.PerformClick(); // default
+                this.Show();
+            }
+            catch (ObjectDisposedException)
+            {
+                // If disposal races with Show, ignore —
+                // the application is shutting down or
+                // another flow disposed the login form.
             }
         }
+
+        // ════════════════════════════════════════════════════
+        //  REGISTER LINK
+        // ════════════════════════════════════════════════════
 
         private void linkRegister_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {

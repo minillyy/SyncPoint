@@ -32,7 +32,6 @@
             this.lblDashboard = new System.Windows.Forms.Label();
             this.lblAddTask = new System.Windows.Forms.Label();
             this.lblMembers = new System.Windows.Forms.Label();
-            this.lblProgress = new System.Windows.Forms.Label();
             this.lblReports = new System.Windows.Forms.Label();
             this.lblLogout = new System.Windows.Forms.Label();
             this.pnlFooter = new System.Windows.Forms.Panel();
@@ -46,7 +45,6 @@
             this.pnlNav.Controls.Add(this.lblDashboard);
             this.pnlNav.Controls.Add(this.lblAddTask);
             this.pnlNav.Controls.Add(this.lblMembers);
-            this.pnlNav.Controls.Add(this.lblProgress);
             this.pnlNav.Controls.Add(this.lblReports);
             this.pnlNav.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlNav.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -105,22 +103,6 @@
             this.lblMembers.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblMembers.Click += new System.EventHandler(this.lblMembers_Click);
             // 
-            // lblProgress
-            // 
-            this.lblProgress.AutoSize = true;
-            this.lblProgress.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblProgress.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblProgress.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProgress.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(143)))), ((int)(((byte)(163)))), ((int)(((byte)(196)))));
-            this.lblProgress.Location = new System.Drawing.Point(3, 111);
-            this.lblProgress.Name = "lblProgress";
-            this.lblProgress.Padding = new System.Windows.Forms.Padding(12, 8, 0, 10);
-            this.lblProgress.Size = new System.Drawing.Size(87, 37);
-            this.lblProgress.TabIndex = 4;
-            this.lblProgress.Text = "Progress";
-            this.lblProgress.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblProgress.Click += new System.EventHandler(this.lblProgress_Click);
-            // 
             // lblReports
             // 
             this.lblReports.AutoSize = true;
@@ -128,7 +110,7 @@
             this.lblReports.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblReports.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblReports.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(143)))), ((int)(((byte)(163)))), ((int)(((byte)(196)))));
-            this.lblReports.Location = new System.Drawing.Point(3, 148);
+            this.lblReports.Location = new System.Drawing.Point(3, 111);
             this.lblReports.Name = "lblReports";
             this.lblReports.Padding = new System.Windows.Forms.Padding(12, 8, 0, 10);
             this.lblReports.Size = new System.Drawing.Size(77, 37);
@@ -186,7 +168,6 @@
         private System.Windows.Forms.Label lblDashboard;
         private System.Windows.Forms.Label lblAddTask;
         private System.Windows.Forms.Label lblMembers;
-        private System.Windows.Forms.Label lblProgress;
         private System.Windows.Forms.Label lblReports;
         private System.Windows.Forms.Label lblLogout;
         private System.Windows.Forms.Panel pnlFooter;

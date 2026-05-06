@@ -53,29 +53,29 @@
             // lblTitle
             // 
             this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Georgia", 13.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 13.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(240)))), ((int)(((byte)(232)))));
             this.lblTitle.Location = new System.Drawing.Point(16, 14);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(207, 27);
+            this.lblTitle.Size = new System.Drawing.Size(191, 30);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Appoint a Leader";
             // 
             // lblGroup
             // 
             this.lblGroup.AutoSize = true;
-            this.lblGroup.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGroup.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblGroup.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(201)))), ((int)(((byte)(168)))), ((int)(((byte)(76)))));
             this.lblGroup.Location = new System.Drawing.Point(16, 52);
             this.lblGroup.Name = "lblGroup";
-            this.lblGroup.Size = new System.Drawing.Size(76, 18);
+            this.lblGroup.Size = new System.Drawing.Size(79, 20);
             this.lblGroup.TabIndex = 1;
             this.lblGroup.Text = "Group: ---";
             // 
             // lblInstruction
             // 
             this.lblInstruction.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblInstruction.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInstruction.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblInstruction.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(111)))), ((int)(((byte)(90)))));
             this.lblInstruction.Location = new System.Drawing.Point(16, 12);
             this.lblInstruction.Name = "lblInstruction";
@@ -85,7 +85,7 @@
             // 
             // pnlHeader
             // 
-            this.pnlHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(39)))), ((int)(((byte)(68)))));
+            this.pnlHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
             this.pnlHeader.Controls.Add(this.lblTitle);
             this.pnlHeader.Controls.Add(this.lblGroup);
             this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
@@ -124,6 +124,7 @@
             // 
             this.btnCancel.BackColor = System.Drawing.Color.White;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(39)))), ((int)(((byte)(68)))));
             this.btnCancel.Location = new System.Drawing.Point(213, 9);
             this.btnCancel.Name = "btnCancel";
@@ -134,10 +135,10 @@
             // 
             // btnAppoint
             // 
-            this.btnAppoint.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(39)))), ((int)(((byte)(68)))));
+            this.btnAppoint.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
             this.btnAppoint.Enabled = false;
             this.btnAppoint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAppoint.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAppoint.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAppoint.ForeColor = System.Drawing.Color.White;
             this.btnAppoint.Location = new System.Drawing.Point(0, 9);
             this.btnAppoint.Name = "btnAppoint";
@@ -159,11 +160,11 @@
             // lblSelected
             // 
             this.lblSelected.AutoSize = true;
-            this.lblSelected.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSelected.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSelected.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(111)))), ((int)(((byte)(90)))));
             this.lblSelected.Location = new System.Drawing.Point(3, 9);
             this.lblSelected.Name = "lblSelected";
-            this.lblSelected.Size = new System.Drawing.Size(138, 17);
+            this.lblSelected.Size = new System.Drawing.Size(134, 20);
             this.lblSelected.TabIndex = 0;
             this.lblSelected.Text = "No student selected";
             this.lblSelected.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -184,7 +185,7 @@
             // lblCount
             // 
             this.lblCount.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblCount.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCount.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(111)))), ((int)(((byte)(90)))));
             this.lblCount.Location = new System.Drawing.Point(16, 74);
             this.lblCount.Name = "lblCount";
