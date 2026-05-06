@@ -15,22 +15,15 @@
 
         private void InitializeComponent()
         {
-            // Topbar Panel
             this.pnlTopbar = new System.Windows.Forms.Panel();
             this.lblUserName = new System.Windows.Forms.Label();
             this.lblUserRole = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
-
-            // Sidebar Panel
             this.pnlSidebar = new System.Windows.Forms.Panel();
             this.pnlLogout = new System.Windows.Forms.Panel();
             this.lblLogout = new System.Windows.Forms.Label();
-
-            // Main Content Panel
             this.pnlContent = new System.Windows.Forms.Panel();
             this.tableLayoutMain = new System.Windows.Forms.TableLayoutPanel();
-
-            // Stats Row
             this.flpStats = new System.Windows.Forms.FlowLayoutPanel();
             this.pnlStatTotal = new System.Windows.Forms.Panel();
             this.lblTotalNum = new System.Windows.Forms.Label();
@@ -41,25 +34,15 @@
             this.pnlStatProgress = new System.Windows.Forms.Panel();
             this.lblInProgressNum = new System.Windows.Forms.Label();
             this.lblInProgressLabel = new System.Windows.Forms.Label();
-
-            // Progress Card
-            this.pnlProgressCard = new System.Windows.Forms.Panel();
-            this.lblProgressTitle = new System.Windows.Forms.Label();
-            this.pbMyProgress = new System.Windows.Forms.ProgressBar();
-            this.lblProgressPercent = new System.Windows.Forms.Label();
-
-            // Tasks Card
             this.pnlTasksCard = new System.Windows.Forms.Panel();
             this.lblTasksTitle = new System.Windows.Forms.Label();
-            this.lblTaskCount = new System.Windows.Forms.Label();
             this.dgvMyTasks = new System.Windows.Forms.DataGridView();
             this.pnlUpdateStatus = new System.Windows.Forms.Panel();
             this.lblSelectStatus = new System.Windows.Forms.Label();
             this.cmbNewStatus = new System.Windows.Forms.ComboBox();
             this.btnUpdateStatus = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
-
-            // Topbar Suspend
+            this.lblTasks = new System.Windows.Forms.Label();
             this.pnlTopbar.SuspendLayout();
             this.pnlSidebar.SuspendLayout();
             this.pnlLogout.SuspendLayout();
@@ -69,112 +52,121 @@
             this.pnlStatTotal.SuspendLayout();
             this.pnlStatCompleted.SuspendLayout();
             this.pnlStatProgress.SuspendLayout();
-            this.pnlProgressCard.SuspendLayout();
             this.pnlTasksCard.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMyTasks)).BeginInit();
             this.pnlUpdateStatus.SuspendLayout();
             this.SuspendLayout();
-
-            // ========== pnlTopbar ==========
-            this.pnlTopbar.BackColor = System.Drawing.Color.FromArgb(44, 62, 80);
+            // 
+            // pnlTopbar
+            // 
+            this.pnlTopbar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
             this.pnlTopbar.Controls.Add(this.lblUserName);
             this.pnlTopbar.Controls.Add(this.lblUserRole);
             this.pnlTopbar.Controls.Add(this.lblTitle);
             this.pnlTopbar.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTopbar.Location = new System.Drawing.Point(0, 0);
             this.pnlTopbar.Name = "pnlTopbar";
-            this.pnlTopbar.Size = new System.Drawing.Size(1000, 65);
+            this.pnlTopbar.Size = new System.Drawing.Size(1035, 65);
             this.pnlTopbar.TabIndex = 0;
-
-            // lblTitle
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold);
-            this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(236, 240, 241);
-            this.lblTitle.Location = new System.Drawing.Point(25, 18);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(315, 30);
-            this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "📋 SyncPoint — My Workspace";
-
+            // 
             // lblUserName
-            this.lblUserName.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
+            // 
+            this.lblUserName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblUserName.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
-            this.lblUserName.ForeColor = System.Drawing.Color.FromArgb(241, 196, 15);
-            this.lblUserName.Location = new System.Drawing.Point(730, 12);
+            this.lblUserName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(196)))), ((int)(((byte)(15)))));
+            this.lblUserName.Location = new System.Drawing.Point(765, 12);
             this.lblUserName.Name = "lblUserName";
             this.lblUserName.Size = new System.Drawing.Size(245, 25);
             this.lblUserName.TabIndex = 2;
             this.lblUserName.Text = "Welcome, Member";
             this.lblUserName.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-
+            // 
             // lblUserRole
-            this.lblUserRole.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
+            // 
+            this.lblUserRole.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblUserRole.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblUserRole.ForeColor = System.Drawing.Color.FromArgb(149, 165, 166);
-            this.lblUserRole.Location = new System.Drawing.Point(730, 40);
+            this.lblUserRole.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(165)))), ((int)(((byte)(166)))));
+            this.lblUserRole.Location = new System.Drawing.Point(765, 40);
             this.lblUserRole.Name = "lblUserRole";
             this.lblUserRole.Size = new System.Drawing.Size(245, 18);
             this.lblUserRole.TabIndex = 3;
             this.lblUserRole.Text = "Team Member";
             this.lblUserRole.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-
-            // ========== pnlSidebar ==========
-            this.pnlSidebar.BackColor = System.Drawing.Color.FromArgb(52, 73, 94);
+            // 
+            // lblTitle
+            // 
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold);
+            this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(240)))), ((int)(((byte)(241)))));
+            this.lblTitle.Location = new System.Drawing.Point(25, 18);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(418, 37);
+            this.lblTitle.TabIndex = 0;
+            this.lblTitle.Text = "📋 SyncPoint — My Workspace";
+            // 
+            // pnlSidebar
+            // 
+            this.pnlSidebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
+            this.pnlSidebar.Controls.Add(this.lblTasks);
             this.pnlSidebar.Controls.Add(this.pnlLogout);
             this.pnlSidebar.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlSidebar.Location = new System.Drawing.Point(0, 65);
             this.pnlSidebar.Name = "pnlSidebar";
-            this.pnlSidebar.Size = new System.Drawing.Size(60, 585);
+            this.pnlSidebar.Size = new System.Drawing.Size(112, 585);
             this.pnlSidebar.TabIndex = 1;
-
+            // 
             // pnlLogout
+            // 
             this.pnlLogout.Controls.Add(this.lblLogout);
             this.pnlLogout.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnlLogout.Location = new System.Drawing.Point(0, 540);
             this.pnlLogout.Name = "pnlLogout";
-            this.pnlLogout.Size = new System.Drawing.Size(60, 45);
+            this.pnlLogout.Size = new System.Drawing.Size(112, 45);
             this.pnlLogout.TabIndex = 0;
-
-            // lblLogout - EXIT BUTTON (UPDATED)
+            // 
+            // lblLogout
+            // 
             this.lblLogout.AutoSize = true;
             this.lblLogout.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblLogout.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.lblLogout.ForeColor = System.Drawing.Color.FromArgb(231, 76, 60);
+            this.lblLogout.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLogout.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
             this.lblLogout.Location = new System.Drawing.Point(14, 14);
             this.lblLogout.Name = "lblLogout";
-            this.lblLogout.Size = new System.Drawing.Size(32, 20);
+            this.lblLogout.Size = new System.Drawing.Size(88, 23);
             this.lblLogout.TabIndex = 0;
-            this.lblLogout.Text = "Exit";
+            this.lblLogout.Text = "↩ Logout";
             this.lblLogout.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-
-            // ========== pnlContent ==========
+            // 
+            // pnlContent
+            // 
             this.pnlContent.AutoScroll = true;
-            this.pnlContent.BackColor = System.Drawing.Color.FromArgb(245, 247, 250);
+            this.pnlContent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(247)))), ((int)(((byte)(250)))));
             this.pnlContent.Controls.Add(this.tableLayoutMain);
             this.pnlContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlContent.Location = new System.Drawing.Point(60, 65);
+            this.pnlContent.Location = new System.Drawing.Point(112, 65);
             this.pnlContent.Name = "pnlContent";
             this.pnlContent.Padding = new System.Windows.Forms.Padding(30);
-            this.pnlContent.Size = new System.Drawing.Size(940, 585);
+            this.pnlContent.Size = new System.Drawing.Size(923, 585);
             this.pnlContent.TabIndex = 2;
-
-            // ========== tableLayoutMain ==========
+            // 
+            // tableLayoutMain
+            // 
             this.tableLayoutMain.ColumnCount = 1;
             this.tableLayoutMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutMain.Controls.Add(this.flpStats, 0, 0);
-            this.tableLayoutMain.Controls.Add(this.pnlProgressCard, 0, 1);
             this.tableLayoutMain.Controls.Add(this.pnlTasksCard, 0, 2);
             this.tableLayoutMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutMain.Location = new System.Drawing.Point(30, 30);
             this.tableLayoutMain.Name = "tableLayoutMain";
             this.tableLayoutMain.RowCount = 3;
             this.tableLayoutMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 130F));
-            this.tableLayoutMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 11F));
             this.tableLayoutMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutMain.Size = new System.Drawing.Size(880, 525);
+            this.tableLayoutMain.Size = new System.Drawing.Size(863, 525);
             this.tableLayoutMain.TabIndex = 0;
-
-            // ========== flpStats ==========
+            // 
+            // flpStats
+            // 
             this.flpStats.Controls.Add(this.pnlStatTotal);
             this.flpStats.Controls.Add(this.pnlStatCompleted);
             this.flpStats.Controls.Add(this.pnlStatProgress);
@@ -182,10 +174,11 @@
             this.flpStats.Location = new System.Drawing.Point(0, 0);
             this.flpStats.Margin = new System.Windows.Forms.Padding(0);
             this.flpStats.Name = "flpStats";
-            this.flpStats.Size = new System.Drawing.Size(880, 130);
+            this.flpStats.Size = new System.Drawing.Size(863, 130);
             this.flpStats.TabIndex = 0;
-
+            // 
             // pnlStatTotal
+            // 
             this.pnlStatTotal.BackColor = System.Drawing.Color.White;
             this.pnlStatTotal.Controls.Add(this.lblTotalNum);
             this.pnlStatTotal.Controls.Add(this.lblTotalLabel);
@@ -195,24 +188,31 @@
             this.pnlStatTotal.Size = new System.Drawing.Size(270, 120);
             this.pnlStatTotal.TabIndex = 0;
             this.pnlStatTotal.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlStatTotal_Paint);
-
+            // 
+            // lblTotalNum
+            // 
             this.lblTotalNum.AutoSize = true;
             this.lblTotalNum.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Bold);
-            this.lblTotalNum.ForeColor = System.Drawing.Color.FromArgb(44, 62, 80);
+            this.lblTotalNum.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
             this.lblTotalNum.Location = new System.Drawing.Point(25, 20);
             this.lblTotalNum.Name = "lblTotalNum";
-            this.lblTotalNum.Size = new System.Drawing.Size(57, 65);
+            this.lblTotalNum.Size = new System.Drawing.Size(70, 81);
+            this.lblTotalNum.TabIndex = 0;
             this.lblTotalNum.Text = "0";
-
+            // 
+            // lblTotalLabel
+            // 
             this.lblTotalLabel.AutoSize = true;
             this.lblTotalLabel.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.lblTotalLabel.ForeColor = System.Drawing.Color.FromArgb(127, 140, 141);
+            this.lblTotalLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(140)))), ((int)(((byte)(141)))));
             this.lblTotalLabel.Location = new System.Drawing.Point(25, 85);
             this.lblTotalLabel.Name = "lblTotalLabel";
-            this.lblTotalLabel.Size = new System.Drawing.Size(46, 20);
+            this.lblTotalLabel.Size = new System.Drawing.Size(55, 25);
+            this.lblTotalLabel.TabIndex = 1;
             this.lblTotalLabel.Text = "Tasks";
-
+            // 
             // pnlStatCompleted
+            // 
             this.pnlStatCompleted.BackColor = System.Drawing.Color.White;
             this.pnlStatCompleted.Controls.Add(this.lblCompletedNum);
             this.pnlStatCompleted.Controls.Add(this.lblCompletedLabel);
@@ -222,24 +222,31 @@
             this.pnlStatCompleted.Size = new System.Drawing.Size(270, 120);
             this.pnlStatCompleted.TabIndex = 1;
             this.pnlStatCompleted.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlStatCompleted_Paint);
-
+            // 
+            // lblCompletedNum
+            // 
             this.lblCompletedNum.AutoSize = true;
             this.lblCompletedNum.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Bold);
-            this.lblCompletedNum.ForeColor = System.Drawing.Color.FromArgb(39, 174, 96);
+            this.lblCompletedNum.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(174)))), ((int)(((byte)(96)))));
             this.lblCompletedNum.Location = new System.Drawing.Point(25, 20);
             this.lblCompletedNum.Name = "lblCompletedNum";
-            this.lblCompletedNum.Size = new System.Drawing.Size(57, 65);
+            this.lblCompletedNum.Size = new System.Drawing.Size(70, 81);
+            this.lblCompletedNum.TabIndex = 0;
             this.lblCompletedNum.Text = "0";
-
+            // 
+            // lblCompletedLabel
+            // 
             this.lblCompletedLabel.AutoSize = true;
             this.lblCompletedLabel.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.lblCompletedLabel.ForeColor = System.Drawing.Color.FromArgb(127, 140, 141);
+            this.lblCompletedLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(140)))), ((int)(((byte)(141)))));
             this.lblCompletedLabel.Location = new System.Drawing.Point(25, 85);
             this.lblCompletedLabel.Name = "lblCompletedLabel";
-            this.lblCompletedLabel.Size = new System.Drawing.Size(81, 20);
+            this.lblCompletedLabel.Size = new System.Drawing.Size(104, 25);
+            this.lblCompletedLabel.TabIndex = 1;
             this.lblCompletedLabel.Text = "Completed";
-
-            // pnlStatProgress (In Progress)
+            // 
+            // pnlStatProgress
+            // 
             this.pnlStatProgress.BackColor = System.Drawing.Color.White;
             this.pnlStatProgress.Controls.Add(this.lblInProgressNum);
             this.pnlStatProgress.Controls.Add(this.lblInProgressLabel);
@@ -249,139 +256,108 @@
             this.pnlStatProgress.Size = new System.Drawing.Size(270, 120);
             this.pnlStatProgress.TabIndex = 2;
             this.pnlStatProgress.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlStatProgress_Paint);
-
+            // 
+            // lblInProgressNum
+            // 
             this.lblInProgressNum.AutoSize = true;
             this.lblInProgressNum.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Bold);
-            this.lblInProgressNum.ForeColor = System.Drawing.Color.FromArgb(41, 128, 185);
+            this.lblInProgressNum.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
             this.lblInProgressNum.Location = new System.Drawing.Point(25, 20);
             this.lblInProgressNum.Name = "lblInProgressNum";
-            this.lblInProgressNum.Size = new System.Drawing.Size(57, 65);
+            this.lblInProgressNum.Size = new System.Drawing.Size(70, 81);
+            this.lblInProgressNum.TabIndex = 0;
             this.lblInProgressNum.Text = "0";
-
+            // 
+            // lblInProgressLabel
+            // 
             this.lblInProgressLabel.AutoSize = true;
             this.lblInProgressLabel.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.lblInProgressLabel.ForeColor = System.Drawing.Color.FromArgb(127, 140, 141);
+            this.lblInProgressLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(140)))), ((int)(((byte)(141)))));
             this.lblInProgressLabel.Location = new System.Drawing.Point(25, 85);
             this.lblInProgressLabel.Name = "lblInProgressLabel";
-            this.lblInProgressLabel.Size = new System.Drawing.Size(92, 20);
+            this.lblInProgressLabel.Size = new System.Drawing.Size(106, 25);
+            this.lblInProgressLabel.TabIndex = 1;
             this.lblInProgressLabel.Text = "In Progress";
-
-            // ========== pnlProgressCard ==========
-            this.pnlProgressCard.BackColor = System.Drawing.Color.White;
-            this.pnlProgressCard.Controls.Add(this.lblProgressTitle);
-            this.pnlProgressCard.Controls.Add(this.pbMyProgress);
-            this.pnlProgressCard.Controls.Add(this.lblProgressPercent);
-            this.pnlProgressCard.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlProgressCard.Location = new System.Drawing.Point(3, 133);
-            this.pnlProgressCard.Name = "pnlProgressCard";
-            this.pnlProgressCard.Padding = new System.Windows.Forms.Padding(25, 15, 25, 15);
-            this.pnlProgressCard.Size = new System.Drawing.Size(874, 94);
-            this.pnlProgressCard.TabIndex = 1;
-
-            // lblProgressTitle
-            this.lblProgressTitle.AutoSize = true;
-            this.lblProgressTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.lblProgressTitle.ForeColor = System.Drawing.Color.FromArgb(44, 62, 80);
-            this.lblProgressTitle.Location = new System.Drawing.Point(25, 18);
-            this.lblProgressTitle.Name = "lblProgressTitle";
-            this.lblProgressTitle.Size = new System.Drawing.Size(179, 21);
-            this.lblProgressTitle.Text = "📊 Completion Progress";
-
-            // lblProgressPercent
-            this.lblProgressPercent.AutoSize = true;
-            this.lblProgressPercent.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Bold);
-            this.lblProgressPercent.ForeColor = System.Drawing.Color.FromArgb(241, 196, 15);
-            this.lblProgressPercent.Location = new System.Drawing.Point(775, 15);
-            this.lblProgressPercent.Name = "lblProgressPercent";
-            this.lblProgressPercent.Size = new System.Drawing.Size(74, 25);
-            this.lblProgressPercent.Text = "0%";
-            this.lblProgressPercent.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-
-            // pbMyProgress
-            this.pbMyProgress.BackColor = System.Drawing.Color.FromArgb(236, 240, 241);
-            this.pbMyProgress.ForeColor = System.Drawing.Color.FromArgb(46, 204, 113);
-            this.pbMyProgress.Location = new System.Drawing.Point(29, 55);
-            this.pbMyProgress.Name = "pbMyProgress";
-            this.pbMyProgress.Size = new System.Drawing.Size(816, 14);
-            this.pbMyProgress.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-
-            // ========== pnlTasksCard ==========
+            // 
+            // pnlTasksCard
+            // 
             this.pnlTasksCard.BackColor = System.Drawing.Color.White;
             this.pnlTasksCard.Controls.Add(this.lblTasksTitle);
-            this.pnlTasksCard.Controls.Add(this.lblTaskCount);
             this.pnlTasksCard.Controls.Add(this.dgvMyTasks);
             this.pnlTasksCard.Controls.Add(this.pnlUpdateStatus);
             this.pnlTasksCard.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlTasksCard.Location = new System.Drawing.Point(3, 233);
+            this.pnlTasksCard.Location = new System.Drawing.Point(3, 144);
             this.pnlTasksCard.Name = "pnlTasksCard";
             this.pnlTasksCard.Padding = new System.Windows.Forms.Padding(25, 15, 25, 15);
-            this.pnlTasksCard.Size = new System.Drawing.Size(874, 289);
+            this.pnlTasksCard.Size = new System.Drawing.Size(857, 378);
             this.pnlTasksCard.TabIndex = 2;
-
+            // 
             // lblTasksTitle
+            // 
             this.lblTasksTitle.AutoSize = true;
             this.lblTasksTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.lblTasksTitle.ForeColor = System.Drawing.Color.FromArgb(44, 62, 80);
+            this.lblTasksTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
             this.lblTasksTitle.Location = new System.Drawing.Point(25, 18);
             this.lblTasksTitle.Name = "lblTasksTitle";
-            this.lblTasksTitle.Size = new System.Drawing.Size(169, 21);
+            this.lblTasksTitle.Size = new System.Drawing.Size(223, 28);
+            this.lblTasksTitle.TabIndex = 0;
             this.lblTasksTitle.Text = "📝 My Assigned Tasks";
-
-            // lblTaskCount
-            this.lblTaskCount.AutoSize = true;
-            this.lblTaskCount.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblTaskCount.ForeColor = System.Drawing.Color.FromArgb(127, 140, 141);
-            this.lblTaskCount.Location = new System.Drawing.Point(195, 21);
-            this.lblTaskCount.Name = "lblTaskCount";
-            this.lblTaskCount.Size = new System.Drawing.Size(79, 15);
-            this.lblTaskCount.Text = "0 tasks assigned";
-
+            // 
             // dgvMyTasks
+            // 
             this.dgvMyTasks.AllowUserToAddRows = false;
             this.dgvMyTasks.AllowUserToDeleteRows = false;
             this.dgvMyTasks.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvMyTasks.BackgroundColor = System.Drawing.Color.White;
             this.dgvMyTasks.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvMyTasks.ColumnHeadersHeight = 29;
             this.dgvMyTasks.Location = new System.Drawing.Point(29, 55);
             this.dgvMyTasks.Name = "dgvMyTasks";
             this.dgvMyTasks.ReadOnly = true;
             this.dgvMyTasks.RowHeadersVisible = false;
+            this.dgvMyTasks.RowHeadersWidth = 51;
             this.dgvMyTasks.RowTemplate.Height = 42;
             this.dgvMyTasks.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvMyTasks.Size = new System.Drawing.Size(816, 140);
             this.dgvMyTasks.TabIndex = 2;
-
+            // 
             // pnlUpdateStatus
+            // 
             this.pnlUpdateStatus.Controls.Add(this.lblSelectStatus);
             this.pnlUpdateStatus.Controls.Add(this.cmbNewStatus);
             this.pnlUpdateStatus.Controls.Add(this.btnUpdateStatus);
             this.pnlUpdateStatus.Controls.Add(this.btnRefresh);
             this.pnlUpdateStatus.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlUpdateStatus.Location = new System.Drawing.Point(25, 210);
+            this.pnlUpdateStatus.Location = new System.Drawing.Point(25, 299);
             this.pnlUpdateStatus.Name = "pnlUpdateStatus";
-            this.pnlUpdateStatus.Size = new System.Drawing.Size(824, 64);
+            this.pnlUpdateStatus.Size = new System.Drawing.Size(807, 64);
             this.pnlUpdateStatus.TabIndex = 3;
-
+            // 
             // lblSelectStatus
+            // 
             this.lblSelectStatus.AutoSize = true;
             this.lblSelectStatus.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lblSelectStatus.ForeColor = System.Drawing.Color.FromArgb(127, 140, 141);
+            this.lblSelectStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(140)))), ((int)(((byte)(141)))));
             this.lblSelectStatus.Location = new System.Drawing.Point(4, 22);
             this.lblSelectStatus.Name = "lblSelectStatus";
-            this.lblSelectStatus.Size = new System.Drawing.Size(121, 19);
+            this.lblSelectStatus.Size = new System.Drawing.Size(141, 23);
+            this.lblSelectStatus.TabIndex = 0;
             this.lblSelectStatus.Text = "Update status to:";
-
+            // 
             // cmbNewStatus
+            // 
+            this.cmbNewStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(247)))), ((int)(((byte)(250)))));
             this.cmbNewStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbNewStatus.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cmbNewStatus.Location = new System.Drawing.Point(131, 18);
             this.cmbNewStatus.Name = "cmbNewStatus";
-            this.cmbNewStatus.Size = new System.Drawing.Size(150, 25);
+            this.cmbNewStatus.Size = new System.Drawing.Size(150, 31);
             this.cmbNewStatus.TabIndex = 1;
-            this.cmbNewStatus.BackColor = System.Drawing.Color.FromArgb(245, 247, 250);
-
+            // 
             // btnUpdateStatus
-            this.btnUpdateStatus.BackColor = System.Drawing.Color.FromArgb(52, 73, 94);
+            // 
+            this.btnUpdateStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
+            this.btnUpdateStatus.FlatAppearance.BorderSize = 0;
             this.btnUpdateStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUpdateStatus.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnUpdateStatus.ForeColor = System.Drawing.Color.White;
@@ -391,27 +367,41 @@
             this.btnUpdateStatus.TabIndex = 2;
             this.btnUpdateStatus.Text = "✓ Update Status";
             this.btnUpdateStatus.UseVisualStyleBackColor = false;
-            this.btnUpdateStatus.FlatAppearance.BorderSize = 0;
-
+            // 
             // btnRefresh
-            this.btnRefresh.BackColor = System.Drawing.Color.FromArgb(236, 240, 241);
+            // 
+            this.btnRefresh.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(240)))), ((int)(((byte)(241)))));
+            this.btnRefresh.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRefresh.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.btnRefresh.ForeColor = System.Drawing.Color.FromArgb(52, 73, 94);
+            this.btnRefresh.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
             this.btnRefresh.Location = new System.Drawing.Point(463, 14);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(120, 35);
             this.btnRefresh.TabIndex = 3;
             this.btnRefresh.Text = "⟳ Refresh";
             this.btnRefresh.UseVisualStyleBackColor = false;
-            this.btnRefresh.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(200, 200, 200);
-            this.btnRefresh.FlatAppearance.BorderSize = 1;
-
-            // ========== MemberDashboardForm ==========
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            // 
+            // lblTasks
+            // 
+            this.lblTasks.BackColor = System.Drawing.Color.Transparent;
+            this.lblTasks.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblTasks.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTasks.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(143)))), ((int)(((byte)(163)))), ((int)(((byte)(196)))));
+            this.lblTasks.Location = new System.Drawing.Point(3, 3);
+            this.lblTasks.Name = "lblTasks";
+            this.lblTasks.Padding = new System.Windows.Forms.Padding(14, 0, 0, 0);
+            this.lblTasks.Size = new System.Drawing.Size(109, 41);
+            this.lblTasks.TabIndex = 1;
+            this.lblTasks.Text = "Tasks";
+            this.lblTasks.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // MemberDashboardForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(245, 247, 250);
-            this.ClientSize = new System.Drawing.Size(1000, 650);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(247)))), ((int)(((byte)(250)))));
+            this.ClientSize = new System.Drawing.Size(1035, 650);
             this.Controls.Add(this.pnlContent);
             this.Controls.Add(this.pnlSidebar);
             this.Controls.Add(this.pnlTopbar);
@@ -421,8 +411,6 @@
             this.Name = "MemberDashboardForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SyncPoint - My Workspace";
-
-            // Resume Layouts
             this.pnlTopbar.ResumeLayout(false);
             this.pnlTopbar.PerformLayout();
             this.pnlSidebar.ResumeLayout(false);
@@ -437,14 +425,13 @@
             this.pnlStatCompleted.PerformLayout();
             this.pnlStatProgress.ResumeLayout(false);
             this.pnlStatProgress.PerformLayout();
-            this.pnlProgressCard.ResumeLayout(false);
-            this.pnlProgressCard.PerformLayout();
             this.pnlTasksCard.ResumeLayout(false);
             this.pnlTasksCard.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMyTasks)).EndInit();
             this.pnlUpdateStatus.ResumeLayout(false);
             this.pnlUpdateStatus.PerformLayout();
             this.ResumeLayout(false);
+
         }
 
         // Designer-friendly paint handlers
@@ -498,18 +485,14 @@
         private System.Windows.Forms.Panel pnlStatProgress;
         private System.Windows.Forms.Label lblInProgressNum;
         private System.Windows.Forms.Label lblInProgressLabel;
-        private System.Windows.Forms.Panel pnlProgressCard;
-        private System.Windows.Forms.Label lblProgressTitle;
-        private System.Windows.Forms.ProgressBar pbMyProgress;
-        private System.Windows.Forms.Label lblProgressPercent;
         private System.Windows.Forms.Panel pnlTasksCard;
         private System.Windows.Forms.Label lblTasksTitle;
-        private System.Windows.Forms.Label lblTaskCount;
         private System.Windows.Forms.DataGridView dgvMyTasks;
         private System.Windows.Forms.Panel pnlUpdateStatus;
         private System.Windows.Forms.Label lblSelectStatus;
         private System.Windows.Forms.ComboBox cmbNewStatus;
         private System.Windows.Forms.Button btnUpdateStatus;
         private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.Label lblTasks;
     }
 }

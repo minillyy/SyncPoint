@@ -188,33 +188,12 @@ namespace SyncPoint.Forms
             lblInProgressNum.Text = inProgress.ToString();
 
             int percent = total > 0 ? (completed * 100) / total : 0;
-            pbMyProgress.Value = percent;
-            lblProgressPercent.Text = $"{percent}% Complete";
 
-            AnimateProgressBar(percent);
-        }
-
-        private async void AnimateProgressBar(int targetValue)
-        {
-            int current = pbMyProgress.Value;
-            int step = targetValue > current ? 5 : -5;
-            for (int i = current; step > 0 ? i <= targetValue : i >= targetValue; i += step)
-            {
-                pbMyProgress.Value = Math.Max(0, Math.Min(100, i));
-                await System.Threading.Tasks.Task.Delay(10);
-            }
-            pbMyProgress.Value = targetValue;
         }
 
         private void LoadMyTasks()
         {
             dgvMyTasks.Rows.Clear();
-
-            if (Session.GroupID == -1)
-            {
-                lblTaskCount.Text = "0 tasks assigned";
-                return;
-            }
 
             var tasks = DatabaseHelper.GetTasksByMember(Session.UserID);
 
@@ -237,7 +216,6 @@ namespace SyncPoint.Forms
                     row["Status"]
                 );
             }
-            lblTaskCount.Text = $"{tasks.Rows.Count} task{(tasks.Rows.Count != 1 ? "s" : "")} assigned";
         }
 
         private void PopulateStatusDropdown()

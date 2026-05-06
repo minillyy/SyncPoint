@@ -17,6 +17,8 @@ namespace SyncPoint.Forms
         public LeaderDashboardForm()
         {
             InitializeComponent();
+            // Subscribe to sidebar control Add Task clicks so the form can open the AddTaskForm
+            sidebarControl1.AddTaskClicked += SidebarControl1_AddTaskClicked;
         }
 
         private void LoadStats()
@@ -51,9 +53,6 @@ namespace SyncPoint.Forms
                     completed++;
 
             int percent = total > 0 ? (completed * 100) / total : 0;
-
-            pbGroupProgress.Value = percent;
-            lblProgressPct.Text = percent + "%";
         }
 
         private void LoadMembers()
@@ -87,7 +86,26 @@ namespace SyncPoint.Forms
         }
         private void sidebarControl1_Load(object sender, EventArgs e)
         {
+            // Intentionally left blank. AddTask is handled via AddTaskClicked event.
+        }
 
+        private void SidebarControl1_AddTaskClicked(object sender, EventArgs e)
+        {
+            int activeGroupId = Session.GroupID;
+            string currentLeaderName = Session.FullName;
+
+            using (AddTaskForm popUp = new AddTaskForm(activeGroupId, currentLeaderName))
+            {
+                if (popUp.ShowDialog(this) == DialogResult.OK)
+                {
+                    MessageBox.Show("Task assigned and saved to database!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    // Refresh dashboard stats
+                    LoadStats();
+                    LoadProgress();
+                    LoadMembers();
+                }
+            }
         }
 
         private void LeaderDashboardForm_Load(object sender, EventArgs e)
@@ -162,5 +180,9 @@ namespace SyncPoint.Forms
             dgvMembers.EnableHeadersVisualStyles = false;
         }
 
+        private void btnAddMember_Click(object sender, EventArgs e)
+        {
+            new AddMemberForm(Session.GroupID, Session.GroupName).ShowDialog();
+        }
     }
 }

@@ -18,11 +18,10 @@ namespace SyncPoint.Data
         //  INITIALIZATION
         public static void InitializeDatabase()
         {
-            if (!File.Exists(DbPath))
-                SQLiteConnection.CreateFile(DbPath);
-
-            using (var conn = GetConnection())
+            using (var conn = new SQLiteConnection(ConnectionString))
             {
+                conn.Open();
+                // Ensure database schema exists and seed default data
                 CreateTables(conn);
                 SeedData(conn);
             }
@@ -250,21 +249,25 @@ namespace SyncPoint.Data
         // Validates login. Returns the user row or null.
         public static DataRow ValidateLogin(string username, string password)
         {
-            string hashed = HashPassword(password);
-            using (var conn = GetConnection())
+            using (var conn = new SQLiteConnection(ConnectionString))
+            using (var cmd = conn.CreateCommand())
             {
-                string sql = @"
-                    SELECT u.UserID, u.FullName, u.Username, u.RoleID, r.RoleName
-                    FROM   Users u
-                    JOIN   Roles r ON u.RoleID = r.RoleID
-                    WHERE  u.Username = @user AND u.Password = @pass;";
-                var cmd = new SQLiteCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@user", username);
-                cmd.Parameters.AddWithValue("@pass", hashed);
-                var da = new SQLiteDataAdapter(cmd);
-                var dt = new DataTable();
-                da.Fill(dt);
-                return dt.Rows.Count > 0 ? dt.Rows[0] : null;
+                conn.Open();
+                cmd.CommandText = @"SELECT u.UserID, u.Username, u.FullName, r.RoleID, r.RoleName
+FROM Users u
+JOIN Roles r ON u.RoleID = r.RoleID
+WHERE u.Username = @u AND u.Password = @p";
+                cmd.Parameters.AddWithValue("@u", username);
+                // Compare against the stored hashed password
+                cmd.Parameters.AddWithValue("@p", HashPassword(password));
+
+                using (var da = new SQLiteDataAdapter(cmd))
+                {
+                    var dt = new DataTable();
+                    da.Fill(dt);
+                    if (dt.Rows.Count == 0) return null;
+                    return dt.Rows[0];
+                }
             }
         }
 
@@ -363,12 +366,27 @@ namespace SyncPoint.Data
         public static int GetUserGroupID(int userID)
         {
             using (var conn = GetConnection())
+            using (var cmd = conn.CreateCommand())
             {
-                string sql = "SELECT GroupID FROM GroupMembers WHERE UserID = @uid LIMIT 1;";
-                var cmd = new SQLiteCommand(sql, conn);
+                // GetConnection() returns an open connection, do not call Open() again here.
+
+                // First, check if the user is appointed as Leader in any group
+                cmd.CommandText = "SELECT GroupID FROM Groups WHERE LeaderID = @uid LIMIT 1";
                 cmd.Parameters.AddWithValue("@uid", userID);
-                object result = cmd.ExecuteScalar();
-                return result != null ? Convert.ToInt32(result) : -1;
+
+                var res = cmd.ExecuteScalar();
+                if (res != null && res != DBNull.Value)
+                    return Convert.ToInt32(res);
+
+                // Not a leader — check membership table
+                cmd.Parameters.Clear();
+                cmd.CommandText = "SELECT GroupID FROM GroupMembers WHERE UserID = @uid LIMIT 1";
+                cmd.Parameters.AddWithValue("@uid", userID);
+
+                res = cmd.ExecuteScalar();
+                if (res == null || res == DBNull.Value)
+                    return -1;
+                return Convert.ToInt32(res);
             }
         }
 
@@ -564,7 +582,7 @@ namespace SyncPoint.Data
         // Creates a new task and returns its TaskID
         public static int CreateTask(int groupID, string title, string description,
                                      DateTime deadline, int difficulty,
-                                     string taskType, int assignedTo)
+                                     string taskType, int? assignedTo)
         {
             using (var conn = GetConnection())
             {
@@ -581,7 +599,11 @@ namespace SyncPoint.Data
                 cmd.Parameters.AddWithValue("@dl", deadline.ToString("yyyy-MM-dd"));
                 cmd.Parameters.AddWithValue("@diff", difficulty);
                 cmd.Parameters.AddWithValue("@type", taskType);
-                cmd.Parameters.AddWithValue("@assigned", assignedTo);
+                // Allow AssignedTo to be NULL when task is unassigned (leader posts for members to claim)
+                if (assignedTo.HasValue)
+                    cmd.Parameters.AddWithValue("@assigned", assignedTo.Value);
+                else
+                    cmd.Parameters.AddWithValue("@assigned", DBNull.Value);
                 return Convert.ToInt32(cmd.ExecuteScalar());
             }
         }

@@ -46,8 +46,7 @@ namespace SyncPoint
         // ════════════════════════════════════════════════════
         //  LOGIN BUTTON CLICK
         // ════════════════════════════════════════════════════
-        private void btnLogin_Click(
-            object sender, EventArgs e)
+        private void btnLogin_Click(object sender, EventArgs e)
         {
             Login();
         }
@@ -123,11 +122,32 @@ namespace SyncPoint
             Session.RoleID =
                 Convert.ToInt32(user["RoleID"]);
             Session.RoleName = role;
-            Session.GroupID =
-                DatabaseHelper.GetUserGroupID(
-                    Session.UserID);
+            // Prefer GroupID from the validated user row if present;
+            // fall back to the helper lookup only when necessary.
+            if (user.Table.Columns.Contains("GroupID") &&
+                user["GroupID"] != DBNull.Value)
+            {
+                Session.GroupID = Convert.ToInt32(user["GroupID"]);
+            }
+            else
+            {
+                Session.GroupID =
+                    DatabaseHelper.GetUserGroupID(
+                        Session.UserID);
+            }
 
             // ── Step 5: Open the correct dashboard ────────
+            // Prevent members without a group from opening the Member Dashboard
+            if (role == "Member" && Session.GroupID == -1)
+            {
+                MessageBox.Show(
+                    "You must be a member of a group to access the Member Dashboard.",
+                    "SyncPoint",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+
             OpenDashboard(role);
         }
 
@@ -171,10 +191,25 @@ namespace SyncPoint
 
             // When dashboard closes, clear fields
             // and show login again for the next user
+            // Guard against the case where the login
+            // form was disposed while the dashboard
+            // was open (prevents ObjectDisposedException).
+            if (this.IsDisposed || this.Disposing)
+                return;
+
             txtUsername.Clear();
             txtPassword.Clear();
             txtUsername.Focus();
-            this.Show();
+            try
+            {
+                this.Show();
+            }
+            catch (ObjectDisposedException)
+            {
+                // If disposal races with Show, ignore —
+                // the application is shutting down or
+                // another flow disposed the login form.
+            }
         }
 
         // ════════════════════════════════════════════════════

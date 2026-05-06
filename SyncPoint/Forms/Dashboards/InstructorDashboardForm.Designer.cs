@@ -52,7 +52,7 @@
             // 
             // pnlTopbar
             // 
-            this.pnlTopbar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(39)))), ((int)(((byte)(68)))));
+            this.pnlTopbar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
             this.pnlTopbar.Controls.Add(this.lblUser);
             this.pnlTopbar.Controls.Add(this.lblTitle);
             this.pnlTopbar.Dock = System.Windows.Forms.DockStyle.Top;
@@ -65,28 +65,28 @@
             // 
             this.lblUser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblUser.AutoSize = true;
-            this.lblUser.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUser.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUser.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(201)))), ((int)(((byte)(168)))), ((int)(((byte)(76)))));
-            this.lblUser.Location = new System.Drawing.Point(808, 17);
+            this.lblUser.Location = new System.Drawing.Point(808, 14);
             this.lblUser.Name = "lblUser";
-            this.lblUser.Size = new System.Drawing.Size(93, 23);
+            this.lblUser.Size = new System.Drawing.Size(96, 28);
             this.lblUser.TabIndex = 1;
             this.lblUser.Text = "Instructor";
             // 
             // lblTitle
             // 
             this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(240)))), ((int)(((byte)(232)))));
-            this.lblTitle.Location = new System.Drawing.Point(14, 16);
+            this.lblTitle.Location = new System.Drawing.Point(11, 8);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(370, 24);
+            this.lblTitle.Size = new System.Drawing.Size(516, 38);
             this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "SyncPoint — Instructor Dashboard";
+            this.lblTitle.Text = "📋 SyncPoint — Instructor Dashboard";
             // 
             // pnlSidebar
             // 
-            this.pnlSidebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(45)))), ((int)(((byte)(74)))));
+            this.pnlSidebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
             this.pnlSidebar.Controls.Add(this.pnlSidebarFooter);
             this.pnlSidebar.Controls.Add(this.lblNavReports);
             this.pnlSidebar.Controls.Add(this.lblNavGroups);
@@ -124,7 +124,7 @@
             // 
             this.lblNavReports.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblNavReports.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblNavReports.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNavReports.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNavReports.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(143)))), ((int)(((byte)(163)))), ((int)(((byte)(196)))));
             this.lblNavReports.Location = new System.Drawing.Point(0, 40);
             this.lblNavReports.Name = "lblNavReports";
@@ -138,7 +138,7 @@
             // 
             this.lblNavGroups.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblNavGroups.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblNavGroups.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNavGroups.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNavGroups.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(143)))), ((int)(((byte)(163)))), ((int)(((byte)(196)))));
             this.lblNavGroups.Location = new System.Drawing.Point(0, 0);
             this.lblNavGroups.Name = "lblNavGroups";
@@ -150,6 +150,7 @@
             // 
             // pnlContent
             // 
+            this.pnlContent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(247)))), ((int)(((byte)(250)))));
             this.pnlContent.Controls.Add(this.dgvGroups);
             this.pnlContent.Controls.Add(this.pnlActions);
             this.pnlContent.Controls.Add(this.lblPageTitle);
@@ -165,7 +166,7 @@
             this.dgvGroups.AllowUserToAddRows = false;
             this.dgvGroups.AllowUserToDeleteRows = false;
             this.dgvGroups.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvGroups.BackgroundColor = System.Drawing.Color.White;
+            this.dgvGroups.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(247)))), ((int)(((byte)(250)))));
             this.dgvGroups.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvGroups.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgvGroups.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -195,18 +196,19 @@
             // lblGroupCount
             // 
             this.lblGroupCount.AutoSize = true;
-            this.lblGroupCount.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGroupCount.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblGroupCount.ForeColor = System.Drawing.Color.SaddleBrown;
-            this.lblGroupCount.Location = new System.Drawing.Point(150, 8);
+            this.lblGroupCount.Location = new System.Drawing.Point(150, 6);
             this.lblGroupCount.Name = "lblGroupCount";
-            this.lblGroupCount.Size = new System.Drawing.Size(88, 24);
+            this.lblGroupCount.Size = new System.Drawing.Size(104, 31);
             this.lblGroupCount.TabIndex = 1;
             this.lblGroupCount.Text = "0 groups";
             // 
             // btnCreateGroup
             // 
-            this.btnCreateGroup.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(39)))), ((int)(((byte)(68)))));
+            this.btnCreateGroup.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
             this.btnCreateGroup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCreateGroup.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCreateGroup.ForeColor = System.Drawing.Color.White;
             this.btnCreateGroup.Location = new System.Drawing.Point(0, 0);
             this.btnCreateGroup.Name = "btnCreateGroup";
@@ -218,7 +220,7 @@
             // lblPageTitle
             // 
             this.lblPageTitle.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblPageTitle.Font = new System.Drawing.Font("Georgia", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPageTitle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPageTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(39)))), ((int)(((byte)(68)))));
             this.lblPageTitle.Location = new System.Drawing.Point(16, 16);
             this.lblPageTitle.Name = "lblPageTitle";
