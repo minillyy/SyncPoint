@@ -431,3 +431,4 @@ FodyWeavers.xsd
 *.db-wal
 bin/
 obj/
+FETCH_HEAD 
