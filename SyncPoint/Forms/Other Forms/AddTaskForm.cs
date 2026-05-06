@@ -86,22 +86,14 @@ namespace SyncPoint
             if (cmbAssignTo.SelectedValue != null && cmbAssignTo.SelectedValue != DBNull.Value)
                 assignedToUserId = Convert.ToInt32(cmbAssignTo.SelectedValue);
 
-            // Set default difficulty to 1 (as seen in database table constraint)
-            int difficulty = 1;
-
             // 3. Write data to your DB via the DatabaseHelper helper class
             try
             {
-                // TaskType is no longer selected in the form; default to "Individual"
-                string taskType = "Individual";
-
                 int newTaskID = DatabaseHelper.CreateTask(
                     _groupId,
                     title,
                     description,
                     deadline,
-                    difficulty,
-                    taskType,
                     assignedToUserId
                 );
 

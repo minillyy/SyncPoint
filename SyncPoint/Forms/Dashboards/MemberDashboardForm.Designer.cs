@@ -20,6 +20,7 @@
             this.lblUserRole = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
             this.pnlSidebar = new System.Windows.Forms.Panel();
+            this.lblTasks = new System.Windows.Forms.Label();
             this.pnlLogout = new System.Windows.Forms.Panel();
             this.lblLogout = new System.Windows.Forms.Label();
             this.pnlContent = new System.Windows.Forms.Panel();
@@ -37,12 +38,6 @@
             this.pnlTasksCard = new System.Windows.Forms.Panel();
             this.lblTasksTitle = new System.Windows.Forms.Label();
             this.dgvMyTasks = new System.Windows.Forms.DataGridView();
-            this.pnlUpdateStatus = new System.Windows.Forms.Panel();
-            this.lblSelectStatus = new System.Windows.Forms.Label();
-            this.cmbNewStatus = new System.Windows.Forms.ComboBox();
-            this.btnUpdateStatus = new System.Windows.Forms.Button();
-            this.btnRefresh = new System.Windows.Forms.Button();
-            this.lblTasks = new System.Windows.Forms.Label();
             this.pnlTopbar.SuspendLayout();
             this.pnlSidebar.SuspendLayout();
             this.pnlLogout.SuspendLayout();
@@ -54,7 +49,6 @@
             this.pnlStatProgress.SuspendLayout();
             this.pnlTasksCard.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMyTasks)).BeginInit();
-            this.pnlUpdateStatus.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlTopbar
@@ -114,6 +108,20 @@
             this.pnlSidebar.Name = "pnlSidebar";
             this.pnlSidebar.Size = new System.Drawing.Size(112, 585);
             this.pnlSidebar.TabIndex = 1;
+            // 
+            // lblTasks
+            // 
+            this.lblTasks.BackColor = System.Drawing.Color.Transparent;
+            this.lblTasks.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblTasks.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTasks.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(143)))), ((int)(((byte)(163)))), ((int)(((byte)(196)))));
+            this.lblTasks.Location = new System.Drawing.Point(3, 3);
+            this.lblTasks.Name = "lblTasks";
+            this.lblTasks.Padding = new System.Windows.Forms.Padding(14, 0, 0, 0);
+            this.lblTasks.Size = new System.Drawing.Size(109, 41);
+            this.lblTasks.TabIndex = 1;
+            this.lblTasks.Text = "Tasks";
+            this.lblTasks.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // pnlLogout
             // 
@@ -284,7 +292,6 @@
             this.pnlTasksCard.BackColor = System.Drawing.Color.White;
             this.pnlTasksCard.Controls.Add(this.lblTasksTitle);
             this.pnlTasksCard.Controls.Add(this.dgvMyTasks);
-            this.pnlTasksCard.Controls.Add(this.pnlUpdateStatus);
             this.pnlTasksCard.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlTasksCard.Location = new System.Drawing.Point(3, 144);
             this.pnlTasksCard.Name = "pnlTasksCard";
@@ -321,81 +328,6 @@
             this.dgvMyTasks.Size = new System.Drawing.Size(816, 140);
             this.dgvMyTasks.TabIndex = 2;
             // 
-            // pnlUpdateStatus
-            // 
-            this.pnlUpdateStatus.Controls.Add(this.lblSelectStatus);
-            this.pnlUpdateStatus.Controls.Add(this.cmbNewStatus);
-            this.pnlUpdateStatus.Controls.Add(this.btnUpdateStatus);
-            this.pnlUpdateStatus.Controls.Add(this.btnRefresh);
-            this.pnlUpdateStatus.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlUpdateStatus.Location = new System.Drawing.Point(25, 299);
-            this.pnlUpdateStatus.Name = "pnlUpdateStatus";
-            this.pnlUpdateStatus.Size = new System.Drawing.Size(807, 64);
-            this.pnlUpdateStatus.TabIndex = 3;
-            // 
-            // lblSelectStatus
-            // 
-            this.lblSelectStatus.AutoSize = true;
-            this.lblSelectStatus.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lblSelectStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(140)))), ((int)(((byte)(141)))));
-            this.lblSelectStatus.Location = new System.Drawing.Point(4, 22);
-            this.lblSelectStatus.Name = "lblSelectStatus";
-            this.lblSelectStatus.Size = new System.Drawing.Size(141, 23);
-            this.lblSelectStatus.TabIndex = 0;
-            this.lblSelectStatus.Text = "Update status to:";
-            // 
-            // cmbNewStatus
-            // 
-            this.cmbNewStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(247)))), ((int)(((byte)(250)))));
-            this.cmbNewStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbNewStatus.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.cmbNewStatus.Location = new System.Drawing.Point(131, 18);
-            this.cmbNewStatus.Name = "cmbNewStatus";
-            this.cmbNewStatus.Size = new System.Drawing.Size(150, 31);
-            this.cmbNewStatus.TabIndex = 1;
-            // 
-            // btnUpdateStatus
-            // 
-            this.btnUpdateStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.btnUpdateStatus.FlatAppearance.BorderSize = 0;
-            this.btnUpdateStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUpdateStatus.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.btnUpdateStatus.ForeColor = System.Drawing.Color.White;
-            this.btnUpdateStatus.Location = new System.Drawing.Point(297, 14);
-            this.btnUpdateStatus.Name = "btnUpdateStatus";
-            this.btnUpdateStatus.Size = new System.Drawing.Size(150, 35);
-            this.btnUpdateStatus.TabIndex = 2;
-            this.btnUpdateStatus.Text = "✓ Update Status";
-            this.btnUpdateStatus.UseVisualStyleBackColor = false;
-            // 
-            // btnRefresh
-            // 
-            this.btnRefresh.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(240)))), ((int)(((byte)(241)))));
-            this.btnRefresh.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRefresh.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.btnRefresh.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.btnRefresh.Location = new System.Drawing.Point(463, 14);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(120, 35);
-            this.btnRefresh.TabIndex = 3;
-            this.btnRefresh.Text = "⟳ Refresh";
-            this.btnRefresh.UseVisualStyleBackColor = false;
-            // 
-            // lblTasks
-            // 
-            this.lblTasks.BackColor = System.Drawing.Color.Transparent;
-            this.lblTasks.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblTasks.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTasks.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(143)))), ((int)(((byte)(163)))), ((int)(((byte)(196)))));
-            this.lblTasks.Location = new System.Drawing.Point(3, 3);
-            this.lblTasks.Name = "lblTasks";
-            this.lblTasks.Padding = new System.Windows.Forms.Padding(14, 0, 0, 0);
-            this.lblTasks.Size = new System.Drawing.Size(109, 41);
-            this.lblTasks.TabIndex = 1;
-            this.lblTasks.Text = "Tasks";
-            this.lblTasks.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // MemberDashboardForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -428,8 +360,6 @@
             this.pnlTasksCard.ResumeLayout(false);
             this.pnlTasksCard.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMyTasks)).EndInit();
-            this.pnlUpdateStatus.ResumeLayout(false);
-            this.pnlUpdateStatus.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -488,11 +418,6 @@
         private System.Windows.Forms.Panel pnlTasksCard;
         private System.Windows.Forms.Label lblTasksTitle;
         private System.Windows.Forms.DataGridView dgvMyTasks;
-        private System.Windows.Forms.Panel pnlUpdateStatus;
-        private System.Windows.Forms.Label lblSelectStatus;
-        private System.Windows.Forms.ComboBox cmbNewStatus;
-        private System.Windows.Forms.Button btnUpdateStatus;
-        private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Label lblTasks;
     }
 }

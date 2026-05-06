@@ -57,7 +57,7 @@
             this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(240)))), ((int)(((byte)(232)))));
             this.lblTitle.Location = new System.Drawing.Point(16, 14);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(197, 31);
+            this.lblTitle.Size = new System.Drawing.Size(191, 30);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Appoint a Leader";
             // 

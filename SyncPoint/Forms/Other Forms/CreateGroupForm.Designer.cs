@@ -41,9 +41,9 @@
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 13.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(39)))), ((int)(((byte)(68)))));
-            this.lblTitle.Location = new System.Drawing.Point(20, 20);
+            this.lblTitle.Location = new System.Drawing.Point(95, 18);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(209, 31);
+            this.lblTitle.Size = new System.Drawing.Size(205, 30);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Create New Group";
             // 
@@ -52,7 +52,7 @@
             this.lblGroupName.AutoSize = true;
             this.lblGroupName.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblGroupName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(111)))), ((int)(((byte)(90)))));
-            this.lblGroupName.Location = new System.Drawing.Point(20, 61);
+            this.lblGroupName.Location = new System.Drawing.Point(30, 60);
             this.lblGroupName.Name = "lblGroupName";
             this.lblGroupName.Size = new System.Drawing.Size(94, 20);
             this.lblGroupName.TabIndex = 1;
@@ -63,9 +63,9 @@
             this.txtGroupName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtGroupName.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtGroupName.ForeColor = System.Drawing.Color.Black;
-            this.txtGroupName.Location = new System.Drawing.Point(20, 83);
+            this.txtGroupName.Location = new System.Drawing.Point(34, 83);
             this.txtGroupName.Name = "txtGroupName";
-            this.txtGroupName.Size = new System.Drawing.Size(329, 27);
+            this.txtGroupName.Size = new System.Drawing.Size(320, 27);
             this.txtGroupName.TabIndex = 2;
             // 
             // lblNote
@@ -73,11 +73,11 @@
             this.lblNote.AutoSize = true;
             this.lblNote.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(111)))), ((int)(((byte)(90)))));
-            this.lblNote.Location = new System.Drawing.Point(20, 120);
+            this.lblNote.Location = new System.Drawing.Point(31, 124);
             this.lblNote.Name = "lblNote";
-            this.lblNote.Size = new System.Drawing.Size(329, 17);
+            this.lblNote.Size = new System.Drawing.Size(280, 17);
             this.lblNote.TabIndex = 3;
-            this.lblNote.Text = "The group name should describe your class or project.";
+            this.lblNote.Text = "The group name should describe your project.";
             // 
             // btnCreate
             // 
@@ -85,7 +85,7 @@
             this.btnCreate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCreate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCreate.ForeColor = System.Drawing.Color.White;
-            this.btnCreate.Location = new System.Drawing.Point(20, 160);
+            this.btnCreate.Location = new System.Drawing.Point(34, 160);
             this.btnCreate.Name = "btnCreate";
             this.btnCreate.Size = new System.Drawing.Size(165, 38);
             this.btnCreate.TabIndex = 4;
@@ -97,7 +97,7 @@
             // 
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(191, 160);
+            this.btnCancel.Location = new System.Drawing.Point(205, 160);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(149, 38);
             this.btnCancel.TabIndex = 5;

@@ -16,7 +16,6 @@ namespace SyncPoint.Forms
             // LicenseManager.UsageMode is a reliable way to detect design-time vs run-time here.
             if (System.ComponentModel.LicenseManager.UsageMode != System.ComponentModel.LicenseUsageMode.Designtime)
             {
-                PopulateStatusDropdown();
                 SetupDataGridViewColumns();
                 AttachEvents();
             }
@@ -25,8 +24,7 @@ namespace SyncPoint.Forms
         private void AttachEvents()
         {
             this.Load += MemberDashboardForm_Load;
-            btnUpdateStatus.Click += BtnUpdateStatus_Click;
-            btnRefresh.Click += BtnRefresh_Click;
+
             lblLogout.Click += LblLogout_Click;
             lblLogout.Cursor = Cursors.Hand;
 
@@ -216,81 +214,6 @@ namespace SyncPoint.Forms
                     row["Status"]
                 );
             }
-        }
-
-        private void PopulateStatusDropdown()
-        {
-            cmbNewStatus.Items.Clear();
-            cmbNewStatus.Items.Add("Pending");
-            cmbNewStatus.Items.Add("In Progress");
-            cmbNewStatus.Items.Add("Completed");
-            cmbNewStatus.SelectedIndex = 0;
-        }
-
-        private void BtnUpdateStatus_Click(object sender, EventArgs e)
-        {
-            if (dgvMyTasks.SelectedRows.Count == 0)
-            {
-                MessageBox.Show("Please select a task first.", "SyncPoint", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (cmbNewStatus.SelectedItem == null)
-            {
-                MessageBox.Show("Please select a new status.", "SyncPoint", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            int taskID = Convert.ToInt32(dgvMyTasks.SelectedRows[0].Cells["TaskID"].Value);
-            string currentStatus = dgvMyTasks.SelectedRows[0].Cells["Status"].Value.ToString();
-            string newStatus = cmbNewStatus.SelectedItem.ToString();
-
-            if (currentStatus == newStatus)
-            {
-                MessageBox.Show($"Task is already marked as '{newStatus}'.", "SyncPoint", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
-            DialogResult confirm = MessageBox.Show($"Update task status from '{currentStatus}' to '{newStatus}'?",
-                "SyncPoint", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (confirm == DialogResult.Yes)
-            {
-                DatabaseHelper.UpdateTaskStatus(taskID, newStatus);
-
-                if (newStatus == "Completed")
-                {
-                    var tasks = DatabaseHelper.GetTasksByMember(Session.UserID);
-                    foreach (DataRow row in tasks.Rows)
-                    {
-                        if (Convert.ToInt32(row["TaskID"]) == taskID)
-                        {
-                            DateTime deadline = Convert.ToDateTime(row["Deadline"]);
-                            int difficulty = Convert.ToInt32(row["Difficulty"]);
-                            DatabaseHelper.RecordScore(taskID, Session.UserID, deadline, difficulty);
-                            break;
-                        }
-                    }
-                }
-
-                MessageBox.Show($"Task status updated to '{newStatus}'!", "SyncPoint", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                RefreshAllData();
-            }
-        }
-
-        private void BtnRefresh_Click(object sender, EventArgs e)
-        {
-            RefreshAllData();
-            btnRefresh.Text = "✓ Refreshed!";
-            btnRefresh.Enabled = false;
-            System.Threading.Tasks.Task.Delay(1500).ContinueWith(_ =>
-            {
-                this.Invoke(new Action(() =>
-                {
-                    btnRefresh.Text = "⟳ Refresh";
-                    btnRefresh.Enabled = true;
-                }));
-            });
         }
 
         private void LblLogout_Click(object sender, EventArgs e)

@@ -413,7 +413,7 @@ namespace SyncPoint.Forms
                 var confirm = MessageBox.Show(
                     $"Appoint \"{name}\" as the Leader " +
                     $"of \"{_groupName}\"?\n\n" +
-                    $"They can log in as" +
+                    $"They can log in as " +
                     $"a Leader.",
                     "SyncPoint — Confirm",
                     MessageBoxButtons.YesNo,
