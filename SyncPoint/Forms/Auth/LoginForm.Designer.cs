@@ -21,7 +21,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panelHeader = new System.Windows.Forms.Panel();
+            this.pnlHeader = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblSubTitle = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
@@ -30,25 +30,23 @@
             this.lblPassword = new System.Windows.Forms.Label();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.lblSignInAs = new System.Windows.Forms.Label();
-            this.btnLeader = new System.Windows.Forms.Button();
-            this.btnMember = new System.Windows.Forms.Button();
             this.linkRegister = new System.Windows.Forms.LinkLabel();
             this.lblNoAccount = new System.Windows.Forms.Label();
-            this.btnInstructor = new System.Windows.Forms.Button();
-            this.panelHeader.SuspendLayout();
+            this.btnLogin = new System.Windows.Forms.Button();
+            this.pnlHeader.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panelHeader
+            // pnlHeader
             // 
-            this.panelHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(39)))), ((int)(((byte)(68)))));
-            this.panelHeader.Controls.Add(this.panel1);
-            this.panelHeader.Controls.Add(this.lblSubTitle);
-            this.panelHeader.Controls.Add(this.lblTitle);
-            this.panelHeader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelHeader.Location = new System.Drawing.Point(0, 0);
-            this.panelHeader.Name = "panelHeader";
-            this.panelHeader.Size = new System.Drawing.Size(376, 90);
-            this.panelHeader.TabIndex = 0;
+            this.pnlHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(39)))), ((int)(((byte)(68)))));
+            this.pnlHeader.Controls.Add(this.panel1);
+            this.pnlHeader.Controls.Add(this.lblSubTitle);
+            this.pnlHeader.Controls.Add(this.lblTitle);
+            this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlHeader.Location = new System.Drawing.Point(0, 0);
+            this.pnlHeader.Name = "pnlHeader";
+            this.pnlHeader.Size = new System.Drawing.Size(369, 90);
+            this.pnlHeader.TabIndex = 0;
             // 
             // panel1
             // 
@@ -56,7 +54,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 87);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(376, 3);
+            this.panel1.Size = new System.Drawing.Size(369, 3);
             this.panel1.TabIndex = 2;
             // 
             // lblSubTitle
@@ -131,39 +129,10 @@
             this.lblSignInAs.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(144)))), ((int)(((byte)(112)))));
             this.lblSignInAs.Location = new System.Drawing.Point(12, 253);
             this.lblSignInAs.Name = "lblSignInAs";
-            this.lblSignInAs.Size = new System.Drawing.Size(333, 16);
+            this.lblSignInAs.Size = new System.Drawing.Size(307, 16);
             this.lblSignInAs.TabIndex = 7;
-            this.lblSignInAs.Text = "—————————— Sign in as ——————————";
+            this.lblSignInAs.Text = "—————————— Sign in as ————————";
             this.lblSignInAs.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // btnLeader
-            // 
-            this.btnLeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(39)))), ((int)(((byte)(68)))));
-            this.btnLeader.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(201)))), ((int)(((byte)(168)))), ((int)(((byte)(76)))));
-            this.btnLeader.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLeader.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLeader.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(240)))), ((int)(((byte)(232)))));
-            this.btnLeader.Location = new System.Drawing.Point(194, 281);
-            this.btnLeader.Name = "btnLeader";
-            this.btnLeader.Size = new System.Drawing.Size(130, 32);
-            this.btnLeader.TabIndex = 8;
-            this.btnLeader.Text = "Leader";
-            this.btnLeader.UseVisualStyleBackColor = false;
-            this.btnLeader.Click += new System.EventHandler(this.btnLeader_Click);
-            // 
-            // btnMember
-            // 
-            this.btnMember.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(201)))), ((int)(((byte)(176)))));
-            this.btnMember.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMember.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMember.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(111)))), ((int)(((byte)(90)))));
-            this.btnMember.Location = new System.Drawing.Point(109, 324);
-            this.btnMember.Name = "btnMember";
-            this.btnMember.Size = new System.Drawing.Size(130, 32);
-            this.btnMember.TabIndex = 9;
-            this.btnMember.Text = "Member";
-            this.btnMember.UseVisualStyleBackColor = true;
-            this.btnMember.Click += new System.EventHandler(this.btnMember_Click);
             // 
             // linkRegister
             // 
@@ -188,38 +157,35 @@
             this.lblNoAccount.TabIndex = 11;
             this.lblNoAccount.Text = "No account?";
             // 
-            // btnInstructor
+            // btnLogin
             // 
-            this.btnInstructor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(39)))), ((int)(((byte)(68)))));
-            this.btnInstructor.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(201)))), ((int)(((byte)(168)))), ((int)(((byte)(76)))));
-            this.btnInstructor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnInstructor.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnInstructor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(240)))), ((int)(((byte)(232)))));
-            this.btnInstructor.Location = new System.Drawing.Point(34, 281);
-            this.btnInstructor.Name = "btnInstructor";
-            this.btnInstructor.Size = new System.Drawing.Size(130, 32);
-            this.btnInstructor.TabIndex = 12;
-            this.btnInstructor.Text = "Instructor";
-            this.btnInstructor.UseVisualStyleBackColor = false;
-            this.btnInstructor.Click += new System.EventHandler(this.btnInstructor_Click);
+            this.btnLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(39)))), ((int)(((byte)(68)))));
+            this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLogin.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogin.ForeColor = System.Drawing.Color.White;
+            this.btnLogin.Location = new System.Drawing.Point(77, 292);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(191, 42);
+            this.btnLogin.TabIndex = 12;
+            this.btnLogin.Text = "Login";
+            this.btnLogin.UseVisualStyleBackColor = false;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(247)))), ((int)(((byte)(242)))));
-            this.ClientSize = new System.Drawing.Size(376, 387);
-            this.Controls.Add(this.btnInstructor);
+            this.ClientSize = new System.Drawing.Size(369, 387);
+            this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.lblNoAccount);
             this.Controls.Add(this.linkRegister);
-            this.Controls.Add(this.btnMember);
-            this.Controls.Add(this.btnLeader);
             this.Controls.Add(this.lblSignInAs);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.lblPassword);
             this.Controls.Add(this.txtUsername);
             this.Controls.Add(this.lblUsername);
-            this.Controls.Add(this.panelHeader);
+            this.Controls.Add(this.pnlHeader);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -227,8 +193,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login Page";
             this.Load += new System.EventHandler(this.LoginForm_Load);
-            this.panelHeader.ResumeLayout(false);
-            this.panelHeader.PerformLayout();
+            this.pnlHeader.ResumeLayout(false);
+            this.pnlHeader.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -236,7 +202,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panelHeader;
+        private System.Windows.Forms.Panel pnlHeader;
         private System.Windows.Forms.Label lblSubTitle;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Panel panel1;
@@ -245,10 +211,8 @@
         private System.Windows.Forms.Label lblPassword;
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.Label lblSignInAs;
-        private System.Windows.Forms.Button btnLeader;
-        private System.Windows.Forms.Button btnMember;
         private System.Windows.Forms.LinkLabel linkRegister;
         private System.Windows.Forms.Label lblNoAccount;
-        private System.Windows.Forms.Button btnInstructor;
+        private System.Windows.Forms.Button btnLogin;
     }
 }
