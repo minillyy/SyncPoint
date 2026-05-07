@@ -121,12 +121,14 @@
             // 
             // sidebarControl3
             // 
-            this.sidebarControl3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(45)))), ((int)(((byte)(74)))));
-            this.sidebarControl3.Location = new System.Drawing.Point(0, 2);
-            this.sidebarControl3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.sidebarControl3.Name = "sidebarControl3";
-            this.sidebarControl3.Size = new System.Drawing.Size(120, 556);
-            this.sidebarControl3.TabIndex = 2;
+            this.sidebarControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(45)))), ((int)(((byte)(74)))));
+            this.sidebarControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.sidebarControl1.Location = new System.Drawing.Point(0, 0);
+            this.sidebarControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.sidebarControl1.Name = "sidebarControl1";
+            this.sidebarControl1.Size = new System.Drawing.Size(120, 558);
+            this.sidebarControl1.TabIndex = 0;
+            this.sidebarControl1.Load += new System.EventHandler(this.sidebarControl1_Load);
             // 
             // pnlContent
             // 
@@ -181,12 +183,24 @@
             // 
             // pnlMemberProgress
             // 
-            this.pnlMemberProgress.AutoScroll = true;
-            this.pnlMemberProgress.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlMemberProgress.Location = new System.Drawing.Point(12, 28);
-            this.pnlMemberProgress.Name = "pnlMemberProgress";
-            this.pnlMemberProgress.Size = new System.Drawing.Size(591, 117);
-            this.pnlMemberProgress.TabIndex = 1;
+            this.dgvMembers.AllowUserToAddRows = false;
+            this.dgvMembers.AllowUserToDeleteRows = false;
+            this.dgvMembers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvMembers.BackgroundColor = System.Drawing.Color.White;
+            this.dgvMembers.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvMembers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMembers.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvMembers.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(224)))), ((int)(((byte)(208)))));
+            this.dgvMembers.Location = new System.Drawing.Point(12, 34);
+            this.dgvMembers.Name = "dgvMembers";
+            this.dgvMembers.ReadOnly = true;
+            this.dgvMembers.RowHeadersVisible = false;
+            this.dgvMembers.RowHeadersWidth = 51;
+            this.dgvMembers.RowTemplate.Height = 24;
+            this.dgvMembers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvMembers.Size = new System.Drawing.Size(591, 285);
+            this.dgvMembers.TabIndex = 1;
+            this.dgvMembers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMembers_CellContentClick);
             // 
             // lblMembersTitle
             // 
