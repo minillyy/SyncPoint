@@ -47,7 +47,7 @@ namespace SyncPoint.Forms
         {
             Form parent = this.FindForm();
             parent.Hide();
-            new LeaderDashboardForm().ShowDialog();
+            new xzLeaderDashboardForm().ShowDialog();
             parent.Close();
         }
 

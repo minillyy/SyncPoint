@@ -180,7 +180,7 @@ namespace SyncPoint
                     break;
 
                 case "Leader":
-                    new LeaderDashboardForm().ShowDialog();
+                    new xzLeaderDashboardForm().ShowDialog();
                     break;
 
                 case "Member":
