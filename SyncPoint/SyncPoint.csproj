@@ -35,7 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
+    <Reference Include="System">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Data.SQLite, Version=1.0.119.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\lib\net46\System.Data.SQLite.dll</HintPath>
@@ -99,6 +101,7 @@
     </Compile>
     <Compile Include="Forms\Dashboards\MemberDashboardForm.cs">
       <SubType>Form</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Forms\Dashboards\MemberDashboardForm.Designer.cs">
       <DependentUpon>MemberDashboardForm.cs</DependentUpon>
@@ -108,6 +111,7 @@
     </Compile>
     <Compile Include="Forms\Auth\RegisterForm.Designer.cs">
       <DependentUpon>RegisterForm.cs</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Forms\Other Forms\SidebarControl.cs">
       <SubType>UserControl</SubType>
@@ -144,6 +148,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Auth\RegisterForm.resx">
       <DependentUpon>RegisterForm.cs</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Other Forms\SidebarControl.resx">
       <DependentUpon>SidebarControl.cs</DependentUpon>
