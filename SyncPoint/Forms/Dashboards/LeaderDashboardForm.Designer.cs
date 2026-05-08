@@ -1,6 +1,6 @@
 ﻿namespace SyncPoint.Forms
 {
-    partial class xzLeaderDashboardForm
+    partial class LeaderDashboardForm
     {
         private System.ComponentModel.IContainer components = null;
 
@@ -20,21 +20,12 @@
             this.pnlTopbar = new System.Windows.Forms.Panel();
             this.lblUserName = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.btnRefresh = new System.Windows.Forms.Button();
             this.pnlSidebar = new System.Windows.Forms.Panel();
             this.pnlContent = new System.Windows.Forms.Panel();
-            this.lblUpcomingDeadlines = new System.Windows.Forms.Label();
-            this.dgvDeadlines = new System.Windows.Forms.DataGridView();
+            this.btnAddMember = new System.Windows.Forms.Button();
             this.pnlMembersCard = new System.Windows.Forms.Panel();
-            this.pnlMemberProgress = new System.Windows.Forms.Panel();
+            this.dgvMembers = new System.Windows.Forms.DataGridView();
             this.lblMembersTitle = new System.Windows.Forms.Label();
-            this.pnlProgressCard = new System.Windows.Forms.Panel();
-            this.lblCompleteNum = new System.Windows.Forms.Label();
-            this.lblNotStarted = new System.Windows.Forms.Label();
-            this.lblProgressPct = new System.Windows.Forms.Label();
-            this.lblInProgress = new System.Windows.Forms.Label();
-            this.pbGroupProgress = new System.Windows.Forms.ProgressBar();
-            this.lblProgressTitle = new System.Windows.Forms.Label();
             this.flpStats = new System.Windows.Forms.FlowLayoutPanel();
             this.pnlStatTotal1 = new System.Windows.Forms.Panel();
             this.lblTotalLabel = new System.Windows.Forms.Label();
@@ -45,17 +36,12 @@
             this.pnlStatTotal3 = new System.Windows.Forms.Panel();
             this.lblPendingLabel = new System.Windows.Forms.Label();
             this.lblPendingNum = new System.Windows.Forms.Label();
-            this.lblMemberOverview = new System.Windows.Forms.Label();
-            this.sidebarControl3 = new SyncPoint.Forms.SidebarControl();
-            this.sidebarControl2 = new SyncPoint.Forms.SidebarControl();
             this.sidebarControl1 = new SyncPoint.Forms.SidebarControl();
             this.pnlTopbar.SuspendLayout();
             this.pnlSidebar.SuspendLayout();
             this.pnlContent.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDeadlines)).BeginInit();
             this.pnlMembersCard.SuspendLayout();
-            this.pnlMemberProgress.SuspendLayout();
-            this.pnlProgressCard.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMembers)).BeginInit();
             this.flpStats.SuspendLayout();
             this.pnlStatTotal1.SuspendLayout();
             this.pnlStatTotal2.SuspendLayout();
@@ -64,13 +50,13 @@
             // 
             // pnlTopbar
             // 
-            this.pnlTopbar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(39)))), ((int)(((byte)(68)))));
+            this.pnlTopbar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
             this.pnlTopbar.Controls.Add(this.lblUserName);
             this.pnlTopbar.Controls.Add(this.lblTitle);
             this.pnlTopbar.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTopbar.Location = new System.Drawing.Point(0, 0);
             this.pnlTopbar.Name = "pnlTopbar";
-            this.pnlTopbar.Size = new System.Drawing.Size(767, 50);
+            this.pnlTopbar.Size = new System.Drawing.Size(763, 50);
             this.pnlTopbar.TabIndex = 0;
             this.pnlTopbar.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlTopbar_Paint);
             // 
@@ -78,196 +64,106 @@
             // 
             this.lblUserName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblUserName.AutoSize = true;
-            this.lblUserName.Font = new System.Drawing.Font("Georgia", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUserName.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUserName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(201)))), ((int)(((byte)(168)))), ((int)(((byte)(76)))));
-            this.lblUserName.Location = new System.Drawing.Point(560, 16);
+            this.lblUserName.Location = new System.Drawing.Point(599, 16);
             this.lblUserName.Name = "lblUserName";
-            this.lblUserName.Size = new System.Drawing.Size(105, 17);
+            this.lblUserName.Size = new System.Drawing.Size(126, 23);
             this.lblUserName.TabIndex = 2;
             this.lblUserName.Text = "Leader: Juan D.";
-            this.lblUserName.Click += new System.EventHandler(this.lblUserName_Click);
             // 
             // lblTitle
             // 
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(240)))), ((int)(((byte)(232)))));
-            this.lblTitle.Location = new System.Drawing.Point(14, 14);
+            this.lblTitle.Location = new System.Drawing.Point(12, 10);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(177, 18);
+            this.lblTitle.Size = new System.Drawing.Size(387, 31);
             this.lblTitle.TabIndex = 1;
-            this.lblTitle.Text = "SyncPoint — Dashboard";
-            // 
-            // btnRefresh
-            // 
-            this.btnRefresh.Location = new System.Drawing.Point(17, 494);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(75, 23);
-            this.btnRefresh.TabIndex = 3;
-            this.btnRefresh.Text = "Refresh";
-            this.btnRefresh.UseVisualStyleBackColor = true;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
-            this.btnRefresh.MouseEnter += new System.EventHandler(this.btnRefresh_MouseEnter);
-            this.btnRefresh.MouseLeave += new System.EventHandler(this.btnRefresh_MouseLeave);
+            this.lblTitle.Text = "📋 SyncPoint — Leader Dashboard";
             // 
             // pnlSidebar
             // 
             this.pnlSidebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(39)))), ((int)(((byte)(68)))));
-            this.pnlSidebar.Controls.Add(this.btnRefresh);
-            this.pnlSidebar.Controls.Add(this.sidebarControl3);
+            this.pnlSidebar.Controls.Add(this.sidebarControl1);
             this.pnlSidebar.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlSidebar.Location = new System.Drawing.Point(0, 50);
             this.pnlSidebar.Name = "pnlSidebar";
-            this.pnlSidebar.Size = new System.Drawing.Size(120, 558);
+            this.pnlSidebar.Size = new System.Drawing.Size(90, 618);
             this.pnlSidebar.TabIndex = 1;
             // 
             // pnlContent
             // 
             this.pnlContent.AutoScroll = true;
-            this.pnlContent.Controls.Add(this.lblUpcomingDeadlines);
-            this.pnlContent.Controls.Add(this.dgvDeadlines);
+            this.pnlContent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(247)))), ((int)(((byte)(250)))));
+            this.pnlContent.Controls.Add(this.btnAddMember);
             this.pnlContent.Controls.Add(this.pnlMembersCard);
-            this.pnlContent.Controls.Add(this.pnlProgressCard);
             this.pnlContent.Controls.Add(this.flpStats);
             this.pnlContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlContent.Location = new System.Drawing.Point(120, 50);
+            this.pnlContent.Location = new System.Drawing.Point(90, 50);
             this.pnlContent.Name = "pnlContent";
             this.pnlContent.Padding = new System.Windows.Forms.Padding(14);
-            this.pnlContent.Size = new System.Drawing.Size(647, 558);
+            this.pnlContent.Size = new System.Drawing.Size(673, 618);
             this.pnlContent.TabIndex = 2;
             this.pnlContent.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlContent_Paint);
             // 
-            // lblUpcomingDeadlines
+            // btnAddMember
             // 
-            this.lblUpcomingDeadlines.AutoSize = true;
-            this.lblUpcomingDeadlines.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUpcomingDeadlines.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.lblUpcomingDeadlines.Location = new System.Drawing.Point(17, 382);
-            this.lblUpcomingDeadlines.Name = "lblUpcomingDeadlines";
-            this.lblUpcomingDeadlines.Size = new System.Drawing.Size(179, 18);
-            this.lblUpcomingDeadlines.TabIndex = 7;
-            this.lblUpcomingDeadlines.Text = "Upcoming Deadlines";
-            // 
-            // dgvDeadlines
-            // 
-            this.dgvDeadlines.BackgroundColor = System.Drawing.Color.White;
-            this.dgvDeadlines.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgvDeadlines.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDeadlines.GridColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.dgvDeadlines.Location = new System.Drawing.Point(17, 403);
-            this.dgvDeadlines.Name = "dgvDeadlines";
-            this.dgvDeadlines.Size = new System.Drawing.Size(615, 138);
-            this.dgvDeadlines.TabIndex = 5;
-            this.dgvDeadlines.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDeadlines_CellContentClick);
+            this.btnAddMember.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.btnAddMember.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddMember.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddMember.ForeColor = System.Drawing.Color.White;
+            this.btnAddMember.Location = new System.Drawing.Point(447, 560);
+            this.btnAddMember.Name = "btnAddMember";
+            this.btnAddMember.Size = new System.Drawing.Size(170, 41);
+            this.btnAddMember.TabIndex = 3;
+            this.btnAddMember.Text = "Add Member";
+            this.btnAddMember.UseVisualStyleBackColor = false;
+            this.btnAddMember.Click += new System.EventHandler(this.btnAddMember_Click);
             // 
             // pnlMembersCard
             // 
             this.pnlMembersCard.BackColor = System.Drawing.Color.White;
-            this.pnlMembersCard.Controls.Add(this.pnlMemberProgress);
+            this.pnlMembersCard.Controls.Add(this.dgvMembers);
             this.pnlMembersCard.Controls.Add(this.lblMembersTitle);
-            this.pnlMembersCard.Location = new System.Drawing.Point(14, 212);
+            this.pnlMembersCard.Location = new System.Drawing.Point(14, 115);
             this.pnlMembersCard.Name = "pnlMembersCard";
             this.pnlMembersCard.Padding = new System.Windows.Forms.Padding(12, 10, 12, 10);
-            this.pnlMembersCard.Size = new System.Drawing.Size(615, 155);
+            this.pnlMembersCard.Size = new System.Drawing.Size(615, 426);
             this.pnlMembersCard.TabIndex = 2;
-            this.pnlMembersCard.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlMembersCard_Paint);
             // 
-            // pnlMemberProgress
+            // dgvMembers
             // 
-            this.pnlMemberProgress.Controls.Add(this.lblMemberOverview);
-            this.pnlMemberProgress.Location = new System.Drawing.Point(0, 0);
-            this.pnlMemberProgress.Name = "pnlMemberProgress";
-            this.pnlMemberProgress.Size = new System.Drawing.Size(200, 100);
-            this.pnlMemberProgress.TabIndex = 0;
+            this.dgvMembers.AllowUserToAddRows = false;
+            this.dgvMembers.AllowUserToDeleteRows = false;
+            this.dgvMembers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvMembers.BackgroundColor = System.Drawing.Color.White;
+            this.dgvMembers.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvMembers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMembers.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvMembers.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(224)))), ((int)(((byte)(208)))));
+            this.dgvMembers.Location = new System.Drawing.Point(12, 38);
+            this.dgvMembers.Name = "dgvMembers";
+            this.dgvMembers.ReadOnly = true;
+            this.dgvMembers.RowHeadersVisible = false;
+            this.dgvMembers.RowHeadersWidth = 51;
+            this.dgvMembers.RowTemplate.Height = 24;
+            this.dgvMembers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvMembers.Size = new System.Drawing.Size(591, 378);
+            this.dgvMembers.TabIndex = 1;
+            this.dgvMembers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMembers_CellContentClick);
             // 
             // lblMembersTitle
             // 
             this.lblMembersTitle.AutoSize = true;
             this.lblMembersTitle.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblMembersTitle.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMembersTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMembersTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(39)))), ((int)(((byte)(68)))));
             this.lblMembersTitle.Location = new System.Drawing.Point(12, 10);
             this.lblMembersTitle.Name = "lblMembersTitle";
-            this.lblMembersTitle.Size = new System.Drawing.Size(152, 18);
+            this.lblMembersTitle.Size = new System.Drawing.Size(184, 28);
             this.lblMembersTitle.TabIndex = 0;
             this.lblMembersTitle.Text = "Member overview";
-            // 
-            // pnlProgressCard
-            // 
-            this.pnlProgressCard.BackColor = System.Drawing.Color.White;
-            this.pnlProgressCard.Controls.Add(this.lblCompleteNum);
-            this.pnlProgressCard.Controls.Add(this.lblNotStarted);
-            this.pnlProgressCard.Controls.Add(this.lblProgressPct);
-            this.pnlProgressCard.Controls.Add(this.lblInProgress);
-            this.pnlProgressCard.Controls.Add(this.pbGroupProgress);
-            this.pnlProgressCard.Controls.Add(this.lblProgressTitle);
-            this.pnlProgressCard.Location = new System.Drawing.Point(14, 118);
-            this.pnlProgressCard.Margin = new System.Windows.Forms.Padding(0, 10, 0, 0);
-            this.pnlProgressCard.Name = "pnlProgressCard";
-            this.pnlProgressCard.Padding = new System.Windows.Forms.Padding(12, 10, 12, 10);
-            this.pnlProgressCard.Size = new System.Drawing.Size(615, 81);
-            this.pnlProgressCard.TabIndex = 1;
-            // 
-            // lblCompleteNum
-            // 
-            this.lblCompleteNum.AutoSize = true;
-            this.lblCompleteNum.Location = new System.Drawing.Point(25, 60);
-            this.lblCompleteNum.Name = "lblCompleteNum";
-            this.lblCompleteNum.Size = new System.Drawing.Size(41, 15);
-            this.lblCompleteNum.TabIndex = 10;
-            this.lblCompleteNum.Text = "label1";
-            // 
-            // lblNotStarted
-            // 
-            this.lblNotStarted.AutoSize = true;
-            this.lblNotStarted.Location = new System.Drawing.Point(255, 56);
-            this.lblNotStarted.Name = "lblNotStarted";
-            this.lblNotStarted.Size = new System.Drawing.Size(0, 15);
-            this.lblNotStarted.TabIndex = 9;
-            this.lblNotStarted.Click += new System.EventHandler(this.label2_Click);
-            // 
-            // lblProgressPct
-            // 
-            this.lblProgressPct.AutoSize = true;
-            this.lblProgressPct.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProgressPct.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(39)))), ((int)(((byte)(68)))));
-            this.lblProgressPct.Location = new System.Drawing.Point(556, 18);
-            this.lblProgressPct.Name = "lblProgressPct";
-            this.lblProgressPct.Size = new System.Drawing.Size(38, 22);
-            this.lblProgressPct.TabIndex = 2;
-            this.lblProgressPct.Text = "0%";
-            this.lblProgressPct.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // lblInProgress
-            // 
-            this.lblInProgress.AutoSize = true;
-            this.lblInProgress.Location = new System.Drawing.Point(129, 56);
-            this.lblInProgress.Name = "lblInProgress";
-            this.lblInProgress.Size = new System.Drawing.Size(0, 15);
-            this.lblInProgress.TabIndex = 8;
-            this.lblInProgress.Click += new System.EventHandler(this.lblInProgress_Click);
-            // 
-            // pbGroupProgress
-            // 
-            this.pbGroupProgress.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(224)))), ((int)(((byte)(208)))));
-            this.pbGroupProgress.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(39)))), ((int)(((byte)(68)))));
-            this.pbGroupProgress.Location = new System.Drawing.Point(12, 43);
-            this.pbGroupProgress.Name = "pbGroupProgress";
-            this.pbGroupProgress.Size = new System.Drawing.Size(591, 10);
-            this.pbGroupProgress.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.pbGroupProgress.TabIndex = 1;
-            // 
-            // lblProgressTitle
-            // 
-            this.lblProgressTitle.AutoSize = true;
-            this.lblProgressTitle.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblProgressTitle.Font = new System.Drawing.Font("Georgia", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProgressTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(39)))), ((int)(((byte)(68)))));
-            this.lblProgressTitle.Location = new System.Drawing.Point(12, 10);
-            this.lblProgressTitle.Name = "lblProgressTitle";
-            this.lblProgressTitle.Size = new System.Drawing.Size(272, 27);
-            this.lblProgressTitle.TabIndex = 0;
-            this.lblProgressTitle.Text = "Overall group progress";
             // 
             // flpStats
             // 
@@ -279,13 +175,13 @@
             this.flpStats.Location = new System.Drawing.Point(14, 14);
             this.flpStats.Name = "flpStats";
             this.flpStats.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
-            this.flpStats.Size = new System.Drawing.Size(619, 80);
+            this.flpStats.Size = new System.Drawing.Size(645, 80);
             this.flpStats.TabIndex = 0;
             this.flpStats.WrapContents = false;
             // 
             // pnlStatTotal1
             // 
-            this.pnlStatTotal1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(235)))), ((int)(((byte)(224)))));
+            this.pnlStatTotal1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(247)))), ((int)(((byte)(250)))));
             this.pnlStatTotal1.Controls.Add(this.lblTotalLabel);
             this.pnlStatTotal1.Controls.Add(this.lblTotalNum);
             this.pnlStatTotal1.Location = new System.Drawing.Point(0, 0);
@@ -299,11 +195,11 @@
             // lblTotalLabel
             // 
             this.lblTotalLabel.AutoSize = true;
-            this.lblTotalLabel.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalLabel.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(111)))), ((int)(((byte)(90)))));
             this.lblTotalLabel.Location = new System.Drawing.Point(91, 31);
             this.lblTotalLabel.Name = "lblTotalLabel";
-            this.lblTotalLabel.Size = new System.Drawing.Size(77, 17);
+            this.lblTotalLabel.Size = new System.Drawing.Size(94, 25);
             this.lblTotalLabel.TabIndex = 1;
             this.lblTotalLabel.Text = "Total tasks";
             this.lblTotalLabel.Click += new System.EventHandler(this.lblTotalLabel_Click);
@@ -311,18 +207,18 @@
             // lblTotalNum
             // 
             this.lblTotalNum.AutoSize = true;
-            this.lblTotalNum.Font = new System.Drawing.Font("Georgia", 25.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalNum.Font = new System.Drawing.Font("Segoe UI", 25.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalNum.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(39)))), ((int)(((byte)(68)))));
             this.lblTotalNum.Location = new System.Drawing.Point(18, 11);
             this.lblTotalNum.Name = "lblTotalNum";
-            this.lblTotalNum.Size = new System.Drawing.Size(43, 41);
+            this.lblTotalNum.Size = new System.Drawing.Size(50, 59);
             this.lblTotalNum.TabIndex = 0;
             this.lblTotalNum.Text = "0";
             this.lblTotalNum.Click += new System.EventHandler(this.lblTotalNum_Click);
             // 
             // pnlStatTotal2
             // 
-            this.pnlStatTotal2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(235)))), ((int)(((byte)(224)))));
+            this.pnlStatTotal2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(247)))), ((int)(((byte)(250)))));
             this.pnlStatTotal2.Controls.Add(this.lblCompletedLabel);
             this.pnlStatTotal2.Controls.Add(this.lblCompletedNum);
             this.pnlStatTotal2.Location = new System.Drawing.Point(210, 0);
@@ -336,130 +232,92 @@
             // lblCompletedLabel
             // 
             this.lblCompletedLabel.AutoSize = true;
-            this.lblCompletedLabel.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCompletedLabel.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCompletedLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(111)))), ((int)(((byte)(90)))));
             this.lblCompletedLabel.Location = new System.Drawing.Point(83, 31);
             this.lblCompletedLabel.Name = "lblCompletedLabel";
-            this.lblCompletedLabel.Size = new System.Drawing.Size(79, 17);
+            this.lblCompletedLabel.Size = new System.Drawing.Size(100, 25);
             this.lblCompletedLabel.TabIndex = 1;
             this.lblCompletedLabel.Text = "Completed";
             // 
             // lblCompletedNum
             // 
             this.lblCompletedNum.AutoSize = true;
-            this.lblCompletedNum.Font = new System.Drawing.Font("Georgia", 25.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCompletedNum.Font = new System.Drawing.Font("Segoe UI", 25.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCompletedNum.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(107)))), ((int)(((byte)(58)))));
             this.lblCompletedNum.Location = new System.Drawing.Point(19, 11);
             this.lblCompletedNum.Name = "lblCompletedNum";
-            this.lblCompletedNum.Size = new System.Drawing.Size(43, 41);
+            this.lblCompletedNum.Size = new System.Drawing.Size(50, 59);
             this.lblCompletedNum.TabIndex = 0;
             this.lblCompletedNum.Text = "0";
             this.lblCompletedNum.Click += new System.EventHandler(this.lblCompletedNum_Click);
             // 
             // pnlStatTotal3
             // 
-            this.pnlStatTotal3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(235)))), ((int)(((byte)(224)))));
+            this.pnlStatTotal3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(247)))), ((int)(((byte)(250)))));
             this.pnlStatTotal3.Controls.Add(this.lblPendingLabel);
             this.pnlStatTotal3.Controls.Add(this.lblPendingNum);
             this.pnlStatTotal3.Location = new System.Drawing.Point(416, 0);
             this.pnlStatTotal3.Margin = new System.Windows.Forms.Padding(0, 0, 10, 0);
             this.pnlStatTotal3.Name = "pnlStatTotal3";
             this.pnlStatTotal3.Padding = new System.Windows.Forms.Padding(10, 8, 10, 8);
-            this.pnlStatTotal3.Size = new System.Drawing.Size(203, 80);
+            this.pnlStatTotal3.Size = new System.Drawing.Size(199, 80);
             this.pnlStatTotal3.TabIndex = 2;
             this.pnlStatTotal3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
             // lblPendingLabel
             // 
             this.lblPendingLabel.AutoSize = true;
-            this.lblPendingLabel.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPendingLabel.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPendingLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(111)))), ((int)(((byte)(90)))));
             this.lblPendingLabel.Location = new System.Drawing.Point(95, 31);
             this.lblPendingLabel.Name = "lblPendingLabel";
-            this.lblPendingLabel.Size = new System.Drawing.Size(61, 17);
+            this.lblPendingLabel.Size = new System.Drawing.Size(76, 25);
             this.lblPendingLabel.TabIndex = 1;
             this.lblPendingLabel.Text = "Pending";
             // 
             // lblPendingNum
             // 
             this.lblPendingNum.AutoSize = true;
-            this.lblPendingNum.Font = new System.Drawing.Font("Georgia", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPendingNum.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPendingNum.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(92)))), ((int)(((byte)(0)))));
             this.lblPendingNum.Location = new System.Drawing.Point(21, 14);
             this.lblPendingNum.Name = "lblPendingNum";
-            this.lblPendingNum.Size = new System.Drawing.Size(39, 38);
+            this.lblPendingNum.Size = new System.Drawing.Size(46, 54);
             this.lblPendingNum.TabIndex = 0;
             this.lblPendingNum.Text = "0";
             // 
-            // lblMemberOverview
-            // 
-            this.lblMemberOverview.AutoSize = true;
-            this.lblMemberOverview.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblMemberOverview.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMemberOverview.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.lblMemberOverview.Location = new System.Drawing.Point(0, 0);
-            this.lblMemberOverview.Name = "lblMemberOverview";
-            this.lblMemberOverview.Size = new System.Drawing.Size(155, 18);
-            this.lblMemberOverview.TabIndex = 0;
-            this.lblMemberOverview.Text = "Member Overview";
-            // 
-            // sidebarControl3
-            // 
-            this.sidebarControl3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(45)))), ((int)(((byte)(74)))));
-            this.sidebarControl3.Location = new System.Drawing.Point(0, 0);
-            this.sidebarControl3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.sidebarControl3.Name = "sidebarControl3";
-            this.sidebarControl3.Size = new System.Drawing.Size(118, 564);
-            this.sidebarControl3.TabIndex = 4;
-            // 
-            // sidebarControl2
-            // 
-            this.sidebarControl2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(45)))), ((int)(((byte)(74)))));
-            this.sidebarControl2.Location = new System.Drawing.Point(-2, 5);
-            this.sidebarControl2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.sidebarControl2.Name = "sidebarControl2";
-            this.sidebarControl2.Size = new System.Drawing.Size(120, 556);
-            this.sidebarControl2.TabIndex = 0;
-            // 
             // sidebarControl1
             // 
-            this.sidebarControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(45)))), ((int)(((byte)(74)))));
-            this.sidebarControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.sidebarControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
             this.sidebarControl1.Location = new System.Drawing.Point(0, 0);
-            this.sidebarControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.sidebarControl1.Name = "sidebarControl1";
-            this.sidebarControl1.Size = new System.Drawing.Size(90, 406);
+            this.sidebarControl1.Size = new System.Drawing.Size(116, 618);
             this.sidebarControl1.TabIndex = 0;
-            this.sidebarControl1.Load += new System.EventHandler(this.sidebarControl1_Load);
             // 
-            // xzLeaderDashboardForm
+            // LeaderDashboardForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(247)))), ((int)(((byte)(242)))));
-            this.ClientSize = new System.Drawing.Size(767, 608);
+            this.ClientSize = new System.Drawing.Size(763, 668);
             this.Controls.Add(this.pnlContent);
             this.Controls.Add(this.pnlSidebar);
             this.Controls.Add(this.pnlTopbar);
             this.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.Name = "xzLeaderDashboardForm";
+            this.Name = "LeaderDashboardForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SyncPoint";
-            this.Load += new System.EventHandler(this.xzLeaderDashboardForm_Load);
+            this.Load += new System.EventHandler(this.LeaderDashboardForm_Load);
             this.pnlTopbar.ResumeLayout(false);
             this.pnlTopbar.PerformLayout();
             this.pnlSidebar.ResumeLayout(false);
             this.pnlContent.ResumeLayout(false);
-            this.pnlContent.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDeadlines)).EndInit();
             this.pnlMembersCard.ResumeLayout(false);
             this.pnlMembersCard.PerformLayout();
-            this.pnlMemberProgress.ResumeLayout(false);
-            this.pnlMemberProgress.PerformLayout();
-            this.pnlProgressCard.ResumeLayout(false);
-            this.pnlProgressCard.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMembers)).EndInit();
             this.flpStats.ResumeLayout(false);
             this.pnlStatTotal1.ResumeLayout(false);
             this.pnlStatTotal1.PerformLayout();
@@ -475,7 +333,6 @@
 
         private System.Windows.Forms.Panel pnlTopbar;
         private System.Windows.Forms.Panel pnlSidebar;
-        private SidebarControl sidebarControl1;
         private System.Windows.Forms.Panel pnlContent;
         private System.Windows.Forms.Label lblUserName;
         private System.Windows.Forms.Label lblTitle;
@@ -489,21 +346,10 @@
         private System.Windows.Forms.Label lblCompletedNum;
         private System.Windows.Forms.Label lblPendingLabel;
         private System.Windows.Forms.Label lblPendingNum;
-        private System.Windows.Forms.Panel pnlProgressCard;
-        private System.Windows.Forms.ProgressBar pbGroupProgress;
-        private System.Windows.Forms.Label lblProgressTitle;
-        private System.Windows.Forms.Label lblProgressPct;
         private System.Windows.Forms.Panel pnlMembersCard;
         private System.Windows.Forms.Label lblMembersTitle;
-        private System.Windows.Forms.DataGridView dgvDeadlines;
-        private System.Windows.Forms.Label lblUpcomingDeadlines;
-        private System.Windows.Forms.Label lblNotStarted;
-        private System.Windows.Forms.Label lblInProgress;
-        private SidebarControl sidebarControl2;
-        private SidebarControl sidebarControl3;
-        private System.Windows.Forms.Panel pnlMemberProgress;
-        private System.Windows.Forms.Label lblCompleteNum;
-        private System.Windows.Forms.Button btnRefresh;
-        private System.Windows.Forms.Label lblMemberOverview;
+        private System.Windows.Forms.DataGridView dgvMembers;
+        private SidebarControl sidebarControl1;
+        private System.Windows.Forms.Button btnAddMember;
     }
 }
