@@ -21,9 +21,7 @@ namespace SyncPoint
         private void AddTaskForm_Load(object sender, EventArgs e)
         {
             // Set header leader name label (show leader in header title)
-            lblHeaderTitle.Text = $"SyncPoint - Add Task (Leader: {_leaderName})";
-
-            // Task type selection removed - default handled when creating the task
+            lblHeaderTitle.Text = $"SyncPoint - Add Task";
 
             // Set default date picker constraints (e.g., minimum of today)
             dtpDeadline.MinDate = DateTime.Today;
