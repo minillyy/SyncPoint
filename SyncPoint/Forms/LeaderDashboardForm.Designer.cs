@@ -18,11 +18,10 @@
         private void InitializeComponent()
         {
             this.pnlTopbar = new System.Windows.Forms.Panel();
-            this.btnRefresh = new System.Windows.Forms.Button();
             this.lblUserName = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.pnlSidebar = new System.Windows.Forms.Panel();
-            this.sidebarControl3 = new SyncPoint.Forms.SidebarControl();
             this.pnlContent = new System.Windows.Forms.Panel();
             this.lblUpcomingDeadlines = new System.Windows.Forms.Label();
             this.dgvDeadlines = new System.Windows.Forms.DataGridView();
@@ -46,6 +45,8 @@
             this.pnlStatTotal3 = new System.Windows.Forms.Panel();
             this.lblPendingLabel = new System.Windows.Forms.Label();
             this.lblPendingNum = new System.Windows.Forms.Label();
+            this.lblMemberOverview = new System.Windows.Forms.Label();
+            this.sidebarControl3 = new SyncPoint.Forms.SidebarControl();
             this.sidebarControl2 = new SyncPoint.Forms.SidebarControl();
             this.sidebarControl1 = new SyncPoint.Forms.SidebarControl();
             this.pnlTopbar.SuspendLayout();
@@ -53,6 +54,7 @@
             this.pnlContent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDeadlines)).BeginInit();
             this.pnlMembersCard.SuspendLayout();
+            this.pnlMemberProgress.SuspendLayout();
             this.pnlProgressCard.SuspendLayout();
             this.flpStats.SuspendLayout();
             this.pnlStatTotal1.SuspendLayout();
@@ -71,18 +73,6 @@
             this.pnlTopbar.Size = new System.Drawing.Size(767, 50);
             this.pnlTopbar.TabIndex = 0;
             this.pnlTopbar.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlTopbar_Paint);
-            // 
-            // btnRefresh
-            // 
-            this.btnRefresh.Location = new System.Drawing.Point(12, 486);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(75, 23);
-            this.btnRefresh.TabIndex = 3;
-            this.btnRefresh.Text = "Refresh";
-            this.btnRefresh.UseVisualStyleBackColor = true;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
-            this.btnRefresh.MouseEnter += new System.EventHandler(this.btnRefresh_MouseEnter);
-            this.btnRefresh.MouseLeave += new System.EventHandler(this.btnRefresh_MouseLeave);
             // 
             // lblUserName
             // 
@@ -108,6 +98,18 @@
             this.lblTitle.TabIndex = 1;
             this.lblTitle.Text = "SyncPoint — Dashboard";
             // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Location = new System.Drawing.Point(17, 494);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(75, 23);
+            this.btnRefresh.TabIndex = 3;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            this.btnRefresh.MouseEnter += new System.EventHandler(this.btnRefresh_MouseEnter);
+            this.btnRefresh.MouseLeave += new System.EventHandler(this.btnRefresh_MouseLeave);
+            // 
             // pnlSidebar
             // 
             this.pnlSidebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(39)))), ((int)(((byte)(68)))));
@@ -118,17 +120,6 @@
             this.pnlSidebar.Name = "pnlSidebar";
             this.pnlSidebar.Size = new System.Drawing.Size(120, 558);
             this.pnlSidebar.TabIndex = 1;
-            // 
-            // sidebarControl3
-            // 
-            this.sidebarControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(45)))), ((int)(((byte)(74)))));
-            this.sidebarControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.sidebarControl1.Location = new System.Drawing.Point(0, 0);
-            this.sidebarControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.sidebarControl1.Name = "sidebarControl1";
-            this.sidebarControl1.Size = new System.Drawing.Size(120, 558);
-            this.sidebarControl1.TabIndex = 0;
-            this.sidebarControl1.Load += new System.EventHandler(this.sidebarControl1_Load);
             // 
             // pnlContent
             // 
@@ -183,24 +174,11 @@
             // 
             // pnlMemberProgress
             // 
-            this.dgvMembers.AllowUserToAddRows = false;
-            this.dgvMembers.AllowUserToDeleteRows = false;
-            this.dgvMembers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvMembers.BackgroundColor = System.Drawing.Color.White;
-            this.dgvMembers.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgvMembers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvMembers.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvMembers.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(224)))), ((int)(((byte)(208)))));
-            this.dgvMembers.Location = new System.Drawing.Point(12, 34);
-            this.dgvMembers.Name = "dgvMembers";
-            this.dgvMembers.ReadOnly = true;
-            this.dgvMembers.RowHeadersVisible = false;
-            this.dgvMembers.RowHeadersWidth = 51;
-            this.dgvMembers.RowTemplate.Height = 24;
-            this.dgvMembers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvMembers.Size = new System.Drawing.Size(591, 285);
-            this.dgvMembers.TabIndex = 1;
-            this.dgvMembers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMembers_CellContentClick);
+            this.pnlMemberProgress.Controls.Add(this.lblMemberOverview);
+            this.pnlMemberProgress.Location = new System.Drawing.Point(0, 0);
+            this.pnlMemberProgress.Name = "pnlMemberProgress";
+            this.pnlMemberProgress.Size = new System.Drawing.Size(200, 100);
+            this.pnlMemberProgress.TabIndex = 0;
             // 
             // lblMembersTitle
             // 
@@ -413,6 +391,27 @@
             this.lblPendingNum.TabIndex = 0;
             this.lblPendingNum.Text = "0";
             // 
+            // lblMemberOverview
+            // 
+            this.lblMemberOverview.AutoSize = true;
+            this.lblMemberOverview.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblMemberOverview.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMemberOverview.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.lblMemberOverview.Location = new System.Drawing.Point(0, 0);
+            this.lblMemberOverview.Name = "lblMemberOverview";
+            this.lblMemberOverview.Size = new System.Drawing.Size(155, 18);
+            this.lblMemberOverview.TabIndex = 0;
+            this.lblMemberOverview.Text = "Member Overview";
+            // 
+            // sidebarControl3
+            // 
+            this.sidebarControl3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(45)))), ((int)(((byte)(74)))));
+            this.sidebarControl3.Location = new System.Drawing.Point(0, 0);
+            this.sidebarControl3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.sidebarControl3.Name = "sidebarControl3";
+            this.sidebarControl3.Size = new System.Drawing.Size(118, 564);
+            this.sidebarControl3.TabIndex = 4;
+            // 
             // sidebarControl2
             // 
             this.sidebarControl2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(45)))), ((int)(((byte)(74)))));
@@ -425,11 +424,13 @@
             // sidebarControl1
             // 
             this.sidebarControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(45)))), ((int)(((byte)(74)))));
+            this.sidebarControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sidebarControl1.Location = new System.Drawing.Point(0, 0);
             this.sidebarControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.sidebarControl1.Name = "sidebarControl1";
             this.sidebarControl1.Size = new System.Drawing.Size(90, 406);
             this.sidebarControl1.TabIndex = 0;
+            this.sidebarControl1.Load += new System.EventHandler(this.sidebarControl1_Load);
             // 
             // xzLeaderDashboardForm
             // 
@@ -455,6 +456,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvDeadlines)).EndInit();
             this.pnlMembersCard.ResumeLayout(false);
             this.pnlMembersCard.PerformLayout();
+            this.pnlMemberProgress.ResumeLayout(false);
+            this.pnlMemberProgress.PerformLayout();
             this.pnlProgressCard.ResumeLayout(false);
             this.pnlProgressCard.PerformLayout();
             this.flpStats.ResumeLayout(false);
@@ -501,5 +504,6 @@
         private System.Windows.Forms.Panel pnlMemberProgress;
         private System.Windows.Forms.Label lblCompleteNum;
         private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.Label lblMemberOverview;
     }
 }
