@@ -209,6 +209,18 @@ namespace SyncPoint.Forms
             // White background
             dgvGroups.BackgroundColor = Color.White;
 
+            // Prevent table resizing
+
+            dgvGroups.AllowUserToResizeColumns = false;
+            dgvGroups.AllowUserToResizeRows = false;
+            dgvGroups.ColumnHeadersHeightSizeMode =
+                DataGridViewColumnHeadersHeightSizeMode
+                    .DisableResizing;
+            dgvGroups.RowHeadersWidthSizeMode =
+                DataGridViewRowHeadersWidthSizeMode
+                    .DisableResizing;
+            dgvGroups.AllowUserToOrderColumns = false;
+
             // ── HEADER ROW ───────────────────────────────────────
             // Dark navy
             dgvGroups.EnableHeadersVisualStyles = false;

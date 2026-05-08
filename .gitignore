@@ -11,6 +11,10 @@
 *.sln.docstates
 *.env
 
+# Instructor info
+*.config
+instructor.config
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
@@ -356,7 +360,6 @@ paket-files/
 
 # Cake - Uncomment if you are using it
 #tools/**
-#!tools/packages.config
 
 # Tabs Studio
 *.tss
@@ -432,3 +435,4 @@ FodyWeavers.xsd
 *.db-wal
 bin/
 obj/
+FETCH_HEAD 

@@ -53,49 +53,45 @@
             // lblTitle
             // 
             this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Georgia", 13.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 13.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(240)))), ((int)(((byte)(232)))));
-            this.lblTitle.Location = new System.Drawing.Point(12, 11);
-            this.lblTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblTitle.Location = new System.Drawing.Point(16, 14);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(170, 21);
+            this.lblTitle.Size = new System.Drawing.Size(191, 30);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Appoint a Leader";
             // 
             // lblGroup
             // 
             this.lblGroup.AutoSize = true;
-            this.lblGroup.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGroup.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblGroup.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(201)))), ((int)(((byte)(168)))), ((int)(((byte)(76)))));
-            this.lblGroup.Location = new System.Drawing.Point(12, 42);
-            this.lblGroup.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblGroup.Location = new System.Drawing.Point(16, 52);
             this.lblGroup.Name = "lblGroup";
-            this.lblGroup.Size = new System.Drawing.Size(59, 15);
+            this.lblGroup.Size = new System.Drawing.Size(79, 20);
             this.lblGroup.TabIndex = 1;
             this.lblGroup.Text = "Group: ---";
             // 
             // lblInstruction
             // 
             this.lblInstruction.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblInstruction.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInstruction.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblInstruction.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(111)))), ((int)(((byte)(90)))));
-            this.lblInstruction.Location = new System.Drawing.Point(12, 10);
-            this.lblInstruction.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblInstruction.Location = new System.Drawing.Point(16, 12);
             this.lblInstruction.Name = "lblInstruction";
-            this.lblInstruction.Size = new System.Drawing.Size(286, 18);
+            this.lblInstruction.Size = new System.Drawing.Size(381, 22);
             this.lblInstruction.TabIndex = 2;
             this.lblInstruction.Text = "Select a registered student to appoint as Leader:";
             // 
             // pnlHeader
             // 
-            this.pnlHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(39)))), ((int)(((byte)(68)))));
+            this.pnlHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
             this.pnlHeader.Controls.Add(this.lblTitle);
             this.pnlHeader.Controls.Add(this.lblGroup);
             this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlHeader.Location = new System.Drawing.Point(0, 0);
-            this.pnlHeader.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pnlHeader.Name = "pnlHeader";
-            this.pnlHeader.Size = new System.Drawing.Size(310, 65);
+            this.pnlHeader.Size = new System.Drawing.Size(413, 80);
             this.pnlHeader.TabIndex = 7;
             // 
             // pnlBody
@@ -108,11 +104,10 @@
             this.pnlBody.Controls.Add(this.pnlSearch);
             this.pnlBody.Controls.Add(this.lblInstruction);
             this.pnlBody.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlBody.Location = new System.Drawing.Point(0, 65);
-            this.pnlBody.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlBody.Location = new System.Drawing.Point(0, 80);
             this.pnlBody.Name = "pnlBody";
-            this.pnlBody.Padding = new System.Windows.Forms.Padding(12, 10, 12, 10);
-            this.pnlBody.Size = new System.Drawing.Size(310, 297);
+            this.pnlBody.Padding = new System.Windows.Forms.Padding(16, 12, 16, 12);
+            this.pnlBody.Size = new System.Drawing.Size(413, 366);
             this.pnlBody.TabIndex = 8;
             // 
             // pnlButtons
@@ -120,36 +115,34 @@
             this.pnlButtons.Controls.Add(this.btnCancel);
             this.pnlButtons.Controls.Add(this.btnAppoint);
             this.pnlButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlButtons.Location = new System.Drawing.Point(12, 246);
-            this.pnlButtons.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlButtons.Location = new System.Drawing.Point(16, 303);
             this.pnlButtons.Name = "pnlButtons";
-            this.pnlButtons.Size = new System.Drawing.Size(286, 41);
+            this.pnlButtons.Size = new System.Drawing.Size(381, 51);
             this.pnlButtons.TabIndex = 7;
             // 
             // btnCancel
             // 
             this.btnCancel.BackColor = System.Drawing.Color.White;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(39)))), ((int)(((byte)(68)))));
-            this.btnCancel.Location = new System.Drawing.Point(160, 7);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnCancel.Location = new System.Drawing.Point(213, 9);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(126, 29);
+            this.btnCancel.Size = new System.Drawing.Size(168, 36);
             this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = false;
             // 
             // btnAppoint
             // 
-            this.btnAppoint.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(39)))), ((int)(((byte)(68)))));
+            this.btnAppoint.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
             this.btnAppoint.Enabled = false;
             this.btnAppoint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAppoint.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAppoint.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAppoint.ForeColor = System.Drawing.Color.White;
-            this.btnAppoint.Location = new System.Drawing.Point(0, 7);
-            this.btnAppoint.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAppoint.Location = new System.Drawing.Point(0, 9);
             this.btnAppoint.Name = "btnAppoint";
-            this.btnAppoint.Size = new System.Drawing.Size(145, 29);
+            this.btnAppoint.Size = new System.Drawing.Size(193, 36);
             this.btnAppoint.TabIndex = 0;
             this.btnAppoint.Text = "Appoint as Leader";
             this.btnAppoint.UseVisualStyleBackColor = false;
@@ -158,22 +151,20 @@
             // 
             this.pnlSelected.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(235)))), ((int)(((byte)(224)))));
             this.pnlSelected.Controls.Add(this.lblSelected);
-            this.pnlSelected.Location = new System.Drawing.Point(12, 222);
-            this.pnlSelected.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlSelected.Location = new System.Drawing.Point(16, 273);
             this.pnlSelected.Name = "pnlSelected";
-            this.pnlSelected.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
-            this.pnlSelected.Size = new System.Drawing.Size(286, 27);
+            this.pnlSelected.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.pnlSelected.Size = new System.Drawing.Size(381, 33);
             this.pnlSelected.TabIndex = 6;
             // 
             // lblSelected
             // 
             this.lblSelected.AutoSize = true;
-            this.lblSelected.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSelected.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSelected.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(111)))), ((int)(((byte)(90)))));
-            this.lblSelected.Location = new System.Drawing.Point(2, 7);
-            this.lblSelected.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblSelected.Location = new System.Drawing.Point(3, 9);
             this.lblSelected.Name = "lblSelected";
-            this.lblSelected.Size = new System.Drawing.Size(115, 15);
+            this.lblSelected.Size = new System.Drawing.Size(134, 20);
             this.lblSelected.TabIndex = 0;
             this.lblSelected.Text = "No student selected";
             this.lblSelected.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -184,23 +175,21 @@
             this.dgvStudents.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvStudents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvStudents.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvStudents.Location = new System.Drawing.Point(12, 76);
-            this.dgvStudents.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgvStudents.Location = new System.Drawing.Point(16, 94);
             this.dgvStudents.Name = "dgvStudents";
             this.dgvStudents.RowHeadersWidth = 51;
             this.dgvStudents.RowTemplate.Height = 24;
-            this.dgvStudents.Size = new System.Drawing.Size(286, 211);
+            this.dgvStudents.Size = new System.Drawing.Size(381, 260);
             this.dgvStudents.TabIndex = 5;
             // 
             // lblCount
             // 
             this.lblCount.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblCount.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCount.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(111)))), ((int)(((byte)(90)))));
-            this.lblCount.Location = new System.Drawing.Point(12, 60);
-            this.lblCount.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblCount.Location = new System.Drawing.Point(16, 74);
             this.lblCount.Name = "lblCount";
-            this.lblCount.Size = new System.Drawing.Size(286, 16);
+            this.lblCount.Size = new System.Drawing.Size(381, 20);
             this.lblCount.TabIndex = 4;
             this.lblCount.Text = "0 Students available";
             // 
@@ -209,11 +198,10 @@
             this.pnlSearch.BackColor = System.Drawing.Color.Transparent;
             this.pnlSearch.Controls.Add(this.txtSearch);
             this.pnlSearch.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlSearch.Location = new System.Drawing.Point(12, 28);
-            this.pnlSearch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlSearch.Location = new System.Drawing.Point(16, 34);
             this.pnlSearch.Name = "pnlSearch";
-            this.pnlSearch.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
-            this.pnlSearch.Size = new System.Drawing.Size(286, 32);
+            this.pnlSearch.Padding = new System.Windows.Forms.Padding(0, 6, 0, 6);
+            this.pnlSearch.Size = new System.Drawing.Size(381, 40);
             this.pnlSearch.TabIndex = 3;
             // 
             // txtSearch
@@ -223,22 +211,20 @@
             this.txtSearch.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtSearch.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSearch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(168)))), ((int)(((byte)(152)))));
-            this.txtSearch.Location = new System.Drawing.Point(0, 5);
-            this.txtSearch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtSearch.Location = new System.Drawing.Point(0, 6);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(286, 23);
+            this.txtSearch.Size = new System.Drawing.Size(381, 27);
             this.txtSearch.TabIndex = 0;
             // 
             // AppointLeaderForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(247)))), ((int)(((byte)(242)))));
-            this.ClientSize = new System.Drawing.Size(310, 362);
+            this.ClientSize = new System.Drawing.Size(413, 446);
             this.Controls.Add(this.pnlBody);
             this.Controls.Add(this.pnlHeader);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AppointLeaderForm";

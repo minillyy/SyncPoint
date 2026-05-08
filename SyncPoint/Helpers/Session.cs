@@ -8,6 +8,7 @@
         public static int RoleID { get; set; }
         public static string RoleName { get; set; }
         public static int GroupID { get; set; }
+        public static string GroupName { get; set; }
 
         public static bool IsInstructor => RoleName == "Instructor";
         public static bool IsLeader => RoleName == "Leader";

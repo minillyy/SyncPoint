@@ -54,75 +54,103 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\AppConfig.cs" />
     <Compile Include="Data\DatabaseHelper.cs" />
-    <Compile Include="Data\Session.cs" />
-    <Compile Include="Forms\AppointLeaderForm.cs">
+    <Compile Include="Forms\Other Forms\AddMemberForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\AppointLeaderForm.Designer.cs">
+    <Compile Include="Forms\Other Forms\AddMemberForm.Designer.cs">
+      <DependentUpon>AddMemberForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Other Forms\AddTaskForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Other Forms\AddTaskForm.Designer.cs">
+      <DependentUpon>AddTaskForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\Session.cs" />
+    <Compile Include="Forms\Other Forms\AppointLeaderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Other Forms\AppointLeaderForm.Designer.cs">
       <DependentUpon>AppointLeaderForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\CreateGroupForm.cs">
+    <Compile Include="Forms\Other Forms\CreateGroupForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\CreateGroupForm.Designer.cs">
+    <Compile Include="Forms\Other Forms\CreateGroupForm.Designer.cs">
       <DependentUpon>CreateGroupForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\InstructorDashboardForm.cs">
+    <Compile Include="Forms\Dashboards\InstructorDashboardForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\InstructorDashboardForm.Designer.cs">
+    <Compile Include="Forms\Dashboards\InstructorDashboardForm.Designer.cs">
       <DependentUpon>InstructorDashboardForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\LeaderDashboardForm.cs">
+    <Compile Include="Forms\Dashboards\LeaderDashboardForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\LeaderDashboardForm.Designer.cs">
+    <Compile Include="Forms\Dashboards\LeaderDashboardForm.Designer.cs">
       <DependentUpon>LeaderDashboardForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\LoginForm.cs">
+    <Compile Include="Forms\Auth\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\LoginForm.Designer.cs">
+    <Compile Include="Forms\Auth\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\RegisterForm.cs">
+    <Compile Include="Forms\Dashboards\MemberDashboardForm.cs">
       <SubType>Form</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Forms\RegisterForm.Designer.cs">
+    <Compile Include="Forms\Dashboards\MemberDashboardForm.Designer.cs">
+      <DependentUpon>MemberDashboardForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Auth\RegisterForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Auth\RegisterForm.Designer.cs">
       <DependentUpon>RegisterForm.cs</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Forms\SidebarControl.cs">
+    <Compile Include="Forms\Other Forms\SidebarControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\SidebarControl.Designer.cs">
+    <Compile Include="Forms\Other Forms\SidebarControl.Designer.cs">
       <DependentUpon>SidebarControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\ColorTheme.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Forms\AppointLeaderForm.resx">
+    <EmbeddedResource Include="Forms\Other Forms\AddMemberForm.resx">
+      <DependentUpon>AddMemberForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Other Forms\AddTaskForm.resx">
+      <DependentUpon>AddTaskForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Other Forms\AppointLeaderForm.resx">
       <DependentUpon>AppointLeaderForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\CreateGroupForm.resx">
+    <EmbeddedResource Include="Forms\Other Forms\CreateGroupForm.resx">
       <DependentUpon>CreateGroupForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\InstructorDashboardForm.resx">
+    <EmbeddedResource Include="Forms\Dashboards\InstructorDashboardForm.resx">
       <DependentUpon>InstructorDashboardForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LeaderDashboardForm.resx">
+    <EmbeddedResource Include="Forms\Dashboards\LeaderDashboardForm.resx">
       <DependentUpon>LeaderDashboardForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LoginForm.resx">
+    <EmbeddedResource Include="Forms\Auth\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\RegisterForm.resx">
+    <EmbeddedResource Include="Forms\Dashboards\MemberDashboardForm.resx">
+      <DependentUpon>MemberDashboardForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Auth\RegisterForm.resx">
       <DependentUpon>RegisterForm.cs</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SidebarControl.resx">
+    <EmbeddedResource Include="Forms\Other Forms\SidebarControl.resx">
       <DependentUpon>SidebarControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -134,6 +162,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="instructor.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -148,9 +179,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

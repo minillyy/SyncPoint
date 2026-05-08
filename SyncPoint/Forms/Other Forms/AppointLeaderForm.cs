@@ -12,8 +12,7 @@ namespace SyncPoint.Forms
         private string _groupName;
         private DataTable _allStudents;
 
-        public AppointLeaderForm(
-            int groupID, string groupName)
+        public AppointLeaderForm(int groupID, string groupName)
         {
             InitializeComponent();
             _groupID = groupID;
@@ -102,8 +101,7 @@ namespace SyncPoint.Forms
             {
                 lblInstruction.Text =
                     "⚠  This group already has a " +
-                    "Leader. Selecting a new one " +
-                    "will replace them.";
+                    "Leader.";
                 lblInstruction.ForeColor =
                     ColorTranslator.FromHtml("#8b2020");
             }
@@ -163,6 +161,17 @@ namespace SyncPoint.Forms
                     ReadOnly = true,
                     FillWeight = 50
                 });
+
+            // Prevent table resize
+            dgvStudents.AllowUserToResizeColumns = false;
+            dgvStudents.AllowUserToResizeRows = false;
+            dgvStudents.ColumnHeadersHeightSizeMode =
+                DataGridViewColumnHeadersHeightSizeMode
+                    .DisableResizing;
+            dgvStudents.RowHeadersWidthSizeMode =
+                DataGridViewRowHeadersWidthSizeMode
+                    .DisableResizing;
+            dgvStudents.AllowUserToOrderColumns = false;
 
             // ── Header ────────────────────────────────────
             dgvStudents.EnableHeadersVisualStyles = false;
@@ -404,8 +413,8 @@ namespace SyncPoint.Forms
                 var confirm = MessageBox.Show(
                     $"Appoint \"{name}\" as the Leader " +
                     $"of \"{_groupName}\"?\n\n" +
-                    $"They can log in using " +
-                    $"the Leader button.",
+                    $"They can log in as " +
+                    $"a Leader.",
                     "SyncPoint — Confirm",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question);
