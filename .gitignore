@@ -12,6 +12,7 @@
 *.env
 
 # Instructor info
+*config
 instructor.config
 
 # User-specific files (MonoDevelop/Xamarin Studio)
