@@ -12,7 +12,6 @@
 *.env
 
 # Instructor info
-*.config
 instructor.config
 
 # User-specific files (MonoDevelop/Xamarin Studio)
@@ -433,4 +432,4 @@ FodyWeavers.xsd
 *.db-wal
 bin/
 obj/
-FETCH_HEAD 
+FETCH_HEAD
