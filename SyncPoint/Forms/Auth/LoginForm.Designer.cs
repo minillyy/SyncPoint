@@ -1,4 +1,4 @@
-﻿namespace SyncPoint
+﻿namespace SyncPoint.Forms.Auth
 {
     partial class LoginForm
     {

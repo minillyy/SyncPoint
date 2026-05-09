@@ -54,6 +54,13 @@
   <ItemGroup>
     <Compile Include="Data\AppConfig.cs" />
     <Compile Include="Data\DatabaseHelper.cs" />
+    <Compile Include="Data\FirstRunSetup.cs" />
+    <Compile Include="Forms\Auth\SetupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Auth\SetupForm.Designer.cs">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Other Forms\AddMemberForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -118,6 +125,9 @@
     <Compile Include="Helpers\ColorTheme.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\Auth\SetupForm.resx">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Other Forms\AddMemberForm.resx">
       <DependentUpon>AddMemberForm.cs</DependentUpon>
     </EmbeddedResource>

@@ -3,9 +3,9 @@ using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 using SyncPoint.Data;
-using SyncPoint.Forms;
+using SyncPoint.Forms.Dashboards;
 
-namespace SyncPoint
+namespace SyncPoint.Forms.Auth
 {
     public partial class LoginForm : Form
     {
@@ -218,7 +218,7 @@ namespace SyncPoint
 
         private void linkRegister_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            new RegisterForm().ShowDialog();
+            new Forms.Auth.RegisterForm().ShowDialog();
         }
     }
 }

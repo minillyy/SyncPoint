@@ -9,8 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SyncPoint.Data;
 using SyncPoint.Helpers;
+using SyncPoint.Forms.Auth;
 
-namespace SyncPoint.Forms
+namespace SyncPoint.Forms.Dashboards
 {
     public partial class LeaderDashboardForm : Form
     {

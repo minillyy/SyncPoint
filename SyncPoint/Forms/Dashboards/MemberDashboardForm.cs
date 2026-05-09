@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using SyncPoint.Data;
 
-namespace SyncPoint.Forms
+namespace SyncPoint.Forms.Dashboards
 {
     public partial class MemberDashboardForm : Form
     {

@@ -3,8 +3,9 @@ using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 using SyncPoint.Data;
+using SyncPoint.Forms.Auth;
 
-namespace SyncPoint.Forms
+namespace SyncPoint.Forms.Dashboards
 {
     public partial class InstructorDashboardForm : Form
     {
