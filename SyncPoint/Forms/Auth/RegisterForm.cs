@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SyncPoint.Forms
+namespace SyncPoint.Forms.Auth
 {
     public partial class RegisterForm : Form
     {
