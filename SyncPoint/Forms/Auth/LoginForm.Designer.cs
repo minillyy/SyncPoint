@@ -73,9 +73,9 @@
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(240)))), ((int)(((byte)(232)))));
-            this.lblTitle.Location = new System.Drawing.Point(95, 9);
+            this.lblTitle.Location = new System.Drawing.Point(95, 7);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(178, 46);
+            this.lblTitle.Size = new System.Drawing.Size(173, 45);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "SyncPoint";
             // 
