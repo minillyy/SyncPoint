@@ -73,6 +73,12 @@
     <Compile Include="Forms\Other Forms\AddTaskForm.Designer.cs">
       <DependentUpon>AddTaskForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Other Forms\TaskProgress.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Other Forms\TaskProgress.Designer.cs">
+      <DependentUpon>TaskProgress.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\Session.cs" />
     <Compile Include="Forms\Other Forms\AppointLeaderForm.cs">
       <SubType>Form</SubType>
@@ -157,6 +163,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Other Forms\SidebarControl.resx">
       <DependentUpon>SidebarControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Other Forms\TaskProgress.resx">
+      <DependentUpon>TaskProgress.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
