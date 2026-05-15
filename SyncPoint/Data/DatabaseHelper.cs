@@ -607,20 +607,55 @@ namespace SyncPoint.Data
                 {
                     try
                     {
-                        using (var cmd = new SQLiteCommand(conn))
+                        DateTime deadline;
+                        DateTime submittedAt;
+
+                        using (var cmdDate = new SQLiteCommand("SELECT Deadline, SubmittedAt FROM Tasks WHERE TaskID = @tid", conn))
                         {
-                            cmd.CommandText = "UPDATE Tasks SET StatusID = (SELECT StatusID FROM TaskStatus WHERE StatusName = 'Completed') WHERE TaskID = @tid;";
+                            cmdDate.Parameters.AddWithValue("@tid", taskID);
+                            using (var reader = cmdDate.ExecuteReader())
+                            {
+                                if (!reader.Read()) return false;
+                                deadline = Convert.ToDateTime(reader["Deadline"]);
+                                submittedAt = Convert.ToDateTime(reader["SubmittedAt"]);
+                            }
+                        }
+
+                        int daysLate = (submittedAt.Date - deadline.Date).Days;
+
+                        decimal penalty = (daysLate > 0) ? (decimal)daysLate * 1.0m : 0;
+
+                        decimal finalScore = Math.Max(0, (decimal)points - penalty);
+
+                        string updateTask = "UPDATE Tasks SET StatusID = (SELECT StatusID FROM TaskStatus WHERE StatusName = 'Completed') WHERE TaskID = @tid;";
+                        using (var cmd = new SQLiteCommand(updateTask, conn))
+                        {
                             cmd.Parameters.AddWithValue("@tid", taskID);
                             cmd.ExecuteNonQuery();
-                            cmd.CommandText = "INSERT INTO Scores (TaskID, UserID, Points, FinalScore) VALUES (@tid, @uid, @pts, @pts);";
+                        }
+
+                        string insertScore = @"
+                    INSERT INTO Scores (TaskID, UserID, Points, Penalty, FinalScore) 
+                    VALUES (@tid, @uid, @base, @pen, @final);";
+
+                        using (var cmd = new SQLiteCommand(insertScore, conn))
+                        {
+                            cmd.Parameters.AddWithValue("@tid", taskID);
                             cmd.Parameters.AddWithValue("@uid", userID);
-                            cmd.Parameters.AddWithValue("@pts", points);
+                            cmd.Parameters.AddWithValue("@base", points);
+                            cmd.Parameters.AddWithValue("@pen", penalty);
+                            cmd.Parameters.AddWithValue("@final", finalScore);
                             cmd.ExecuteNonQuery();
                         }
+
                         transaction.Commit();
                         return true;
                     }
-                    catch { transaction.Rollback(); return false; }
+                    catch
+                    {
+                        transaction.Rollback();
+                        return false;
+                    }
                 }
             }
         }
