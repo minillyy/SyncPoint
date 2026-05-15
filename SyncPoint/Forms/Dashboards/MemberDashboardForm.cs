@@ -147,25 +147,30 @@ namespace SyncPoint.Forms.Dashboards
 
         private void LoadDashboardStats()
         {
-            var tasks = DatabaseHelper.GetTasksByGroup(Session.GroupID);
+            var allGroupTasks = DatabaseHelper.GetTasksByGroup(Session.GroupID);
 
-            int total = tasks.Rows.Count;
-            int completed = 0;
-            int pending = 0;
+            int total = allGroupTasks.Rows.Count;
+            int completedCount = 0;
+            int pendingAvailableCount = 0;
 
-            foreach (DataRow row in tasks.Rows)
+            foreach (DataRow row in allGroupTasks.Rows)
             {
                 string status = row["Status"].ToString();
 
                 if (status == "Completed")
-                    completed++;
+                {
+                    completedCount++;
+                }
                 else if (status == "Pending")
-                    pending++;
+                {
+                    pendingAvailableCount++;
+                }
             }
 
-            lblTotalNum.Text = total.ToString();
-            lblCompletedNum.Text = completed.ToString();
-            lblInProgressNum.Text = pending.ToString();
+            lblTotalNum.Text = total.ToString();          
+            lblCompletedNum.Text = completedCount.ToString();
+
+            lblInProgressNum.Text = pendingAvailableCount.ToString();
         }
 
         private void LoadMyTasks()
@@ -204,6 +209,17 @@ namespace SyncPoint.Forms.Dashboards
 
         private void lblTasks_Click(object sender, EventArgs e)
         {
+            var myTasks = DatabaseHelper.GetTasksByMember(Session.UserID);
+            foreach (DataRow row in myTasks.Rows)
+            {
+                string status = row["Status"].ToString();
+                if (status == "In Progress" || status == "Pending Review")
+                {
+                    MessageBox.Show("You cannot accept new tasks until your current work is Approved or Returned.", "SyncPoint - Task Limit");
+                    return; 
+                }
+            }
+
             using (TasksForm tasksWindow = new TasksForm())
             {
                 tasksWindow.ShowDialog();

@@ -425,9 +425,16 @@ namespace SyncPoint.Data
         {
             using (var conn = GetConnection())
             {
-                string sql = @"SELECT t.TaskID, t.Title, t.Description, t.Deadline, t.TaskWeight, COALESCE(u.FullName, 'Unassigned') AS AssignedTo, ts.StatusName AS Status
-                               FROM Tasks t LEFT JOIN Users u ON t.AssignedTo = u.UserID
-                               JOIN TaskStatus ts ON t.StatusID = ts.StatusID WHERE t.GroupID = @gid ORDER BY t.Deadline ASC;";
+                string sql = @"
+            SELECT t.TaskID, t.Title, t.Description, t.Deadline, t.TaskWeight, 
+                   COALESCE(u.FullName, 'Unassigned') AS AssignedTo, 
+                   ts.StatusName AS Status
+            FROM Tasks t 
+            LEFT JOIN Users u ON t.AssignedTo = u.UserID
+            JOIN TaskStatus ts ON t.StatusID = ts.StatusID 
+            WHERE t.GroupID = @gid 
+            ORDER BY t.Deadline ASC;";
+
                 using (var cmd = new SQLiteCommand(sql, conn))
                 {
                     cmd.Parameters.AddWithValue("@gid", groupID);
@@ -435,6 +442,51 @@ namespace SyncPoint.Data
                     var dt = new DataTable();
                     da.Fill(dt);
                     return dt;
+                }
+            }
+        }
+
+        public static DataTable GetAvailableTasks(int groupID)
+        {
+            using (var conn = GetConnection())
+            {
+                string sql = @"
+            SELECT t.TaskID, t.Title, t.Description, t.Deadline, t.TaskWeight, ts.StatusName AS Status
+            FROM Tasks t 
+            JOIN TaskStatus ts ON t.StatusID = ts.StatusID 
+            WHERE t.GroupID = @gid 
+              AND t.AssignedTo IS NULL 
+              AND ts.StatusName = 'Pending' 
+            ORDER BY t.Deadline ASC;";
+
+                using (var cmd = new SQLiteCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@gid", groupID);
+                    var da = new SQLiteDataAdapter(cmd);
+                    var dt = new DataTable();
+                    da.Fill(dt);
+                    return dt;
+                }
+            }
+        }
+
+        public static bool AssignAndAcceptTask(int taskID, int userID)
+        {
+            using (var conn = GetConnection())
+            {
+                using (var cmdCheck = new SQLiteCommand("SELECT ts.StatusName FROM Tasks t JOIN TaskStatus ts ON t.StatusID = ts.StatusID WHERE t.TaskID = @tid", conn))
+                {
+                    cmdCheck.Parameters.AddWithValue("@tid", taskID);
+                    var currentStatus = cmdCheck.ExecuteScalar()?.ToString();
+                    if (currentStatus != "Pending") return false;
+                }
+
+                string sql = @"UPDATE Tasks SET AssignedTo = @uid, StatusID = (SELECT StatusID FROM TaskStatus WHERE StatusName = 'In Progress') WHERE TaskID = @tid;";
+                using (var cmd = new SQLiteCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@uid", userID);
+                    cmd.Parameters.AddWithValue("@tid", taskID);
+                    return cmd.ExecuteNonQuery() > 0;
                 }
             }
         }
@@ -466,26 +518,6 @@ namespace SyncPoint.Data
                     cmd.Parameters.AddWithValue("@sname", statusName);
                     cmd.Parameters.AddWithValue("@tid", taskID);
                     cmd.ExecuteNonQuery();
-                }
-            }
-        }
-
-        public static bool AssignAndAcceptTask(int taskID, int userID)
-        {
-            using (var conn = GetConnection())
-            {
-                using (var cmdCheck = new SQLiteCommand("SELECT StatusID FROM Tasks WHERE TaskID = @tid", conn))
-                {
-                    cmdCheck.Parameters.AddWithValue("@tid", taskID);
-                    var status = cmdCheck.ExecuteScalar();
-                    if (status == null || Convert.ToInt32(status) != 1) return false;
-                }
-                string sql = "UPDATE Tasks SET AssignedTo = @uid, StatusID = (SELECT StatusID FROM TaskStatus WHERE StatusName = 'In Progress') WHERE TaskID = @tid;";
-                using (var cmd = new SQLiteCommand(sql, conn))
-                {
-                    cmd.Parameters.AddWithValue("@uid", userID);
-                    cmd.Parameters.AddWithValue("@tid", taskID);
-                    return cmd.ExecuteNonQuery() > 0;
                 }
             }
         }

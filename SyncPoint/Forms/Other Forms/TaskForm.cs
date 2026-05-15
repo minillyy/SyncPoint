@@ -107,11 +107,18 @@ namespace SyncPoint.Forms.Other_Forms
         {
             DataTable myTasks = DatabaseHelper.GetTasksByMember(Session.UserID);
             bool isBusy = false;
+
             if (myTasks != null)
             {
                 foreach (DataRow row in myTasks.Rows)
                 {
-                    if (row["Status"].ToString() == "In Progress") { isBusy = true; break; }
+                    string status = row["Status"].ToString();
+
+                    if (status == "In Progress" || status == "Pending Review")
+                    {
+                        isBusy = true;
+                        break;
+                    }
                 }
             }
 
@@ -119,28 +126,29 @@ namespace SyncPoint.Forms.Other_Forms
             {
                 dgvTasks.Rows.Clear();
                 Control[] found = this.Controls.Find("lblInfo", true);
-                if (found.Length > 0) { found[0].Text = "Submit your active task first!"; found[0].ForeColor = Color.Red; }
+                if (found.Length > 0)
+                {
+                    found[0].Text = "Finish your current task or wait for approval before accepting a new one!";
+                    found[0].ForeColor = Color.OrangeRed;
+                }
                 return;
             }
 
-            DataTable allTasks = DatabaseHelper.GetTasksByGroup(Session.GroupID);
+            DataTable available = DatabaseHelper.GetAvailableTasks(Session.GroupID);
             dgvTasks.Rows.Clear();
 
-            if (allTasks != null)
+            if (available != null)
             {
-                foreach (DataRow row in allTasks.Rows)
+                foreach (DataRow row in available.Rows)
                 {
-                    if (row["Status"].ToString() == "Pending")
-                    {
-                        dgvTasks.Rows.Add(
-                            row["TaskID"],
-                            row["Title"],
-                            row["Description"],
-                            Convert.ToDateTime(row["Deadline"]).ToString("MMM dd, yyyy"),
-                            row["TaskWeight"],
-                            "Accept"
-                        );
-                    }
+                    dgvTasks.Rows.Add(
+                        row["TaskID"],
+                        row["Title"],
+                        row["Description"],
+                        Convert.ToDateTime(row["Deadline"]).ToString("MMM dd, yyyy"),
+                        row["TaskWeight"],
+                        "Accept"
+                    );
                 }
             }
 
