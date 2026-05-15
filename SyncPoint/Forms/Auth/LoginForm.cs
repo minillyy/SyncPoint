@@ -144,8 +144,7 @@ namespace SyncPoint.Forms.Auth
 
         // ════════════════════════════════════════════════════
         //  OPEN DASHBOARD
-        //  Automatically routes to the right form
-        //  based on the role read from the database
+        //  Automatically routes to the right form based on the role read from the database
         // ════════════════════════════════════════════════════
         private void OpenDashboard(string role)
         {
@@ -169,8 +168,6 @@ namespace SyncPoint.Forms.Auth
                     break;
 
                 default:
-                    // Unknown role — should never happen
-                    // but handle it gracefully
                     MessageBox.Show(
                         $"Unknown role: {role}\n\n" +
                         "Please contact your administrator.",
@@ -180,11 +177,6 @@ namespace SyncPoint.Forms.Auth
                     break;
             }
 
-            // When dashboard closes, clear fields
-            // and show login again for the next user
-            // Guard against the case where the login
-            // form was disposed while the dashboard
-            // was open (prevents ObjectDisposedException).
             if (this.IsDisposed || this.Disposing)
                 return;
 

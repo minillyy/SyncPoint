@@ -18,7 +18,7 @@ namespace SyncPoint.Data
                 AppDomain.CurrentDomain.BaseDirectory,
                 "instructor.config");
 
-        // ── Load config file once ────────────────────────
+        // Load config file once
         private static void EnsureLoaded()
         {
             if (_values != null) return;
@@ -39,7 +39,6 @@ namespace SyncPoint.Data
             foreach (string line in
                 File.ReadAllLines(ConfigPath))
             {
-                // Skip empty lines and comments
                 if (string.IsNullOrWhiteSpace(line) ||
                     line.StartsWith("#"))
                     continue;
@@ -56,7 +55,7 @@ namespace SyncPoint.Data
             }
         }
 
-        // ── Get a value by key ───────────────────────────
+        // Get a value by key
         public static string Get(string key)
         {
             EnsureLoaded();

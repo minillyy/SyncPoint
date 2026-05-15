@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
 using SyncPoint.Data;
-using SyncPoint.Forms.Auth;       // ← LoginForm, RegisterForm, SetupForm
-using SyncPoint.Forms.Dashboards;  // ← InstructorDashboardForm, etc.
+using SyncPoint.Forms.Auth;
+using SyncPoint.Forms.Dashboards;
 
 namespace SyncPoint
 {

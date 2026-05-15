@@ -55,11 +55,9 @@ namespace SyncPoint.Forms.Other_Forms
 
         private void SetupDataGridViewStyle()
         {
-            // 1. COMPLETELY WIPE THE GRID
             dgvTasks.Columns.Clear();
             dgvTasks.DataSource = null;
 
-            // 2. DEFINE COLUMNS MANUALLY (Matches your LoadAvailableTasks logic)
             dgvTasks.Columns.Add(new DataGridViewTextBoxColumn { Name = "TaskID", Visible = false });
             dgvTasks.Columns.Add(new DataGridViewTextBoxColumn { Name = "Title", HeaderText = "Title", FillWeight = 25, MinimumWidth = 100 });
             dgvTasks.Columns.Add(new DataGridViewTextBoxColumn { Name = "Description", HeaderText = "Description", FillWeight = 40, MinimumWidth = 150 });
@@ -74,7 +72,6 @@ namespace SyncPoint.Forms.Other_Forms
             });
             dgvTasks.Columns.Add(new DataGridViewButtonColumn { Name = "Accept", HeaderText = "Action", FillWeight = 10, MinimumWidth = 70 });
 
-            // 3. FORCE THE COLORS (Navy Blue Theme)
             dgvTasks.BackgroundColor = Color.White;
             dgvTasks.GridColor = Color.FromArgb(235, 235, 235);
             dgvTasks.BorderStyle = BorderStyle.None;
@@ -85,24 +82,21 @@ namespace SyncPoint.Forms.Other_Forms
             dgvTasks.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvTasks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
-            // 4. HEADER STYLING (The Navy Blue Look)
             dgvTasks.EnableHeadersVisualStyles = false;
             dgvTasks.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dgvTasks.ColumnHeadersHeight = 45;
 
             DataGridViewCellStyle headerStyle = new DataGridViewCellStyle();
-            headerStyle.BackColor = Color.FromArgb(18, 35, 70); // Your Navy Blue
+            headerStyle.BackColor = Color.FromArgb(18, 35, 70);
             headerStyle.ForeColor = Color.White;
             headerStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
-            headerStyle.SelectionBackColor = Color.FromArgb(18, 35, 70); // Prevents blue highlight on click
+            headerStyle.SelectionBackColor = Color.FromArgb(18, 35, 70);
             dgvTasks.ColumnHeadersDefaultCellStyle = headerStyle;
 
-            // 5. BODY STYLING (Remove the default Blue selection)
             dgvTasks.DefaultCellStyle.SelectionBackColor = Color.White;
             dgvTasks.DefaultCellStyle.SelectionForeColor = Color.Black;
             dgvTasks.RowTemplate.Height = 50;
 
-            // 6. RE-ATTACH EVENTS (Remove first to avoid double-triggering)
             dgvTasks.CellPainting -= dgvTasks_CellPainting;
             dgvTasks.CellPainting += dgvTasks_CellPainting;
             dgvTasks.CellContentClick -= dgvTasks_CellContentClick;
@@ -111,7 +105,6 @@ namespace SyncPoint.Forms.Other_Forms
 
         private void LoadAvailableTasks()
         {
-            // 1. Policy Check (1 Task : 1 Member)
             DataTable myTasks = DatabaseHelper.GetTasksByMember(Session.UserID);
             bool isBusy = false;
             if (myTasks != null)
@@ -130,7 +123,6 @@ namespace SyncPoint.Forms.Other_Forms
                 return;
             }
 
-            // 2. Load Data
             DataTable allTasks = DatabaseHelper.GetTasksByGroup(Session.GroupID);
             dgvTasks.Rows.Clear();
 
@@ -138,11 +130,8 @@ namespace SyncPoint.Forms.Other_Forms
             {
                 foreach (DataRow row in allTasks.Rows)
                 {
-                    // Only show Pending tasks
                     if (row["Status"].ToString() == "Pending")
                     {
-                        // ADDING DATA IN THE EXACT ORDER DEFINED IN SETUP:
-                        // 0:TaskID, 1:Title, 2:Description, 3:Deadline, 4:TaskWeight, 5:Accept
                         dgvTasks.Rows.Add(
                             row["TaskID"],
                             row["Title"],
@@ -155,7 +144,6 @@ namespace SyncPoint.Forms.Other_Forms
                 }
             }
 
-            // 3. Remove sorting arrows
             foreach (DataGridViewColumn col in dgvTasks.Columns) col.SortMode = DataGridViewColumnSortMode.NotSortable;
         }
 

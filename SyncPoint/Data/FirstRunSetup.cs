@@ -18,13 +18,13 @@ namespace SyncPoint.Data
                 AppDomain.CurrentDomain.BaseDirectory,
                 "instructor.config");
 
-        // ── Check if setup is needed ─────────────────────
+        // Check if setup is needed 
         public static bool IsFirstRun()
         {
             return !File.Exists(ConfigPath);
         }
 
-        // ── Run the setup wizard ─────────────────────────
+        // Run the setup wizard
         public static bool RunSetup()
         {
             MessageBox.Show(

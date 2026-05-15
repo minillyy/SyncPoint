@@ -1,4 +1,4 @@
-﻿namespace SyncPoint
+﻿namespace SyncPoint.Forms.Other_Forms
 {
     partial class AddTaskForm
     {

@@ -24,7 +24,7 @@ namespace SyncPoint.Forms.Other_Forms
 
         private void SetupHeader()
         {
-            pnlHeader.BackColor = Color.FromArgb(44, 62, 80); // Your requested color
+            pnlHeader.BackColor = Color.FromArgb(44, 62, 80);
             lblTitle.ForeColor = Color.White;
             lblTitle.Text = "Submission Review Queue";
             lblInfo.Text = "Review member work below. Click the link to verify, then Approve to award points.";
@@ -33,11 +33,9 @@ namespace SyncPoint.Forms.Other_Forms
 
         private void SetupGrid()
         {
-            // 1. CLEAR EVERYTHING
             dgvReview.Columns.Clear();
             dgvReview.DataSource = null;
 
-            // 2. DEFINE COLUMNS (Order must match your LoadSubmissions Rows.Add)
             dgvReview.Columns.Add(new DataGridViewTextBoxColumn { Name = "TaskID", Visible = false });
             dgvReview.Columns.Add(new DataGridViewTextBoxColumn { Name = "UserID", Visible = false });
             dgvReview.Columns.Add(new DataGridViewTextBoxColumn { Name = "Member", HeaderText = "Member", FillWeight = 20 });
@@ -57,7 +55,6 @@ namespace SyncPoint.Forms.Other_Forms
             dgvReview.Columns.Add(linkCol);
             dgvReview.Columns.Add(new DataGridViewTextBoxColumn { Name = "Date", HeaderText = "Submitted On", FillWeight = 15 });
 
-            // 3. DISABLE ALL RESIZING & INTERACTION
             dgvReview.AllowUserToResizeColumns = false;
             dgvReview.AllowUserToResizeRows = false;
             dgvReview.RowHeadersVisible = false;
@@ -66,18 +63,16 @@ namespace SyncPoint.Forms.Other_Forms
             dgvReview.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvReview.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
-            // 4. HEADER STYLING (44, 62, 80)
             dgvReview.EnableHeadersVisualStyles = false;
             dgvReview.ColumnHeadersHeight = 45;
             DataGridViewCellStyle headerStyle = new DataGridViewCellStyle();
             headerStyle.BackColor = Color.FromArgb(44, 62, 80);
             headerStyle.ForeColor = Color.White;
             headerStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
-            headerStyle.SelectionBackColor = Color.FromArgb(44, 62, 80); // Prevents blue highlight on header click
+            headerStyle.SelectionBackColor = Color.FromArgb(44, 62, 80);
             headerStyle.SelectionForeColor = Color.White;
             dgvReview.ColumnHeadersDefaultCellStyle = headerStyle;
 
-            // 5. BODY STYLING (White Background, Black Font, Light Blue Highlight)
             dgvReview.BackgroundColor = Color.White;
             dgvReview.GridColor = Color.FromArgb(235, 235, 235);
             dgvReview.BorderStyle = BorderStyle.None;
@@ -86,20 +81,17 @@ namespace SyncPoint.Forms.Other_Forms
             bodyStyle.BackColor = Color.White;
             bodyStyle.ForeColor = Color.Black;
 
-            // --- THE EVALUATION HIGHLIGHT ---
             bodyStyle.SelectionBackColor = Color.FromArgb(235, 245, 255);
             bodyStyle.SelectionForeColor = Color.Black;
 
             bodyStyle.Font = new Font("Segoe UI", 9);
             dgvReview.DefaultCellStyle = bodyStyle;
 
-            // Enable selection so the light blue shows up
-            dgvReview.MultiSelect = false; // Only one task can be "evaluated" at a time
+            dgvReview.MultiSelect = false;
             dgvReview.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
             dgvReview.RowTemplate.Height = 50;
 
-            // 6. PREVENT SORTING ARROWS
             foreach (DataGridViewColumn col in dgvReview.Columns)
             {
                 col.SortMode = DataGridViewColumnSortMode.NotSortable;
@@ -139,7 +131,6 @@ namespace SyncPoint.Forms.Other_Forms
             int taskId = Convert.ToInt32(dgvReview.CurrentRow.Cells["TaskID"].Value);
             string member = dgvReview.CurrentRow.Cells["Member"].Value.ToString();
 
-            // Ask for confirmation
             DialogResult result = MessageBox.Show(
                 $"Are you sure you want to return this task to {member}?\n\nThe task will go back to their active workspace for revision.",
                 "Return to Member",
@@ -151,7 +142,7 @@ namespace SyncPoint.Forms.Other_Forms
                 if (DatabaseHelper.ReturnTaskToMember(taskId))
                 {
                     MessageBox.Show("Task returned successfully.");
-                    LoadSubmissions(); // Refresh the grid to remove the row
+                    LoadSubmissions();
                 }
                 else
                 {
@@ -164,12 +155,10 @@ namespace SyncPoint.Forms.Other_Forms
         {
             if (e.RowIndex < 0) return;
 
-            // 2. Check if the clicked column is the "WorkLink"
             if (dgvReview.Columns[e.ColumnIndex].Name == "WorkLink")
             {
                 string url = dgvReview.Rows[e.RowIndex].Cells["WorkLink"].Value.ToString();
 
-                // Safety check: ensure the string isn't empty and looks like a link
                 if (!string.IsNullOrWhiteSpace(url) && url.StartsWith("http"))
                 {
                     try

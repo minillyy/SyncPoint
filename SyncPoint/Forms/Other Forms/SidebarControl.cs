@@ -18,7 +18,6 @@ namespace SyncPoint.Forms
             InitializeComponent();
         }
 
-        // Raised when the user clicks the Add Task item in the sidebar
         public event EventHandler AddTaskClicked;
         public event EventHandler MembersClicked;
         public event EventHandler ReportsClicked;

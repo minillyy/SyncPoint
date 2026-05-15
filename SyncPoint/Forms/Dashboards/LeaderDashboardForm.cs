@@ -70,7 +70,6 @@ namespace SyncPoint.Forms.Dashboards
         {
             if (this.DesignMode) return;
 
-            // 1. Reset and Define Columns
             dgvMembers.Columns.Clear();
             dgvMembers.Rows.Clear();
 
@@ -80,7 +79,6 @@ namespace SyncPoint.Forms.Dashboards
             dgvMembers.Columns.Add(new DataGridViewTextBoxColumn { Name = "Deadline", HeaderText = "Due Date", FillWeight = 20 });
             dgvMembers.Columns.Add(new DataGridViewTextBoxColumn { Name = "Status", HeaderText = "Status", FillWeight = 20 });
 
-            // 2. DATA POPULATION
             var tasks = DatabaseHelper.GetTasksByMember(Session.UserID);
             foreach (DataRow row in tasks.Rows)
             {
@@ -93,7 +91,6 @@ namespace SyncPoint.Forms.Dashboards
                 );
             }
 
-            // 3. UI LOCKDOWN (No Resize, No Sort, No Clickable Headers)
             dgvMembers.AllowUserToResizeColumns = false;
             dgvMembers.AllowUserToResizeRows = false;
             dgvMembers.RowHeadersVisible = false;
@@ -104,20 +101,16 @@ namespace SyncPoint.Forms.Dashboards
             dgvMembers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dgvMembers.ColumnHeadersHeight = 45;
 
-            // 4. THEME STYLING (44, 62, 80)
             dgvMembers.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(44, 62, 80);
             dgvMembers.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             dgvMembers.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10f, FontStyle.Bold);
-            dgvMembers.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(44, 62, 80); // No click color on header
+            dgvMembers.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(44, 62, 80);
 
-            // 5. SELECTION GHOSTING (Making "Highlight" invisible)
-            // We set selection color to the same as the background so you can't tell it's clicked
             dgvMembers.DefaultCellStyle.BackColor = Color.White;
             dgvMembers.DefaultCellStyle.ForeColor = Color.Black;
             dgvMembers.DefaultCellStyle.SelectionBackColor = Color.White;
             dgvMembers.DefaultCellStyle.SelectionForeColor = Color.Black;
 
-            // Handling Alternating Rows if you use them
             dgvMembers.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 245, 240);
             dgvMembers.AlternatingRowsDefaultCellStyle.SelectionBackColor = Color.FromArgb(248, 245, 240);
             dgvMembers.AlternatingRowsDefaultCellStyle.SelectionForeColor = Color.Black;
@@ -126,7 +119,6 @@ namespace SyncPoint.Forms.Dashboards
             dgvMembers.RowTemplate.Height = 45;
             dgvMembers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
-            // 6. DISABLE SORTING
             foreach (DataGridViewColumn col in dgvMembers.Columns)
             {
                 col.SortMode = DataGridViewColumnSortMode.NotSortable;
@@ -148,7 +140,6 @@ namespace SyncPoint.Forms.Dashboards
                 {
                     MessageBox.Show("Task assigned and saved to database!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    // Refresh dashboard stats
                     LoadStats();
                     LoadMyWorkspace();
                 }

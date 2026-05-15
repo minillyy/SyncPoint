@@ -1,10 +1,6 @@
-﻿// ===============================
-// TaskProgress.Designer.cs
-// ===============================
+﻿using System.Windows.Forms;
 
-using System.Windows.Forms;
-
-namespace SyncPoint.Forms
+namespace SyncPoint.Forms.Other_Forms
 {
     partial class TaskProgress
     {
