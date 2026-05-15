@@ -117,16 +117,6 @@ namespace SyncPoint.Forms.Dashboards
         }
 
         // ════════════════════════════════════════════════════
-        //  SHOW REPORTS TAB
-        // ════════════════════════════════════════════════════
-        private void ShowReportsTab()
-        {
-            SetActiveNav(lblNavReports);
-            lblPageTitle.Text = "Reports";
-            // Reports logic will go here later
-        }
-
-        // ════════════════════════════════════════════════════
         //  SETUP GROUPS GRID COLUMNS
         //  Called once before any data is loaded
         // ════════════════════════════════════════════════════
@@ -427,23 +417,20 @@ namespace SyncPoint.Forms.Dashboards
         // ════════════════════════════════════════════════════
         private void dgvGroups_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            // Ignore header row clicks
             if (e.RowIndex < 0) return;
 
             int groupID = Convert.ToInt32(dgvGroups.Rows[e.RowIndex].Cells["GroupID"].Value);
 
             string groupName = dgvGroups.Rows[e.RowIndex].Cells["GroupName"].Value.ToString();
 
-            // Store selected group
             _selectedGroupID = groupID;
             _selectedGroupName = groupName;
 
-            // Appoint Leader button clicked
             if (e.ColumnIndex == dgvGroups.Columns["BtnAppoint"].Index)
             {
                 var form = new AppointLeaderForm(groupID, groupName);
                 form.ShowDialog();
-                LoadGroups(); // refresh list
+                LoadGroups();
             }
         }
 
@@ -477,9 +464,30 @@ namespace SyncPoint.Forms.Dashboards
 
         private void lblNavReports_Click(object sender, EventArgs e)
         {
-            using (ReportsForm reportsWindow = new ReportsForm())
+            // 1. Check if a group is actually selected in the grid
+            if (dgvGroups.CurrentRow == null)
             {
-                reportsWindow.ShowDialog();
+                MessageBox.Show("Please select a group from the list first to view its reports.", "SyncPoint", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                // 2. Get the GroupID and Name from the selected row
+                // Note: Ensure your dgvGroups has a column named "GroupID" (even if hidden)
+                int selectedGroupId = Convert.ToInt32(dgvGroups.CurrentRow.Cells["GroupID"].Value);
+                string groupName = dgvGroups.CurrentRow.Cells["GroupName"].Value?.ToString() ?? "Selected Group";
+
+                // 3. Open the ReportsForm passing the specific GroupID
+                using (ReportsForm reportWindow = new ReportsForm(selectedGroupId))
+                {
+                    reportWindow.Text = $"Reports - {groupName}";
+                    reportWindow.ShowDialog(this);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Make sure the GroupID column is correctly set in your grid. Error: " + ex.Message);
             }
         }
     }

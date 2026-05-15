@@ -17,15 +17,12 @@ namespace SyncPoint.Forms.Auth
         // ════════════════════════════════════════════════════
         //  FORM LOAD
         // ════════════════════════════════════════════════════
-        private void LoginForm_Load(
-            object sender, EventArgs e)
+        private void LoginForm_Load(object sender, EventArgs e)
         {
-            // Style the login button border
             btnLogin.FlatAppearance.BorderColor =
                 ColorTranslator.FromHtml("#c9a84c");
             btnLogin.FlatAppearance.BorderSize = 1;
 
-            // Paint gold border on header
             pnlHeader.Paint += (s, pe) =>
             {
                 var pen = new Pen(
@@ -36,10 +33,8 @@ namespace SyncPoint.Forms.Auth
                     pnlHeader.Height - 2);
             };
 
-            // Allow pressing Enter to login
             this.AcceptButton = btnLogin;
 
-            // Focus on username when form opens
             txtUsername.Select();
         }
 
@@ -61,7 +56,7 @@ namespace SyncPoint.Forms.Auth
             string username = txtUsername.Text.Trim();
             string password = txtPassword.Text;
 
-            // ── Step 1: Check inputs are not empty ────────
+            // Check inputs are not empty
             if (string.IsNullOrEmpty(username))
             {
                 MessageBox.Show(
@@ -84,9 +79,8 @@ namespace SyncPoint.Forms.Auth
                 return;
             }
 
-            // ── Step 2: Validate against database ─────────
-            // ValidateLogin hashes the password and
-            // compares it with what's stored in the DB
+            // Validate against database 
+            // ValidateLogin hashes the password and compares it with what's stored in the DB
             DataRow user =
                 DatabaseHelper.ValidateLogin(
                     username, password);
@@ -107,12 +101,10 @@ namespace SyncPoint.Forms.Auth
                 return;
             }
 
-            // ── Step 3: Read role from database ───────────
-            // No need for the user to tell us their role
-            // — we read it directly from the DB
+            // Read role from database
             string role = user["RoleName"].ToString();
 
-            // ── Step 4: Save session data ─────────────────
+            // Save session data
             Session.UserID =
                 Convert.ToInt32(user["UserID"]);
             Session.FullName =
@@ -122,8 +114,7 @@ namespace SyncPoint.Forms.Auth
             Session.RoleID =
                 Convert.ToInt32(user["RoleID"]);
             Session.RoleName = role;
-            // Prefer GroupID from the validated user row if present;
-            // fall back to the helper lookup only when necessary.
+
             if (user.Table.Columns.Contains("GroupID") &&
                 user["GroupID"] != DBNull.Value)
             {
@@ -136,7 +127,7 @@ namespace SyncPoint.Forms.Auth
                         Session.UserID);
             }
 
-            // ── Step 5: Open the correct dashboard ────────
+            // Open the correct dashboard
             // Prevent members without a group from opening the Member Dashboard
             if (role == "Member" && Session.GroupID == -1)
             {

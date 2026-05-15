@@ -13,19 +13,19 @@ namespace SyncPoint.Forms.Other_Forms
 {
     public partial class ReportsForm : Form
     {
-        public ReportsForm()
+        private int _currentGroupId;
+        public ReportsForm(int? targetGroupId = null)
         {
+            _currentGroupId = targetGroupId ?? Session.GroupID;
             InitializeComponent();
             this.Load += (s, e) => LoadAllReports();
         }
 
         private void LoadAllReports()
         {
-            // 1. Fetch Data
-            dgvLeaderboard.DataSource = DatabaseHelper.GetLeaderboard(Session.GroupID);
-            dgvDistribution.DataSource = DatabaseHelper.GetTaskDistribution(Session.GroupID);
+            dgvLeaderboard.DataSource = DatabaseHelper.GetLeaderboard(_currentGroupId);
+            dgvDistribution.DataSource = DatabaseHelper.GetTaskDistribution(_currentGroupId);
 
-            // 2. Apply "Locked" Formatting
             FormatGrid(dgvLeaderboard);
             FormatGrid(dgvDistribution);
         }
