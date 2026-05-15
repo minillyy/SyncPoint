@@ -158,7 +158,8 @@ namespace SyncPoint.Forms.Dashboards
 
         private void LoadDashboardStats()
         {
-            var tasks = DatabaseHelper.GetTasksByMember(Session.UserID);
+            var tasks = DatabaseHelper.GetTasksByGroup(Session.GroupID);
+
             int total = tasks.Rows.Count;
             int completed = 0;
             int inProgress = 0;
@@ -167,7 +168,7 @@ namespace SyncPoint.Forms.Dashboards
             {
                 string status = row["Status"].ToString();
                 if (status == "Completed") completed++;
-                else if (status == "In Progress") inProgress++;
+                if (status == "Pending") inProgress++;
             }
 
             lblTotalNum.Text = total.ToString();

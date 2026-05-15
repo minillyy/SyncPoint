@@ -283,9 +283,9 @@
             this.lblInProgressLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(140)))), ((int)(((byte)(141)))));
             this.lblInProgressLabel.Location = new System.Drawing.Point(25, 85);
             this.lblInProgressLabel.Name = "lblInProgressLabel";
-            this.lblInProgressLabel.Size = new System.Drawing.Size(106, 25);
+            this.lblInProgressLabel.Size = new System.Drawing.Size(81, 25);
             this.lblInProgressLabel.TabIndex = 1;
-            this.lblInProgressLabel.Text = "In Progress";
+            this.lblInProgressLabel.Text = "Pending";
             // 
             // pnlTasksCard
             // 

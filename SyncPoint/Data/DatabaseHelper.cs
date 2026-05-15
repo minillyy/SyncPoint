@@ -810,34 +810,32 @@ namespace SyncPoint.Data
             }
         }
 
-        public static DataTable GetTasksByGroup(
-            int groupID)
+        public static DataTable GetTasksByGroup(int groupID)
         {
             using (var conn = GetConnection())
             {
+                // Changed JOIN Users to LEFT JOIN Users
+                // This ensures tasks show up even if they aren't assigned to anyone yet.
                 string sql = @"
-                    SELECT
-                        t.TaskID,
-                        t.Title,
-                        t.Description,
-                        t.Deadline,
-                        u.FullName   AS AssignedTo,
-                        ts.StatusName AS Status
-                    FROM   Tasks t
-                    JOIN   Users u
-                           ON t.AssignedTo = u.UserID
-                    JOIN   TaskStatus ts
-                           ON t.StatusID = ts.StatusID
-                    WHERE  t.GroupID = @gid
-                    ORDER  BY t.Deadline ASC;";
+            SELECT
+                t.TaskID,
+                t.Title,
+                t.Description,
+                t.Deadline,
+                COALESCE(u.FullName, 'Unassigned') AS AssignedTo,
+                ts.StatusName AS Status
+            FROM   Tasks t
+            LEFT JOIN Users u
+                   ON t.AssignedTo = u.UserID
+            JOIN   TaskStatus ts
+                   ON t.StatusID = ts.StatusID
+            WHERE  t.GroupID = @gid
+            ORDER  BY t.Deadline ASC;";
 
-                using (var cmd =
-                    new SQLiteCommand(sql, conn))
+                using (var cmd = new SQLiteCommand(sql, conn))
                 {
-                    cmd.Parameters.AddWithValue(
-                        "@gid", groupID);
-                    var da =
-                        new SQLiteDataAdapter(cmd);
+                    cmd.Parameters.AddWithValue("@gid", groupID);
+                    var da = new SQLiteDataAdapter(cmd);
                     var dt = new DataTable();
                     da.Fill(dt);
                     return dt;
