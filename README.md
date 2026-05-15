@@ -10,145 +10,15 @@ Whether for school projects, capstones, or collaborative activities, SyncPoint h
 
 ---
 
-# Features
+# Key Features
 
-## First Time Setup
-- Runs only once during the first launch
-- Creates the Instructor account
-- Stores credentials in a local config file
-- Username validation:
-  - Minimum 4 characters
-  - No spaces allowed
-- Password validation:
-  - Minimum 6 characters
-  - Requires confirmation
-- Styled interface with gold-themed UI
+* **Role-Based Dashboards:** Specialized interfaces for Instructors (management), Leaders (assignment), and Members (execution).
+* **Dynamic Task Marketplace:** Members can browse and claim \"Available Tasks,\" ensuring a fair and transparent workload distribution.
+* **Automated Scoring Engine:** Real-time point calculation featuring **automatic late submission penalties** calculated at the database level.
+* **Concurrency Control:** Integrated \"Busy Gate\" logic prevents task hoarding, requiring members to finish or submit current work before claiming new tasks.
+* **Live Analytics:** Instant generation of Leaderboards, Task Distribution charts, and Member Progress reports.
 
 ---
-
-# Authentication System
-
-## Login Form
-- Username and password authentication
-- Password hashing support
-- Automatic role detection
-- Redirects users to the correct dashboard
-- Enter key support for login
-- Validation warnings for empty fields
-- Prevents unassigned members from accessing dashboards
-- Includes registration link
-
-## Registration Form
-- User account creation
-- Full name, username, and password input
-- Username uniqueness checking
-- Placeholder text behavior
-- Password confirmation validation
-- Success notification after registration
-
----
-
-# Instructor Dashboard
-
-## Groups Tab
-- Displays all created groups
-- Shows:
-  - Group Name
-  - Appointed Leader
-  - Member Count
-- Dynamic group counter
-- Create Group button
-- Appoint Leader functionality
-- Auto-refresh after updates
-
-## Reports Tab
-- Tab where the instructors can see a group's progress
-
-## Navigation & Session
-- Sidebar navigation
-- Logout confirmation dialog
-
----
-
-# Leader Dashboard
-
-## Stats Overview
-Displays:
-- Total Tasks
-- Completed Tasks
-- Pending Tasks
-
-All statistics are loaded from the database.
-
----
-
-# Add Task Form
-- Task title input
-- Member assignment dropdown
-- "Any Member" option
-- Deadline picker
-- Description field
-- Prevents past deadlines
-- Auto-refreshes dashboard after submission
-
----
-
-# Add Member Form
-- Displays available students
-- Live search filtering
-- Excludes leaders automatically
-- Student count display
-- Selection preview
-- Confirmation dialog after adding
-
----
-
-# Sidebar Navigation
-- Dashboard
-- Add Task
-- Members
-- Reports
-- Logout
-
----
-
-# Member Dashboard
-
-## Stats Overview
-Displays:
-- Total Tasks
-- Completed Tasks
-- In Progress Tasks
-- Shows assigned tasks to the logged-in member.
-
----
-
-# My Tasks Table
-
-### Columns
-- Task Title
-- Description
-- Due Date
-- Difficulty Level
-- Status
-
-### Additional Features
-- Bold task titles
-- Color-coded status indicators
-- Color-coded difficulty labels
-- Deadline warnings for approaching due dates
-- Empty-state notification for users without groups
-
----
-
-# Task Progress Form
-A visual transparency screen that:
-- Displays team member cards
-- Shows completed task counts
-- Provides quick team performance monitoring
-
----
-
 # Object-Oriented Programming Principles Used
 
 ## 1. Abstraction
@@ -186,19 +56,108 @@ Examples:
 
 ---
 
-# UML Diagram
+# System Architecture
 
-> Attach UML diagram here
+```mermaid
+classDiagram
+    direction TB
+
+    class Session {
+        <<static>>
+        +int UserID
+        +int GroupID
+        +string FullName
+        +string RoleName
+        +Clear()
+    }
+
+    class DatabaseHelper {
+        <<static>>
+        +GetConnection() SQLiteConnection
+        +ValidateLogin(string, string) DataRow
+        +RegisterUser(string, string, string) bool
+        
+        %% Instructor Logic
+        +AppointLeader(int, int) void
+        +GetScoresByGroup(int) DataTable
+        +GetAllGroups() DataTable
+        
+        %% Leader Logic
+        +CreateTask(int, string, string, DateTime, int?, int) int
+        +GetPendingSubmissions(int) DataTable
+        +ApproveTask(int, int, int) bool
+        +ReturnTaskToMember(int) bool
+        
+        %% Member Logic
+        +GetAvailableTasks(int) DataTable
+        +GetTasksByMember(int) DataTable
+        +AssignAndAcceptTask(int, int) bool
+        +SubmitTask(int, string) bool
+    }
+
+    %% --- THE USER INTERFACE LAYER ---
+
+    class InstructorDashboardForm {
+        <<form>>
+        -LoadGroupManagementGrid()
+        -btnAppointLeader_Click()
+        -LoadReportsTab()
+    }
+
+    class LeaderDashboardForm {
+        <<form>>
+        -LoadGroupTasksGrid()
+        -LoadPendingSubmissionsGrid()
+        -btnApprove_Click()
+        -btnReject_Click()
+        -btnCreateNewTask_Click() (opens AddTaskForm)
+    }
+
+    class MemberDashboardForm {
+        <<form>>
+        -LoadDashboardStats()
+        -LoadMyTasks()
+        -btnSubmitTask_Click()
+        -lblMarketplace_Click() (opens TasksForm)
+    }
+
+    class TasksForm {
+        <<form>>
+        -LoadAvailableTasks()
+        -dgvTasks_CellContentClick() (triggers AssignAndAcceptTask)
+    }
+
+    class AddTaskForm {
+        <<form>>
+        -btnAssignTask_Click()
+    }
+
+    InstructorDashboardForm ..> DatabaseHelper : calls
+    LeaderDashboardForm ..> DatabaseHelper : calls
+    MemberDashboardForm ..> DatabaseHelper : calls
+    TasksForm ..> DatabaseHelper : calls
+    AddTaskForm ..> DatabaseHelper : calls
+    
+    InstructorDashboardForm --> Session : reads state
+    LeaderDashboardForm --> Session : reads state
+    MemberDashboardForm --> Session : reads state
+    TasksForm --> Session : reads state
+    
+    LeaderDashboardForm ..> AddTaskForm : navigation
+    MemberDashboardForm ..> TasksForm : navigation
+
+```
 
 ---
 
 # Technologies Used
 
-- **C#**
-- **WinForms**
-- **SQL Database**
-- **.NET Framework / .NET 6+**
-- **Visual Studio 2022**
+* **Language:** C# (.NET Framework)
+* **UI Framework:** Windows Forms (WinForms)
+* **Database:** SQLite (Relational Database Management)
+* **Architecture:** Layered Logic (Data Access via DatabaseHelper, UI via Dashboard Forms)
+* **Security**: SHA-256 Password Hashing
+* **IDE:** Visual Studio 2022
 
 ---
 
@@ -240,23 +199,25 @@ On first launch, the Setup screen will appear.
 
 ---
 
-# How the Application Works
+# How to Use
 
-1. First launch opens `SetupForm`
-2. Instructor sets up their account
-3. User registers through `RegisterForm`
-4. Instructor creates groups
-5. Instructor appoints leaders
-6. User logs in through `LoginForm`
-7. System detects user role automatically
-8. Leaders add members
-9. Leaders assign tasks
-10. Members monitor assigned tasks
-11. Progress tracking updates in real time
-12. Member submits tasks then wait for leader's approval
-13. Once approved, the points are granted to that member
+SyncPoint is designed around a three-tier hierarchy to ensure structured project management.
 
-All data is stored in a local SQL database.
+### For Instructors (Project Administrators)
+* **Manage Groups:** Create project groups and batch-register students.
+* **Appoint Leaders:** Designate high-performing members as "Leaders" to delegate task management within a group.
+* **Global Analytics:** Access the `Reports` tab to monitor group-wide velocity, completion rates, and historical data.
+
+### For Leaders (Task Managers)
+* **Task Assignment:** Create tasks with specific titles, descriptions, and deadlines. 
+* **Weight Selection:** Assign point values (1, 3, or 5) based on the difficulty of the work.
+* **Quality Control:** Access the `Pending Review` queue to inspect submitted links. You can either `Approve` (which triggers the automated scoring) or `Return` work for revision.
+
+### For Members (Execution)
+* **The Marketplace:** Browse the `Available Tasks` store. Note: You can only see tasks that are unassigned and still 'Pending'.
+* **Claiming Work:** Click 'Accept' to move a task to your workspace. The system enforces a **"Single-Task Rule"** where you must submit or finish your current task before claiming a new one.
+* **Submissions:** Provide a live link to your work (GitHub, Google Drive, etc.). The system automatically timestamps your submission for deadline verification.
+* **Live Leaderboard:** Track your points and rank against other group members in real-time.
 
 ---
 
@@ -273,6 +234,11 @@ All data is stored in a local SQL database.
 # License
 
 This project is for educational purposes only.
+
+---
+
+# Acknowledgement
+We would like to express our deepest gratitude to our instructor, Ma'am Darlene for her invaluable guidance and technical insights throughout the development of SyncPoint. Her feedbacks were instrumental in refining the system’s logic, particularly the automated scoring and concurrency features.
 
 ---
 
