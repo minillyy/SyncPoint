@@ -67,7 +67,7 @@
             this.lblInstructions.AutoSize = true;
             this.lblInstructions.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.lblInstructions.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(111)))), ((int)(((byte)(90)))));
-            this.lblInstructions.Location = new System.Drawing.Point(17, 101);
+            this.lblInstructions.Location = new System.Drawing.Point(13, 101);
             this.lblInstructions.Name = "lblInstructions";
             this.lblInstructions.Size = new System.Drawing.Size(403, 20);
             this.lblInstructions.TabIndex = 1;

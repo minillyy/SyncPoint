@@ -18,8 +18,10 @@ namespace SyncPoint.Forms.Dashboards
         public LeaderDashboardForm()
         {
             InitializeComponent();
-            // Subscribe to sidebar control Add Task clicks so the form can open the AddTaskForm
             sidebarControl1.AddTaskClicked += SidebarControl1_AddTaskClicked;
+
+            // ADD THIS LINE TO LINK THE MEMBERS BUTTON:
+            sidebarControl1.MembersClicked += SidebarControl1_MembersClicked;
         }
 
         private void LoadStats()
@@ -58,32 +60,81 @@ namespace SyncPoint.Forms.Dashboards
 
         private void LoadMembers()
         {
+            // Safety check for the Designer
+            if (this.DesignMode) return;
+
+            // 1. Fetch Fresh Data
             var progress = DatabaseHelper.GetMemberProgress(Session.GroupID);
 
-            dgvMembers.Columns.Clear();
+            // 2. Clear and Bind Data
+            dgvMembers.DataSource = null;
+            dgvMembers.RowTemplate.Height = 40;
             dgvMembers.DataSource = progress;
 
-            if (dgvMembers.Columns.Contains("FullName"))
-                dgvMembers.Columns["FullName"].HeaderText = "Member";
-            if (dgvMembers.Columns.Contains("Total"))
-                dgvMembers.Columns["Total"].HeaderText = "Tasks";
-            if (dgvMembers.Columns.Contains("Done"))
-                dgvMembers.Columns["Done"].HeaderText = "Done";
+            // 3. Header Sizing (Mode must be set before Height)
+            dgvMembers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dgvMembers.ColumnHeadersHeight = 50;
+
+            // 4. Remove unwanted "Completion %" column
             if (dgvMembers.Columns.Contains("CompletionRate"))
-                dgvMembers.Columns["CompletionRate"].HeaderText = "Completion %";
+            {
+                dgvMembers.Columns.Remove("CompletionRate");
+            }
 
-            dgvMembers.AlternatingRowsDefaultCellStyle.BackColor =
-                ColorTranslator.FromHtml("#faf7f2");
+            // 5. Header Texts, Alignment, and DISABLE SORTING
+            foreach (DataGridViewColumn column in dgvMembers.Columns)
+            {
+                // This removes the arrow and prevents clicking from shuffling rows
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
 
+            if (dgvMembers.Columns.Contains("FullName"))
+            {
+                dgvMembers.Columns["FullName"].HeaderText = "Member";
+                dgvMembers.Columns["FullName"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            }
+
+            if (dgvMembers.Columns.Contains("Total"))
+            {
+                dgvMembers.Columns["Total"].HeaderText = "Tasks";
+                dgvMembers.Columns["Total"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            }
+
+            if (dgvMembers.Columns.Contains("Done"))
+            {
+                dgvMembers.Columns["Done"].HeaderText = "Done";
+                dgvMembers.Columns["Done"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            }
+
+            // 6. Header Styling & Invisible Header Highlight
+            dgvMembers.EnableHeadersVisualStyles = false;
+            dgvMembers.ColumnHeadersDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#1a2744");
+            dgvMembers.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvMembers.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 10f, FontStyle.Bold);
+            dgvMembers.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvMembers.ColumnHeadersDefaultCellStyle.SelectionBackColor = ColorTranslator.FromHtml("#1a2744");
+            dgvMembers.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.White;
+
+            // 7. Body Styling & Invisible Row Highlights
+            dgvMembers.DefaultCellStyle.SelectionBackColor = Color.White;
+            dgvMembers.DefaultCellStyle.SelectionForeColor = Color.Black;
+
+            dgvMembers.AlternatingRowsDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#faf7f2");
+            dgvMembers.AlternatingRowsDefaultCellStyle.SelectionBackColor = ColorTranslator.FromHtml("#faf7f2");
+            dgvMembers.AlternatingRowsDefaultCellStyle.SelectionForeColor = Color.Black;
+
+            // 8. General Grid Cleanup
+            dgvMembers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvMembers.AllowUserToResizeColumns = false;
             dgvMembers.AllowUserToResizeRows = false;
-            dgvMembers.ColumnHeadersHeightSizeMode =
-                DataGridViewColumnHeadersHeightSizeMode
-                    .DisableResizing;
-            dgvMembers.RowHeadersWidthSizeMode =
-                DataGridViewRowHeadersWidthSizeMode
-                    .DisableResizing;
-            dgvMembers.AllowUserToOrderColumns = false;
+            dgvMembers.RowHeadersVisible = false;
+            dgvMembers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            // 9. Force row height update
+            foreach (DataGridViewRow row in dgvMembers.Rows)
+            {
+                row.Height = 40;
+            }
         }
         private void sidebarControl1_Load(object sender, EventArgs e)
         {
@@ -109,8 +160,25 @@ namespace SyncPoint.Forms.Dashboards
             }
         }
 
+        private void SidebarControl1_MembersClicked(object sender, EventArgs e)
+        {
+            // We use 'using' to ensure the form is properly disposed of after closing
+            using (TaskProgress progressForm = new TaskProgress())
+            {
+                // ShowDialog opens it as a popup window
+                progressForm.ShowDialog(this);
+
+                // Optional: Refresh the dashboard stats when the user closes the progress form
+                // in case any status updates happened.
+                LoadStats();
+                LoadMembers();
+            }
+        }
+
         private void LeaderDashboardForm_Load(object sender, EventArgs e)
         {
+            if (this.DesignMode) return;
+
             if (Session.GroupID == -1)
             {
                 MessageBox.Show(
@@ -183,7 +251,11 @@ namespace SyncPoint.Forms.Dashboards
 
         private void btnAddMember_Click(object sender, EventArgs e)
         {
-            new AddMemberForm(Session.GroupID, Session.GroupName).ShowDialog();
+            using (AddMemberForm popUp = new AddMemberForm(Session.GroupID, Session.GroupName))
+            {
+                popUp.ShowDialog();
+                LoadMembers();
+            }
         }
     }
 }

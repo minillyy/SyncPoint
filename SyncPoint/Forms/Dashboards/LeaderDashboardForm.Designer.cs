@@ -21,7 +21,6 @@
             this.lblUserName = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
             this.pnlSidebar = new System.Windows.Forms.Panel();
-            this.sidebarControl1 = new SyncPoint.Forms.SidebarControl();
             this.pnlContent = new System.Windows.Forms.Panel();
             this.btnAddMember = new System.Windows.Forms.Button();
             this.pnlMembersCard = new System.Windows.Forms.Panel();
@@ -37,6 +36,7 @@
             this.pnlStatTotal3 = new System.Windows.Forms.Panel();
             this.lblPendingLabel = new System.Windows.Forms.Label();
             this.lblPendingNum = new System.Windows.Forms.Label();
+            this.sidebarControl1 = new SyncPoint.Forms.SidebarControl();
             this.pnlTopbar.SuspendLayout();
             this.pnlSidebar.SuspendLayout();
             this.pnlContent.SuspendLayout();
@@ -89,16 +89,8 @@
             this.pnlSidebar.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlSidebar.Location = new System.Drawing.Point(0, 50);
             this.pnlSidebar.Name = "pnlSidebar";
-            this.pnlSidebar.Size = new System.Drawing.Size(90, 618);
+            this.pnlSidebar.Size = new System.Drawing.Size(90, 519);
             this.pnlSidebar.TabIndex = 1;
-            // 
-            // sidebarControl1
-            // 
-            this.sidebarControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.sidebarControl1.Location = new System.Drawing.Point(0, 0);
-            this.sidebarControl1.Name = "sidebarControl1";
-            this.sidebarControl1.Size = new System.Drawing.Size(116, 618);
-            this.sidebarControl1.TabIndex = 0;
             // 
             // pnlContent
             // 
@@ -111,7 +103,7 @@
             this.pnlContent.Location = new System.Drawing.Point(90, 50);
             this.pnlContent.Name = "pnlContent";
             this.pnlContent.Padding = new System.Windows.Forms.Padding(14);
-            this.pnlContent.Size = new System.Drawing.Size(673, 618);
+            this.pnlContent.Size = new System.Drawing.Size(673, 519);
             this.pnlContent.TabIndex = 2;
             this.pnlContent.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlContent_Paint);
             // 
@@ -121,7 +113,7 @@
             this.btnAddMember.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddMember.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddMember.ForeColor = System.Drawing.Color.White;
-            this.btnAddMember.Location = new System.Drawing.Point(447, 560);
+            this.btnAddMember.Location = new System.Drawing.Point(459, 461);
             this.btnAddMember.Name = "btnAddMember";
             this.btnAddMember.Size = new System.Drawing.Size(170, 41);
             this.btnAddMember.TabIndex = 3;
@@ -137,7 +129,7 @@
             this.pnlMembersCard.Location = new System.Drawing.Point(14, 115);
             this.pnlMembersCard.Name = "pnlMembersCard";
             this.pnlMembersCard.Padding = new System.Windows.Forms.Padding(12, 10, 12, 10);
-            this.pnlMembersCard.Size = new System.Drawing.Size(615, 426);
+            this.pnlMembersCard.Size = new System.Drawing.Size(615, 330);
             this.pnlMembersCard.TabIndex = 2;
             // 
             // dgvMembers
@@ -147,7 +139,7 @@
             this.dgvMembers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvMembers.BackgroundColor = System.Drawing.Color.White;
             this.dgvMembers.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgvMembers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMembers.ColumnHeadersHeight = 29;
             this.dgvMembers.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvMembers.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(224)))), ((int)(((byte)(208)))));
             this.dgvMembers.Location = new System.Drawing.Point(12, 38);
@@ -157,7 +149,7 @@
             this.dgvMembers.RowHeadersWidth = 51;
             this.dgvMembers.RowTemplate.Height = 24;
             this.dgvMembers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvMembers.Size = new System.Drawing.Size(591, 378);
+            this.dgvMembers.Size = new System.Drawing.Size(591, 282);
             this.dgvMembers.TabIndex = 1;
             this.dgvMembers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMembers_CellContentClick);
             // 
@@ -295,12 +287,20 @@
             this.lblPendingNum.TabIndex = 0;
             this.lblPendingNum.Text = "0";
             // 
+            // sidebarControl1
+            // 
+            this.sidebarControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.sidebarControl1.Location = new System.Drawing.Point(0, 0);
+            this.sidebarControl1.Name = "sidebarControl1";
+            this.sidebarControl1.Size = new System.Drawing.Size(116, 519);
+            this.sidebarControl1.TabIndex = 0;
+            // 
             // LeaderDashboardForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(247)))), ((int)(((byte)(242)))));
-            this.ClientSize = new System.Drawing.Size(763, 668);
+            this.ClientSize = new System.Drawing.Size(763, 569);
             this.Controls.Add(this.pnlContent);
             this.Controls.Add(this.pnlSidebar);
             this.Controls.Add(this.pnlTopbar);

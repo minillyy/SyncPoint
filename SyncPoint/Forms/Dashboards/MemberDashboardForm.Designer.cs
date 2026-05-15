@@ -122,6 +122,7 @@
             this.lblTasks.TabIndex = 1;
             this.lblTasks.Text = "Tasks";
             this.lblTasks.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblTasks.Click += new System.EventHandler(this.lblTasks_Click);
             // 
             // pnlLogout
             // 
@@ -283,9 +284,9 @@
             this.lblInProgressLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(140)))), ((int)(((byte)(141)))));
             this.lblInProgressLabel.Location = new System.Drawing.Point(25, 85);
             this.lblInProgressLabel.Name = "lblInProgressLabel";
-            this.lblInProgressLabel.Size = new System.Drawing.Size(106, 25);
+            this.lblInProgressLabel.Size = new System.Drawing.Size(81, 25);
             this.lblInProgressLabel.TabIndex = 1;
-            this.lblInProgressLabel.Text = "In Progress";
+            this.lblInProgressLabel.Text = "Pending";
             // 
             // pnlTasksCard
             // 

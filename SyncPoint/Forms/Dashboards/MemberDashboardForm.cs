@@ -3,6 +3,7 @@ using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 using SyncPoint.Data;
+using SyncPoint.Forms.Other_Forms;
 
 namespace SyncPoint.Forms.Dashboards
 {
@@ -12,8 +13,7 @@ namespace SyncPoint.Forms.Dashboards
         {
             InitializeComponent();
 
-            // Avoid running runtime-only initialization while the form is opened in the WinForms designer.
-            // LicenseManager.UsageMode is a reliable way to detect design-time vs run-time here.
+            // Guard for the Designer
             if (System.ComponentModel.LicenseManager.UsageMode != System.ComponentModel.LicenseUsageMode.Designtime)
             {
                 SetupDataGridViewColumns();
@@ -24,7 +24,6 @@ namespace SyncPoint.Forms.Dashboards
         private void AttachEvents()
         {
             this.Load += MemberDashboardForm_Load;
-
             lblLogout.Click += LblLogout_Click;
             lblLogout.Cursor = Cursors.Hand;
 
@@ -41,121 +40,114 @@ namespace SyncPoint.Forms.Dashboards
         {
             dgvMyTasks.Columns.Clear();
 
-            dgvMyTasks.Columns.Add(new DataGridViewTextBoxColumn
-            {
-                Name = "TaskID",
-                Visible = false
-            });
+            // TaskID (Hidden)
+            dgvMyTasks.Columns.Add(new DataGridViewTextBoxColumn { Name = "TaskID", Visible = false });
 
+            // 1. Task Title
             dgvMyTasks.Columns.Add(new DataGridViewTextBoxColumn
             {
                 Name = "Title",
                 HeaderText = "Task Title",
                 ReadOnly = true,
-                FillWeight = 30,
-                DefaultCellStyle = new DataGridViewCellStyle { Font = new Font("Segoe UI", 10f, FontStyle.Bold) }
+                FillWeight = 20,
+                DefaultCellStyle = new DataGridViewCellStyle
+                {
+                    Font = new Font("Segoe UI", 10f, FontStyle.Bold),
+                    ForeColor = Color.Black,
+                    Alignment = DataGridViewContentAlignment.MiddleLeft
+                }
             });
 
+            // 2. Description
             dgvMyTasks.Columns.Add(new DataGridViewTextBoxColumn
             {
                 Name = "Description",
                 HeaderText = "Description",
                 ReadOnly = true,
-                FillWeight = 35
+                FillWeight = 40
             });
 
+            // 3. Due Date
             dgvMyTasks.Columns.Add(new DataGridViewTextBoxColumn
             {
                 Name = "Deadline",
                 HeaderText = "Due Date",
                 ReadOnly = true,
-                FillWeight = 15,
+                FillWeight = 22,
                 DefaultCellStyle = new DataGridViewCellStyle { Alignment = DataGridViewContentAlignment.MiddleCenter }
             });
 
-            dgvMyTasks.Columns.Add(new DataGridViewTextBoxColumn
-            {
-                Name = "Difficulty",
-                HeaderText = "Level",
-                ReadOnly = true,
-                FillWeight = 10,
-                DefaultCellStyle = new DataGridViewCellStyle { Alignment = DataGridViewContentAlignment.MiddleCenter }
-            });
-
+            // 4. Status
             dgvMyTasks.Columns.Add(new DataGridViewTextBoxColumn
             {
                 Name = "Status",
                 HeaderText = "Status",
                 ReadOnly = true,
-                FillWeight = 10,
+                FillWeight = 18,
                 DefaultCellStyle = new DataGridViewCellStyle { Alignment = DataGridViewContentAlignment.MiddleCenter }
             });
 
+            // --- DISABLE SORTING (Removes the Arrow and Shuffling) ---
+            foreach (DataGridViewColumn column in dgvMyTasks.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+
+            // --- LOCK TABLE RESIZING ---
+            dgvMyTasks.AllowUserToResizeColumns = false;
+            dgvMyTasks.AllowUserToResizeRows = false;
+            dgvMyTasks.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dgvMyTasks.RowHeadersVisible = false;
+            dgvMyTasks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            // --- HEADER STYLING & INVISIBLE HIGHLIGHT ---
             dgvMyTasks.EnableHeadersVisualStyles = false;
             dgvMyTasks.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(52, 73, 94);
             dgvMyTasks.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             dgvMyTasks.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10f, FontStyle.Bold);
             dgvMyTasks.ColumnHeadersHeight = 45;
-            dgvMyTasks.DefaultCellStyle.Font = new Font("Segoe UI", 9.5f);
-            dgvMyTasks.DefaultCellStyle.Padding = new Padding(8);
-            dgvMyTasks.DefaultCellStyle.SelectionBackColor = Color.FromArgb(230, 242, 255);
+
+            // Makes the header stay the same color when clicked
+            dgvMyTasks.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(52, 73, 94);
+            dgvMyTasks.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.White;
+
+            // --- BODY STYLING & INVISIBLE ROW HIGHLIGHTS ---
+            // Standard Row Selection
+            dgvMyTasks.DefaultCellStyle.SelectionBackColor = Color.White;
+            dgvMyTasks.DefaultCellStyle.SelectionForeColor = Color.Black;
+
+            // Alternating Row Selection
             dgvMyTasks.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 245, 240);
+            dgvMyTasks.AlternatingRowsDefaultCellStyle.SelectionBackColor = Color.FromArgb(248, 245, 240);
+            dgvMyTasks.AlternatingRowsDefaultCellStyle.SelectionForeColor = Color.Black;
+
             dgvMyTasks.RowTemplate.Height = 45;
             dgvMyTasks.CellFormatting += DgvMyTasks_CellFormatting;
         }
 
         private void DgvMyTasks_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
+            e.CellStyle.ForeColor = Color.Black;
+
             if (dgvMyTasks.Columns[e.ColumnIndex].Name == "Status" && e.Value != null)
             {
                 string status = e.Value.ToString();
-                if (status == "Completed")
-                {
-                    e.CellStyle.ForeColor = Color.FromArgb(39, 174, 96);
-                    e.CellStyle.Font = new Font("Segoe UI", 9f, FontStyle.Bold);
-                }
-                else if (status == "In Progress")
-                {
-                    e.CellStyle.ForeColor = Color.FromArgb(41, 128, 185);
-                    e.CellStyle.Font = new Font("Segoe UI", 9f, FontStyle.Bold);
-                }
-                else if (status == "Pending")
-                {
-                    e.CellStyle.ForeColor = Color.FromArgb(230, 126, 34);
-                    e.CellStyle.Font = new Font("Segoe UI", 9f, FontStyle.Bold);
-                }
-            }
+                if (status == "Completed") e.CellStyle.ForeColor = Color.FromArgb(39, 174, 96);
+                else if (status == "In Progress") e.CellStyle.ForeColor = Color.FromArgb(41, 128, 185);
+                else if (status == "Pending") e.CellStyle.ForeColor = Color.FromArgb(230, 126, 34);
 
-            if (dgvMyTasks.Columns[e.ColumnIndex].Name == "Difficulty" && e.Value != null)
-            {
-                string difficulty = e.Value.ToString();
-                switch (difficulty)
-                {
-                    case "Easy":
-                        e.CellStyle.ForeColor = Color.FromArgb(39, 174, 96);
-                        break;
-                    case "Medium":
-                        e.CellStyle.ForeColor = Color.FromArgb(230, 126, 34);
-                        break;
-                    case "Hard":
-                        e.CellStyle.ForeColor = Color.FromArgb(231, 76, 60);
-                        break;
-                }
+                e.CellStyle.Font = new Font("Segoe UI", 9f, FontStyle.Bold);
             }
         }
 
         private void MemberDashboardForm_Load(object sender, EventArgs e)
         {
+            if (this.DesignMode) return;
+
             lblUserName.Text = Session.FullName;
             lblUserRole.Text = "Member";
 
-            if (Session.GroupID == -1)
-            {
-                MessageBox.Show("You are not yet assigned to any group.\n\nPlease wait for your Instructor to add you to a group.",
-                    "SyncPoint", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
+            if (Session.GroupID == -1) return;
             RefreshAllData();
         }
 
@@ -167,9 +159,8 @@ namespace SyncPoint.Forms.Dashboards
 
         private void LoadDashboardStats()
         {
-            if (Session.GroupID == -1) return;
+            var tasks = DatabaseHelper.GetTasksByGroup(Session.GroupID);
 
-            var tasks = DatabaseHelper.GetTasksByMember(Session.UserID);
             int total = tasks.Rows.Count;
             int completed = 0;
             int inProgress = 0;
@@ -178,21 +169,17 @@ namespace SyncPoint.Forms.Dashboards
             {
                 string status = row["Status"].ToString();
                 if (status == "Completed") completed++;
-                else if (status == "In Progress") inProgress++;
+                if (status == "Pending") inProgress++;
             }
 
             lblTotalNum.Text = total.ToString();
             lblCompletedNum.Text = completed.ToString();
             lblInProgressNum.Text = inProgress.ToString();
-
-            int percent = total > 0 ? (completed * 100) / total : 0;
-
         }
 
         private void LoadMyTasks()
         {
             dgvMyTasks.Rows.Clear();
-
             var tasks = DatabaseHelper.GetTasksByMember(Session.UserID);
 
             foreach (DataRow row in tasks.Rows)
@@ -210,7 +197,6 @@ namespace SyncPoint.Forms.Dashboards
                     row["Title"],
                     row["Description"],
                     deadlineText,
-                    row["Difficulty"],
                     row["Status"]
                 );
             }
@@ -218,14 +204,16 @@ namespace SyncPoint.Forms.Dashboards
 
         private void LblLogout_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Are you sure you want to logout?",
-                "SyncPoint", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Yes)
+            if (MessageBox.Show("Are you sure?", "Logout", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 Session.Clear();
                 this.Close();
             }
+        }
+
+        private void lblTasks_Click(object sender, EventArgs e)
+        {
+            new TasksForm().ShowDialog();
         }
     }
 }

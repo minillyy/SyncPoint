@@ -21,6 +21,8 @@ namespace SyncPoint.Forms
         // Raised when the user clicks the Add Task item in the sidebar
         public event EventHandler AddTaskClicked;
 
+        public event EventHandler MembersClicked;
+
         private void pnlNav_Paint(object sender, PaintEventArgs e)
         {
 
@@ -61,7 +63,7 @@ namespace SyncPoint.Forms
 
         private void lblMembers_Click(object sender, EventArgs e)
         {
-            
+            MembersClicked?.Invoke(this, EventArgs.Empty);
         }
 
         private void lblProgress_Click(object sender, EventArgs e)
