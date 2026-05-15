@@ -18,19 +18,17 @@
             this.lblHeaderTitle = new System.Windows.Forms.Label();
             this.panelHeader = new System.Windows.Forms.Panel();
             this.panelBody = new System.Windows.Forms.Panel();
+            this.cmbWeight = new System.Windows.Forms.ComboBox();
+            this.lblWeight = new System.Windows.Forms.Label();
             this.lblNewTaskDetails = new System.Windows.Forms.Label();
             this.lblTaskTitle = new System.Windows.Forms.Label();
             this.txtTaskTitle = new System.Windows.Forms.TextBox();
-            this.lblAssignTo = new System.Windows.Forms.Label();
-            this.cmbAssignTo = new System.Windows.Forms.ComboBox();
             this.lblDeadline = new System.Windows.Forms.Label();
             this.dtpDeadline = new System.Windows.Forms.DateTimePicker();
             this.lblDescription = new System.Windows.Forms.Label();
             this.txtDescription = new System.Windows.Forms.TextBox();
             this.btnAssignTask = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.lblWeight = new System.Windows.Forms.Label();
-            this.cmbWeight = new System.Windows.Forms.ComboBox();
             this.panelHeader.SuspendLayout();
             this.panelBody.SuspendLayout();
             this.SuspendLayout();
@@ -64,8 +62,6 @@
             this.panelBody.Controls.Add(this.lblNewTaskDetails);
             this.panelBody.Controls.Add(this.lblTaskTitle);
             this.panelBody.Controls.Add(this.txtTaskTitle);
-            this.panelBody.Controls.Add(this.lblAssignTo);
-            this.panelBody.Controls.Add(this.cmbAssignTo);
             this.panelBody.Controls.Add(this.lblDeadline);
             this.panelBody.Controls.Add(this.dtpDeadline);
             this.panelBody.Controls.Add(this.lblDescription);
@@ -77,6 +73,28 @@
             this.panelBody.Name = "panelBody";
             this.panelBody.Size = new System.Drawing.Size(949, 470);
             this.panelBody.TabIndex = 1;
+            // 
+            // cmbWeight
+            // 
+            this.cmbWeight.FormattingEnabled = true;
+            this.cmbWeight.Items.AddRange(new object[] {
+            "1 - Easy",
+            "3 - Medium",
+            "5 - Hard"});
+            this.cmbWeight.Location = new System.Drawing.Point(29, 146);
+            this.cmbWeight.Name = "cmbWeight";
+            this.cmbWeight.Size = new System.Drawing.Size(146, 24);
+            this.cmbWeight.TabIndex = 14;
+            // 
+            // lblWeight
+            // 
+            this.lblWeight.AutoSize = true;
+            this.lblWeight.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWeight.Location = new System.Drawing.Point(28, 114);
+            this.lblWeight.Name = "lblWeight";
+            this.lblWeight.Size = new System.Drawing.Size(48, 20);
+            this.lblWeight.TabIndex = 13;
+            this.lblWeight.Text = "Points";
             // 
             // lblNewTaskDetails
             // 
@@ -108,28 +126,6 @@
             this.txtTaskTitle.Name = "txtTaskTitle";
             this.txtTaskTitle.Size = new System.Drawing.Size(891, 30);
             this.txtTaskTitle.TabIndex = 2;
-            // 
-            // lblAssignTo
-            // 
-            this.lblAssignTo.AutoSize = true;
-            this.lblAssignTo.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAssignTo.ForeColor = System.Drawing.Color.Black;
-            this.lblAssignTo.Location = new System.Drawing.Point(29, 112);
-            this.lblAssignTo.Name = "lblAssignTo";
-            this.lblAssignTo.Size = new System.Drawing.Size(62, 17);
-            this.lblAssignTo.TabIndex = 5;
-            this.lblAssignTo.Text = "Assign to";
-            // 
-            // cmbAssignTo
-            // 
-            this.cmbAssignTo.BackColor = System.Drawing.SystemColors.Window;
-            this.cmbAssignTo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbAssignTo.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.cmbAssignTo.FormattingEnabled = true;
-            this.cmbAssignTo.Location = new System.Drawing.Point(29, 133);
-            this.cmbAssignTo.Name = "cmbAssignTo";
-            this.cmbAssignTo.Size = new System.Drawing.Size(891, 31);
-            this.cmbAssignTo.TabIndex = 6;
             // 
             // lblDeadline
             // 
@@ -200,28 +196,6 @@
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // lblWeight
-            // 
-            this.lblWeight.AutoSize = true;
-            this.lblWeight.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblWeight.Location = new System.Drawing.Point(678, 23);
-            this.lblWeight.Name = "lblWeight";
-            this.lblWeight.Size = new System.Drawing.Size(48, 20);
-            this.lblWeight.TabIndex = 13;
-            this.lblWeight.Text = "Points";
-            // 
-            // cmbWeight
-            // 
-            this.cmbWeight.FormattingEnabled = true;
-            this.cmbWeight.Items.AddRange(new object[] {
-            "1 - Easy",
-            "3 - Medium",
-            "5 - Hard"});
-            this.cmbWeight.Location = new System.Drawing.Point(733, 21);
-            this.cmbWeight.Name = "cmbWeight";
-            this.cmbWeight.Size = new System.Drawing.Size(146, 24);
-            this.cmbWeight.TabIndex = 14;
-            // 
             // AddTaskForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -250,8 +224,6 @@
         private System.Windows.Forms.Label lblNewTaskDetails;
         private System.Windows.Forms.Label lblTaskTitle;
         private System.Windows.Forms.TextBox txtTaskTitle;
-        private System.Windows.Forms.Label lblAssignTo;
-        private System.Windows.Forms.ComboBox cmbAssignTo;
         private System.Windows.Forms.Label lblDeadline;
         private System.Windows.Forms.DateTimePicker dtpDeadline;
         private System.Windows.Forms.Label lblDescription;
