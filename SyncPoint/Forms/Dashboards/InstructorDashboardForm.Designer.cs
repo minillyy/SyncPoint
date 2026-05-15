@@ -133,6 +133,7 @@
             this.lblNavReports.TabIndex = 2;
             this.lblNavReports.Text = "Reports";
             this.lblNavReports.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblNavReports.Click += new System.EventHandler(this.lblNavReports_Click);
             // 
             // lblNavGroups
             // 

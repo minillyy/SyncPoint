@@ -1057,7 +1057,7 @@ namespace SyncPoint.Data
                             transaction.Commit();
                             return true;
                         }
-                        catch (Exception ex)
+                        catch (Exception e)
                         {
                             transaction.Rollback();
                             return false;
@@ -1090,55 +1090,55 @@ namespace SyncPoint.Data
         //  REPORT QUERIES
         // ════════════════════════════════════════════════
 
-        public static int GenerateReport(
-            int groupID, int generatedBy)
+        // For the Leaderboard: Ranks members by total points earned
+        public static DataTable GetLeaderboard(int groupID)
         {
             using (var conn = GetConnection())
             {
                 string sql = @"
-                    INSERT INTO Reports
-                        (GroupID, GeneratedBy,
-                         DateGenerated)
-                    VALUES
-                        (@gid, @by, DATE('now'));
-                    SELECT last_insert_rowid();";
+            SELECT 
+                u.FullName AS Member, 
+                IFNULL(SUM(s.FinalScore), 0) AS [Total Points],
+                COUNT(s.ScoreID) AS [Tasks Completed]
+            FROM GroupMembers gm
+            JOIN Users u ON gm.UserID = u.UserID
+            LEFT JOIN Scores s ON u.UserID = s.UserID
+            LEFT JOIN Tasks t ON s.TaskID = t.TaskID
+            WHERE gm.GroupID = @gid 
+              AND (t.GroupID = @gid OR s.ScoreID IS NULL)
+              AND LOWER(u.FullName) != 'instructor'
+            GROUP BY u.UserID, u.FullName
+            ORDER BY [Total Points] DESC;";
 
-                using (var cmd =
-                    new SQLiteCommand(sql, conn))
+                using (var cmd = new SQLiteCommand(sql, conn))
                 {
-                    cmd.Parameters.AddWithValue(
-                        "@gid", groupID);
-                    cmd.Parameters.AddWithValue(
-                        "@by", generatedBy);
-                    return Convert.ToInt32(
-                        cmd.ExecuteScalar());
+                    cmd.Parameters.AddWithValue("@gid", groupID);
+                    var da = new SQLiteDataAdapter(cmd);
+                    var dt = new DataTable();
+                    da.Fill(dt);
+                    return dt;
                 }
             }
         }
 
-        public static DataTable GetReportsByGroup(
-            int groupID)
+        // For Task Distribution: Shows how many 1pt, 3pt, and 5pt tasks exist
+        public static DataTable GetTaskDistribution(int groupID)
         {
             using (var conn = GetConnection())
             {
                 string sql = @"
-                    SELECT
-                        r.ReportID,
-                        u.FullName AS GeneratedBy,
-                        r.DateGenerated
-                    FROM   Reports r
-                    JOIN   Users u
-                           ON r.GeneratedBy = u.UserID
-                    WHERE  r.GroupID = @gid
-                    ORDER  BY r.DateGenerated DESC;";
+            SELECT 
+                TaskWeight AS [Point Value], 
+                COUNT(TaskID) AS [Task Count]
+            FROM Tasks 
+            WHERE GroupID = @gid
+            GROUP BY TaskWeight
+            ORDER BY TaskWeight ASC;";
 
-                using (var cmd =
-                    new SQLiteCommand(sql, conn))
+                using (var cmd = new SQLiteCommand(sql, conn))
                 {
-                    cmd.Parameters.AddWithValue(
-                        "@gid", groupID);
-                    var da =
-                        new SQLiteDataAdapter(cmd);
+                    cmd.Parameters.AddWithValue("@gid", groupID);
+                    var da = new SQLiteDataAdapter(cmd);
                     var dt = new DataTable();
                     da.Fill(dt);
                     return dt;
@@ -1179,49 +1179,32 @@ namespace SyncPoint.Data
             }
         }
 
-        public static DataTable GetMemberProgress(
-            int groupID)
+        public static DataTable GetMemberProgress(int groupID)
         {
             using (var conn = GetConnection())
             {
                 string sql = @"
-                    SELECT
-                        u.FullName,
-                        COUNT(t.TaskID) AS Total,
-                        SUM(CASE
-                            WHEN ts.StatusName =
-                                 'Completed'
-                            THEN 1 ELSE 0
-                            END) AS Done,
-                        ROUND(
-                            SUM(CASE
-                                WHEN ts.StatusName =
-                                     'Completed'
-                                THEN 1.0 ELSE 0
-                                END)
-                            / NULLIF(
-                                COUNT(t.TaskID), 0)
-                            * 100, 1
-                        ) AS CompletionRate
-                    FROM   GroupMembers gm
-                    JOIN   Users u
-                           ON gm.UserID = u.UserID
-                    LEFT JOIN Tasks t
-                           ON t.AssignedTo = u.UserID
-                           AND t.GroupID   = @gid
-                    LEFT JOIN TaskStatus ts
-                           ON t.StatusID = ts.StatusID
-                    WHERE  gm.GroupID = @gid
-                    GROUP  BY u.UserID
-                    ORDER  BY u.FullName ASC;";
+            SELECT
+                u.FullName,
+                COUNT(t.TaskID) AS Total,
+                SUM(CASE WHEN ts.StatusName = 'Completed' THEN 1 ELSE 0 END) AS Done,
+                ROUND(
+                    SUM(CASE WHEN ts.StatusName = 'Completed' THEN 1.0 ELSE 0 END)
+                    / NULLIF(COUNT(t.TaskID), 0) * 100, 1
+                ) AS CompletionRate
+            FROM GroupMembers gm
+            JOIN Users u ON gm.UserID = u.UserID
+            LEFT JOIN Tasks t ON t.AssignedTo = u.UserID AND t.GroupID = @gid
+            LEFT JOIN TaskStatus ts ON t.StatusID = ts.StatusID
+            WHERE gm.GroupID = @gid 
+              AND LOWER(u.FullName) != 'instructor'
+            GROUP BY u.UserID, u.FullName
+            ORDER BY u.FullName ASC;";
 
-                using (var cmd =
-                    new SQLiteCommand(sql, conn))
+                using (var cmd = new SQLiteCommand(sql, conn))
                 {
-                    cmd.Parameters.AddWithValue(
-                        "@gid", groupID);
-                    var da =
-                        new SQLiteDataAdapter(cmd);
+                    cmd.Parameters.AddWithValue("@gid", groupID);
+                    var da = new SQLiteDataAdapter(cmd);
                     var dt = new DataTable();
                     da.Fill(dt);
                     return dt;

@@ -20,9 +20,30 @@ namespace SyncPoint.Forms.Dashboards
         {
             InitializeComponent();
             sidebarControl1.AddTaskClicked += SidebarControl1_AddTaskClicked;
-
-            // ADD THIS LINE TO LINK THE MEMBERS BUTTON:
             sidebarControl1.MembersClicked += SidebarControl1_MembersClicked;
+            sidebarControl1.ReportsClicked += SidebarControl1_ReportsClicked;
+            dgvMembers.CellFormatting += dgvMembers_CellFormatting;
+        }
+
+        private void dgvMembers_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            // Make sure we are looking at the Status column
+            if (dgvMembers.Columns[e.ColumnIndex].Name == "Status" && e.Value != null)
+            {
+                string status = e.Value.ToString();
+
+                // Apply colors based on the text
+                if (status == "Completed")
+                    e.CellStyle.ForeColor = Color.FromArgb(39, 174, 96); // Green
+                else if (status == "In Progress")
+                    e.CellStyle.ForeColor = Color.FromArgb(41, 128, 185); // Blue
+                else if (status == "Pending Review")
+                    e.CellStyle.ForeColor = Color.FromArgb(155, 89, 182); // Purple
+                else if (status == "Pending")
+                    e.CellStyle.ForeColor = Color.FromArgb(230, 126, 34); // Orange
+
+                e.CellStyle.Font = new Font("Segoe UI", 9f, FontStyle.Bold);
+            }
         }
 
         private void LoadStats()
@@ -45,96 +66,70 @@ namespace SyncPoint.Forms.Dashboards
             lblPendingNum.Text = pending.ToString();
         }
 
-        private void LoadProgress()
+        private void LoadMyWorkspace()
         {
-            var tasks = DatabaseHelper.GetTasksByGroup(Session.GroupID);
-
-            int total = tasks.Rows.Count;
-            int completed = 0;
-
-            foreach (DataRow row in tasks.Rows)
-                if (row["Status"].ToString() == "Completed")
-                    completed++;
-
-            int percent = total > 0 ? (completed * 100) / total : 0;
-        }
-
-        private void LoadMembers()
-        {
-            // Safety check for the Designer
             if (this.DesignMode) return;
 
-            // 1. Fetch Fresh Data
-            var progress = DatabaseHelper.GetMemberProgress(Session.GroupID);
+            // 1. Reset and Define Columns
+            dgvMembers.Columns.Clear();
+            dgvMembers.Rows.Clear();
 
-            // 2. Clear and Bind Data
-            dgvMembers.DataSource = null;
-            dgvMembers.RowTemplate.Height = 40;
-            dgvMembers.DataSource = progress;
+            dgvMembers.Columns.Add(new DataGridViewTextBoxColumn { Name = "TaskID", Visible = false });
+            dgvMembers.Columns.Add(new DataGridViewTextBoxColumn { Name = "Title", HeaderText = "Task Title", FillWeight = 25 });
+            dgvMembers.Columns.Add(new DataGridViewTextBoxColumn { Name = "Description", HeaderText = "Description", FillWeight = 35 });
+            dgvMembers.Columns.Add(new DataGridViewTextBoxColumn { Name = "Deadline", HeaderText = "Due Date", FillWeight = 20 });
+            dgvMembers.Columns.Add(new DataGridViewTextBoxColumn { Name = "Status", HeaderText = "Status", FillWeight = 20 });
 
-            // 3. Header Sizing (Mode must be set before Height)
-            dgvMembers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgvMembers.ColumnHeadersHeight = 50;
-
-            // 4. Remove unwanted "Completion %" column
-            if (dgvMembers.Columns.Contains("CompletionRate"))
+            // 2. DATA POPULATION
+            var tasks = DatabaseHelper.GetTasksByMember(Session.UserID);
+            foreach (DataRow row in tasks.Rows)
             {
-                dgvMembers.Columns.Remove("CompletionRate");
+                dgvMembers.Rows.Add(
+                    row["TaskID"],
+                    row["Title"],
+                    row["Description"],
+                    Convert.ToDateTime(row["Deadline"]).ToString("MMM dd, yyyy"),
+                    row["Status"]
+                );
             }
 
-            // 5. Header Texts, Alignment, and DISABLE SORTING
-            foreach (DataGridViewColumn column in dgvMembers.Columns)
-            {
-                // This removes the arrow and prevents clicking from shuffling rows
-                column.SortMode = DataGridViewColumnSortMode.NotSortable;
-            }
-
-            if (dgvMembers.Columns.Contains("FullName"))
-            {
-                dgvMembers.Columns["FullName"].HeaderText = "Member";
-                dgvMembers.Columns["FullName"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            }
-
-            if (dgvMembers.Columns.Contains("Total"))
-            {
-                dgvMembers.Columns["Total"].HeaderText = "Tasks";
-                dgvMembers.Columns["Total"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            }
-
-            if (dgvMembers.Columns.Contains("Done"))
-            {
-                dgvMembers.Columns["Done"].HeaderText = "Done";
-                dgvMembers.Columns["Done"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            }
-
-            // 6. Header Styling & Invisible Header Highlight
-            dgvMembers.EnableHeadersVisualStyles = false;
-            dgvMembers.ColumnHeadersDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#1a2744");
-            dgvMembers.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgvMembers.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 10f, FontStyle.Bold);
-            dgvMembers.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgvMembers.ColumnHeadersDefaultCellStyle.SelectionBackColor = ColorTranslator.FromHtml("#1a2744");
-            dgvMembers.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.White;
-
-            // 7. Body Styling & Invisible Row Highlights
-            dgvMembers.DefaultCellStyle.SelectionBackColor = Color.White;
-            dgvMembers.DefaultCellStyle.SelectionForeColor = Color.Black;
-
-            dgvMembers.AlternatingRowsDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#faf7f2");
-            dgvMembers.AlternatingRowsDefaultCellStyle.SelectionBackColor = ColorTranslator.FromHtml("#faf7f2");
-            dgvMembers.AlternatingRowsDefaultCellStyle.SelectionForeColor = Color.Black;
-
-            // 8. General Grid Cleanup
-            dgvMembers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            // 3. UI LOCKDOWN (No Resize, No Sort, No Clickable Headers)
             dgvMembers.AllowUserToResizeColumns = false;
             dgvMembers.AllowUserToResizeRows = false;
             dgvMembers.RowHeadersVisible = false;
+            dgvMembers.AllowUserToAddRows = false;
+            dgvMembers.MultiSelect = false;
+            dgvMembers.ReadOnly = true;
+            dgvMembers.EnableHeadersVisualStyles = false;
+            dgvMembers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dgvMembers.ColumnHeadersHeight = 45;
+
+            // 4. THEME STYLING (44, 62, 80)
+            dgvMembers.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(44, 62, 80);
+            dgvMembers.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvMembers.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10f, FontStyle.Bold);
+            dgvMembers.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(44, 62, 80); // No click color on header
+
+            // 5. SELECTION GHOSTING (Making "Highlight" invisible)
+            // We set selection color to the same as the background so you can't tell it's clicked
+            dgvMembers.DefaultCellStyle.BackColor = Color.White;
+            dgvMembers.DefaultCellStyle.ForeColor = Color.Black;
+            dgvMembers.DefaultCellStyle.SelectionBackColor = Color.White;
+            dgvMembers.DefaultCellStyle.SelectionForeColor = Color.Black;
+
+            // Handling Alternating Rows if you use them
+            dgvMembers.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 245, 240);
+            dgvMembers.AlternatingRowsDefaultCellStyle.SelectionBackColor = Color.FromArgb(248, 245, 240);
+            dgvMembers.AlternatingRowsDefaultCellStyle.SelectionForeColor = Color.Black;
+
+            dgvMembers.GridColor = Color.FromArgb(235, 235, 235);
+            dgvMembers.RowTemplate.Height = 45;
             dgvMembers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
-            // 9. Force row height update
-            foreach (DataGridViewRow row in dgvMembers.Rows)
+            // 6. DISABLE SORTING
+            foreach (DataGridViewColumn col in dgvMembers.Columns)
             {
-                row.Height = 40;
+                col.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
         }
         private void sidebarControl1_Load(object sender, EventArgs e)
@@ -155,24 +150,27 @@ namespace SyncPoint.Forms.Dashboards
 
                     // Refresh dashboard stats
                     LoadStats();
-                    LoadProgress();
-                    LoadMembers();
+                    LoadMyWorkspace();
                 }
             }
         }
 
         private void SidebarControl1_MembersClicked(object sender, EventArgs e)
         {
-            // We use 'using' to ensure the form is properly disposed of after closing
             using (TaskProgress progressForm = new TaskProgress())
             {
-                // ShowDialog opens it as a popup window
                 progressForm.ShowDialog(this);
 
-                // Optional: Refresh the dashboard stats when the user closes the progress form
-                // in case any status updates happened.
                 LoadStats();
-                LoadMembers();
+                LoadMyWorkspace();
+            }
+        }
+
+        private void SidebarControl1_ReportsClicked(object sender, EventArgs e)
+        {
+            using (ReportsForm reports = new ReportsForm())
+            {
+                reports.ShowDialog(this);
             }
         }
 
@@ -193,8 +191,7 @@ namespace SyncPoint.Forms.Dashboards
             lblUserName.Text = "Leader: " + Session.FullName;
 
             LoadStats();
-            LoadProgress();
-            LoadMembers();
+            LoadMyWorkspace();
         }
 
         private void pnlTopbar_Paint(object sender, PaintEventArgs e)
@@ -235,7 +232,7 @@ namespace SyncPoint.Forms.Dashboards
             using (AddMemberForm popUp = new AddMemberForm(Session.GroupID, Session.GroupName))
             {
                 popUp.ShowDialog();
-                LoadMembers();
+                LoadMyWorkspace();
             }
         }
 
@@ -246,6 +243,45 @@ namespace SyncPoint.Forms.Dashboards
                 reviewForm.ShowDialog();
             }
             LoadStats();
+        }
+
+        private void btnSubmit_Click(object sender, EventArgs e)
+        {
+            if (dgvMembers.CurrentRow == null) return;
+
+            int taskId = Convert.ToInt32(dgvMembers.CurrentRow.Cells["TaskID"].Value);
+            string title = dgvMembers.CurrentRow.Cells["Title"].Value.ToString();
+            string status = dgvMembers.CurrentRow.Cells["Status"].Value.ToString();
+
+            if (status != "In Progress")
+            {
+                MessageBox.Show("You can only submit tasks that are 'In Progress'.", "SyncPoint");
+                return;
+            }
+
+            using (var submitForm = new SubmitTaskForm(title))
+            {
+                if (submitForm.ShowDialog() == DialogResult.OK)
+                {
+                    if (DatabaseHelper.SubmitTask(taskId, submitForm.SubmissionLink))
+                    {
+                        MessageBox.Show("Work submitted! Since you are the leader, don't forget to approve it in the Review section.");
+                        LoadMyWorkspace();
+                        LoadStats();
+                    }
+                }
+            }
+        }
+
+        private void lblTasks_Click(object sender, EventArgs e)
+        {
+            using (TasksForm tasksWindow = new TasksForm())
+            {
+                tasksWindow.ShowDialog();
+            }
+            
+            LoadStats();
+            LoadMyWorkspace();
         }
     }
 }

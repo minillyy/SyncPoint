@@ -21,7 +21,6 @@
             this.lblUserName = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
             this.pnlSidebar = new System.Windows.Forms.Panel();
-            this.sidebarControl1 = new SyncPoint.Forms.SidebarControl();
             this.pnlContent = new System.Windows.Forms.Panel();
             this.btnReviewSubmissions = new System.Windows.Forms.Button();
             this.btnAddMember = new System.Windows.Forms.Button();
@@ -38,6 +37,9 @@
             this.pnlStatTotal3 = new System.Windows.Forms.Panel();
             this.lblPendingLabel = new System.Windows.Forms.Label();
             this.lblPendingNum = new System.Windows.Forms.Label();
+            this.btnSubmit = new System.Windows.Forms.Button();
+            this.lblTasks = new System.Windows.Forms.Label();
+            this.sidebarControl1 = new SyncPoint.Forms.SidebarControl();
             this.pnlTopbar.SuspendLayout();
             this.pnlSidebar.SuspendLayout();
             this.pnlContent.SuspendLayout();
@@ -86,6 +88,7 @@
             // pnlSidebar
             // 
             this.pnlSidebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(39)))), ((int)(((byte)(68)))));
+            this.pnlSidebar.Controls.Add(this.lblTasks);
             this.pnlSidebar.Controls.Add(this.sidebarControl1);
             this.pnlSidebar.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlSidebar.Location = new System.Drawing.Point(0, 50);
@@ -93,18 +96,11 @@
             this.pnlSidebar.Size = new System.Drawing.Size(90, 519);
             this.pnlSidebar.TabIndex = 1;
             // 
-            // sidebarControl1
-            // 
-            this.sidebarControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.sidebarControl1.Location = new System.Drawing.Point(0, 0);
-            this.sidebarControl1.Name = "sidebarControl1";
-            this.sidebarControl1.Size = new System.Drawing.Size(116, 519);
-            this.sidebarControl1.TabIndex = 0;
-            // 
             // pnlContent
             // 
             this.pnlContent.AutoScroll = true;
             this.pnlContent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(247)))), ((int)(((byte)(250)))));
+            this.pnlContent.Controls.Add(this.btnSubmit);
             this.pnlContent.Controls.Add(this.btnReviewSubmissions);
             this.pnlContent.Controls.Add(this.btnAddMember);
             this.pnlContent.Controls.Add(this.pnlMembersCard);
@@ -134,11 +130,11 @@
             // 
             this.btnAddMember.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
             this.btnAddMember.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddMember.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddMember.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddMember.ForeColor = System.Drawing.Color.White;
-            this.btnAddMember.Location = new System.Drawing.Point(268, 451);
+            this.btnAddMember.Location = new System.Drawing.Point(205, 451);
             this.btnAddMember.Name = "btnAddMember";
-            this.btnAddMember.Size = new System.Drawing.Size(170, 51);
+            this.btnAddMember.Size = new System.Drawing.Size(233, 51);
             this.btnAddMember.TabIndex = 3;
             this.btnAddMember.Text = "Add Member";
             this.btnAddMember.UseVisualStyleBackColor = false;
@@ -163,26 +159,24 @@
             this.dgvMembers.BackgroundColor = System.Drawing.Color.White;
             this.dgvMembers.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvMembers.ColumnHeadersHeight = 29;
-            this.dgvMembers.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvMembers.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(224)))), ((int)(((byte)(208)))));
-            this.dgvMembers.Location = new System.Drawing.Point(12, 38);
+            this.dgvMembers.Location = new System.Drawing.Point(0, 42);
             this.dgvMembers.Name = "dgvMembers";
             this.dgvMembers.ReadOnly = true;
             this.dgvMembers.RowHeadersVisible = false;
             this.dgvMembers.RowHeadersWidth = 51;
             this.dgvMembers.RowTemplate.Height = 24;
             this.dgvMembers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvMembers.Size = new System.Drawing.Size(591, 282);
+            this.dgvMembers.Size = new System.Drawing.Size(615, 288);
             this.dgvMembers.TabIndex = 1;
             this.dgvMembers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMembers_CellContentClick);
             // 
             // lblMembersTitle
             // 
             this.lblMembersTitle.AutoSize = true;
-            this.lblMembersTitle.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblMembersTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMembersTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(39)))), ((int)(((byte)(68)))));
-            this.lblMembersTitle.Location = new System.Drawing.Point(12, 10);
+            this.lblMembersTitle.Location = new System.Drawing.Point(15, 11);
             this.lblMembersTitle.Name = "lblMembersTitle";
             this.lblMembersTitle.Size = new System.Drawing.Size(132, 28);
             this.lblMembersTitle.TabIndex = 0;
@@ -307,6 +301,43 @@
             this.lblPendingNum.TabIndex = 0;
             this.lblPendingNum.Text = "0";
             // 
+            // btnSubmit
+            // 
+            this.btnSubmit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.btnSubmit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSubmit.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSubmit.ForeColor = System.Drawing.Color.White;
+            this.btnSubmit.Location = new System.Drawing.Point(14, 451);
+            this.btnSubmit.Name = "btnSubmit";
+            this.btnSubmit.Size = new System.Drawing.Size(185, 51);
+            this.btnSubmit.TabIndex = 3;
+            this.btnSubmit.Text = "Submit Work";
+            this.btnSubmit.UseVisualStyleBackColor = false;
+            this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
+            // 
+            // lblTasks
+            // 
+            this.lblTasks.AutoSize = true;
+            this.lblTasks.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.lblTasks.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblTasks.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTasks.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(143)))), ((int)(((byte)(163)))), ((int)(((byte)(196)))));
+            this.lblTasks.Location = new System.Drawing.Point(16, 133);
+            this.lblTasks.Name = "lblTasks";
+            this.lblTasks.Size = new System.Drawing.Size(57, 21);
+            this.lblTasks.TabIndex = 4;
+            this.lblTasks.Text = "Tasks";
+            this.lblTasks.Click += new System.EventHandler(this.lblTasks_Click);
+            // 
+            // sidebarControl1
+            // 
+            this.sidebarControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.sidebarControl1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(143)))), ((int)(((byte)(163)))), ((int)(((byte)(196)))));
+            this.sidebarControl1.Location = new System.Drawing.Point(0, 0);
+            this.sidebarControl1.Name = "sidebarControl1";
+            this.sidebarControl1.Size = new System.Drawing.Size(116, 519);
+            this.sidebarControl1.TabIndex = 0;
+            // 
             // LeaderDashboardForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
@@ -326,6 +357,7 @@
             this.pnlTopbar.ResumeLayout(false);
             this.pnlTopbar.PerformLayout();
             this.pnlSidebar.ResumeLayout(false);
+            this.pnlSidebar.PerformLayout();
             this.pnlContent.ResumeLayout(false);
             this.pnlMembersCard.ResumeLayout(false);
             this.pnlMembersCard.PerformLayout();
@@ -364,5 +396,7 @@
         private SidebarControl sidebarControl1;
         private System.Windows.Forms.Button btnAddMember;
         private System.Windows.Forms.Button btnReviewSubmissions;
+        private System.Windows.Forms.Button btnSubmit;
+        private System.Windows.Forms.Label lblTasks;
     }
 }

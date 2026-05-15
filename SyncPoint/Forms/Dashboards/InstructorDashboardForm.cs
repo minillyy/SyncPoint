@@ -1,9 +1,10 @@
-﻿using System;
+﻿using SyncPoint.Data;
+using SyncPoint.Forms.Auth;
+using SyncPoint.Forms.Other_Forms;
+using System;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
-using SyncPoint.Data;
-using SyncPoint.Forms.Auth;
 
 namespace SyncPoint.Forms.Dashboards
 {
@@ -103,11 +104,6 @@ namespace SyncPoint.Forms.Dashboards
         private void lblNavGroups_Click(object sender, EventArgs e)
         {
             ShowGroupsTab();
-        }
-
-        private void lblNavReports_Click(object sender, EventArgs e)
-        {
-            ShowReportsTab();
         }
 
         // ════════════════════════════════════════════════════
@@ -351,9 +347,7 @@ namespace SyncPoint.Forms.Dashboards
             StyleButtonCells();
         }
 
-        private void dgvGroups_CellPainting(
-    object sender,
-    DataGridViewCellPaintingEventArgs e)
+        private void dgvGroups_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             // Only paint the BtnAppoint column
             if (e.ColumnIndex !=
@@ -478,6 +472,14 @@ namespace SyncPoint.Forms.Dashboards
             {
                 Session.Clear();
                 this.Close();
+            }
+        }
+
+        private void lblNavReports_Click(object sender, EventArgs e)
+        {
+            using (ReportsForm reportsWindow = new ReportsForm())
+            {
+                reportsWindow.ShowDialog();
             }
         }
     }
