@@ -57,29 +57,34 @@ namespace SyncPoint.Forms.Dashboards
 
         private void LoadMembers()
         {
-            // 1. SAFETY: Prevent the Designer from running database/styling code that 
-            // causes "Value does not fall within expected range" or "Extender Provider" errors.
+            // Safety check for the Designer
             if (this.DesignMode) return;
 
-            // 2. Refresh Data
+            // 1. Fetch Fresh Data
             var progress = DatabaseHelper.GetMemberProgress(Session.GroupID);
 
-            // 3. Setup Binding & Row Height blueprint
+            // 2. Clear and Bind Data
             dgvMembers.DataSource = null;
             dgvMembers.RowTemplate.Height = 40;
             dgvMembers.DataSource = progress;
 
-            // 4. Header Sizing Logic (Must set Mode before Height to avoid crashes)
+            // 3. Header Sizing (Mode must be set before Height)
             dgvMembers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dgvMembers.ColumnHeadersHeight = 50;
 
-            // 5. Remove unwanted "Completion %" column
+            // 4. Remove unwanted "Completion %" column
             if (dgvMembers.Columns.Contains("CompletionRate"))
             {
                 dgvMembers.Columns.Remove("CompletionRate");
             }
 
-            // 6. Text and Alignments
+            // 5. Header Texts, Alignment, and DISABLE SORTING
+            foreach (DataGridViewColumn column in dgvMembers.Columns)
+            {
+                // This removes the arrow and prevents clicking from shuffling rows
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+
             if (dgvMembers.Columns.Contains("FullName"))
             {
                 dgvMembers.Columns["FullName"].HeaderText = "Member";
@@ -98,23 +103,31 @@ namespace SyncPoint.Forms.Dashboards
                 dgvMembers.Columns["Done"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             }
 
-            // 7. Styling (Colors, Fonts, Selection)
+            // 6. Header Styling & Invisible Header Highlight
             dgvMembers.EnableHeadersVisualStyles = false;
             dgvMembers.ColumnHeadersDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#1a2744");
             dgvMembers.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             dgvMembers.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 10f, FontStyle.Bold);
-            dgvMembers.ColumnHeadersDefaultCellStyle.SelectionBackColor = ColorTranslator.FromHtml("#1a2744");
             dgvMembers.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvMembers.ColumnHeadersDefaultCellStyle.SelectionBackColor = ColorTranslator.FromHtml("#1a2744");
+            dgvMembers.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.White;
 
-            // 8. General Grid Look & Feel
+            // 7. Body Styling & Invisible Row Highlights
+            dgvMembers.DefaultCellStyle.SelectionBackColor = Color.White;
+            dgvMembers.DefaultCellStyle.SelectionForeColor = Color.Black;
+
             dgvMembers.AlternatingRowsDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#faf7f2");
+            dgvMembers.AlternatingRowsDefaultCellStyle.SelectionBackColor = ColorTranslator.FromHtml("#faf7f2");
+            dgvMembers.AlternatingRowsDefaultCellStyle.SelectionForeColor = Color.Black;
+
+            // 8. General Grid Cleanup
             dgvMembers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvMembers.AllowUserToResizeColumns = false;
             dgvMembers.AllowUserToResizeRows = false;
             dgvMembers.RowHeadersVisible = false;
             dgvMembers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
-            // 9. Force Refresh Row Heights
+            // 9. Force row height update
             foreach (DataGridViewRow row in dgvMembers.Rows)
             {
                 row.Height = 40;

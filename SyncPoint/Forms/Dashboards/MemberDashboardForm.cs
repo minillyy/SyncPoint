@@ -42,7 +42,7 @@ namespace SyncPoint.Forms.Dashboards
             // TaskID (Hidden)
             dgvMyTasks.Columns.Add(new DataGridViewTextBoxColumn { Name = "TaskID", Visible = false });
 
-            // 1. Task Title (Balanced at 20)
+            // 1. Task Title
             dgvMyTasks.Columns.Add(new DataGridViewTextBoxColumn
             {
                 Name = "Title",
@@ -57,7 +57,7 @@ namespace SyncPoint.Forms.Dashboards
                 }
             });
 
-            // 2. Description (Reduced from 55 to 40 to give neighbors room)
+            // 2. Description
             dgvMyTasks.Columns.Add(new DataGridViewTextBoxColumn
             {
                 Name = "Description",
@@ -66,7 +66,7 @@ namespace SyncPoint.Forms.Dashboards
                 FillWeight = 40
             });
 
-            // 3. Due Date (Increased from 15 to 22)
+            // 3. Due Date
             dgvMyTasks.Columns.Add(new DataGridViewTextBoxColumn
             {
                 Name = "Deadline",
@@ -76,7 +76,7 @@ namespace SyncPoint.Forms.Dashboards
                 DefaultCellStyle = new DataGridViewCellStyle { Alignment = DataGridViewContentAlignment.MiddleCenter }
             });
 
-            // 4. Status (Increased from 10 to 18)
+            // 4. Status
             dgvMyTasks.Columns.Add(new DataGridViewTextBoxColumn
             {
                 Name = "Status",
@@ -86,22 +86,36 @@ namespace SyncPoint.Forms.Dashboards
                 DefaultCellStyle = new DataGridViewCellStyle { Alignment = DataGridViewContentAlignment.MiddleCenter }
             });
 
-            // LOCK TABLE RESIZING
+            // --- DISABLE SORTING (Removes the Arrow and Shuffling) ---
+            foreach (DataGridViewColumn column in dgvMyTasks.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+
+            // --- LOCK TABLE RESIZING ---
             dgvMyTasks.AllowUserToResizeColumns = false;
             dgvMyTasks.AllowUserToResizeRows = false;
             dgvMyTasks.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dgvMyTasks.RowHeadersVisible = false;
             dgvMyTasks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
-            // STYLING & REMOVE HIGHLIGHT
+            // --- HEADER STYLING & INVISIBLE HIGHLIGHT ---
             dgvMyTasks.EnableHeadersVisualStyles = false;
             dgvMyTasks.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(52, 73, 94);
             dgvMyTasks.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvMyTasks.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10f, FontStyle.Bold);
             dgvMyTasks.ColumnHeadersHeight = 45;
 
-            // Selection color fix (Matches selection to background so it's "invisible")
+            // Makes the header stay the same color when clicked
+            dgvMyTasks.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(52, 73, 94);
+            dgvMyTasks.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.White;
+
+            // --- BODY STYLING & INVISIBLE ROW HIGHLIGHTS ---
+            // Standard Row Selection
             dgvMyTasks.DefaultCellStyle.SelectionBackColor = Color.White;
             dgvMyTasks.DefaultCellStyle.SelectionForeColor = Color.Black;
+
+            // Alternating Row Selection
             dgvMyTasks.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 245, 240);
             dgvMyTasks.AlternatingRowsDefaultCellStyle.SelectionBackColor = Color.FromArgb(248, 245, 240);
             dgvMyTasks.AlternatingRowsDefaultCellStyle.SelectionForeColor = Color.Black;
