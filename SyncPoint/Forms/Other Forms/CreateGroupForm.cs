@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using SyncPoint.Data;
 
-namespace SyncPoint.Forms
+namespace SyncPoint.Forms.Other_Forms
 {
     public partial class CreateGroupForm : Form
     {

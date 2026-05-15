@@ -1,15 +1,15 @@
-﻿using System;
+﻿using SyncPoint.Data;
+using SyncPoint.Forms.Auth;
+using SyncPoint.Forms.Other_Forms;
+using System;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
-using SyncPoint.Data;
-using SyncPoint.Forms.Auth;
 
 namespace SyncPoint.Forms.Dashboards
 {
     public partial class InstructorDashboardForm : Form
     {
-        // Tracks currently selected group
         private int _selectedGroupID = -1;
         private string _selectedGroupName = "";
 
@@ -24,25 +24,19 @@ namespace SyncPoint.Forms.Dashboards
         // ════════════════════════════════════════════════════
         private void WireUpEvents()
         {
-            // Form load
             this.Load += new EventHandler(InstructorDashboardForm_Load);
 
-            // Nav label clicks
             lblNavGroups.Click += new EventHandler(lblNavGroups_Click);
             lblNavReports.Click += new EventHandler(lblNavReports_Click);
 
-            // Make nav labels look clickable
             lblNavGroups.Cursor = Cursors.Hand;
             lblNavReports.Cursor = Cursors.Hand;
 
-            // Logout label
             lblLogout.Click += new EventHandler(lblLogout_Click);
             lblLogout.Cursor = Cursors.Hand;
 
-            // Create group button
             btnCreateGroup.Click += new EventHandler(btnCreateGroup_Click);
 
-            // Topbar gold border paint
             pnlTopbar.Paint += (s, pe) =>
             {
                 var pen = new Pen(ColorTranslator.FromHtml("#c9a84c"), 3);
@@ -50,7 +44,6 @@ namespace SyncPoint.Forms.Dashboards
                     pnlTopbar.Width, pnlTopbar.Height - 2);
             };
 
-            // Sidebar footer divider paint
             pnlSidebarFooter.Paint += (s, pe) =>
             {
                 var pen = new Pen(ColorTranslator.FromHtml("#2e3f5c"), 1);
@@ -79,22 +72,20 @@ namespace SyncPoint.Forms.Dashboards
                 lblNavReports
             };
 
-            // Reset all labels to inactive style
             foreach (Label lbl in navLabels)
             {
                 lbl.ForeColor = ColorTranslator.FromHtml("#8fa3c4");
                 lbl.BackColor = Color.Transparent;
                 lbl.Font = new Font("Arial", 10f, FontStyle.Regular);
                 lbl.Tag = "";
-                lbl.Invalidate(); // force visual refresh
+                lbl.Invalidate();
             }
 
-            // Apply active style to clicked label
             activeLabel.ForeColor = ColorTranslator.FromHtml("#f5f0e8");
             activeLabel.BackColor = Color.FromArgb(30, 201, 168, 76);
             activeLabel.Font = new Font("Arial", 10f, FontStyle.Bold);
             activeLabel.Tag = "active";
-            activeLabel.Invalidate(); // force visual refresh
+            activeLabel.Invalidate();
         }
 
         // ════════════════════════════════════════════════════
@@ -103,11 +94,6 @@ namespace SyncPoint.Forms.Dashboards
         private void lblNavGroups_Click(object sender, EventArgs e)
         {
             ShowGroupsTab();
-        }
-
-        private void lblNavReports_Click(object sender, EventArgs e)
-        {
-            ShowReportsTab();
         }
 
         // ════════════════════════════════════════════════════
@@ -121,25 +107,13 @@ namespace SyncPoint.Forms.Dashboards
         }
 
         // ════════════════════════════════════════════════════
-        //  SHOW REPORTS TAB
-        // ════════════════════════════════════════════════════
-        private void ShowReportsTab()
-        {
-            SetActiveNav(lblNavReports);
-            lblPageTitle.Text = "Reports";
-            // Reports logic will go here later
-        }
-
-        // ════════════════════════════════════════════════════
         //  SETUP GROUPS GRID COLUMNS
         //  Called once before any data is loaded
         // ════════════════════════════════════════════════════
         private void SetupGroupsGrid()
         {
-            // Prevent adding columns twice
             if (dgvGroups.Columns.Count > 0) return;
 
-            // Hidden GroupID
             dgvGroups.Columns.Add(
                 new DataGridViewTextBoxColumn
                 {
@@ -200,17 +174,12 @@ namespace SyncPoint.Forms.Dashboards
                     FillWeight = 20
                 });
 
-            // Remove sort arrows from all columns
             foreach (DataGridViewColumn col in dgvGroups.Columns)
             {
                 col.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
 
-            // ── TABLE BACKGROUND ─────────────────────────────────
-            // White background
             dgvGroups.BackgroundColor = Color.White;
-
-            // Prevent table resizing
 
             dgvGroups.AllowUserToResizeColumns = false;
             dgvGroups.AllowUserToResizeRows = false;
@@ -222,8 +191,6 @@ namespace SyncPoint.Forms.Dashboards
                     .DisableResizing;
             dgvGroups.AllowUserToOrderColumns = false;
 
-            // ── HEADER ROW ───────────────────────────────────────
-            // Dark navy
             dgvGroups.EnableHeadersVisualStyles = false;
             dgvGroups.ColumnHeadersDefaultCellStyle.BackColor =
                 ColorTranslator.FromHtml("#1a2744");
@@ -235,8 +202,6 @@ namespace SyncPoint.Forms.Dashboards
                 new Padding(8, 0, 0, 0);
             dgvGroups.ColumnHeadersHeight = 38;
 
-            // ── DATA ROWS ────────────────────────────────────────
-            // White rows with navy text
             dgvGroups.DefaultCellStyle.BackColor =
                 Color.White;
             dgvGroups.DefaultCellStyle.ForeColor =
@@ -250,7 +215,6 @@ namespace SyncPoint.Forms.Dashboards
             dgvGroups.DefaultCellStyle.SelectionForeColor =
                 ColorTranslator.FromHtml("#1a2744");
 
-            // Alternating row — very light cream
             dgvGroups.AlternatingRowsDefaultCellStyle.BackColor =
                 ColorTranslator.FromHtml("#faf7f2");
             dgvGroups.AlternatingRowsDefaultCellStyle.ForeColor =
@@ -262,15 +226,11 @@ namespace SyncPoint.Forms.Dashboards
                 .SelectionForeColor =
                 ColorTranslator.FromHtml("#1a2744");
 
-            // ── GRID LINES ───────────────────────────────────────
-            // Subtle horizontal lines only — cleaner look
             dgvGroups.CellBorderStyle =
                 DataGridViewCellBorderStyle.SingleHorizontal;
             dgvGroups.GridColor =
                 ColorTranslator.FromHtml("#e8e0d0");
 
-            // ── BUTTON COLUMN STYLE ──────────────────────────────
-            // Dark navy button matching your UI buttons
             dgvGroups.Columns["BtnAppoint"]
                 .DefaultCellStyle.BackColor =
                 ColorTranslator.FromHtml("#1a2744");
@@ -290,7 +250,6 @@ namespace SyncPoint.Forms.Dashboards
                 .DefaultCellStyle.SelectionForeColor =
                 Color.White;
 
-            // ── OTHER GRID PROPERTIES ────────────────────────────
             dgvGroups.BorderStyle = BorderStyle.None;
             dgvGroups.RowHeadersVisible = false;
             dgvGroups.AllowUserToAddRows = false;
@@ -302,7 +261,6 @@ namespace SyncPoint.Forms.Dashboards
             dgvGroups.RowTemplate.Height = 42;
             dgvGroups.MultiSelect = false;
 
-            // Remove blue selection highlight
             dgvGroups.DefaultCellStyle.SelectionBackColor =
                 Color.White;
             dgvGroups.DefaultCellStyle.SelectionForeColor =
@@ -315,10 +273,8 @@ namespace SyncPoint.Forms.Dashboards
                 .SelectionForeColor =
                 ColorTranslator.FromHtml("#1a2744");
 
-            // Wire CellClick once
             dgvGroups.CellClick += new DataGridViewCellEventHandler(dgvGroups_CellClick);
 
-            // Wire custom button painter
             dgvGroups.CellPainting += new DataGridViewCellPaintingEventHandler(dgvGroups_CellPainting);
         }
 
@@ -327,7 +283,6 @@ namespace SyncPoint.Forms.Dashboards
         // ════════════════════════════════════════════════════
         private void LoadGroups()
         {
-            // Safety check — setup columns if missing
             if (dgvGroups.Columns.Count == 0)
                 SetupGroupsGrid();
 
@@ -341,9 +296,7 @@ namespace SyncPoint.Forms.Dashboards
                     row["GroupID"],    // col 0 - hidden
                     row["GroupName"],  // col 1
                     row["LeaderName"], // col 2
-                    row["MemberCount"] // col 3
-                                       // col 4 BtnAppoint is a button
-                                       // no value needed for button columns
+                    row["MemberCount"] // col 3          
                 );
             }
 
@@ -351,11 +304,8 @@ namespace SyncPoint.Forms.Dashboards
             StyleButtonCells();
         }
 
-        private void dgvGroups_CellPainting(
-    object sender,
-    DataGridViewCellPaintingEventArgs e)
+        private void dgvGroups_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            // Only paint the BtnAppoint column
             if (e.ColumnIndex !=
                 dgvGroups.Columns["BtnAppoint"].Index ||
                 e.RowIndex < 0)
@@ -364,7 +314,6 @@ namespace SyncPoint.Forms.Dashboards
             e.Paint(e.ClipBounds,
                 DataGridViewPaintParts.Background);
 
-            // Draw the navy button background
             Color btnColor =
                 ColorTranslator.FromHtml("#1a2744");
             Color btnHover =
@@ -372,17 +321,14 @@ namespace SyncPoint.Forms.Dashboards
 
             using (var brush = new SolidBrush(btnColor))
             {
-                // Button rectangle with padding inside the cell
                 Rectangle btnRect = new Rectangle(
                     e.CellBounds.X + 6,
                     e.CellBounds.Y + 5,
                     e.CellBounds.Width - 12,
                     e.CellBounds.Height - 10);
 
-                // Draw filled rounded-looking button
                 e.Graphics.FillRectangle(brush, btnRect);
 
-                // Draw button text in white
                 using (var textBrush = new SolidBrush(Color.White))
                 using (var font = new Font(
                     "Arial", 8.5f, FontStyle.Bold))
@@ -404,7 +350,7 @@ namespace SyncPoint.Forms.Dashboards
                 }
             }
 
-            e.Handled = true; // prevent default drawing
+            e.Handled = true;
         }
 
         private void StyleButtonCells()
@@ -413,7 +359,6 @@ namespace SyncPoint.Forms.Dashboards
             {
                 if (row.IsNewRow) continue;
 
-                // Style the Appoint Leader button cell
                 var cell = row.Cells["BtnAppoint"]
                     as DataGridViewButtonCell;
                 if (cell != null)
@@ -433,23 +378,20 @@ namespace SyncPoint.Forms.Dashboards
         // ════════════════════════════════════════════════════
         private void dgvGroups_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            // Ignore header row clicks
             if (e.RowIndex < 0) return;
 
             int groupID = Convert.ToInt32(dgvGroups.Rows[e.RowIndex].Cells["GroupID"].Value);
 
             string groupName = dgvGroups.Rows[e.RowIndex].Cells["GroupName"].Value.ToString();
 
-            // Store selected group
             _selectedGroupID = groupID;
             _selectedGroupName = groupName;
 
-            // Appoint Leader button clicked
             if (e.ColumnIndex == dgvGroups.Columns["BtnAppoint"].Index)
             {
                 var form = new AppointLeaderForm(groupID, groupName);
                 form.ShowDialog();
-                LoadGroups(); // refresh list
+                LoadGroups();
             }
         }
 
@@ -478,6 +420,31 @@ namespace SyncPoint.Forms.Dashboards
             {
                 Session.Clear();
                 this.Close();
+            }
+        }
+
+        private void lblNavReports_Click(object sender, EventArgs e)
+        {
+            if (dgvGroups.CurrentRow == null)
+            {
+                MessageBox.Show("Please select a group from the list first to view its reports.", "SyncPoint", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                int selectedGroupId = Convert.ToInt32(dgvGroups.CurrentRow.Cells["GroupID"].Value);
+                string groupName = dgvGroups.CurrentRow.Cells["GroupName"].Value?.ToString() ?? "Selected Group";
+
+                using (ReportsForm reportWindow = new ReportsForm(selectedGroupId))
+                {
+                    reportWindow.Text = $"Reports - {groupName}";
+                    reportWindow.ShowDialog(this);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Make sure the GroupID column is correctly set in your grid. Error: " + ex.Message);
             }
         }
     }

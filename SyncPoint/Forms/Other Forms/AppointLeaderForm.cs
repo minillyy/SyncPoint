@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using SyncPoint.Data;
 
-namespace SyncPoint.Forms
+namespace SyncPoint.Forms.Other_Forms
 {
     public partial class AppointLeaderForm : Form
     {
@@ -27,11 +27,9 @@ namespace SyncPoint.Forms
         {
             this.Load += AppointLeaderForm_Load;
 
-            // Search bar filters as user types
             txtSearch.TextChanged += (s, e) =>
                 FilterStudents(txtSearch.Text);
 
-            // Search placeholder behavior
             txtSearch.Enter += (s, e) =>
             {
                 if (txtSearch.Text ==
@@ -57,12 +55,9 @@ namespace SyncPoint.Forms
                 }
             };
 
-            // Row selection updates the label
             dgvStudents.SelectionChanged += (s, e) =>
                 UpdateSelectedLabel();
 
-            // Double click only highlights the row
-            // Does NOT trigger appoint
             dgvStudents.CellDoubleClick += (s, e) =>
             {
                 if (e.RowIndex >= 0)
@@ -70,11 +65,9 @@ namespace SyncPoint.Forms
                         .Selected = true;
             };
 
-            // Button clicks
             btnAppoint.Click += btnAppoint_Click;
             btnCancel.Click += (s, e) => this.Close();
 
-            // Header gold border paint
             pnlHeader.Paint += (s, pe) =>
             {
                 var pen = new Pen(
@@ -93,10 +86,8 @@ namespace SyncPoint.Forms
         private void AppointLeaderForm_Load(
             object sender, EventArgs e)
         {
-            // Show the group name passed in
             lblGroup.Text = "Group:  " + _groupName;
 
-            // Warn if group already has a leader
             if (DatabaseHelper.GroupHasLeader(_groupID))
             {
                 lblInstruction.Text =
@@ -117,13 +108,11 @@ namespace SyncPoint.Forms
             SetupStudentsGrid();
             LoadStudents();
 
-            // Set search placeholder
             txtSearch.Text =
                 "Search by name or username...";
             txtSearch.ForeColor =
                 ColorTranslator.FromHtml("#b0a898");
 
-            // Disable until a student is selected
             btnAppoint.Enabled = false;
         }
 
@@ -134,7 +123,6 @@ namespace SyncPoint.Forms
         {
             dgvStudents.Columns.Clear();
 
-            // Hidden UserID
             dgvStudents.Columns.Add(
                 new DataGridViewTextBoxColumn
                 {
@@ -142,7 +130,6 @@ namespace SyncPoint.Forms
                     Visible = false
                 });
 
-            // Full Name
             dgvStudents.Columns.Add(
                 new DataGridViewTextBoxColumn
                 {
@@ -152,7 +139,6 @@ namespace SyncPoint.Forms
                     FillWeight = 50
                 });
 
-            // Username
             dgvStudents.Columns.Add(
                 new DataGridViewTextBoxColumn
                 {
@@ -162,7 +148,6 @@ namespace SyncPoint.Forms
                     FillWeight = 50
                 });
 
-            // Prevent table resize
             dgvStudents.AllowUserToResizeColumns = false;
             dgvStudents.AllowUserToResizeRows = false;
             dgvStudents.ColumnHeadersHeightSizeMode =
@@ -173,7 +158,6 @@ namespace SyncPoint.Forms
                     .DisableResizing;
             dgvStudents.AllowUserToOrderColumns = false;
 
-            // ── Header ────────────────────────────────────
             dgvStudents.EnableHeadersVisualStyles = false;
             dgvStudents.ColumnHeadersDefaultCellStyle
                 .BackColor =
@@ -187,7 +171,6 @@ namespace SyncPoint.Forms
                 .Padding = new Padding(8, 0, 0, 0);
             dgvStudents.ColumnHeadersHeight = 36;
 
-            // ── Rows — white background, dark text ────────
             dgvStudents.BackgroundColor = Color.White;
             dgvStudents.DefaultCellStyle.BackColor =
                 Color.White;
@@ -198,7 +181,6 @@ namespace SyncPoint.Forms
             dgvStudents.DefaultCellStyle.Padding =
                 new Padding(8, 0, 0, 0);
 
-            // ── Selection — light blue ─────────────────────
             dgvStudents.DefaultCellStyle
                 .SelectionBackColor =
                 ColorTranslator.FromHtml("#dbeafe");
@@ -206,7 +188,6 @@ namespace SyncPoint.Forms
                 .SelectionForeColor =
                 ColorTranslator.FromHtml("#1a2744");
 
-            // ── Alternating rows — very light gray ─────────
             dgvStudents.AlternatingRowsDefaultCellStyle
                 .BackColor =
                 ColorTranslator.FromHtml("#f8f8f8");
@@ -220,7 +201,6 @@ namespace SyncPoint.Forms
                 .SelectionForeColor =
                 ColorTranslator.FromHtml("#1a2744");
 
-            // ── Grid properties ───────────────────────────
             dgvStudents.BorderStyle =
                 BorderStyle.None;
             dgvStudents.RowHeadersVisible = false;
@@ -238,7 +218,6 @@ namespace SyncPoint.Forms
             dgvStudents.RowTemplate.Height = 38;
             dgvStudents.MultiSelect = false;
 
-            // Remove sort arrows
             foreach (DataGridViewColumn col
                 in dgvStudents.Columns)
             {
@@ -370,10 +349,8 @@ namespace SyncPoint.Forms
 
         // ════════════════════════════════════════════════════
         //  APPOINT BUTTON CLICK
-        //  This is the ONLY place the MessageBox appears
         // ════════════════════════════════════════════════════
-        private void btnAppoint_Click(
-            object sender, EventArgs e)
+        private void btnAppoint_Click(object sender, EventArgs e)
         {
             if (dgvStudents.SelectedRows.Count == 0)
             {

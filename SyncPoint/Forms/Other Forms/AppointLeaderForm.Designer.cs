@@ -1,4 +1,4 @@
-﻿namespace SyncPoint.Forms
+﻿namespace SyncPoint.Forms.Other_Forms
 {
     partial class AppointLeaderForm
     {

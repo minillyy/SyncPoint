@@ -13,7 +13,6 @@ namespace SyncPoint.Forms.Other_Forms
         {
             InitializeComponent();
 
-            // Apply Design and Logic
             SetupHeaderPanel();
             SetupDataGridViewStyle();
             LoadAvailableTasks();
@@ -21,19 +20,17 @@ namespace SyncPoint.Forms.Other_Forms
 
         private void SetupHeaderPanel()
         {
-            // 1. Create the Navy Blue Panel
             Panel pnlHeader = new Panel
             {
                 Dock = DockStyle.Top,
                 Height = 100,
-                BackColor = Color.FromArgb(18, 35, 70), // Navy Blue
+                BackColor = Color.FromArgb(44, 62, 80),
                 Name = "pnlHeader"
             };
 
-            // 2. Add Title Label
             Label lblTitle = new Label
             {
-                Name = "lblTitle", // Added Name for internal lookup
+                Name = "lblTitle",
                 Text = "Available Tasks",
                 Font = new Font("Segoe UI", 18, FontStyle.Bold),
                 ForeColor = Color.White,
@@ -41,10 +38,9 @@ namespace SyncPoint.Forms.Other_Forms
                 AutoSize = true
             };
 
-            // 3. Add Info Label
             Label lblInfo = new Label
             {
-                Name = "lblInfo", // Added Name so LoadAvailableTasks can find it
+                Name = "lblInfo",
                 Text = "Browse the list below. Press 'Accept' to assign a task to yourself.",
                 Font = new Font("Segoe UI", 10),
                 ForeColor = Color.FromArgb(200, 200, 200),
@@ -59,127 +55,128 @@ namespace SyncPoint.Forms.Other_Forms
 
         private void SetupDataGridViewStyle()
         {
-            dgvTasks.AllowUserToResizeColumns = false;
-            dgvTasks.AllowUserToResizeRows = false;
-            dgvTasks.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dgvTasks.Columns.Clear();
+            dgvTasks.DataSource = null;
+
+            dgvTasks.Columns.Add(new DataGridViewTextBoxColumn { Name = "TaskID", Visible = false });
+            dgvTasks.Columns.Add(new DataGridViewTextBoxColumn { Name = "Title", HeaderText = "Title", FillWeight = 25, MinimumWidth = 100 });
+            dgvTasks.Columns.Add(new DataGridViewTextBoxColumn { Name = "Description", HeaderText = "Description", FillWeight = 40, MinimumWidth = 150 });
+            dgvTasks.Columns.Add(new DataGridViewTextBoxColumn { Name = "Deadline", HeaderText = "Deadline", FillWeight = 15, MinimumWidth = 80 });
+            dgvTasks.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "TaskWeight",
+                HeaderText = "Points",
+                FillWeight = 10,
+                MinimumWidth = 50,
+                DefaultCellStyle = new DataGridViewCellStyle { Alignment = DataGridViewContentAlignment.MiddleCenter }
+            });
+            dgvTasks.Columns.Add(new DataGridViewButtonColumn { Name = "Accept", HeaderText = "Action", FillWeight = 10, MinimumWidth = 70 });
+
+            dgvTasks.BackgroundColor = Color.White;
+            dgvTasks.GridColor = Color.FromArgb(235, 235, 235);
+            dgvTasks.BorderStyle = BorderStyle.None;
             dgvTasks.RowHeadersVisible = false;
             dgvTasks.AllowUserToAddRows = false;
+            dgvTasks.AllowUserToResizeRows = false;
+            dgvTasks.AllowUserToResizeColumns = false;
             dgvTasks.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvTasks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvTasks.BackgroundColor = Color.White;
-            dgvTasks.BorderStyle = BorderStyle.None;
 
             dgvTasks.EnableHeadersVisualStyles = false;
+            dgvTasks.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dgvTasks.ColumnHeadersHeight = 45;
-            dgvTasks.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(18, 35, 70);
-            dgvTasks.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgvTasks.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
-            dgvTasks.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(18, 35, 70);
+
+            DataGridViewCellStyle headerStyle = new DataGridViewCellStyle();
+            headerStyle.BackColor = Color.FromArgb(18, 35, 70);
+            headerStyle.ForeColor = Color.White;
+            headerStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            headerStyle.SelectionBackColor = Color.FromArgb(18, 35, 70);
+            dgvTasks.ColumnHeadersDefaultCellStyle = headerStyle;
 
             dgvTasks.DefaultCellStyle.SelectionBackColor = Color.White;
             dgvTasks.DefaultCellStyle.SelectionForeColor = Color.Black;
             dgvTasks.RowTemplate.Height = 50;
 
+            dgvTasks.CellPainting -= dgvTasks_CellPainting;
             dgvTasks.CellPainting += dgvTasks_CellPainting;
+            dgvTasks.CellContentClick -= dgvTasks_CellContentClick;
             dgvTasks.CellContentClick += dgvTasks_CellContentClick;
         }
 
         private void LoadAvailableTasks()
         {
-            // 1. Fetch tasks assigned to the user to check the 1:1 Policy
             DataTable myTasks = DatabaseHelper.GetTasksByMember(Session.UserID);
             bool isBusy = false;
-
             if (myTasks != null)
             {
                 foreach (DataRow row in myTasks.Rows)
                 {
-                    // If they have any task that is 'In Progress', they are busy
-                    if (row["Status"].ToString() == "In Progress")
-                    {
-                        isBusy = true;
-                        break;
-                    }
+                    if (row["Status"].ToString() == "In Progress") { isBusy = true; break; }
                 }
             }
 
-            // 2. Handle the "Busy" state safely
             if (isBusy)
             {
-                dgvTasks.DataSource = null;
-                dgvTasks.Columns.Clear();
-
-                // Safely find the label to update the text
-                Control[] foundControls = this.Controls.Find("lblInfo", true);
-                if (foundControls.Length > 0 && foundControls[0] is Label lblInfo)
-                {
-                    lblInfo.Text = "Policy: You can only have one active task at a time.";
-                    lblInfo.ForeColor = Color.FromArgb(231, 76, 60); // Red warning
-                }
+                dgvTasks.Rows.Clear();
+                Control[] found = this.Controls.Find("lblInfo", true);
+                if (found.Length > 0) { found[0].Text = "Submit your active task first!"; found[0].ForeColor = Color.Red; }
                 return;
             }
 
-            // 3. Requirement: Only show tasks that are NOT In-Progress by anyone else
             DataTable allTasks = DatabaseHelper.GetTasksByGroup(Session.GroupID);
+            dgvTasks.Rows.Clear();
 
-            // We filter the table to only show 'Pending' tasks
-            DataTable availableOnly = allTasks.Clone();
             if (allTasks != null)
             {
                 foreach (DataRow row in allTasks.Rows)
                 {
                     if (row["Status"].ToString() == "Pending")
                     {
-                        availableOnly.ImportRow(row);
+                        dgvTasks.Rows.Add(
+                            row["TaskID"],
+                            row["Title"],
+                            row["Description"],
+                            Convert.ToDateTime(row["Deadline"]).ToString("MMM dd, yyyy"),
+                            row["TaskWeight"],
+                            "Accept"
+                        );
                     }
                 }
             }
 
-            // 4. Bind the filtered data
-            dgvTasks.DataSource = null;
-            dgvTasks.Columns.Clear();
-            dgvTasks.DataSource = availableOnly;
-
-            // Grid Formatting
-            if (dgvTasks.Columns.Contains("TaskID")) dgvTasks.Columns["TaskID"].Visible = false;
-
-            if (availableOnly.Rows.Count > 0 && !dgvTasks.Columns.Contains("Accept"))
-            {
-                DataGridViewButtonColumn btn = new DataGridViewButtonColumn
-                {
-                    Name = "Accept",
-                    HeaderText = "Action",
-                    Text = "Accept",
-                    UseColumnTextForButtonValue = true,
-                    FlatStyle = FlatStyle.Flat
-                };
-                dgvTasks.Columns.Add(btn);
-            }
-
-            // Remove sorting arrows
-            foreach (DataGridViewColumn col in dgvTasks.Columns)
-                col.SortMode = DataGridViewColumnSortMode.NotSortable;
+            foreach (DataGridViewColumn col in dgvTasks.Columns) col.SortMode = DataGridViewColumnSortMode.NotSortable;
         }
 
         private void dgvTasks_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && dgvTasks.Columns[e.ColumnIndex].Name == "Accept")
             {
-                int taskID = Convert.ToInt32(dgvTasks.Rows[e.RowIndex].Cells["TaskID"].Value);
+                string taskTitle = dgvTasks.Rows[e.RowIndex].Cells["Title"].Value.ToString();
 
-                // Final safety check: Assign the task to the current UserID and set status
-                // You should update your DatabaseHelper to include Session.UserID in the assignment
-                bool success = DatabaseHelper.AssignAndAcceptTask(taskID, Session.UserID);
+                DialogResult result = MessageBox.Show(
+                    $"Are you sure you want to accept \"{taskTitle}\"?\n\nOnce accepted, this task will be moved to your workspace and hidden from other members.",
+                    "Confirm Task Acceptance",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question
+                );
 
-                if (success)
+                if (result == DialogResult.Yes)
                 {
-                    MessageBox.Show("Task Accepted! It is now assigned to you.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.Close(); // Close form so they go to their workspace
-                }
-                else
-                {
-                    MessageBox.Show("This task was just taken by someone else or you already have a task.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    LoadAvailableTasks();
+                    int taskID = Convert.ToInt32(dgvTasks.Rows[e.RowIndex].Cells["TaskID"].Value);
+
+                    bool success = DatabaseHelper.AssignAndAcceptTask(taskID, Session.UserID);
+
+                    if (success)
+                    {
+                        MessageBox.Show("Task accepted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Oops! This task might have been taken by another member just now.", "SyncPoint", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        LoadAvailableTasks();
+                    }
                 }
             }
         }

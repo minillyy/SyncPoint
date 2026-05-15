@@ -36,6 +36,7 @@
             this.lblInProgressNum = new System.Windows.Forms.Label();
             this.lblInProgressLabel = new System.Windows.Forms.Label();
             this.pnlTasksCard = new System.Windows.Forms.Panel();
+            this.btnSubmitTask = new System.Windows.Forms.Button();
             this.lblTasksTitle = new System.Windows.Forms.Label();
             this.dgvMyTasks = new System.Windows.Forms.DataGridView();
             this.pnlTopbar.SuspendLayout();
@@ -112,6 +113,7 @@
             // lblTasks
             // 
             this.lblTasks.BackColor = System.Drawing.Color.Transparent;
+            this.lblTasks.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblTasks.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblTasks.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTasks.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(143)))), ((int)(((byte)(163)))), ((int)(((byte)(196)))));
@@ -120,7 +122,7 @@
             this.lblTasks.Padding = new System.Windows.Forms.Padding(14, 0, 0, 0);
             this.lblTasks.Size = new System.Drawing.Size(109, 41);
             this.lblTasks.TabIndex = 1;
-            this.lblTasks.Text = "Tasks";
+            this.lblTasks.Text = "    Tasks";
             this.lblTasks.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblTasks.Click += new System.EventHandler(this.lblTasks_Click);
             // 
@@ -291,6 +293,7 @@
             // pnlTasksCard
             // 
             this.pnlTasksCard.BackColor = System.Drawing.Color.White;
+            this.pnlTasksCard.Controls.Add(this.btnSubmitTask);
             this.pnlTasksCard.Controls.Add(this.lblTasksTitle);
             this.pnlTasksCard.Controls.Add(this.dgvMyTasks);
             this.pnlTasksCard.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -299,6 +302,21 @@
             this.pnlTasksCard.Padding = new System.Windows.Forms.Padding(25, 15, 25, 15);
             this.pnlTasksCard.Size = new System.Drawing.Size(857, 378);
             this.pnlTasksCard.TabIndex = 2;
+            // 
+            // btnSubmitTask
+            // 
+            this.btnSubmitTask.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.btnSubmitTask.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSubmitTask.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSubmitTask.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSubmitTask.ForeColor = System.Drawing.Color.White;
+            this.btnSubmitTask.Location = new System.Drawing.Point(670, 314);
+            this.btnSubmitTask.Name = "btnSubmitTask";
+            this.btnSubmitTask.Size = new System.Drawing.Size(159, 46);
+            this.btnSubmitTask.TabIndex = 3;
+            this.btnSubmitTask.Text = "Submit Task";
+            this.btnSubmitTask.UseVisualStyleBackColor = false;
+            this.btnSubmitTask.Click += new System.EventHandler(this.btnSubmitTask_Click);
             // 
             // lblTasksTitle
             // 
@@ -326,7 +344,7 @@
             this.dgvMyTasks.RowHeadersWidth = 51;
             this.dgvMyTasks.RowTemplate.Height = 42;
             this.dgvMyTasks.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvMyTasks.Size = new System.Drawing.Size(816, 140);
+            this.dgvMyTasks.Size = new System.Drawing.Size(816, 149);
             this.dgvMyTasks.TabIndex = 2;
             // 
             // MemberDashboardForm
@@ -420,5 +438,6 @@
         private System.Windows.Forms.Label lblTasksTitle;
         private System.Windows.Forms.DataGridView dgvMyTasks;
         private System.Windows.Forms.Label lblTasks;
+        private System.Windows.Forms.Button btnSubmitTask;
     }
 }

@@ -3,14 +3,13 @@ using System.Data;
 using System.Windows.Forms;
 using SyncPoint.Data;
 
-namespace SyncPoint
+namespace SyncPoint.Forms.Other_Forms
 {
     public partial class AddTaskForm : Form
     {
         private readonly int _groupId;
         private readonly string _leaderName;
 
-        // Constructor requires the Leader Name to show on the header, and GroupID to find assignees
         public AddTaskForm(int groupId, string leaderName)
         {
             InitializeComponent();
@@ -20,14 +19,11 @@ namespace SyncPoint
 
         private void AddTaskForm_Load(object sender, EventArgs e)
         {
-            // Set header leader name label (show leader in header title)
             lblHeaderTitle.Text = $"SyncPoint - Add Task";
 
-            // Set default date picker constraints (e.g., minimum of today)
             dtpDeadline.MinDate = DateTime.Today;
-            dtpDeadline.Value = DateTime.Today.AddDays(7); // Default to 1 week out
+            dtpDeadline.Value = DateTime.Today.AddDays(7);
 
-            // Fill ComboBox with members of this specific group from the DB
             LoadGroupMembers();
         }
 
@@ -52,8 +48,8 @@ namespace SyncPoint
                         dt.ImportRow(r);
 
                     cmbAssignTo.DataSource = dt;
-                    cmbAssignTo.DisplayMember = "FullName"; // What is shown in the ComboBox UI
-                    cmbAssignTo.ValueMember = "UserID";     // The key we save to the DB table
+                    cmbAssignTo.DisplayMember = "FullName";
+                    cmbAssignTo.ValueMember = "UserID";
                 }
                 else
                 {
@@ -68,47 +64,29 @@ namespace SyncPoint
 
         private void btnAssignTask_Click(object sender, EventArgs e)
         {
-            // 1. Validation Checks
-            if (string.IsNullOrWhiteSpace(txtTaskTitle.Text))
+            if (string.IsNullOrWhiteSpace(txtTaskTitle.Text) || cmbWeight.SelectedIndex == -1)
             {
-                MessageBox.Show("Please enter a task title.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtTaskTitle.Focus();
+                MessageBox.Show("Please enter a title and select a Task Weight (Points).", "Missing Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // 2. Gather Inputs
-            string title = txtTaskTitle.Text.Trim();
-            string description = txtDescription.Text.Trim();
-            DateTime deadline = dtpDeadline.Value;
-            int? assignedToUserId = null;
+            int selectedWeight = int.Parse(cmbWeight.Text.Substring(0, 1));
+
+            int? assignedMemberId = null;
             if (cmbAssignTo.SelectedValue != null && cmbAssignTo.SelectedValue != DBNull.Value)
-                assignedToUserId = Convert.ToInt32(cmbAssignTo.SelectedValue);
+                assignedMemberId = (int)cmbAssignTo.SelectedValue;
 
-            // 3. Write data to your DB via the DatabaseHelper helper class
-            try
-            {
-                int newTaskID = DatabaseHelper.CreateTask(
-                    _groupId,
-                    title,
-                    description,
-                    deadline,
-                    assignedToUserId
-                );
+            DatabaseHelper.CreateTask(
+                Session.GroupID,
+                txtTaskTitle.Text,
+                txtDescription.Text,
+                dtpDeadline.Value,
+                assignedMemberId,
+                selectedWeight
+            );
 
-                if (newTaskID > 0)
-                {
-                    this.DialogResult = DialogResult.OK; // Signals success to the main window
-                    this.Close();
-                }
-                else
-                {
-                    MessageBox.Show("Failed to save the task. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error saving task to the database:\n{ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            MessageBox.Show($"Task created with a weight of {selectedWeight} points!", "Success");
+            this.Close();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

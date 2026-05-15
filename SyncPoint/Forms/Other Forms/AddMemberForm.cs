@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Data;
 using System.Windows.Forms;
-using SyncPoint.Data; // Ensure this matches your project namespace
+using SyncPoint.Data;
 
-namespace SyncPoint
+namespace SyncPoint.Forms.Other_Forms
 {
     public partial class AddMemberForm : Form
     {
@@ -11,15 +11,12 @@ namespace SyncPoint
         private readonly string _groupName;
         private DataTable _dtAvailableUsers;
 
-        // Constructor needs GroupID to exclude existing members and target insertions, and the Group Name for visual UI
         public AddMemberForm(int groupId, string groupName)
         {
             InitializeComponent();
             _groupId = groupId;
             _groupName = groupName;
 
-            // Ensure the header label shows the provided group name immediately
-            // in case Load fires before external consumers expect it.
             try
             {
                 lblGroupName.Text = string.IsNullOrWhiteSpace(_groupName)
@@ -42,8 +39,7 @@ namespace SyncPoint
         {
             try
             {
-                // This uses your helper method: GetAvailableMembersForGroup(int groupID)
-                // It fetches registered students (RoleID = 3) who are NOT in the group yet
+                // Fetches registered students (RoleID = 3) who are NOT in the group yet
                 _dtAvailableUsers = DatabaseHelper.GetAvailableMembersForGroup(_groupId);
 
                 if (_dtAvailableUsers != null)
@@ -54,9 +50,8 @@ namespace SyncPoint
                     // Combine with any search filter via DefaultView.RowFilter when needed
                     _dtAvailableUsers.DefaultView.RowFilter = BuildCombinedFilter(string.Empty);
 
-                    // Clean up and customize your columns to look like the UI image
                     if (dgvUsers.Columns.Contains("UserID"))
-                        dgvUsers.Columns["UserID"].Visible = false; // Hide ID from users
+                        dgvUsers.Columns["UserID"].Visible = false;
 
                     if (dgvUsers.Columns.Contains("FullName"))
                         dgvUsers.Columns["FullName"].HeaderText = "Full Name";
@@ -78,12 +73,10 @@ namespace SyncPoint
         {
             if (_dtAvailableUsers == null) return;
 
-            string filterValue = txtSearch.Text.Trim(); // escaping handled in helper
+            string filterValue = txtSearch.Text.Trim();
 
             try
             {
-                // Apply combined filter: always exclude leaders (RoleID = 2) if column exists,
-                // and apply the search text filter when provided.
                 _dtAvailableUsers.DefaultView.RowFilter = BuildCombinedFilter(filterValue);
                 UpdateStatusAndSelection();
             }
@@ -93,8 +86,6 @@ namespace SyncPoint
             }
         }
 
-        // Helper to build a DataView.RowFilter that always excludes leaders (RoleID = 2)
-        // and optionally applies a search filter on FullName or Username.
         private string BuildCombinedFilter(string searchValue)
         {
             if (_dtAvailableUsers == null)
@@ -121,7 +112,6 @@ namespace SyncPoint
             return string.Empty;
         }
 
-        // Dynamic count status and current selection display label
         private void UpdateStatusAndSelection()
         {
             int visibleCount = dgvUsers.Rows.Count;
@@ -162,12 +152,11 @@ namespace SyncPoint
                 int selectedUserId = Convert.ToInt32(selectedRow.Cells["UserID"].Value);
                 string selectedFullName = selectedRow.Cells["FullName"].Value?.ToString();
 
-                // Call helper insertion method: DatabaseHelper.AddMemberToGroup(int groupID, int userID)
                 DatabaseHelper.AddMemberToGroup(_groupId, selectedUserId);
 
                 MessageBox.Show($"{selectedFullName} has been successfully added to group!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                this.DialogResult = DialogResult.OK; // Closes dialog signaling a parent refresh is needed
+                this.DialogResult = DialogResult.OK;
                 this.Close();
             }
             catch (Exception ex)

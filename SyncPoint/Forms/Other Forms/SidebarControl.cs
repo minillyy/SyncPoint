@@ -18,32 +18,11 @@ namespace SyncPoint.Forms
             InitializeComponent();
         }
 
-        // Raised when the user clicks the Add Task item in the sidebar
         public event EventHandler AddTaskClicked;
-
         public event EventHandler MembersClicked;
-
-        private void pnlNav_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
+        public event EventHandler ReportsClicked;
 
         private void SidebarControl_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pnlFooter_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void pnlNav_Paint_1(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
         {
 
         }
@@ -66,14 +45,9 @@ namespace SyncPoint.Forms
             MembersClicked?.Invoke(this, EventArgs.Empty);
         }
 
-        private void lblProgress_Click(object sender, EventArgs e)
-        {
-            
-        }
-
         private void lblReports_Click(object sender, EventArgs e)
         {
-            
+            ReportsClicked?.Invoke(this, EventArgs.Empty);
         }
 
         private void lblLogout_Click(object sender, EventArgs e)

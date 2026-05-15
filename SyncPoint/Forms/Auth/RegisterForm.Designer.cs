@@ -59,7 +59,6 @@
             this.lblSub.Size = new System.Drawing.Size(141, 20);
             this.lblSub.TabIndex = 1;
             this.lblSub.Text = "Create your account";
-            this.lblSub.Click += new System.EventHandler(this.lblSub_Click);
             // 
             // lblTitle
             // 

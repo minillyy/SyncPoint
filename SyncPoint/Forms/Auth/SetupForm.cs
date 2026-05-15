@@ -23,7 +23,6 @@ namespace SyncPoint.Forms.Auth
         private void SetupForm_Load(
             object sender, EventArgs e)
         {
-            // Paint gold border on header bottom
             pnlHeader.Paint += (s, pe) =>
             {
                 var pen = new Pen(
@@ -35,7 +34,6 @@ namespace SyncPoint.Forms.Auth
                     pnlHeader.Height - 2);
             };
 
-            // Paint top border on buttons panel
             pnlButtons.Paint += (s, pe) =>
             {
                 var pen = new Pen(
@@ -46,12 +44,10 @@ namespace SyncPoint.Forms.Auth
                     pnlButtons.Width, 0);
             };
 
-            // Style button border
             btnCreate.FlatAppearance.BorderColor =
                 ColorTranslator.FromHtml("#c9a84c");
             btnCreate.FlatAppearance.BorderSize = 1;
 
-            // Focus on first field
             txtFullName.Select();
         }
 
@@ -61,7 +57,7 @@ namespace SyncPoint.Forms.Auth
         private void btnCreate_Click(
             object sender, EventArgs e)
         {
-            // ── Validate Full Name ────────────────────────
+            // Validate Full Name
             if (string.IsNullOrWhiteSpace(
                 txtFullName.Text))
             {
@@ -75,7 +71,7 @@ namespace SyncPoint.Forms.Auth
                 return;
             }
 
-            // ── Validate Username ─────────────────────────
+            // Validate Username 
             if (string.IsNullOrWhiteSpace(
                 txtUsername.Text))
             {
@@ -112,7 +108,7 @@ namespace SyncPoint.Forms.Auth
                 return;
             }
 
-            // ── Validate Password ─────────────────────────
+            // Validate Password
             if (txtPassword.Text.Length < 6)
             {
                 MessageBox.Show(
@@ -125,7 +121,7 @@ namespace SyncPoint.Forms.Auth
                 return;
             }
 
-            // ── Validate Confirm Password ─────────────────
+            // Validate Confirm Password
             if (txtPassword.Text != txtConfirm.Text)
             {
                 MessageBox.Show(
@@ -139,7 +135,7 @@ namespace SyncPoint.Forms.Auth
                 return;
             }
 
-            // ── Write config file ─────────────────────────
+            // Write config file 
             try
             {
                 string[] lines = {

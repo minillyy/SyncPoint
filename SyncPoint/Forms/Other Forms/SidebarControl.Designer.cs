@@ -53,7 +53,6 @@
             this.pnlNav.Name = "pnlNav";
             this.pnlNav.Size = new System.Drawing.Size(120, 500);
             this.pnlNav.TabIndex = 1;
-            this.pnlNav.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlNav_Paint_1);
             // 
             // lblDashboard
             // 
