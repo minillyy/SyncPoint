@@ -21,7 +21,6 @@
             this.lblUserName = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
             this.pnlSidebar = new System.Windows.Forms.Panel();
-            this.sidebarControl1 = new SyncPoint.Forms.SidebarControl();
             this.pnlContent = new System.Windows.Forms.Panel();
             this.btnAddMember = new System.Windows.Forms.Button();
             this.pnlMembersCard = new System.Windows.Forms.Panel();
@@ -37,6 +36,7 @@
             this.pnlStatTotal3 = new System.Windows.Forms.Panel();
             this.lblPendingLabel = new System.Windows.Forms.Label();
             this.lblPendingNum = new System.Windows.Forms.Label();
+            this.sidebarControl1 = new SyncPoint.Forms.SidebarControl();
             this.pnlTopbar.SuspendLayout();
             this.pnlSidebar.SuspendLayout();
             this.pnlContent.SuspendLayout();
@@ -91,14 +91,6 @@
             this.pnlSidebar.Name = "pnlSidebar";
             this.pnlSidebar.Size = new System.Drawing.Size(90, 519);
             this.pnlSidebar.TabIndex = 1;
-            // 
-            // sidebarControl1
-            // 
-            this.sidebarControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.sidebarControl1.Location = new System.Drawing.Point(0, 0);
-            this.sidebarControl1.Name = "sidebarControl1";
-            this.sidebarControl1.Size = new System.Drawing.Size(116, 519);
-            this.sidebarControl1.TabIndex = 0;
             // 
             // pnlContent
             // 
@@ -294,6 +286,14 @@
             this.lblPendingNum.Size = new System.Drawing.Size(46, 54);
             this.lblPendingNum.TabIndex = 0;
             this.lblPendingNum.Text = "0";
+            // 
+            // sidebarControl1
+            // 
+            this.sidebarControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.sidebarControl1.Location = new System.Drawing.Point(0, 0);
+            this.sidebarControl1.Name = "sidebarControl1";
+            this.sidebarControl1.Size = new System.Drawing.Size(116, 519);
+            this.sidebarControl1.TabIndex = 0;
             // 
             // LeaderDashboardForm
             // 

@@ -45,7 +45,7 @@ namespace SyncPoint.Forms
             this.panelTop.Controls.Add(this.btnViewProgress);
             this.panelTop.Location = new System.Drawing.Point(20, 20);
             this.panelTop.Name = "panelTop";
-            this.panelTop.Size = new System.Drawing.Size(700, 220);
+            this.panelTop.Size = new System.Drawing.Size(678, 220);
             this.panelTop.TabIndex = 3;
             // 
             // goldLine
@@ -86,7 +86,7 @@ namespace SyncPoint.Forms
             this.btnViewProgress.ForeColor = System.Drawing.Color.White;
             this.btnViewProgress.Location = new System.Drawing.Point(35, 150);
             this.btnViewProgress.Name = "btnViewProgress";
-            this.btnViewProgress.Size = new System.Drawing.Size(630, 45);
+            this.btnViewProgress.Size = new System.Drawing.Size(599, 45);
             this.btnViewProgress.TabIndex = 3;
             this.btnViewProgress.Text = "View Team Progress";
             this.btnViewProgress.UseVisualStyleBackColor = false;
@@ -107,10 +107,10 @@ namespace SyncPoint.Forms
             this.flowMembers.AutoScroll = true;
             this.flowMembers.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(246)))), ((int)(((byte)(242)))));
             this.flowMembers.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowMembers.Location = new System.Drawing.Point(30, 345);
+            this.flowMembers.Location = new System.Drawing.Point(30, 300);
             this.flowMembers.Name = "flowMembers";
             this.flowMembers.Padding = new System.Windows.Forms.Padding(10);
-            this.flowMembers.Size = new System.Drawing.Size(690, 300);
+            this.flowMembers.Size = new System.Drawing.Size(646, 300);
             this.flowMembers.TabIndex = 0;
             this.flowMembers.WrapContents = false;
             // 
@@ -119,9 +119,9 @@ namespace SyncPoint.Forms
             this.headerPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
             this.headerPanel.Controls.Add(this.lblMemberHeader);
             this.headerPanel.Controls.Add(this.lblTaskHeader);
-            this.headerPanel.Location = new System.Drawing.Point(30, 300);
+            this.headerPanel.Location = new System.Drawing.Point(30, 259);
             this.headerPanel.Name = "headerPanel";
-            this.headerPanel.Size = new System.Drawing.Size(690, 40);
+            this.headerPanel.Size = new System.Drawing.Size(658, 40);
             this.headerPanel.TabIndex = 1;
             // 
             // lblMemberHeader
@@ -140,7 +140,7 @@ namespace SyncPoint.Forms
             this.lblTaskHeader.AutoSize = true;
             this.lblTaskHeader.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
             this.lblTaskHeader.ForeColor = System.Drawing.Color.White;
-            this.lblTaskHeader.Location = new System.Drawing.Point(512, 11);
+            this.lblTaskHeader.Location = new System.Drawing.Point(483, 11);
             this.lblTaskHeader.Name = "lblTaskHeader";
             this.lblTaskHeader.Size = new System.Drawing.Size(143, 19);
             this.lblTaskHeader.TabIndex = 1;
@@ -151,7 +151,7 @@ namespace SyncPoint.Forms
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(246)))), ((int)(((byte)(242)))));
-            this.ClientSize = new System.Drawing.Size(750, 680);
+            this.ClientSize = new System.Drawing.Size(717, 625);
             this.Controls.Add(this.flowMembers);
             this.Controls.Add(this.headerPanel);
             this.Controls.Add(this.lblMembers);

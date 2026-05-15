@@ -1,10 +1,8 @@
-﻿// ===============================
-// TaskProgress.cs
-// ===============================
-
-using System;
+﻿using System;
+using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
+using SyncPoint.Data; // Ensure this matches your namespace
 
 namespace SyncPoint.Forms
 {
@@ -13,15 +11,40 @@ namespace SyncPoint.Forms
         public TaskProgress()
         {
             InitializeComponent();
-            LoadMembers();
+            // Load real data on startup
+            LoadRealTimeData();
         }
 
-        private void LoadMembers()
+        private void LoadRealTimeData()
         {
-            AddMember("John Carter", 12);
-            AddMember("Maria Santos", 14);
-            AddMember("Paolo Reyes", 8);
-            AddMember("Elena Garcia", 15);
+            // 1. Clear existing mock items
+            flowMembers.Controls.Clear();
+
+            // 2. Fetch real data from database using Session GroupID
+            // Using the method from your DatabaseHelper
+            DataTable dt = DatabaseHelper.GetMemberProgress(Session.GroupID);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+                    string name = row["FullName"].ToString();
+                    // "Done" is the column name in your GetMemberProgress SQL query
+                    int completedTasks = Convert.ToInt32(row["Done"]);
+
+                    AddMember(name, completedTasks);
+                }
+            }
+            else
+            {
+                // Optional: Show a message if no members are in the group
+                Label lblEmpty = new Label();
+                lblEmpty.Text = "No team members found for this group.";
+                lblEmpty.AutoSize = true;
+                lblEmpty.ForeColor = Color.Gray;
+                lblEmpty.Margin = new Padding(20);
+                flowMembers.Controls.Add(lblEmpty);
+            }
         }
 
         private void AddMember(string name, int completedTasks)
@@ -50,12 +73,12 @@ namespace SyncPoint.Forms
             bubble.Location = new Point(15, 13);
 
             Label lblInitial = new Label();
-            lblInitial.Text = name.Substring(0, 1).ToUpper();
+            // Handle empty names to prevent Substring errors
+            lblInitial.Text = !string.IsNullOrEmpty(name) ? name.Substring(0, 1).ToUpper() : "?";
             lblInitial.ForeColor = Color.White;
             lblInitial.Font = new Font("Arial", 14, FontStyle.Bold);
             lblInitial.Dock = DockStyle.Fill;
             lblInitial.TextAlign = ContentAlignment.MiddleCenter;
-
             bubble.Controls.Add(lblInitial);
 
             // MEMBER NAME
@@ -78,7 +101,6 @@ namespace SyncPoint.Forms
             lblTasks.ForeColor = Color.FromArgb(196, 155, 60);
             lblTasks.Dock = DockStyle.Fill;
             lblTasks.TextAlign = ContentAlignment.MiddleCenter;
-
             taskBox.Controls.Add(lblTasks);
 
             // ADD CONTROLS
@@ -91,12 +113,8 @@ namespace SyncPoint.Forms
 
         private void btnViewProgress_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(
-                "Team progress updated successfully!",
-                "SyncPoint",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information
-            );
+            // Refresh data when button is clicked
+            LoadRealTimeData();
         }
     }
 }

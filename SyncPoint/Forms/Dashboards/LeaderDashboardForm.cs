@@ -19,6 +19,9 @@ namespace SyncPoint.Forms.Dashboards
         {
             InitializeComponent();
             sidebarControl1.AddTaskClicked += SidebarControl1_AddTaskClicked;
+
+            // ADD THIS LINE TO LINK THE MEMBERS BUTTON:
+            sidebarControl1.MembersClicked += SidebarControl1_MembersClicked;
         }
 
         private void LoadStats()
@@ -154,6 +157,21 @@ namespace SyncPoint.Forms.Dashboards
                     LoadProgress();
                     LoadMembers();
                 }
+            }
+        }
+
+        private void SidebarControl1_MembersClicked(object sender, EventArgs e)
+        {
+            // We use 'using' to ensure the form is properly disposed of after closing
+            using (TaskProgress progressForm = new TaskProgress())
+            {
+                // ShowDialog opens it as a popup window
+                progressForm.ShowDialog(this);
+
+                // Optional: Refresh the dashboard stats when the user closes the progress form
+                // in case any status updates happened.
+                LoadStats();
+                LoadMembers();
             }
         }
 
