@@ -122,6 +122,7 @@
             this.lblTasks.TabIndex = 1;
             this.lblTasks.Text = "Tasks";
             this.lblTasks.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblTasks.Click += new System.EventHandler(this.lblTasks_Click);
             // 
             // pnlLogout
             // 

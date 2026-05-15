@@ -901,6 +901,35 @@ namespace SyncPoint.Data
             }
         }
 
+        public static bool AssignAndAcceptTask(int taskID, int userID)
+        {
+            using (var conn = GetConnection())
+            {
+                // Check one last time if the task is still Pending
+                string checkSql = "SELECT StatusID FROM Tasks WHERE TaskID = @tid";
+                using (var cmdCheck = new SQLiteCommand(checkSql, conn))
+                {
+                    cmdCheck.Parameters.AddWithValue("@tid", taskID);
+                    var status = cmdCheck.ExecuteScalar();
+                    if (status == null || Convert.ToInt32(status) != 1) return false; // 1 = Pending
+                }
+
+                // Assign to user and set to In Progress (StatusID 3 usually)
+                string sql = @"
+            UPDATE Tasks 
+            SET AssignedTo = @uid, 
+                StatusID = (SELECT StatusID FROM TaskStatus WHERE StatusName = 'In Progress')
+            WHERE TaskID = @tid;";
+
+                using (var cmd = new SQLiteCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@uid", userID);
+                    cmd.Parameters.AddWithValue("@tid", taskID);
+                    return cmd.ExecuteNonQuery() > 0;
+                }
+            }
+        }
+
         // ════════════════════════════════════════════════
         //  SCORE QUERIES
         // ════════════════════════════════════════════════

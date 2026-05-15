@@ -3,6 +3,7 @@ using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 using SyncPoint.Data;
+using SyncPoint.Forms.Other_Forms;
 
 namespace SyncPoint.Forms.Dashboards
 {
@@ -208,6 +209,11 @@ namespace SyncPoint.Forms.Dashboards
                 Session.Clear();
                 this.Close();
             }
+        }
+
+        private void lblTasks_Click(object sender, EventArgs e)
+        {
+            new TasksForm().ShowDialog();
         }
     }
 }
