@@ -429,8 +429,8 @@ namespace SyncPoint.Forms
             MessageBox.Show(
                 $"✓  {name} has been appointed " +
                 $"as Leader of \"{_groupName}\"!\n\n" +
-                $"They can now log in using " +
-                $"the Leader button.",
+                $"They can now access " +
+                $"the Leader Dashboard.",
                 "SyncPoint — Leader Appointed",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information);

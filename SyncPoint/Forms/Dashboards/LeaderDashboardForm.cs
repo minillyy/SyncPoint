@@ -18,7 +18,6 @@ namespace SyncPoint.Forms.Dashboards
         public LeaderDashboardForm()
         {
             InitializeComponent();
-            // Subscribe to sidebar control Add Task clicks so the form can open the AddTaskForm
             sidebarControl1.AddTaskClicked += SidebarControl1_AddTaskClicked;
         }
 
@@ -58,32 +57,68 @@ namespace SyncPoint.Forms.Dashboards
 
         private void LoadMembers()
         {
+            // 1. SAFETY: Prevent the Designer from running database/styling code that 
+            // causes "Value does not fall within expected range" or "Extender Provider" errors.
+            if (this.DesignMode) return;
+
+            // 2. Refresh Data
             var progress = DatabaseHelper.GetMemberProgress(Session.GroupID);
 
-            dgvMembers.Columns.Clear();
+            // 3. Setup Binding & Row Height blueprint
+            dgvMembers.DataSource = null;
+            dgvMembers.RowTemplate.Height = 40;
             dgvMembers.DataSource = progress;
 
-            if (dgvMembers.Columns.Contains("FullName"))
-                dgvMembers.Columns["FullName"].HeaderText = "Member";
-            if (dgvMembers.Columns.Contains("Total"))
-                dgvMembers.Columns["Total"].HeaderText = "Tasks";
-            if (dgvMembers.Columns.Contains("Done"))
-                dgvMembers.Columns["Done"].HeaderText = "Done";
+            // 4. Header Sizing Logic (Must set Mode before Height to avoid crashes)
+            dgvMembers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dgvMembers.ColumnHeadersHeight = 50;
+
+            // 5. Remove unwanted "Completion %" column
             if (dgvMembers.Columns.Contains("CompletionRate"))
-                dgvMembers.Columns["CompletionRate"].HeaderText = "Completion %";
+            {
+                dgvMembers.Columns.Remove("CompletionRate");
+            }
 
-            dgvMembers.AlternatingRowsDefaultCellStyle.BackColor =
-                ColorTranslator.FromHtml("#faf7f2");
+            // 6. Text and Alignments
+            if (dgvMembers.Columns.Contains("FullName"))
+            {
+                dgvMembers.Columns["FullName"].HeaderText = "Member";
+                dgvMembers.Columns["FullName"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            }
 
+            if (dgvMembers.Columns.Contains("Total"))
+            {
+                dgvMembers.Columns["Total"].HeaderText = "Tasks";
+                dgvMembers.Columns["Total"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            }
+
+            if (dgvMembers.Columns.Contains("Done"))
+            {
+                dgvMembers.Columns["Done"].HeaderText = "Done";
+                dgvMembers.Columns["Done"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            }
+
+            // 7. Styling (Colors, Fonts, Selection)
+            dgvMembers.EnableHeadersVisualStyles = false;
+            dgvMembers.ColumnHeadersDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#1a2744");
+            dgvMembers.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvMembers.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 10f, FontStyle.Bold);
+            dgvMembers.ColumnHeadersDefaultCellStyle.SelectionBackColor = ColorTranslator.FromHtml("#1a2744");
+            dgvMembers.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            // 8. General Grid Look & Feel
+            dgvMembers.AlternatingRowsDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#faf7f2");
+            dgvMembers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvMembers.AllowUserToResizeColumns = false;
             dgvMembers.AllowUserToResizeRows = false;
-            dgvMembers.ColumnHeadersHeightSizeMode =
-                DataGridViewColumnHeadersHeightSizeMode
-                    .DisableResizing;
-            dgvMembers.RowHeadersWidthSizeMode =
-                DataGridViewRowHeadersWidthSizeMode
-                    .DisableResizing;
-            dgvMembers.AllowUserToOrderColumns = false;
+            dgvMembers.RowHeadersVisible = false;
+            dgvMembers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            // 9. Force Refresh Row Heights
+            foreach (DataGridViewRow row in dgvMembers.Rows)
+            {
+                row.Height = 40;
+            }
         }
         private void sidebarControl1_Load(object sender, EventArgs e)
         {
@@ -111,6 +146,8 @@ namespace SyncPoint.Forms.Dashboards
 
         private void LeaderDashboardForm_Load(object sender, EventArgs e)
         {
+            if (this.DesignMode) return;
+
             if (Session.GroupID == -1)
             {
                 MessageBox.Show(
@@ -183,7 +220,11 @@ namespace SyncPoint.Forms.Dashboards
 
         private void btnAddMember_Click(object sender, EventArgs e)
         {
-            new AddMemberForm(Session.GroupID, Session.GroupName).ShowDialog();
+            using (AddMemberForm popUp = new AddMemberForm(Session.GroupID, Session.GroupName))
+            {
+                popUp.ShowDialog();
+                LoadMembers();
+            }
         }
     }
 }
