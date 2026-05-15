@@ -68,47 +68,33 @@ namespace SyncPoint
 
         private void btnAssignTask_Click(object sender, EventArgs e)
         {
-            // 1. Validation Checks
-            if (string.IsNullOrWhiteSpace(txtTaskTitle.Text))
+            // 1. Validation
+            if (string.IsNullOrWhiteSpace(txtTaskTitle.Text) || cmbWeight.SelectedIndex == -1)
             {
-                MessageBox.Show("Please enter a task title.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtTaskTitle.Focus();
+                MessageBox.Show("Please enter a title and select a Task Weight (Points).", "Missing Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // 2. Gather Inputs
-            string title = txtTaskTitle.Text.Trim();
-            string description = txtDescription.Text.Trim();
-            DateTime deadline = dtpDeadline.Value;
-            int? assignedToUserId = null;
+            // 2. Extract Points from ComboBox (Extracts '1', '3', or '5' from the string)
+            int selectedWeight = int.Parse(cmbWeight.Text.Substring(0, 1));
+
+            // 3. Get Assigned ID from your "Assign to" ComboBox (assuming it's cmbMembers)
+            int? assignedMemberId = null;
             if (cmbAssignTo.SelectedValue != null && cmbAssignTo.SelectedValue != DBNull.Value)
-                assignedToUserId = Convert.ToInt32(cmbAssignTo.SelectedValue);
+                assignedMemberId = (int)cmbAssignTo.SelectedValue;
 
-            // 3. Write data to your DB via the DatabaseHelper helper class
-            try
-            {
-                int newTaskID = DatabaseHelper.CreateTask(
-                    _groupId,
-                    title,
-                    description,
-                    deadline,
-                    assignedToUserId
-                );
+            // 4. Save to Database
+            DatabaseHelper.CreateTask(
+                Session.GroupID,
+                txtTaskTitle.Text,
+                txtDescription.Text,
+                dtpDeadline.Value,
+                assignedMemberId,
+                selectedWeight
+            );
 
-                if (newTaskID > 0)
-                {
-                    this.DialogResult = DialogResult.OK; // Signals success to the main window
-                    this.Close();
-                }
-                else
-                {
-                    MessageBox.Show("Failed to save the task. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error saving task to the database:\n{ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            MessageBox.Show($"Task created with a weight of {selectedWeight} points!", "Success");
+            this.Close();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

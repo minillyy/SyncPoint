@@ -21,7 +21,9 @@
             this.lblUserName = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
             this.pnlSidebar = new System.Windows.Forms.Panel();
+            this.sidebarControl1 = new SyncPoint.Forms.SidebarControl();
             this.pnlContent = new System.Windows.Forms.Panel();
+            this.btnReviewSubmissions = new System.Windows.Forms.Button();
             this.btnAddMember = new System.Windows.Forms.Button();
             this.pnlMembersCard = new System.Windows.Forms.Panel();
             this.dgvMembers = new System.Windows.Forms.DataGridView();
@@ -36,7 +38,6 @@
             this.pnlStatTotal3 = new System.Windows.Forms.Panel();
             this.lblPendingLabel = new System.Windows.Forms.Label();
             this.lblPendingNum = new System.Windows.Forms.Label();
-            this.sidebarControl1 = new SyncPoint.Forms.SidebarControl();
             this.pnlTopbar.SuspendLayout();
             this.pnlSidebar.SuspendLayout();
             this.pnlContent.SuspendLayout();
@@ -92,10 +93,19 @@
             this.pnlSidebar.Size = new System.Drawing.Size(90, 519);
             this.pnlSidebar.TabIndex = 1;
             // 
+            // sidebarControl1
+            // 
+            this.sidebarControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.sidebarControl1.Location = new System.Drawing.Point(0, 0);
+            this.sidebarControl1.Name = "sidebarControl1";
+            this.sidebarControl1.Size = new System.Drawing.Size(116, 519);
+            this.sidebarControl1.TabIndex = 0;
+            // 
             // pnlContent
             // 
             this.pnlContent.AutoScroll = true;
             this.pnlContent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(247)))), ((int)(((byte)(250)))));
+            this.pnlContent.Controls.Add(this.btnReviewSubmissions);
             this.pnlContent.Controls.Add(this.btnAddMember);
             this.pnlContent.Controls.Add(this.pnlMembersCard);
             this.pnlContent.Controls.Add(this.flpStats);
@@ -105,7 +115,20 @@
             this.pnlContent.Padding = new System.Windows.Forms.Padding(14);
             this.pnlContent.Size = new System.Drawing.Size(673, 519);
             this.pnlContent.TabIndex = 2;
-            this.pnlContent.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlContent_Paint);
+            // 
+            // btnReviewSubmissions
+            // 
+            this.btnReviewSubmissions.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.btnReviewSubmissions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReviewSubmissions.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReviewSubmissions.ForeColor = System.Drawing.Color.White;
+            this.btnReviewSubmissions.Location = new System.Drawing.Point(444, 451);
+            this.btnReviewSubmissions.Name = "btnReviewSubmissions";
+            this.btnReviewSubmissions.Size = new System.Drawing.Size(185, 51);
+            this.btnReviewSubmissions.TabIndex = 3;
+            this.btnReviewSubmissions.Text = "View Submissions";
+            this.btnReviewSubmissions.UseVisualStyleBackColor = false;
+            this.btnReviewSubmissions.Click += new System.EventHandler(this.btnReviewSubmissions_Click);
             // 
             // btnAddMember
             // 
@@ -113,9 +136,9 @@
             this.btnAddMember.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddMember.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddMember.ForeColor = System.Drawing.Color.White;
-            this.btnAddMember.Location = new System.Drawing.Point(459, 461);
+            this.btnAddMember.Location = new System.Drawing.Point(268, 451);
             this.btnAddMember.Name = "btnAddMember";
-            this.btnAddMember.Size = new System.Drawing.Size(170, 41);
+            this.btnAddMember.Size = new System.Drawing.Size(170, 51);
             this.btnAddMember.TabIndex = 3;
             this.btnAddMember.Text = "Add Member";
             this.btnAddMember.UseVisualStyleBackColor = false;
@@ -161,9 +184,9 @@
             this.lblMembersTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(39)))), ((int)(((byte)(68)))));
             this.lblMembersTitle.Location = new System.Drawing.Point(12, 10);
             this.lblMembersTitle.Name = "lblMembersTitle";
-            this.lblMembersTitle.Size = new System.Drawing.Size(184, 28);
+            this.lblMembersTitle.Size = new System.Drawing.Size(132, 28);
             this.lblMembersTitle.TabIndex = 0;
-            this.lblMembersTitle.Text = "Member overview";
+            this.lblMembersTitle.Text = "📝 My Tasks";
             // 
             // flpStats
             // 
@@ -202,7 +225,6 @@
             this.lblTotalLabel.Size = new System.Drawing.Size(94, 25);
             this.lblTotalLabel.TabIndex = 1;
             this.lblTotalLabel.Text = "Total tasks";
-            this.lblTotalLabel.Click += new System.EventHandler(this.lblTotalLabel_Click);
             // 
             // lblTotalNum
             // 
@@ -214,7 +236,6 @@
             this.lblTotalNum.Size = new System.Drawing.Size(50, 59);
             this.lblTotalNum.TabIndex = 0;
             this.lblTotalNum.Text = "0";
-            this.lblTotalNum.Click += new System.EventHandler(this.lblTotalNum_Click);
             // 
             // pnlStatTotal2
             // 
@@ -250,7 +271,6 @@
             this.lblCompletedNum.Size = new System.Drawing.Size(50, 59);
             this.lblCompletedNum.TabIndex = 0;
             this.lblCompletedNum.Text = "0";
-            this.lblCompletedNum.Click += new System.EventHandler(this.lblCompletedNum_Click);
             // 
             // pnlStatTotal3
             // 
@@ -286,14 +306,6 @@
             this.lblPendingNum.Size = new System.Drawing.Size(46, 54);
             this.lblPendingNum.TabIndex = 0;
             this.lblPendingNum.Text = "0";
-            // 
-            // sidebarControl1
-            // 
-            this.sidebarControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.sidebarControl1.Location = new System.Drawing.Point(0, 0);
-            this.sidebarControl1.Name = "sidebarControl1";
-            this.sidebarControl1.Size = new System.Drawing.Size(116, 519);
-            this.sidebarControl1.TabIndex = 0;
             // 
             // LeaderDashboardForm
             // 
@@ -351,5 +363,6 @@
         private System.Windows.Forms.DataGridView dgvMembers;
         private SidebarControl sidebarControl1;
         private System.Windows.Forms.Button btnAddMember;
+        private System.Windows.Forms.Button btnReviewSubmissions;
     }
 }

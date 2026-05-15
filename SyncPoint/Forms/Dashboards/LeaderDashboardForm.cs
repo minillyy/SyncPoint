@@ -1,4 +1,8 @@
-﻿using System;
+﻿using SyncPoint.Data;
+using SyncPoint.Forms.Auth;
+using SyncPoint.Forms.Other_Forms;
+using SyncPoint.Helpers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,9 +11,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SyncPoint.Data;
-using SyncPoint.Helpers;
-using SyncPoint.Forms.Auth;
 
 namespace SyncPoint.Forms.Dashboards
 {
@@ -202,11 +203,6 @@ namespace SyncPoint.Forms.Dashboards
             e.Graphics.DrawLine(pen, 0, pnlTopbar.Height - 2, pnlTopbar.Width, pnlTopbar.Height - 2);
         }
 
-        private void pnlContent_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
             var pen = new Pen(ColorTranslator.FromHtml("#d4c9b0"), 1);
@@ -226,21 +222,6 @@ namespace SyncPoint.Forms.Dashboards
             e.Graphics.DrawRectangle(pen, 0, 0, pnlStatTotal3.Width - 1, pnlStatTotal3.Height - 1);
         }
 
-        private void lblTotalNum_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblTotalLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblCompletedNum_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void dgvMembers_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             dgvMembers.ColumnHeadersDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#1a2744");
@@ -256,6 +237,15 @@ namespace SyncPoint.Forms.Dashboards
                 popUp.ShowDialog();
                 LoadMembers();
             }
+        }
+
+        private void btnReviewSubmissions_Click(object sender, EventArgs e)
+        {
+            using (LeaderReviewForm reviewForm = new LeaderReviewForm())
+            {
+                reviewForm.ShowDialog();
+            }
+            LoadStats();
         }
     }
 }

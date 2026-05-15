@@ -102,15 +102,17 @@ namespace SyncPoint.Data
                 );",
 
                 @"CREATE TABLE IF NOT EXISTS Tasks (
-                    TaskID      INTEGER PRIMARY KEY
-                                AUTOINCREMENT,
-                    GroupID     INTEGER NOT NULL,
-                    Title       VARCHAR(200) NOT NULL,
-                    Description TEXT,
-                    Deadline    DATE NOT NULL,
-                    AssignedTo  INTEGER,
-                    StatusID    INTEGER NOT NULL DEFAULT 1,
-                    CreatedAt   DATE,
+                    TaskID          INTEGER PRIMARY KEY AUTOINCREMENT,
+                    GroupID         INTEGER NOT NULL,
+                    Title           VARCHAR(200) NOT NULL,
+                    Description     TEXT,
+                    Deadline        DATE NOT NULL,
+                    AssignedTo      INTEGER,
+                    StatusID        INTEGER NOT NULL DEFAULT 1,
+                    CreatedAt       DATE,
+                    TaskWeight      INTEGER DEFAULT 1,
+                    SubmissionLink  TEXT,
+                    SubmittedAt     DATE,
                     FOREIGN KEY (GroupID) REFERENCES Groups(GroupID),
                     FOREIGN KEY (AssignedTo) REFERENCES Users(UserID),
                     FOREIGN KEY (StatusID) REFERENCES TaskStatus(StatusID)
@@ -182,28 +184,18 @@ namespace SyncPoint.Data
 
             if (statusCount == 0)
             {
-                foreach (string s in new[] {
-                    "Pending", "Accepted",
-                    "In Progress", "Completed",
-                    "Declined" })
+                foreach (string s in new[] { "Pending", "Accepted", "In Progress", "Pending Review", "Completed", "Declined" })
                 {
-                    ExecuteParam(conn,
-                        "INSERT INTO TaskStatus " +
-                        "(StatusName) VALUES (@s);",
-                        ("@s", s));
+                    ExecuteParam(conn, "INSERT INTO TaskStatus (StatusName) VALUES (@s);", ("@s", s));
                 }
             }
 
             // ── Instructor account ─────────────────────────
-            // Credentials are read from instructor.config
-            // They are NEVER written directly in this file
             SeedInstructor(conn);
         }
 
         // ════════════════════════════════════════════════
         //  SEED INSTRUCTOR ACCOUNT
-        //  Reads credentials from instructor.config
-        //  so they are never visible in source code
         // ════════════════════════════════════════════════
         private static void SeedInstructor(
             SQLiteConnection conn)
@@ -679,8 +671,7 @@ namespace SyncPoint.Data
             }
         }
 
-        public static DataTable GetMembersOfGroup(
-            int groupID)
+        public static DataTable GetMembersOfGroup(int groupID)
         {
             using (var conn = GetConnection())
             {
@@ -711,8 +702,7 @@ namespace SyncPoint.Data
             }
         }
 
-        public static DataTable
-            GetAvailableMembersForGroup(int groupID)
+        public static DataTable GetAvailableMembersForGroup(int groupID)
         {
             using (var conn = GetConnection())
             {
@@ -747,42 +737,23 @@ namespace SyncPoint.Data
         //  TASK QUERIES — all parameterized
         // ════════════════════════════════════════════════
 
-        public static int CreateTask(
-                    int groupID,
-                    string title,
-                    string description,
-                    DateTime deadline, // Changed from string to DateTime
-                    int? assignedTo)   // Changed from int to int? (nullable int)
+        public static int CreateTask(int groupID, string title, string description, DateTime deadline, int? assignedTo, int weight)
         {
             using (var conn = GetConnection())
             {
-                // Note: Modified database columns Priority, Points, TaskType in the INSERT query
-                // to match the SQLite table columns created in CreateTables (removing non-existent ones)
-                string sql = @"
-                    INSERT INTO Tasks
-                        (GroupID, Title, Description, Deadline, AssignedTo, StatusID, CreatedAt)
-                    VALUES
-                        (@gid, @title, @desc, @dl, @assigned, 1, DATE('now'));
-                    SELECT last_insert_rowid();";
+                string sql = @"INSERT INTO Tasks (GroupID, Title, Description, Deadline, AssignedTo, StatusID, CreatedAt, TaskWeight)
+                       VALUES (@gid, @title, @desc, @dl, @assigned, 1, DATE('now'), @weight);
+                       SELECT last_insert_rowid();";
 
-                using (var cmd =
-                    new SQLiteCommand(sql, conn))
+                using (var cmd = new SQLiteCommand(sql, conn))
                 {
                     cmd.Parameters.AddWithValue("@gid", groupID);
                     cmd.Parameters.AddWithValue("@title", title);
                     cmd.Parameters.AddWithValue("@desc", description);
-
-                    // Format DateTime to the SQLite standard string format (YYYY-MM-DD)
                     cmd.Parameters.AddWithValue("@dl", deadline.ToString("yyyy-MM-dd"));
-
-                    // If assignedTo is null, pass DBNull.Value so SQLite writes NULL to the table
-                    if (assignedTo.HasValue)
-                        cmd.Parameters.AddWithValue("@assigned", assignedTo.Value);
-                    else
-                        cmd.Parameters.AddWithValue("@assigned", DBNull.Value);
-
-                    return Convert.ToInt32(
-                        cmd.ExecuteScalar());
+                    cmd.Parameters.AddWithValue("@weight", weight);
+                    cmd.Parameters.AddWithValue("@assigned", (object)assignedTo ?? DBNull.Value);
+                    return Convert.ToInt32(cmd.ExecuteScalar());
                 }
             }
         }
@@ -814,23 +785,11 @@ namespace SyncPoint.Data
         {
             using (var conn = GetConnection())
             {
-                // Changed JOIN Users to LEFT JOIN Users
-                // This ensures tasks show up even if they aren't assigned to anyone yet.
-                string sql = @"
-            SELECT
-                t.TaskID,
-                t.Title,
-                t.Description,
-                t.Deadline,
-                COALESCE(u.FullName, 'Unassigned') AS AssignedTo,
-                ts.StatusName AS Status
-            FROM   Tasks t
-            LEFT JOIN Users u
-                   ON t.AssignedTo = u.UserID
-            JOIN   TaskStatus ts
-                   ON t.StatusID = ts.StatusID
-            WHERE  t.GroupID = @gid
-            ORDER  BY t.Deadline ASC;";
+                string sql = @"SELECT t.TaskID, t.Title, t.Description, t.Deadline, t.TaskWeight,
+                       COALESCE(u.FullName, 'Unassigned') AS AssignedTo, ts.StatusName AS Status
+                       FROM Tasks t LEFT JOIN Users u ON t.AssignedTo = u.UserID
+                       JOIN TaskStatus ts ON t.StatusID = ts.StatusID
+                       WHERE t.GroupID = @gid ORDER BY t.Deadline ASC;";
 
                 using (var cmd = new SQLiteCommand(sql, conn))
                 {
@@ -843,31 +802,18 @@ namespace SyncPoint.Data
             }
         }
 
-        public static DataTable GetTasksByMember(
-            int userID)
+        public static DataTable GetTasksByMember(int userID)
         {
             using (var conn = GetConnection())
             {
-                string sql = @"
-                    SELECT
-                        t.TaskID,
-                        t.Title,
-                        t.Description,
-                        t.Deadline,
-                        ts.StatusName AS Status
-                    FROM   Tasks t
-                    JOIN   TaskStatus ts
-                           ON t.StatusID = ts.StatusID
-                    WHERE  t.AssignedTo = @uid
-                    ORDER  BY t.Deadline ASC;";
+                string sql = @"SELECT t.TaskID, t.Title, t.Description, t.Deadline, t.TaskWeight, ts.StatusName AS Status
+                       FROM Tasks t JOIN TaskStatus ts ON t.StatusID = ts.StatusID
+                       WHERE t.AssignedTo = @uid ORDER BY t.Deadline ASC;";
 
-                using (var cmd =
-                    new SQLiteCommand(sql, conn))
+                using (var cmd = new SQLiteCommand(sql, conn))
                 {
-                    cmd.Parameters.AddWithValue(
-                        "@uid", userID);
-                    var da =
-                        new SQLiteDataAdapter(cmd);
+                    cmd.Parameters.AddWithValue("@uid", userID);
+                    var da = new SQLiteDataAdapter(cmd);
                     var dt = new DataTable();
                     da.Fill(dt);
                     return dt;
@@ -1011,6 +957,131 @@ namespace SyncPoint.Data
                     var dt = new DataTable();
                     da.Fill(dt);
                     return dt;
+                }
+            }
+        }
+
+        // ======================================================
+        // SUBMITTING A TASK LINK (e.g., GitHub repo or GDrive)
+        // ======================================================
+
+        public static bool SubmitTask(int taskID, string submissionLink)
+        {
+            try
+            {
+                using (var conn = GetConnection())
+                {
+                    string sql = @"
+                UPDATE Tasks 
+                SET StatusID = (SELECT StatusID FROM TaskStatus WHERE StatusName = 'Pending Review'),
+                    SubmissionLink = @link,
+                    SubmittedAt = DATE('now')
+                WHERE TaskID = @tid;";
+
+                    using (var cmd = new SQLiteCommand(sql, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@link", submissionLink);
+                        cmd.Parameters.AddWithValue("@tid", taskID);
+                        return cmd.ExecuteNonQuery() > 0;
+                    }
+                }
+            }
+            catch { return false; }
+        }
+
+        public static DataTable GetPendingSubmissions(int groupID)
+        {
+            using (var conn = GetConnection())
+            {
+                // Notice t.AssignedTo AS UserID is included here!
+                string sql = @"
+            SELECT 
+                t.TaskID, 
+                t.AssignedTo AS UserID, 
+                u.FullName AS Member, 
+                t.Title, 
+                t.TaskWeight AS Points,
+                t.SubmissionLink AS [Work Link], 
+                t.SubmittedAt AS [Date Submitted]
+            FROM Tasks t
+            JOIN Users u ON t.AssignedTo = u.UserID
+            JOIN TaskStatus ts ON t.StatusID = ts.StatusID
+            WHERE t.GroupID = @gid AND ts.StatusName = 'Pending Review'
+            ORDER BY t.SubmittedAt ASC;";
+
+                using (var cmd = new SQLiteCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@gid", groupID);
+                    var da = new SQLiteDataAdapter(cmd);
+                    var dt = new DataTable();
+                    da.Fill(dt);
+                    return dt;
+                }
+            }
+        }
+
+        public static bool ApproveTask(int taskID, int userID, int points)
+        {
+            using (var conn = GetConnection())
+            {
+                // 1. Update Task to Completed
+                string updateTask = @"
+            UPDATE Tasks 
+            SET StatusID = (SELECT StatusID FROM TaskStatus WHERE StatusName = 'Completed')
+            WHERE TaskID = @tid;";
+
+                // 2. Insert the Score record
+                string insertScore = @"
+            INSERT INTO Scores (TaskID, UserID, Points, FinalScore)
+            VALUES (@tid, @uid, @pts, @pts);";
+
+                using (var cmd = new SQLiteCommand(conn))
+                {
+                    // We use a transaction to ensure both happen or neither happens
+                    using (var transaction = conn.BeginTransaction())
+                    {
+                        try
+                        {
+                            cmd.CommandText = updateTask;
+                            cmd.Parameters.Clear();
+                            cmd.Parameters.AddWithValue("@tid", taskID);
+                            cmd.ExecuteNonQuery();
+
+                            cmd.CommandText = insertScore;
+                            cmd.Parameters.Clear();
+                            cmd.Parameters.AddWithValue("@tid", taskID);
+                            cmd.Parameters.AddWithValue("@uid", userID);
+                            cmd.Parameters.AddWithValue("@pts", points);
+                            cmd.ExecuteNonQuery();
+
+                            transaction.Commit();
+                            return true;
+                        }
+                        catch (Exception ex)
+                        {
+                            transaction.Rollback();
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+
+        public static bool ReturnTaskToMember(int taskID)
+        {
+            using (var conn = GetConnection())
+            {
+                string sql = @"
+            UPDATE Tasks 
+            SET StatusID = (SELECT StatusID FROM TaskStatus WHERE StatusName = 'In Progress'),
+                SubmissionLink = NULL,
+                SubmittedAt = NULL
+            WHERE TaskID = @tid;";
+
+                using (var cmd = new SQLiteCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@tid", taskID);
+                    return cmd.ExecuteNonQuery() > 0;
                 }
             }
         }

@@ -73,6 +73,18 @@
     <Compile Include="Forms\Other Forms\AddTaskForm.Designer.cs">
       <DependentUpon>AddTaskForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Other Forms\LeaderReviewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Other Forms\LeaderReviewForm.Designer.cs">
+      <DependentUpon>LeaderReviewForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Other Forms\SubmitTaskForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Other Forms\SubmitTaskForm.Designer.cs">
+      <DependentUpon>SubmitTaskForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Other Forms\TaskForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -167,8 +179,14 @@
     <EmbeddedResource Include="Forms\Auth\RegisterForm.resx">
       <DependentUpon>RegisterForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Other Forms\LeaderReviewForm.resx">
+      <DependentUpon>LeaderReviewForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Other Forms\SidebarControl.resx">
       <DependentUpon>SidebarControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Other Forms\SubmitTaskForm.resx">
+      <DependentUpon>SubmitTaskForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Other Forms\TaskForm.resx">
       <DependentUpon>TaskForm.cs</DependentUpon>

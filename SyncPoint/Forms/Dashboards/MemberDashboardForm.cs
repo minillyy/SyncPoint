@@ -1,9 +1,10 @@
-﻿using System;
+﻿using SyncPoint.Data;
+using SyncPoint.Forms.Other_Forms;
+using System;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
-using SyncPoint.Data;
-using SyncPoint.Forms.Other_Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace SyncPoint.Forms.Dashboards
 {
@@ -13,7 +14,6 @@ namespace SyncPoint.Forms.Dashboards
         {
             InitializeComponent();
 
-            // Guard for the Designer
             if (System.ComponentModel.LicenseManager.UsageMode != System.ComponentModel.LicenseUsageMode.Designtime)
             {
                 SetupDataGridViewColumns();
@@ -111,7 +111,6 @@ namespace SyncPoint.Forms.Dashboards
             dgvMyTasks.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(52, 73, 94);
             dgvMyTasks.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.White;
 
-            // --- BODY STYLING & INVISIBLE ROW HIGHLIGHTS ---
             // Standard Row Selection
             dgvMyTasks.DefaultCellStyle.SelectionBackColor = Color.White;
             dgvMyTasks.DefaultCellStyle.SelectionForeColor = Color.Black;
@@ -163,18 +162,21 @@ namespace SyncPoint.Forms.Dashboards
 
             int total = tasks.Rows.Count;
             int completed = 0;
-            int inProgress = 0;
+            int pending = 0;
 
             foreach (DataRow row in tasks.Rows)
             {
                 string status = row["Status"].ToString();
-                if (status == "Completed") completed++;
-                if (status == "Pending") inProgress++;
+
+                if (status == "Completed")
+                    completed++;
+                else if (status == "Pending")
+                    pending++;
             }
 
             lblTotalNum.Text = total.ToString();
             lblCompletedNum.Text = completed.ToString();
-            lblInProgressNum.Text = inProgress.ToString();
+            lblInProgressNum.Text = pending.ToString();
         }
 
         private void LoadMyTasks()
@@ -213,7 +215,42 @@ namespace SyncPoint.Forms.Dashboards
 
         private void lblTasks_Click(object sender, EventArgs e)
         {
-            new TasksForm().ShowDialog();
+            using (TasksForm tasksWindow = new TasksForm())
+            {
+                tasksWindow.ShowDialog();
+            }
+
+            RefreshAllData();
+        }
+
+        private void btnSubmitTask_Click(object sender, EventArgs e)
+        {
+            if (dgvMyTasks.CurrentRow == null) return;
+
+            int taskId = Convert.ToInt32(dgvMyTasks.CurrentRow.Cells["TaskID"].Value);
+            string taskTitle = dgvMyTasks.CurrentRow.Cells["Title"].Value.ToString();
+            string status = dgvMyTasks.CurrentRow.Cells["Status"].Value.ToString();
+
+            if (status != "In Progress")
+            {
+                MessageBox.Show("Only 'In Progress' tasks can be submitted.", "SyncPoint");
+                return;
+            }
+
+            using (var submitForm = new SubmitTaskForm(taskTitle))
+            {
+                if (submitForm.ShowDialog() == DialogResult.OK)
+                {
+                    string link = submitForm.SubmissionLink;
+                    bool success = DatabaseHelper.SubmitTask(taskId, link);
+
+                    if (success)
+                    {
+                        MessageBox.Show("Work submitted for review!", "Success");
+                        RefreshAllData();
+                    }
+                }
+            }
         }
     }
 }

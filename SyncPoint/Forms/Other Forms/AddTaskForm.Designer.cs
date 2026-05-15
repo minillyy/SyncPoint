@@ -29,6 +29,8 @@
             this.txtDescription = new System.Windows.Forms.TextBox();
             this.btnAssignTask = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.lblWeight = new System.Windows.Forms.Label();
+            this.cmbWeight = new System.Windows.Forms.ComboBox();
             this.panelHeader.SuspendLayout();
             this.panelBody.SuspendLayout();
             this.SuspendLayout();
@@ -57,6 +59,8 @@
             // panelBody
             // 
             this.panelBody.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(247)))), ((int)(((byte)(250)))));
+            this.panelBody.Controls.Add(this.cmbWeight);
+            this.panelBody.Controls.Add(this.lblWeight);
             this.panelBody.Controls.Add(this.lblNewTaskDetails);
             this.panelBody.Controls.Add(this.lblTaskTitle);
             this.panelBody.Controls.Add(this.txtTaskTitle);
@@ -89,7 +93,7 @@
             // 
             this.lblTaskTitle.AutoSize = true;
             this.lblTaskTitle.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTaskTitle.ForeColor = System.Drawing.Color.Gray;
+            this.lblTaskTitle.ForeColor = System.Drawing.Color.Black;
             this.lblTaskTitle.Location = new System.Drawing.Point(29, 48);
             this.lblTaskTitle.Name = "lblTaskTitle";
             this.lblTaskTitle.Size = new System.Drawing.Size(58, 17);
@@ -109,7 +113,7 @@
             // 
             this.lblAssignTo.AutoSize = true;
             this.lblAssignTo.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAssignTo.ForeColor = System.Drawing.Color.Gray;
+            this.lblAssignTo.ForeColor = System.Drawing.Color.Black;
             this.lblAssignTo.Location = new System.Drawing.Point(29, 112);
             this.lblAssignTo.Name = "lblAssignTo";
             this.lblAssignTo.Size = new System.Drawing.Size(62, 17);
@@ -131,7 +135,7 @@
             // 
             this.lblDeadline.AutoSize = true;
             this.lblDeadline.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDeadline.ForeColor = System.Drawing.Color.Gray;
+            this.lblDeadline.ForeColor = System.Drawing.Color.Black;
             this.lblDeadline.Location = new System.Drawing.Point(31, 186);
             this.lblDeadline.Name = "lblDeadline";
             this.lblDeadline.Size = new System.Drawing.Size(59, 17);
@@ -151,7 +155,7 @@
             // 
             this.lblDescription.AutoSize = true;
             this.lblDescription.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDescription.ForeColor = System.Drawing.Color.Gray;
+            this.lblDescription.ForeColor = System.Drawing.Color.Black;
             this.lblDescription.Location = new System.Drawing.Point(26, 256);
             this.lblDescription.Name = "lblDescription";
             this.lblDescription.Size = new System.Drawing.Size(74, 17);
@@ -196,6 +200,28 @@
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // lblWeight
+            // 
+            this.lblWeight.AutoSize = true;
+            this.lblWeight.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWeight.Location = new System.Drawing.Point(678, 23);
+            this.lblWeight.Name = "lblWeight";
+            this.lblWeight.Size = new System.Drawing.Size(48, 20);
+            this.lblWeight.TabIndex = 13;
+            this.lblWeight.Text = "Points";
+            // 
+            // cmbWeight
+            // 
+            this.cmbWeight.FormattingEnabled = true;
+            this.cmbWeight.Items.AddRange(new object[] {
+            "1 - Easy",
+            "3 - Medium",
+            "5 - Hard"});
+            this.cmbWeight.Location = new System.Drawing.Point(733, 21);
+            this.cmbWeight.Name = "cmbWeight";
+            this.cmbWeight.Size = new System.Drawing.Size(146, 24);
+            this.cmbWeight.TabIndex = 14;
+            // 
             // AddTaskForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -232,5 +258,7 @@
         private System.Windows.Forms.TextBox txtDescription;
         private System.Windows.Forms.Button btnAssignTask;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.ComboBox cmbWeight;
+        private System.Windows.Forms.Label lblWeight;
     }
 }
